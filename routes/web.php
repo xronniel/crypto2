@@ -20,3 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth'])->group(function () {
+    // Admin-specific routes
+    Route::prefix('admin')->middleware('role:Admin')->group(function () {
+       
+    });
+});
