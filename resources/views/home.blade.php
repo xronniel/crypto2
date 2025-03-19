@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section class="hero bg_img pos-rel pt-120" data-background="assets/img/bg/hero-bg1.svg">
+    <section class="hero bg_img pos-rel pt-80" data-background="assets/img/bg/hero-bg1.svg">
         <div class="hero-shape">
             <div class="shape--1">
                 <img class="leftToRight" src="assets/img/shape/hero-sp_01.svg" alt="">
@@ -25,34 +25,62 @@
         </div>
         <div class="container">
             <div class="hero__content-wrap">
-                <div class="section-title hero--sec-titlt wow fadeInUp" data-wow-duration=".7s">
-                    <h1 class="title">Crypto Token Sale is On</h1>
+                <div class="wow fadeInUp" data-wow-duration=".7s">
+                    <h1 class="title first-banner-title">Buy Properties with </br> Crypto Homes</h1>
                 </div>
-                <div class="countdown ul_li_center wow fadeInUp mt-60" data-wow-duration=".7s" data-wow-delay="200ms" data-countdown="2024/08/28"></div>
-                <div class="hero__btn btns pt-50 wow fadeInUp" data-wow-duration=".7s" data-wow-delay="350ms">
-                      <a class="them-btn" href="contact.html">
-                        <span class="btn_label" data-text="Get Started">Get Started</span>
-                        <span class="btn_icon">
-                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
-                              </svg>
-                        </span>
-                      </a>
-                    <a href="contact.html" class="them-btn btn-transparent">
-                        <span class="btn_label" data-text="Read Whitepaper">Read Whitepaper</span>
-                        <span class="btn_icon">
-                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
-                              </svg>
-                        </span>
-                    </a>
+         
+                <div class="hero__btn btns pt-50 wow fadeInUp" >
+                    <div class="first-section-border">
+
+                        <div class="first-section-border-first-div">
+                            <span>Rent</span>
+                            <span>Buy</span>
+                            <span>
+                                <p class="new-bar">New</p>
+                                New projects
+                            </span>
+                            <span>Commercial</span>
+                        </div>
+
+                        <div class="first-section-border-second-div">
+                            <span>
+                                <img class="Vector-img" src="assets/img/home/Vector.png" alt="">
+                                <input type="text" placeholder="City, community or building">
+                            </span>
+                            <span>
+                                <p>Property type</p>
+                                <img class="arrow-img" src="assets/img/home/arrow.png" alt="">
+                            </span>
+                            <span>
+                                <p>Beds & Baths</p>
+                                <img class="arrow-img" src="assets/img/home/arrow.png" alt="">
+                            </span>
+                            <span>Search</span>
+                        </div>
+                  
+                    </div>
                 </div>
             </div>
+            <div class="hero-scroll pt-105">
+                <span>scroll to down</span>
+                <div class="scroll-down text-center">
+                    <div class="chevron">
+                        <img class="scrolling-img" src="assets/img/home/scrolling-down 2.png" alt="">
+                    </div>
+                    <div class="chevron">
+                        <img class="scrolling-img" src="assets/img/home/scrolling-down 2.png" alt="">
+                    </div>
+                    <div class="chevron">
+                        <img class="scrolling-img" src="assets/img/home/scrolling-down 2.png" alt="">
+                    </div>
+                  </div>
+            </div>
             <div class="token-structure mt-145 wow fadeInUp" data-wow-duration=".7s" data-wow-delay="450ms">
-                <div class="row">
-                    <div class="col-lg-5">
+                <div 
+                class="row">
+            
                         <div class="hero-token">
-                            <h3 class="xb-item--title">Token Structure</h3>
+                            <h3 class="xb-item--title">Accepted Currencies</h3>
                             <p class="xb-item--content">
                                 Our token structure ensures transparency, fairness, and value. Join us in revolutionizing the digital economy.
                             </p>
@@ -66,37 +94,47 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-7">
+                   
+
                     <div class="hero-sale">
-                        <div class="xb-item--sale_service ul_li_between">
-                            <span>pre-sale</span>
-                            <span>soft caf</span>
-                            <span>bonus</span>
+                        <div class="Converter-div">
+                         <h2>Cryptocurrency Converter Calculator</h2>
+
+                         <div class="Converter-div-two">
+                             <div class="Converter-div-input">
+                                 <input type="text" placeholder="Enter Amount">
+                                 <div class="Converter-select-input">
+                                     <select name="cars" id="cars">
+                                         <option value="Bitcoin">
+                                             Bitcoin 
+                                             <span class="Converter-select-span">BTC</span>
+                                         </option>
+                                     </select>
+                                     <img class="Converter-img-select" src="assets/img/home/frame-7.svg.png" alt="">
+                                     <img class="Converter-img" src="assets/img/home/Border.png" alt="">
+                                     </div>
+                             </div>
+                             <img class="Swap-img" src="assets/img/home/Swap Icon.png" alt="">
+                             <div class="Converter-div-input">
+                                 <input type="text" placeholder="I will recieve">
+                                 <div class="Converter-select-input">
+                                     <select name="cars" id="cars">
+                                         <option value="Bitcoin">
+                                            AED
+                                         </option>
+                                     </select>
+                                     <img class="Converter-img" src="assets/img/home/Border.png" alt="">
+                                     </div>
+                             </div>
+
+                             <button class="Converter-button">Calculate</button>
+                         </div>
                         </div>
-                        <div class="xb-item--line ul_li_between">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div class="xb-item--progress">
-                            <div class="xb-item--pro-color"><span class="shape"></span></div>
-                        </div>
-                        <div class="xb-item--target ul_li_between">
-                            <span>70 target raised</span>
-                            <span>1 ETH = $1000= 3177.38 CIC</span>
-                        </div>
+           
                     </div>
-                    </div>
+                    
+                  
                 </div>
-            </div>
-            <div class="hero-scroll pt-105">
-                <span>scroll to down</span>
-                <div class="scroll-down text-center">
-                    <div class="chevron"></div>
-                    <div class="chevron"></div>
-                    <div class="chevron"></div>
-                  </div>
             </div>
         </div>
     </section>
@@ -176,13 +214,16 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="about-wrap pt-140 wow fadeInLeft" data-wow-duration=".7s">
-                        <h2 class="xb-item--title">what is token iCO?</h2>
+                        <h2 class="xb-item--title">The Buying Process</h2>
                         <p class="xb-item--content">
-                            An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency startups to raise capital for their projects. During an ICO, the company  a new token.
+                            An ICO, or Initial Coin Offering, is a fundraising method used by
+                            cryptocurrency startups to raise capital for their projects.
+                            During an ICO, the company a new token.
                         </p>
-                        <h3 class="xb-item--title xb-item--title1">Why it’s need?</h3>
+                        <h3 class="xb-item--title xb-item--title1">Requirements</h3>
                         <p class="xb-item--content xb-item--content1">
-                            ICOs serve several purposes, both for cryptocurrency startups and investors. Here are some reasons why ICOs are utilized:
+                            ICOs serve several purposes, both for cryptocurrency startups and
+                            investors. Here are some reasons why ICOs are utilized:
                         </p>
                         <div class="xb-item--list">
                             <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +251,7 @@
             </div>
         </div>
         <div class="about-img bg_img" >
-            <img class="wow fadeInRight" data-wow-duration=".7s" data-wow-delay="200ms" src="assets/img/about/about-img.png" alt="">
+            <img class="wow fadeInRight" data-wow-duration=".7s" data-wow-delay="200ms" src="assets/img/home/Link.png" alt="">
         </div>
     </section>
     <!-- about section end-->
@@ -225,8 +266,8 @@
                             <img src="assets/img/icon/process_icon1.svg" alt="">
                         </div>
                         <div class="xb-item--holder">
-                            <h2 class="xb-item--title">register account</h2>
-                            <p class="xb-item--content">To register, visit our website, fill out your name, email, and password.</p>
+                            <h2 class="xb-item--title">register</h2>
+                            <p class="xb-item--content">Create your account swiftly to unlock personalized property recommendations and exclusive market insights.</p>
                         </div>
                         <div class="xb-item--shape">
                             <span>
@@ -252,8 +293,8 @@
                             <img src="assets/img/icon/process_icon2.svg" alt="">
                         </div>
                         <div class="xb-item--holder">
-                            <h2 class="xb-item--title">deposit amount</h2>
-                            <p class="xb-item--content">To deposit funds, log in to your account and navigate to the deposit section. </p>
+                            <h2 class="xb-item--title">Search</h2>
+                            <p class="xb-item--content">Utilize our advanced search tools to explore a diverse range of properties, complete with detailed descriptions, and virtual tours.</p>
                         </div>
                         <div class="xb-item--shape">
                             <span>
@@ -278,9 +319,8 @@
                             <img src="assets/img/icon/process_icon3.svg" alt="">
                         </div>
                         <div class="xb-item--holder">
-                            <h2 class="xb-item--title">buy crypto!</h2>
-                            <p class="xb-item--content">To purchase cryptocurrency, simply log in your account and navigate
-                                to the "Buy/Sell"</p>
+                            <h2 class="xb-item--title">buy</h2>
+                            <p class="xb-item--content">Secure your desired property through efficient cryptocurrency transactions, supported by our expert assistance.</p>
                         </div>
                         <div class="xb-item--shape">
                             <span>
@@ -308,82 +348,81 @@
     <section id="chart" class="token z-1 mt-70 pt-150 pb-150 bg_img pos-rel" data-background="assets/img/bg/token-bg.png">
         <div class="container">
             <div class="section-title pb-55">
-                <h1 class="title">introduction to the cryco <br> tokenism </h1>
+                <h1 class="title ">Featured Properties</h1>
+            </div>
+            <div class="token-wrap-location-filter">
+                <span class="active-filter-link">Dubai</span>
+                <span>Abu Dhabi</span>
+                <span>Sharjah</span>
+                <span>Ras Al Khaimah</span>
+            </div>
+            <div  class="token-wrap-location-filter-two">
+                Discover the latest off-plan properties and be informed.
             </div>
             <div class="token-wrap">
                 <div class="row mt-none-30">
-                    <div class="col-xl-5 col-lg-6 mt-30">
-                        <div class="token-distribut">
-                            <h2 class="xb-item--title">cryco distribution</h2>
-                            <ul class="xb-item--list">
-                                <li>ICO</li>
-                                <li>Reward</li>
-                                <li>marketing</li>
-                                <li>team</li>
-                                <li>market liquidity reserve</li>
-                                <li>advisors</li>
-                                <li>risk - management</li>
-                            </ul>
-                            <div class="xb-item--list-circle pos-rel">
-                                <div class="xb-item--circle"><span>70%</span></div>
-                                <div class="xb-item--circle"><span>10%</span></div>
-                                <div class="xb-item--circle"><span>6%</span></div>
-                                <div class="xb-item--circle"><span>5%</span></div>
-                                <div class="xb-item--circle"><span>4%</span></div>
-                                <div class="xb-item--circle"><span>3%</span></div>
-                                <div class="xb-item--circle"><span>2%</span></div>
+                    <div class="col-xl-5 col-lg-6 mt-30 ">
+                        <div 
+                        style="background-image: url('assets/img/home/street.jpeg');"
+                        class="token-distribut">
+                            <div class="token-distribut-location-div">
+                                <h1 class="token-distribut-location-h1">City Walk Phase 3 By Meraas</h1>
+                                <div class="token-distribut-location-span">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                    <span>New York, USA</span>
+                                </div>
+                                <div class="token-distribut-location-span-two"> 
+                                    <span class="token-distribut-location-span-two-one">Launch price:</span>
+                                    <span class="token-distribut-location-span-two-two">11M AED</span>
+                                </div>
+
+                                <a class="token-location-button" href="#">
+                                    <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
+                                    <span>WhatsApp</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-7 col-lg-6 mt-30">
-                        <div class="token-sale">
-                            <h2 class="xb-item--title">allocation of resources from the token - sale</h2>
-                            <div class="xb-item--progress_bar">
-                                <div class="xb-item--parcenteg ul_li">
-                                    <span>56%</span>
-                                    <span>24%</span>
-                                    <span>12%</span>
-                                    <span>8%</span>
+                        <div 
+                        style="background-image: url('assets/img/home/street.jpeg');"
+                        class="token-sale">
+                            <div class="token-distribut-location-div">
+                                <h1 class="token-distribut-location-h1">City Walk Phase 3 By Meraas</h1>
+                                <div class="token-distribut-location-span">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                    <span>New York, USA</span>
                                 </div>
-                                <div class="xb-item--token_progress ul_li">
-                                    <span class="color1"></span>
-                                    <span class="color2"></span>
-                                    <span class="color3"></span>
-                                    <span class="color4"></span>
+                                <div class="token-distribut-location-span-two"> 
+                                    <span class="token-distribut-location-span-two-one">Launch price:</span>
+                                    <span class="token-distribut-location-span-two-two">11M AED</span>
                                 </div>
+
+                                <a class="token-location-button" href="#">
+                                    <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
+                                    <span>WhatsApp</span>
+                                </a>
                             </div>
-                            <ul class="xb-item--pro_list ul_li">
-                                <li>Investment in projects</li>
-                                <li>Platform development</li>
-                                <li>Infrastructure</li>
-                                <li>Marketing</li>
-                            </ul>
                         </div>
-                        <div class="token-sale model">
-                            <h2 class="xb-item--title">cryco governance <br> model</h2>
-                            <div class="xb-item--progress_bar">
-                                <div class="xb-item--parcenteg ul_li">
-                                    <span>35%</span>
-                                    <span>25%</span>
-                                    <span>25%</span>
-                                    <span>10%</span>
-                                    <span>5%</span>
+                        <div 
+                        style="background-image: url('assets/img/home/street.jpeg');"
+                        class="token-sale model">
+                            <div class="token-distribut-location-div">
+                                <h1 class="token-distribut-location-h1">City Walk Phase 3 By Meraas</h1>
+                                <div class="token-distribut-location-span">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                    <span>New York, USA</span>
                                 </div>
-                                <div class="xb-item--token_progress ul_li">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                                <div class="token-distribut-location-span-two"> 
+                                    <span class="token-distribut-location-span-two-one">Launch price:</span>
+                                    <span class="token-distribut-location-span-two-two">11M AED</span>
                                 </div>
+
+                                <a class="token-location-button" href="#">
+                                    <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
+                                    <span>WhatsApp</span>
+                                </a>
                             </div>
-                            <ul class="xb-item--pro_list ul_li">
-                                <li>cryco holders</li>
-                                <li>Members</li>
-                                <li>Leaders</li>
-                                <li>Founders</li>
-                                <li>Co-creators</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -400,91 +439,13 @@
     </section>
     <!-- token section end -->
     
-    <!-- roadmap section start -->
-    <section id="roadmap" class="roadmap pt-135">
-        <div class="section-title pb-50">
-            <h1 class="title">Our Road map</h1>
-        </div>
-        <div class="roadmap-wrap">
-            <div class="roadmap--top">
-                <div class="roadmap--item roadmap--first_item">
-                    <h2 class="roadmap--head ">Research</h2>
-                    <ul class="roadmap--info">
-                        <li>Objective Definition</li>
-                        <li>Data Collection</li>
-                        <li>Analysis</li>
-                        <li>Reporting</li>
-                    </ul>
-                    <div class="roadmap--year">
-                        <div class="roadmap--circle"><span></span></div>
-                        <span>Mid of Q4 2024</span>
-                    </div>
-                </div>
-                <div class="roadmap--item">
-                    <h2 class="roadmap--head ">Token Test</h2>
-                    <ul class="roadmap--info">
-                        <li>Test Objectives</li>
-                        <li>Testing Environment Setup</li>
-                        <li>Test Cases Development</li>
-                        <li>Execution and Analysis:</li>
-                    </ul>
-                    <div class="roadmap--year">
-                        <div class="roadmap--circle"><span></span></div>
-                        <span>End of Q4 2024</span>
-                    </div>
-                </div>
-            </div>
-            <div class="roadmap--line"></div>
-            <div class="roadmap--bottom">
-                <div class="roadmap--item bottom-item">
-                    <div class="roadmap--year">
-                        <span>Mid of Q4 2024</span>
-                        <div class="roadmap--circle"><span></span></div>
-                    </div>
-                    <h2 class="roadmap--head">Concept</h2>
-                    <ul class="roadmap--info">
-                        <li>Value Proposition</li> 
-                        <li>Token Sale Details</li>
-                        <li>Team and Roadmap</li>
-                        <li>Transparency and Trust</li>
-                    </ul>
-                </div>
-                <div class="roadmap--item bottom-item">
-                    <div class="roadmap--year">
-                        <span>Mid of Q4 2024</span>
-                        <div class="roadmap--circle"><span></span></div>
-                    </div>
-                    <h2 class="roadmap--head">App Beta Test</h2>
-                    <ul class="roadmap--info">
-                        <li>Selection Criteria</li>
-                        <li>Testing Environment Setup</li>
-                        <li>Feedback Collection</li>
-                        <li>Iterative Improvement</li>
-                    </ul>
-                </div>
-                <div class="roadmap--item bottom-item">
-                    <div class="roadmap--year">
-                        <span>End of Q4 2024</span>
-                        <div class="roadmap--circle"><span></span></div>
-                    </div>
-                    <h2 class="roadmap--head">Alpha Test</h2>
-                    <ul class="roadmap--info">
-                        <li>Alpha Test Objectives</li>
-                        <li>Alpha Test Group Selection</li>
-                        <li>Test Environment Setup</li>
-                        <li>Feedback Collection and Iteration</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- roadmap section end -->
+
 
     <!-- feature section start -->
     <section id="features" class="feature pos-rel pt-125 mb-170">
         <div class="container">
             <div class="section-title pb-65">
-                <h1 class="title">our great features</h1>
+                <h1 class="title">Check out these Features</h1>
             </div>
             <div class="row">
                 <div class="col-lg-6">
@@ -599,94 +560,123 @@
          <!-- team section start -->
         <section class="team pt-140">
             <div class="container">
-                <div class="section-title pb-35">
-                    <h1 class="title">Meet our team member</h1>
+                <div class="section-title pb-55">
+                    <h1 class="title">News and Media</h1>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="xb-team xb-team1 text-center">
-                            <div class="xb-item--img pos-rel">
-                                <img src="assets/img/team/member01.png" alt="">
+                <div class="row mt-none-30 justify-content-center">
+                    <div class="col-lg-4 col-md-6 mt-30">
+                        <div class="xb-event">
+                            <div class="xb-item--img">
+                                <img src="assets/img/event/event-img01.jpg" alt="">
                             </div>
                             <div class="xb-item--holder">
-                                <a href="#!" class="xb-item--link"><i class="fab fa-linkedin-in"></i></a>
-                                <h2 class="xb-item--title">Christopher Anthony</h2>
-                                <span class="xb-item--sub-title">Founder & CEO</span>
+                                <div class="xb-item--location"><i class="fal fa-map-marker-alt"></i><span>New York, USA</span></div>
+                                <h2 class="xb-item--title border_effect"><a href="#!">Token Launch 202X Unveiling the Future of Finance..</a></h2>
+                                <div class="xb-item--date-time ul_li_between">
+                                    <div class="xb-item--date xb-item--date-time1">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.66663 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.3334 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5.83337 10.8333H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5.83337 14.1667H10" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.3333 2.91675C16.1083 3.06675 17.5 4.12508 17.5 8.04175V13.1917C17.5 16.6251 16.6667 18.3417 12.5 18.3417H7.5C3.33333 18.3417 2.5 16.6251 2.5 13.1917V8.04175C2.5 4.12508 3.89167 3.07508 6.66667 2.91675H13.3333Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                          </svg><span>24 / 08 / 2024</span>
+                                    </div>
+                                    <div class="xb-item--time xb-item--date-time1">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.2917 11.0417C17.2917 15.0667 14.025 18.3333 10 18.3333C5.97504 18.3333 2.70837 15.0667 2.70837 11.0417C2.70837 7.01667 5.97504 3.75 10 3.75C14.025 3.75 17.2917 7.01667 17.2917 11.0417Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M10 6.66675V10.8334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.5 1.66675H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                          </svg><span>09:00AM - 12:00AM</span>
+                                    </div>
+                                </div>
+                                <div class="xb-item--event-btn">
+                                    <a class="them-btn" href="#!">
+                                        <span class="btn_label" data-text="Find out more">Find out more</span>
+                                        <span class="btn_icon">
+                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
+                                              </svg>
+                                        </span>
+                                      </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8 ">
-                        <div class="row xb-team-right">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="xb-team text-center">
-                                    <div class="xb-item--img pos-rel">
-                                        <img src="assets/img/team/member02.png" alt="">
+                    <div class="col-lg-4 col-md-6 mt-30">
+                        <div class="xb-event">
+                            <div class="xb-item--img">
+                                <img src="assets/img/event/event-img02.jpg" alt="">
+                            </div>
+                            <div class="xb-item--holder">
+                                <div class="xb-item--location"><i class="fal fa-map-marker-alt"></i><span>London, United Kingdom</span></div>
+                                <h2 class="xb-item--title border_effect"><a href="#!">Crypto Summit Unlocking Riding Opportunities in Blockchain..</a></h2>
+                                <div class="xb-item--date-time ul_li_between">
+                                    <div class="xb-item--date xb-item--date-time1">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.66663 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.3334 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5.83337 10.8333H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5.83337 14.1667H10" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.3333 2.91675C16.1083 3.06675 17.5 4.12508 17.5 8.04175V13.1917C17.5 16.6251 16.6667 18.3417 12.5 18.3417H7.5C3.33333 18.3417 2.5 16.6251 2.5 13.1917V8.04175C2.5 4.12508 3.89167 3.07508 6.66667 2.91675H13.3333Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                          </svg><span>24 / 09 / 2024</span>
                                     </div>
-                                    <div class="xb-item--holder">
-                                        <a class="xb-item--link" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                                        <h2 class="xb-item--title">Joseph Richard</h2>
-                                        <span class="xb-item--sub-title">Blockchain Developer</span>
+                                    <div class="xb-item--time xb-item--date-time1">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.2917 11.0417C17.2917 15.0667 14.025 18.3333 10 18.3333C5.97504 18.3333 2.70837 15.0667 2.70837 11.0417C2.70837 7.01667 5.97504 3.75 10 3.75C14.025 3.75 17.2917 7.01667 17.2917 11.0417Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M10 6.66675V10.8334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.5 1.66675H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                          </svg><span>09:00AM - 12:00AM</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="xb-team text-center">
-                                    <div class="xb-item--img pos-rel">
-                                        <img src="assets/img/team/member03.png" alt="">
-                                    </div>
-                                    <div class="xb-item--holder">
-                                        <a class="xb-item--link" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                                        <h2 class="xb-item--title">James William</h2>
-                                        <span class="xb-item--sub-title">Data Analyst</span>
-                                    </div>
+                                <div class="xb-item--event-btn">
+                                    <a class="them-btn" href="#!">
+                                        <span class="btn_label" data-text="Find out more">Find out more</span>
+                                        <span class="btn_icon">
+                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
+                                              </svg>
+                                        </span>
+                                      </a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="xb-team text-center">
-                                    <div class="xb-item--img pos-rel">
-                                        <img src="assets/img/team/member04.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mt-30">
+                        <div class="xb-event">
+                            <div class="xb-item--img">
+                                <img src="assets/img/event/event-img03.jpg" alt="">
+                            </div>
+                            <div class="xb-item--holder">
+                                <div class="xb-item--location"><i class="fal fa-map-marker-alt"></i><span>Berlin, Germany</span></div>
+                                <h2 class="xb-item--title border_effect"><a href="#!">Crypto Xchange  Connecting Investors and Innovators..</a></h2>
+                                <div class="xb-item--date-time ul_li_between">
+                                    <div class="xb-item--date xb-item--date-time1">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6.66663 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.3334 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5.83337 10.8333H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5.83337 14.1667H10" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.3333 2.91675C16.1083 3.06675 17.5 4.12508 17.5 8.04175V13.1917C17.5 16.6251 16.6667 18.3417 12.5 18.3417H7.5C3.33333 18.3417 2.5 16.6251 2.5 13.1917V8.04175C2.5 4.12508 3.89167 3.07508 6.66667 2.91675H13.3333Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                          </svg><span>24 / 10 / 2024</span>
                                     </div>
-                                    <div class="xb-item--holder">
-                                        <a class="xb-item--link" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                                        <h2 class="xb-item--title">Robert David</h2>
-                                        <span class="xb-item--sub-title">Visual Designer</span>
+                                    <div class="xb-item--time xb-item--date-time1">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.2917 11.0417C17.2917 15.0667 14.025 18.3333 10 18.3333C5.97504 18.3333 2.70837 15.0667 2.70837 11.0417C2.70837 7.01667 5.97504 3.75 10 3.75C14.025 3.75 17.2917 7.01667 17.2917 11.0417Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M10 6.66675V10.8334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7.5 1.66675H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                          </svg><span>09:00AM - 12:00AM</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="xb-team text-center">
-                                    <div class="xb-item--img pos-rel">
-                                        <img src="assets/img/team/member05.png" alt="">
-                                    </div>
-                                    <div class="xb-item--holder">
-                                        <a class="xb-item--link" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                                        <h2 class="xb-item--title">John Michael</h2>
-                                        <span class="xb-item--sub-title">Legal & DPO</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="xb-team text-center">
-                                    <div class="xb-item--img pos-rel">
-                                        <img src="assets/img/team/member06.png" alt="">
-                                    </div>
-                                    <div class="xb-item--holder">
-                                        <a class="xb-item--link" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                                        <h2 class="xb-item--title">Charles Thomas</h2>
-                                        <span class="xb-item--sub-title">Content Writer</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="xb-team text-center">
-                                    <div class="xb-item--img pos-rel">
-                                        <img src="assets/img/team/member07.png" alt="">
-                                    </div>
-                                    <div class="xb-item--holder">
-                                        <a class="xb-item--link" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                                        <h2 class="xb-item--title">Daniel Matthew</h2>
-                                        <span class="xb-item--sub-title">Project Manager</span>
-                                    </div>
+                                <div class="xb-item--event-btn">
+                                    <a class="them-btn" href="#!">
+                                        <span class="btn_label" data-text="Find out more">Find out more</span>
+                                        <span class="btn_icon">
+                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
+                                              </svg>
+                                        </span>
+                                      </a>
                                 </div>
                             </div>
                         </div>
@@ -790,134 +780,7 @@
             </div>
         </div>
     </div>
-    <!-- team & faq section end -->
 
-    <!-- event section start -->
-    <section class="event pt-140 pb-150">
-        <div class="container">
-            <div class="section-title pb-55">
-                <h1 class="title">upcoming ico events</h1>
-            </div>
-            <div class="row mt-none-30 justify-content-center">
-                <div class="col-lg-4 col-md-6 mt-30">
-                    <div class="xb-event">
-                        <div class="xb-item--img">
-                            <img src="assets/img/event/event-img01.jpg" alt="">
-                        </div>
-                        <div class="xb-item--holder">
-                            <div class="xb-item--location"><i class="fal fa-map-marker-alt"></i><span>New York, USA</span></div>
-                            <h2 class="xb-item--title border_effect"><a href="#!">Token Launch 202X Unveiling the Future of Finance..</a></h2>
-                            <div class="xb-item--date-time ul_li_between">
-                                <div class="xb-item--date xb-item--date-time1">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66663 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M13.3334 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M5.83337 10.8333H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M5.83337 14.1667H10" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M13.3333 2.91675C16.1083 3.06675 17.5 4.12508 17.5 8.04175V13.1917C17.5 16.6251 16.6667 18.3417 12.5 18.3417H7.5C3.33333 18.3417 2.5 16.6251 2.5 13.1917V8.04175C2.5 4.12508 3.89167 3.07508 6.66667 2.91675H13.3333Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                      </svg><span>24 / 08 / 2024</span>
-                                </div>
-                                <div class="xb-item--time xb-item--date-time1">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.2917 11.0417C17.2917 15.0667 14.025 18.3333 10 18.3333C5.97504 18.3333 2.70837 15.0667 2.70837 11.0417C2.70837 7.01667 5.97504 3.75 10 3.75C14.025 3.75 17.2917 7.01667 17.2917 11.0417Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M10 6.66675V10.8334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M7.5 1.66675H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                      </svg><span>09:00AM - 12:00AM</span>
-                                </div>
-                            </div>
-                            <div class="xb-item--event-btn">
-                                <a class="them-btn" href="#!">
-                                    <span class="btn_label" data-text="Find out more">Find out more</span>
-                                    <span class="btn_icon">
-                                        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
-                                          </svg>
-                                    </span>
-                                  </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-30">
-                    <div class="xb-event">
-                        <div class="xb-item--img">
-                            <img src="assets/img/event/event-img02.jpg" alt="">
-                        </div>
-                        <div class="xb-item--holder">
-                            <div class="xb-item--location"><i class="fal fa-map-marker-alt"></i><span>London, United Kingdom</span></div>
-                            <h2 class="xb-item--title border_effect"><a href="#!">Crypto Summit Unlocking Riding Opportunities in Blockchain..</a></h2>
-                            <div class="xb-item--date-time ul_li_between">
-                                <div class="xb-item--date xb-item--date-time1">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66663 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M13.3334 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M5.83337 10.8333H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M5.83337 14.1667H10" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M13.3333 2.91675C16.1083 3.06675 17.5 4.12508 17.5 8.04175V13.1917C17.5 16.6251 16.6667 18.3417 12.5 18.3417H7.5C3.33333 18.3417 2.5 16.6251 2.5 13.1917V8.04175C2.5 4.12508 3.89167 3.07508 6.66667 2.91675H13.3333Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                      </svg><span>24 / 09 / 2024</span>
-                                </div>
-                                <div class="xb-item--time xb-item--date-time1">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.2917 11.0417C17.2917 15.0667 14.025 18.3333 10 18.3333C5.97504 18.3333 2.70837 15.0667 2.70837 11.0417C2.70837 7.01667 5.97504 3.75 10 3.75C14.025 3.75 17.2917 7.01667 17.2917 11.0417Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M10 6.66675V10.8334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M7.5 1.66675H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                      </svg><span>09:00AM - 12:00AM</span>
-                                </div>
-                            </div>
-                            <div class="xb-item--event-btn">
-                                <a class="them-btn" href="#!">
-                                    <span class="btn_label" data-text="Find out more">Find out more</span>
-                                    <span class="btn_icon">
-                                        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
-                                          </svg>
-                                    </span>
-                                  </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-30">
-                    <div class="xb-event">
-                        <div class="xb-item--img">
-                            <img src="assets/img/event/event-img03.jpg" alt="">
-                        </div>
-                        <div class="xb-item--holder">
-                            <div class="xb-item--location"><i class="fal fa-map-marker-alt"></i><span>Berlin, Germany</span></div>
-                            <h2 class="xb-item--title border_effect"><a href="#!">Crypto Xchange  Connecting Investors and Innovators..</a></h2>
-                            <div class="xb-item--date-time ul_li_between">
-                                <div class="xb-item--date xb-item--date-time1">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66663 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M13.3334 1.66675V4.16675" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M5.83337 10.8333H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M5.83337 14.1667H10" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M13.3333 2.91675C16.1083 3.06675 17.5 4.12508 17.5 8.04175V13.1917C17.5 16.6251 16.6667 18.3417 12.5 18.3417H7.5C3.33333 18.3417 2.5 16.6251 2.5 13.1917V8.04175C2.5 4.12508 3.89167 3.07508 6.66667 2.91675H13.3333Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                      </svg><span>24 / 10 / 2024</span>
-                                </div>
-                                <div class="xb-item--time xb-item--date-time1">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.2917 11.0417C17.2917 15.0667 14.025 18.3333 10 18.3333C5.97504 18.3333 2.70837 15.0667 2.70837 11.0417C2.70837 7.01667 5.97504 3.75 10 3.75C14.025 3.75 17.2917 7.01667 17.2917 11.0417Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M10 6.66675V10.8334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M7.5 1.66675H12.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                      </svg><span>09:00AM - 12:00AM</span>
-                                </div>
-                            </div>
-                            <div class="xb-item--event-btn">
-                                <a class="them-btn" href="#!">
-                                    <span class="btn_label" data-text="Find out more">Find out more</span>
-                                    <span class="btn_icon">
-                                        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
-                                          </svg>
-                                    </span>
-                                  </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 @endsection

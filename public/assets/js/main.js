@@ -173,33 +173,25 @@
 	var slider = new Swiper(".partner-active", {
 		loop: true,
 		spaceBetween: 0,
-		speed: 400,
+		speed: 5000, // Slow, continuous movement (adjust speed as needed)
 		slidesPerView: 6,
 		autoplay: {
-			enabled: true,
-			delay: 6000
+			delay: 0, // No pauses at all
+			disableOnInteraction: false, // Keeps autoplay running even after user interaction
 		},
+		freeMode: true, // Enables smooth, continuous scrolling
+		freeModeMomentum: false, // Prevents sudden stops after movement
+		allowTouchMove: false, // Prevents manual swiping
 		breakpoints: {
-			'1600': {
-				slidesPerView: 6,
-			},
-			'1200': {
-				slidesPerView: 4,
-			},
-			'992': {
-				slidesPerView: 4,
-			},
-			'768': {
-				slidesPerView: 3,
-			},
-			'576': {
-				slidesPerView: 2,
-			},
-			'0': {
-				slidesPerView: 2,
-			},
+			1600: { slidesPerView: 6 },
+			1200: { slidesPerView: 4 },
+			992: { slidesPerView: 4 },
+			768: { slidesPerView: 3 },
+			576: { slidesPerView: 2 },
+			0: { slidesPerView: 2 },
 		},
 	});
+	
 	/*------------------------------------------
 	= partner slider two
 	-------------------------------------------*/
