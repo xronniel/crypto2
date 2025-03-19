@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('listings:import')->everyMinute()->appendOutputTo(storage_path('logs/listings_import.log'));
+        $schedule->command('listings:import')->daily()->appendOutputTo(storage_path('logs/listings_import.log'));
     }
 
     /**
