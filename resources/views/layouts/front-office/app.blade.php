@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRYPTOHOME</title>
 
-    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">
+    <link style="wiath:500px;" rel="shortcut icon" href="{{ asset('assets/img/logo/Logo.png') }}">
 
     {{-- font  --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
