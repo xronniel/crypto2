@@ -13,12 +13,10 @@
     width: 120px;
     background: linear-gradient(180deg, #080b18 0%, #202acf 100%);
     border-radius: 2px;
-    background: #41445C33;
+    background: #41445c33;
     backdrop-filter: blur(70px);
-    border: 1px solid #C1C7DE
+    border: 1px solid #c1c7de;
 }
-
-
 
 .header-btn-one ul li {
     padding: 12px 17px;
@@ -68,10 +66,231 @@
 .btc-btn:hover {
     background-color: var(--color-primary);
     border-color: var(--color-primary);
-    color: black; 
+    color: black;
 }
 
 .btc-btn:hover img,
-.btc-btn:hover i { 
+.btc-btn:hover i {
     filter: brightness(0);
+}
+
+.login-modal-form {
+    background-size: cover;
+    background-position: center calc(100% + 170px);
+position: relative;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding:80px 80px 40px 80px;
+    align-items: center;
+}
+
+.login-modal {
+    position: absolute;
+    top: -800px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 950px;
+    background: #000000;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: top 0.5s ease-in-out;
+    z-index: 1000;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.login-modal.active {
+    top: 100px; /* Adjust this value based on where you want it to appear */
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+.login-modal-form-title{
+    font-family: "Manrope", sans-serif;
+font-weight: 700;
+font-size: 40px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+margin: 0 0 40px 0;
+
+}
+
+
+.login-modal-close{
+    background: #2DD98F;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    cursor: pointer;
+    right: 20px;
+}
+
+.login-modal-close img{
+    width: 10px;
+}
+
+
+.login-modal-close-two{
+    background: #2DD98F;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    cursor: pointer;
+    right: 20px;
+}
+
+.login-modal-close-two img{
+    width: 10px;
+}
+
+
+.login-modal-form-links{
+    background: #FFFFFF;
+    border: 1px solid #8C84CC;
+    font-family: "Manrope", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 24px;
+display: flex
+;
+    justify-content: center;
+    align-items: center;
+
+
+    width: 395.18896484375px;
+    height: 36px;
+
+    gap: 10px;
+    border-radius: 3px;
+    border-width: 1px;
+    margin:  0 0 10px 0;
+    color: #3A307F;
+
+
+
+
+
+}
+
+
+.OR-iocn{
+    margin: 20px 0 20px 0;
+}
+
+.login-modal-form input[type="email"],
+.login-modal-form input[type="text"],
+.login-modal-form input[type="password"] {
+    border: 1px solid #000000;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    color: #FFFFFF;
+    background: #0B102C;
+    margin: 10px 0 0 0 ;
+    padding: 15px 10px 2px 10px !important;
+    height: 55px;
+    width: 100%;
+}
+
+.input-div{
+    position: relative;
+}
+
+.input-div span{
+    position: absolute;
+    font-family: "Manrope", sans-serif;
+font-weight: 400;
+font-size: 13px;
+line-height: 100%;
+top: 17px;
+left: 10px;
+}
+
+
+.them-btn-login {
+    width: 100%;
+    height: 50px;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+
+
+    width: 100%;
+    height: 50px;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    overflow: hidden;
+
+;
+    color: #080b18;
+
+    background-color: var(--color-primary);
+    border: 1px solid transparent;
+    border-radius: 50px;
+
+
+    font-family: Outfit;
+font-weight: 700;
+font-size: 18px;
+
+line-height: 18px;
+letter-spacing: 1px;
+
+
+margin: 20px 0 0 0;
+
+  
+}
+
+
+.password-request{
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+
+
+.accept-p{
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    width: 100%;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin: 15px 0;
+
 }
