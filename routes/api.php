@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CoinLayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/coinlayer/live', [CoinLayerController::class, 'getLiveRates']);
+Route::get('/coinlayer/historical', [CoinLayerController::class, 'getHistoricalRates']);
+Route::get('/coinlayer/list', [CoinLayerController::class, 'getCryptoList']);
+Route::get('/coinlayer/convert', [CoinLayerController::class, 'convertCurrency']);
+
+
