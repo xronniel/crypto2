@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header__wrap ul_li_between">
                 <div class="header-logo">
-                    <a href="/"><img src="assets/img/logo/Logo.svg" alt=""></a>
+                    <a href="/"><img src="assets/img/logo/Logo.png" alt=""></a>
                 </div>
                 <div class="main-menu__wrap ul_li navbar navbar-expand-lg">
                     <nav class="main-menu collapse navbar-collapse">
@@ -41,7 +41,7 @@
                             <div class="xb-header-menu-scroll">
                                 <div class="xb-menu-close xb-hide-xl xb-close"></div>
                                 <div class="xb-logo-mobile xb-hide-xl">
-                                    <a href="/" rel="home"><img src="assets/img/logo/logo.svg" alt=""></a></div>
+                                    <a href="/" rel="home"><img src="assets/img/logo/Logo.png" alt=""></a></div>
                                 <div class="xb-header-mobile-search xb-hide-xl">
                                     <form role="search" action="#">
                                         <input type="text" placeholder="Search..." name="s" class="search-field">

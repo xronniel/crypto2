@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRYPTOHOME</title>
 
-    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}">
+    <link style="wiath:500px;" rel="shortcut icon" href="{{ asset('assets/img/logo/Logo.png') }}">
+
+    {{-- font  --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
@@ -14,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/odometer.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
 </head>
 <body>
     @include('partials.front-office.header')

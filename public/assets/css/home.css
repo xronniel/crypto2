@@ -1,0 +1,410 @@
+.first-banner-title {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 102px;
+    line-height: 120%;
+    letter-spacing: -3.06px;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: capitalize;
+}
+
+.first-section-border {
+    line-height: 1;
+    padding: 35px 40px;
+    font-size: 18px;
+    overflow: hidden;
+    font-weight: 700;
+    -webkit-transition: 300ms;
+    transition: 300ms;
+    position: relative;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    letter-spacing: 1px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    color: #080b18;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 70px;
+    -webkit-border-radius: 70px;
+    -moz-border-radius: 70px;
+    -ms-border-radius: 70px;
+    -o-border-radius: 70px;
+    margin: 20px 0 0 0;
+    background-color: transparent;
+    color: #fff;
+    border-color: #7bd6ff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.first-section-border-first-div {
+    background: #ffffff;
+    border-radius: 40px;
+    display: flex;
+}
+
+.first-section-border-second-div {
+    background: #ffffff;
+    border-radius: 40px;
+    display: flex;
+    overflow: hidden;
+}
+
+.first-section-border-first-div span {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px 40px;
+    color: #080b18;
+    cursor: pointer;
+}
+
+.first-section-border-second-div span {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px 40px;
+    color: #080b18;
+    cursor: pointer;
+}
+
+.first-section-border-first-div span:first-child {
+    background: #2dd98f;
+    border-radius: 40px 0 0 40px;
+    font-weight: 700;
+}
+.first-section-border-second-div span:last-child {
+    background: #2dd98f;
+    font-weight: 700;
+}
+
+.first-section-border-first-div span:nth-child(2),
+.first-section-border-first-div span:nth-child(3) {
+    border-right: 1px solid #7bd6ff;
+}
+
+.first-section-border-second-div span:nth-child(1) {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.first-section-border-second-div span:nth-child(1),
+.first-section-border-second-div span:nth-child(2) {
+    border-right: 1px solid #7bd6ff;
+}
+.first-section-border-second-div span:nth-child(2),
+.first-section-border-second-div span:nth-child(3) {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.first-section-border-first-div span:nth-child(3) {
+    position: relative;
+}
+
+.new-bar {
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: #222bda;
+    position: absolute;
+    padding: 2px 5px;
+    border-radius: 5px;
+    top: -7px;
+    right: 20px;
+}
+
+input[type="text"] {
+    width: 250px;
+    height: 20px;
+    border-radius: 0;
+    background-color: white;
+    padding: 0px;
+    border: 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #000000;
+}
+
+.Converter-div input[type="text"] {
+    width: 100px;
+    height: 20px;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0px;
+    border: 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+
+    font-family: "Manrope", sans-serif;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0%;
+}
+.Vector-img {
+    width: 15px;
+}
+.arrow-img {
+    width: 20px;
+}
+.scrolling-img {
+    width: 130px;
+}
+
+.WhatsApp-img {
+    width: 30px;
+}
+
+.Converter-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Converter-div-two {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.Converter-div h2 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0 0 40px 0;
+}
+
+.Converter-div-input {
+    width: fit-content;
+    height: 50px;
+    border-radius: 3px;
+    border-width: 1px;
+    gap: 10px;
+    padding: 13px;
+    border: 1px solid #ffffffb2;
+    background: #0c144b99;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Converter-div-input select {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    color: #ffffff;
+    padding: 0 20px 0 30px;
+}
+.Converter-select-span {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    letter-spacing: 0% !important;
+    color: rgb(183, 183, 183) !important;
+}
+
+.Converter-select-input {
+    position: relative;
+}
+.Converter-img {
+    position: absolute;
+    width: 12px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.Converter-img-select {
+    width: 25px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.Swap-img {
+    width: 25px;
+}
+
+.Converter-button {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    background: #00ffa0;
+    padding: 13px 40px;
+    border-radius: 1000px;
+}
+
+.hero-token {
+    width: 40%;
+}
+
+.hero-sale {
+    width: 60%;
+}
+
+.token-distribut-location-div {
+    position: absolute;
+    width: 88%;
+    bottom: 46px;
+}
+
+.token-distribut-location-h1 {
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #ffffff;
+}
+
+.token-distribut-location-span {
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: var(--color-default);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.token-distribut-location-span-two {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0 0 0;
+}
+
+.token-distribut-location-span-two-one {
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: #ffffff;
+}
+.token-distribut-location-span-two-two {
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    color: #2dd98f;
+}
+
+.token-location-button {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    min-width: 36px;
+    top: 613.13px;
+    left: 20px;
+    border-radius: 1000px;
+    gap: 4px;
+    background: #f7f7fc;
+    justify-content: center;
+    align-items: center;
+    color: #2dd98f;
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    margin: 20px 0 0 0;
+}
+
+.token-distribut {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 28px;
+    border: 1px solid #41445c;
+    border-radius: 20px;
+    height: 100%;
+    margin-right: 24px;
+    position: relative;
+    height: 80vh;
+}
+
+.token-wrap-location-filter {
+    border-bottom: 1px solid #ffffff;
+    display: flex;
+    gap: 40px;
+    padding: 0 0 15px 0;
+}
+
+.token-wrap-location-filter span {
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0%;
+    color: #ffffff;
+}
+
+
+.token-wrap-location-filter-two{
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0%;
+    color: #ffffff;    
+    padding: 15px 0  15px 0;
+}
+
+
+.active-filter-link {
+    color: #2DD98F !important;
+    text-decoration: underline;  
+    text-underline-offset: 24px
+}
