@@ -25,6 +25,8 @@ class ImportListings extends Command
 
         $xml = new SimpleXMLElement($xmlContent);
 
+        $fetchedPropertyRefNos = []; 
+
         foreach ($xml->Listing as $listing) {
             $listingData = Listing::updateOrCreate(
                 [
@@ -77,17 +79,21 @@ class ImportListings extends Command
                 ]
             );
 
+            // Add property_ref_no to fetched list
+            $fetchedPropertyRefNos[] = (string)$listing->Property_Ref_No;
 
-            // Import Images
             if (isset($listing->Images->image)) {
-                $this->saveImages($listingData->id, $listing->Images->image);
+                $this->updateImages($listingData->id, $listing->Images->image);
             }
 
-            // Import Facilities
             if (isset($listing->Facilities->facility)) {
-                $this->saveFacilities($listingData->id, $listing->Facilities->facility);
+                $this->updateFacilities($listingData->id, $listing->Facilities->facility);
             }
+
         }
+
+        // Delete listings and related data that are not in the fetched XML
+        $this->deleteMissingListings($fetchedPropertyRefNos);
 
         $this->info('Listings imported successfully.');
     }
@@ -108,27 +114,33 @@ class ImportListings extends Command
         return $date ? $date->format('Y-m-d H:i:s') : null;
     }
 
-        /**
-     * Save images to the database
-     */
-    private function saveImages($listingId, $images)
+    private function updateImages($listingId, $images)
     {
-        // Delete old images to avoid duplicates
-        Image::where('listing_id', $listingId)->delete();
+        // Get existing images for the listing
+        $existingImages = Image::where('listing_id', $listingId)->pluck('url')->toArray();
+        $newImages = [];
 
         foreach ($images as $image) {
-            Image::create([
-                'listing_id' => $listingId,
-                'url' => (string)$image, 
-            ]);
-            
+            $newImages[] = (string)$image;
+        }
+
+        // Delete images that are not in the new data
+        Image::where('listing_id', $listingId)
+            ->whereNotIn('url', $newImages)
+            ->delete();
+
+        // Insert new images that do not exist
+        foreach ($newImages as $imageUrl) {
+            if (!in_array($imageUrl, $existingImages)) {
+                Image::create([
+                    'listing_id' => $listingId,
+                    'url' => $imageUrl,
+                ]);
+            }
         }
     }
 
-    /**
-     * Save facilities to the database
-     */
-    private function saveFacilities($listingId, $facilities)
+    private function updateFacilities($listingId, $facilities)
     {
         // Get listing instance
         $listing = Listing::find($listingId);
@@ -140,8 +152,23 @@ class ImportListings extends Command
             $facilityIds[] = $facility->id;
         }
 
-        // Sync facilities to prevent duplicates
+        // Sync facilities to update, remove unlisted, and attach new ones
         $listing->facilities()->sync($facilityIds);
+    }
+
+    private function deleteMissingListings(array $fetchedPropertyRefNos)
+    {
+        // Get listings to delete
+        $listingsToDelete = Listing::whereNotIn('property_ref_no', $fetchedPropertyRefNos)->get();
+
+        foreach ($listingsToDelete as $listing) {
+            // Delete related images and facilities
+            Image::where('listing_id', $listing->id)->delete();
+            $listing->facilities()->detach();
+
+            // Delete listing
+            $listing->delete();
+        }
     }
 }
 
