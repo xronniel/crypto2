@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,10 +15,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('home');
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->group(function () {
+    Route::resource('news', NewsController::class);
 });
+
+Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
+Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
+Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show');
+
 Route::get('/contact-us', function () {
     return view('contact');
 });
