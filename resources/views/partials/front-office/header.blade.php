@@ -40,10 +40,13 @@
                             <div class="xb-header-menu-scroll">
                                 <div class="xb-menu-close xb-hide-xl xb-close"></div>
                                 <div class="xb-logo-mobile xb-hide-xl">
-                                    <a href="/" rel="home"><img src="assets/img/logo/Logo.png" alt=""></a></div>
+                                    <a href="/" rel="home"><img src="assets/img/logo/Logo.png"
+                                            alt=""></a>
+                                </div>
                                 <div class="xb-header-mobile-search xb-hide-xl">
                                     <form role="search" action="#">
-                                        <input type="text" placeholder="Search..." name="s" class="search-field">
+                                        <input type="text" placeholder="Search..." name="s"
+                                            class="search-field">
                                     </form>
                                 </div>
                                 <nav class="xb-header-nav">
@@ -66,8 +69,10 @@
                                         <li class="menu-item menu-item-has-children">
                                             <a href="/"><span>Explore</span></a>
                                             <ul class="sub-menu">
-                                                <li class="menu-item"><a href="index.html"><span>ICO Explore</span></a></li>
-                                                <li class="menu-item"><a href="home-2.html"><span>Crypto Explore</span></a></li>
+                                                <li class="menu-item"><a href="index.html"><span>ICO Explore</span></a>
+                                                </li>
+                                                <li class="menu-item"><a href="home-2.html"><span>Crypto
+                                                            Explore</span></a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -78,69 +83,171 @@
                     </div>
                 </div>
 
-<div
-class="header-last-btn"
->
-    <div class="header-btn-one ul_li">
-        <a class="btc-btn" href="#">
-            
-            <img src="assets/img/icon/hero-icon01.svg" alt="">
-            (BTC)
-            <img class="header-arrow-img" src="assets/img/home/arrow.png" alt="">
-        </a>
-        <ul class="">
-            <li><img src="assets/img/icon/hero-icon01.svg" alt="">(BTC)</li>
-            <li><img src="assets/img/icon/hero-icon02.svg" alt="">(ETH)</li>
-            <li><img src="assets/img/icon/hero-icon03.svg" alt="">(XRP)</li>
-            <li><img src="assets/img/icon/hero-icon04.svg" alt="">(USDT)</li>
-        </ul>
-    
-    </div>
-    
-    <div class="header-btn ul_li">
-        <a class="login-btn" href="#!"><i class="fas fa-user"></i> Login</a>
-        <div class="header-bar-mobile side-menu d-lg-none ml-20">
-            <a class="xb-nav-mobile" href="javascript:void(0);"><i class="far fa-bars"></i></a>
-        </div>
-    </div>
-</div>
+                <div class="header-last-btn">
+                    <div class="header-btn-one ul_li">
+                        <a class="btc-btn" href="#">
+
+                            <img src="assets/img/icon/hero-icon01.svg" alt="">
+                            (BTC)
+                            <img class="header-arrow-img" src="assets/img/home/arrow.png" alt="">
+                        </a>
+                        <ul class="">
+                            <li><img src="assets/img/icon/hero-icon01.svg" alt="">(BTC)</li>
+                            <li><img src="assets/img/icon/hero-icon02.svg" alt="">(ETH)</li>
+                            <li><img src="assets/img/icon/hero-icon03.svg" alt="">(XRP)</li>
+                            <li><img src="assets/img/icon/hero-icon04.svg" alt="">(USDT)</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="header-btn ul_li">
+                        <a class="login-btn" href="#!"><i class="fas fa-user"></i> Login</a>
+                        <div class="header-bar-mobile side-menu d-lg-none ml-20">
+                            <a class="xb-nav-mobile" href="javascript:void(0);"><i class="far fa-bars"></i></a>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
         </div>
     </div>
+
+
+    <!-- Login Modal -->
+
+    <div class="login-modal">
+        <form style="background-image: url('assets/img/footer/login-bg-mode.png');" class="login-modal-form"
+            method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="login-modal-close">
+                <img src="assets/img/footer/close-icon.png" alt="close-icon">
+            </div>
+            <h1 class="login-modal-form-title">Get Started with Crypto Property Investments</h1>
+
+
+            <a class="login-modal-form-links" href="#">
+                <img src="assets/img/footer/google.png" alt="close-icon">
+                Continue with Google
+            </a>
+
+            <a class="login-modal-form-links" href="#">
+                <img src="assets/img/footer/Facebook.png" alt="close-icon">
+                Continue with Facebook
+            </a>
+
+            <img class="OR-iocn" src="assets/img/footer/or.png" alt="OR">
+            <div class="col-md-6 input-div">
+                <span>Email</span>
+                <input id="email" placeholder="Email" type="email"
+                    class="form-control @error('email') is-invalid @enderror" name="email"
+                    value="{{ old('email') }}" required autocomplete="email" autofocus>
+                @error('email')
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+            </div>
+
+
+            <div class="col-md-6 input-div">
+                <span>Password</span>
+                <input id="password" placeholder="Password" type="password"
+                    class="form-control @error('password') is-invalid @enderror" name="password" required
+                    autocomplete="current-password">
+                @error('password')
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+            </div>
+
+
+
+
+            <div class="col-md-6 input-div">
+
+                <button class="them-btn-login" type="submit">
+                    Continue
+                </button>
+
+
+                @if (Route::has('password.request'))
+                    <a class="btn btn-link password-request"
+                        href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                @endif
+
+
+                <p class="accept-p">By registering, you accept our Terms & Conditions and our Privacy Policy.</p>
+            </div>
+        </form>
+    </div>
+
+
+
 </header>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const BTCBtn = document.querySelector(".btc-btn");
-    const listItems = document.querySelectorAll(".header-btn-one ul li");
+    document.addEventListener("DOMContentLoaded", function() {
+        const BTCBtn = document.querySelector(".btc-btn");
+        const listItems = document.querySelectorAll(".header-btn-one ul li");
 
-    listItems.forEach(item => {
-        item.addEventListener("click", function (event) {
-            event.stopPropagation(); 
+        listItems.forEach(item => {
+            item.addEventListener("click", function(event) {
+                event.stopPropagation();
 
-            let selectedIcon = item.querySelector("img").src;
-            let selectedText = item.textContent.trim();
-
-
-            BTCBtn.innerHTML = `<img src="${selectedIcon}" alt=""> ${selectedText} <img class="header-arrow-img" src="assets/img/home/arrow.png" alt="">`;
+                let selectedIcon = item.querySelector("img").src;
+                let selectedText = item.textContent.trim();
 
 
+                BTCBtn.innerHTML =
+                    `<img src="${selectedIcon}" alt=""> ${selectedText} <img class="header-arrow-img" src="assets/img/home/arrow.png" alt="">`;
+
+
+                document.querySelector(".header-btn-one ul").style.display = "none";
+            });
+        });
+
+
+        BTCBtn.addEventListener("click", function(event) {
+            event.stopPropagation();
+            const dropdown = document.querySelector(".header-btn-one ul");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        });
+
+
+        document.addEventListener("click", function() {
             document.querySelector(".header-btn-one ul").style.display = "none";
         });
     });
 
-    // Show the list when clicking the button
-    BTCBtn.addEventListener("click", function (event) {
-        event.stopPropagation();
-        const dropdown = document.querySelector(".header-btn-one ul");
-        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-    });
 
-    // Close dropdown when clicking outside
-    document.addEventListener("click", function () {
-        document.querySelector(".header-btn-one ul").style.display = "none";
-    });
-});
 
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const loginBtn = document.querySelector(".login-btn");
+        const loginModal = document.querySelector(".login-modal");
+        const closeModal = document.querySelector(".login-modal-close");
+        const modalOverlay = document.createElement("div");
+
+        modalOverlay.classList.add("modal-overlay");
+        document.body.appendChild(modalOverlay);
+
+
+        loginBtn.addEventListener("click", function() {
+            loginModal.classList.add("active");
+            modalOverlay.style.display = "block";
+        });
+
+
+        modalOverlay.addEventListener("click", closeLoginModal);
+
+        closeModal.addEventListener("click", closeLoginModal);
+
+
+        function closeLoginModal() {
+            loginModal.classList.remove("active");
+            setTimeout(() => {
+                modalOverlay.style.display = "none";
+            }, 500);
+        }
+    });
 </script>
