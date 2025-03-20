@@ -114,71 +114,85 @@
         </div>
     </div>
 
+<!-- Login Modal -->
+<div class="login-modal">
+    <form style="background-image: url('assets/img/footer/login-bg-mode.png');" class="login-modal-form" method="POST" action="{{ route('login') }}" id="loginForm">
+        @csrf
+        <div class="login-modal-close">
+            <img src="assets/img/footer/close-icon.png" alt="close-icon">
+        </div>
+        <h1 class="login-modal-form-title">Get Started with Crypto Property Investments</h1>
 
-    <!-- Login Modal -->
+        <a class="login-modal-form-links" href="#">
+            <img src="assets/img/footer/google.png" alt="close-icon">
+            Continue with Google
+        </a>
 
-    <div class="login-modal">
-        <form style="background-image: url('assets/img/footer/login-bg-mode.png');" class="login-modal-form"
-            method="POST" action="{{ route('login') }}">
-            @csrf
-            <div class="login-modal-close">
-                <img src="assets/img/footer/close-icon.png" alt="close-icon">
-            </div>
-            <h1 class="login-modal-form-title">Get Started with Crypto Property Investments</h1>
+        <a class="login-modal-form-links" href="#">
+            <img src="assets/img/footer/Facebook.png" alt="close-icon">
+            Continue with Facebook
+        </a>
 
+        <img class="OR-icon" src="assets/img/footer/or.png" alt="OR">
+        
+        <div class="col-md-6 input-div">
+            <span>Email</span>
+            <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+            @error('email')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
+        </div>
 
-            <a class="login-modal-form-links" href="#">
-                <img src="assets/img/footer/google.png" alt="close-icon">
-                Continue with Google
-            </a>
+        <div class="col-md-6 input-div">
+            <span>Password</span>
+            <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+            @error('password')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
+        </div>
 
-            <a class="login-modal-form-links" href="#">
-                <img src="assets/img/footer/Facebook.png" alt="close-icon">
-                Continue with Facebook
-            </a>
+        <div class="col-md-6 input-div">
+            <button class="them-btn-login" type="submit">Continue</button>
 
-            <img class="OR-iocn" src="assets/img/footer/or.png" alt="OR">
-            <div class="col-md-6 input-div">
-                <span>Email</span>
-                <input id="email" placeholder="Email" type="email"
-                    class="form-control @error('email') is-invalid @enderror" name="email"
-                    value="{{ old('email') }}" required autocomplete="email" autofocus>
-                @error('email')
-                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
-            </div>
+            @if (Route::has('password.request'))
+                <a class="btn btn-link password-request" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+            @endif
 
+            <p class="accept-p" id="showRegister">Create Your Account</p>
+            <p class="accept-p">By registering, you accept our Terms & Conditions and our Privacy Policy.</p>
+        </div>
+    </form>
 
-            <div class="col-md-6 input-div">
-                <span>Password</span>
-                <input id="password" placeholder="Password" type="password"
-                    class="form-control @error('password') is-invalid @enderror" name="password" required
-                    autocomplete="current-password">
-                @error('password')
-                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
-            </div>
+    <!-- Register Form -->
+    <form id="registerForm" style="background-image: url('assets/img/footer/login-bg-mode.png'); display: none;" class="login-modal-form" method="POST" action="{{ route('register') }}">
+        @csrf
+        <div class="login-modal-close-two">
+            <img src="assets/img/footer/close-icon.png" alt="close-icon">
+        </div>
+        <h1 class="login-modal-form-title">Create Your Account</h1>
 
-
-
-
-            <div class="col-md-6 input-div">
-
-                <button class="them-btn-login" type="submit">
-                    Continue
-                </button>
-
-
-                @if (Route::has('password.request'))
-                    <a class="btn btn-link password-request"
-                        href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
-                @endif
-
-
-                <p class="accept-p">By registering, you accept our Terms & Conditions and our Privacy Policy.</p>
-            </div>
-        </form>
-    </div>
+        <div class="col-md-6 input-div">
+            <span>Name</span>
+            <input id="name" placeholder="Name" type="text" class="form-control" name="name" required>
+        </div>
+        <div class="col-md-6 input-div">
+            <span>Email</span>
+            <input id="registerEmail" placeholder="Email" type="email" class="form-control" name="email" required>
+        </div>
+        <div class="col-md-6 input-div">
+            <span>Password</span>
+            <input id="registerPassword" placeholder="Password" type="password" class="form-control" name="password" required>
+        </div>
+        <div class="col-md-6 input-div">
+            <span>Confirm Password</span>
+            <input id="passwordConfirm" placeholder="Confirm Password" type="password" class="form-control" name="password_confirmation" required>
+        </div>
+        <div class="col-md-6 input-div">
+            <button class="them-btn-login" type="submit">Register</button>
+            <a href="#" class="password-request" id="showLogin">Already have an account? Login</a>
+        </div>
+    </form>
+</div>
 
 
 
@@ -226,6 +240,7 @@
         const loginBtn = document.querySelector(".login-btn");
         const loginModal = document.querySelector(".login-modal");
         const closeModal = document.querySelector(".login-modal-close");
+        const closeModalTwo = document.querySelector(".login-modal-close-two");
         const modalOverlay = document.createElement("div");
 
         modalOverlay.classList.add("modal-overlay");
@@ -241,6 +256,7 @@
         modalOverlay.addEventListener("click", closeLoginModal);
 
         closeModal.addEventListener("click", closeLoginModal);
+        closeModalTwo.addEventListener("click", closeLoginModal);
 
 
         function closeLoginModal() {
@@ -250,4 +266,24 @@
             }, 500);
         }
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const showRegister = document.getElementById("showRegister");
+    const showLogin = document.getElementById("showLogin");
+    
+
+    showRegister.addEventListener("click", function() {
+        loginForm.style.display = "none";
+        registerForm.style.display = "flex";
+    });
+
+
+    showLogin.addEventListener("click", function() {
+        registerForm.style.display = "none";
+        loginForm.style.display = "flex";
+    });
+});
+
 </script>
