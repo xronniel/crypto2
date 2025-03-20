@@ -266,8 +266,8 @@
                             <img src="assets/img/icon/process_icon1.svg" alt="">
                         </div>
                         <div class="xb-item--holder">
-                            <h2 class="xb-item--title">register</h2>
-                            <p class="xb-item--content">Create your account swiftly to unlock personalized property recommendations and exclusive market insights.</p>
+                            <h2 class="xb-item--title xb-item--title-process">register</h2>
+                            <p class="xb-item--content xb-item--content-process">Create your account swiftly to unlock personalized property recommendations and exclusive market insights.</p>
                         </div>
                         <div class="xb-item--shape">
                             <span>
@@ -293,8 +293,8 @@
                             <img src="assets/img/icon/process_icon2.svg" alt="">
                         </div>
                         <div class="xb-item--holder">
-                            <h2 class="xb-item--title">Search</h2>
-                            <p class="xb-item--content">Utilize our advanced search tools to explore a diverse range of properties, complete with detailed descriptions, and virtual tours.</p>
+                            <h2 class="xb-item--title xb-item--title-process">Search</h2>
+                            <p class="xb-item--content xb-item--content-process">Utilize our advanced search tools to explore a diverse range of properties, complete with detailed descriptions, and virtual tours.</p>
                         </div>
                         <div class="xb-item--shape">
                             <span>
@@ -319,8 +319,8 @@
                             <img src="assets/img/icon/process_icon3.svg" alt="">
                         </div>
                         <div class="xb-item--holder">
-                            <h2 class="xb-item--title">buy</h2>
-                            <p class="xb-item--content">Secure your desired property through efficient cryptocurrency transactions, supported by our expert assistance.</p>
+                            <h2 class="xb-item--title xb-item--title-process">buy</h2>
+                            <p class="xb-item--content xb-item--content-process">Secure your desired property through efficient cryptocurrency transactions, supported by our expert assistance.</p>
                         </div>
                         <div class="xb-item--shape">
                             <span>
