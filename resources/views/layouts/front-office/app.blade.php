@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/hedaer.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/property.css') }}">
 </head>
 <body>
     @include('partials.front-office.header')
