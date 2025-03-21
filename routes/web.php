@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AgentController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\EmiratesController;
+use App\Http\Controllers\HomepageContentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +22,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->group(function () {
+
     Route::resource('news', NewsController::class);
+    Route::get('homepage', [HomepageContentController::class, 'index'])->name('homepage.index');
+    Route::get('homepage/edit', [HomepageContentController::class, 'edit'])->name('homepage.edit');
+    Route::put('homepage', [HomepageContentController::class, 'update'])->name('homepage.update');
+
+    Route::resource('agents', AgentController::class);
+    Route::resource('developers', DeveloperController::class);
+    Route::resource('districts', DistrictController::class);
+    Route::resource('emirates', EmiratesController::class);
+    Route::resource('countries', CountryController::class);
 });
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
