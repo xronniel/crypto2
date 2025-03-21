@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomepageContentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->group(function () {
+
     Route::resource('news', NewsController::class);
+    Route::get('homepage', [HomepageContentController::class, 'index'])->name('homepage.index');
+    Route::get('homepage/edit', [HomepageContentController::class, 'edit'])->name('homepage.edit');
+    Route::put('homepage', [HomepageContentController::class, 'update'])->name('homepage.update');
+
 });
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
