@@ -1,7 +1,7 @@
 @extends('layouts.back-office.app')
 
 @section('content')
-<div class="container">
+<div class="report-container pt-2">
     <h1>Add New Listing</h1>
     <a href="{{ route('admin.listings.index') }}" class="btn btn-secondary mb-3">Back to Listings</a>
 

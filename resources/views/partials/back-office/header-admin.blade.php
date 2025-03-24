@@ -49,8 +49,7 @@
     <header>
         <div class="logosec">
             <div class="logo">
-                <div class="quarter-circle"></div>
-                LMN.
+                CRYPTOHOME.
             </div>
             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/menu.png') }}" alt="Menu" class="icn burger-menu menuicn"
                 id="menuicn">
@@ -104,91 +103,7 @@
                             Users
                         </a>
                     </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/info.png') }}" class="nav-img" alt="articles">
-                            About Us
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/values.png') }}" class="nav-img" alt="articles">
-                            Values
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/phone.png') }}" class="nav-img" alt="articles">
-                            Contact Us
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
-                            Contact Leads
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/refund.png') }}" class="nav-img" alt="articles">
-                            Refunds
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/cashback.png') }}" class="nav-img" alt="articles">
-                            Refund Requests
-                        </a>
-                    </div>
-                    {{-- <div class="option2 nav-option">
-                        <a href="{{ route('admin.size-guide.index') }}">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
-                            Size Guide
-                        </a>
-                    </div> --}}
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="articles">
-                            Terms and Conditions
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blogs.png') }}" class="nav-img" alt="articles">
-                            Blogs
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/box.png') }}" class="nav-img" alt="articles">
-                            Product
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/faq-book.png') }}" class="nav-img"
-                                alt="articles">
-                            FAQS Categories
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/faq.png') }}" class="nav-img" alt="articles">
-                            FAQS
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/order.png') }}" class="nav-img" alt="articles">
-                            Order Management
-                        </a>
-                    </div>
-                    <div class="option2 nav-option">
-                        <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/tracking.png') }}" class="nav-img" alt="articles">
-                            Track Users
-                        </a>
-                    </div>
+         
                 </div>
             </nav>
         </div>
@@ -258,8 +173,6 @@
             }
         });
     </script>
-    {{-- Link to js files --}}
-    <script src="{{ asset('js/MultiSelect.js') }}"></script>
 </body>
 
 </html>

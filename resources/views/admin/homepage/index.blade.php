@@ -1,7 +1,7 @@
 @extends('layouts.back-office.app')
 
 @section('content')
-<div class="container">
+<div class="report-container pt-2">
     <h1>Home Page Settings</h1>
         {{-- Display Success Message --}}
         @if(session('success'))

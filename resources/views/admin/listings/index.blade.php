@@ -1,7 +1,7 @@
 @extends('layouts.back-office.app')
 
 @section('content')
-<div class="container">
+<div class="report-container pt-2">
     <h1 class="mb-4">Listings</h1>
     <a href="{{ route('admin.listings.create') }}" class="btn btn-primary mb-3">Add New Listing</a>
 
@@ -45,7 +45,8 @@
             @endforelse
         </tbody>
     </table>
-
+<div class="pagination">
     {{ $listings->links() }}
+</div>
 </div>
 @endsection
