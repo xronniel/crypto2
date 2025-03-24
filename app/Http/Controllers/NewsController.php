@@ -68,6 +68,7 @@ class NewsController extends Controller
 
     public function update(NewsRequest $request, News $news)
     {
+
         // Update thumbnails if provided
         if ($request->hasFile('thumbnail')) {
             $news->thumbnail = $request->file('thumbnail')->store('news/thumbnails', 'public');
@@ -112,5 +113,20 @@ class NewsController extends Controller
     {
         $news->load('galleries');
         return view('user.news.show', compact('news'));
+    }
+
+    public function deleteGalleryImage($id)
+    {
+        $gallery = NewsGallery::findOrFail($id);
+
+        // Delete the image file from storage
+        if ($gallery->image_path && \Storage::disk('public')->exists($gallery->image_path)) {
+            \Storage::disk('public')->delete($gallery->image_path);
+        }
+
+        // Delete the gallery record from the database
+        $gallery->delete();
+
+        return redirect()->back()->with('success', 'Gallery image deleted successfully!');
     }
 }

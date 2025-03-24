@@ -152,6 +152,36 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="fitted">Fitted</label>
+                    <input type="text" name="fitted" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="web_tour">Web Tour</label>
+                    <input type="text" name="web_tour" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="threesixty_tour">360 Tour</label>
+                    <input type="text" name="threesixty_tour" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="virtual_tour">Virtual Tour</label>
+                    <input type="text" name="virtual_tour" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="preview_link">Preview Link</label>
+                    <input type="text" name="preview_link" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="qr_code">QR Code</label>
+                    <input type="text" name="qr_code" class="form-control">
+                </div>
+
+                <div class="form-group">
                     <label for="longitude">Longitude</label>
                     <input type="text" name="longitude" class="form-control">
                 </div>
@@ -195,6 +225,43 @@
                     <label for="brochure">Brochure (PDF)</label>
                     <input type="file" name="brochure" class="form-control">
                 </div>
+
+                <div class="form-group">
+                    <label for="district_id">District</label>
+                    <select name="district_id" class="form-control">
+                        <option value="">Select District</option>
+                        @foreach($districts as $district)
+                            <option value="{{ $district->id }}">{{ $district->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="developer_id">Developer</label>
+                    <select name="developer_id" class="form-control">
+                        <option value="">Select Developer</option>
+                        @foreach($developers as $developer)
+                            <option value="{{ $developer->id }}">{{ $developer->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <label for="available_from">Available From</label>
+                    <input type="date" name="available_from" class="form-control">
+                </div>
+            
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select name="type" class="form-control">
+                        <option value="NA">NA</option>
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Holiday">Holiday</option>
+                        <option value="Mortgages">Mortgages</option>
+                    </select>
+                </div>
+            </div>
             </div>
         </div>
 

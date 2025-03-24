@@ -54,7 +54,18 @@ class Listing extends Model
         'off_plan',
         'permit_number',
         'completion_status',
-        'xml'
+        'xml',
+        'available_from',
+        'description',
+        'location',
+        'brochure',
+        'new',
+        'verified',
+        'superagent',
+        'listing_agent_whatsapp',
+        'type',
+        'developer_id',
+        'district_id',
     ];
 
 

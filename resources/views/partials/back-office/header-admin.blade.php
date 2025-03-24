@@ -91,19 +91,103 @@
             <nav class="nav" style="z-index: 1;">
                 <div class="nav-upper-options">
                     <div class="nav-option-home option1">
-                        <a href="">
+                        <a href="{{ route('admin.homepage.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/dashboard.png') }}" class="nav-img"
                                 alt="dashboard">
-                            <h3 style="margin: 0; font-size: 18px;"> Dashboard</h3>
+                            <h3 style="margin: 0; font-size: 18px;"> Homepage CMS</h3>
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.agents.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
+                            Agents
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.developers.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/info.png') }}" class="nav-img" alt="articles">
+                            Developers
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.countries.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/values.png') }}" class="nav-img" alt="articles">
+                            Countries
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.emirates.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/phone.png') }}" class="nav-img" alt="articles">
+                            Emirates
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.districts.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
+                            Community (Districts)
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.news.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/refund.png') }}" class="nav-img" alt="articles">
+                           News
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.listings.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/cashback.png') }}" class="nav-img" alt="articles">
+                            Properties (Listings)
+                        </a>
+                    </div>
+                    {{-- <div class="option2 nav-option">
+                        <a href="{{ route('admin.size-guide.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
+                            Size Guide
+                        </a>
+                    </div> --}}
+                    <div class="option2 nav-option">
+                        <a href="">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="articles">
+                            Terms and Conditions
                         </a>
                     </div>
                     <div class="option2 nav-option">
                         <a href="">
-                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
-                            Users
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blogs.png') }}" class="nav-img" alt="articles">
+                            Blogs
                         </a>
                     </div>
-         
+                    <div class="option2 nav-option">
+                        <a href="">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/box.png') }}" class="nav-img" alt="articles">
+                            Product
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/faq-book.png') }}" class="nav-img"
+                                alt="articles">
+                            FAQS Categories
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/faq.png') }}" class="nav-img" alt="articles">
+                            FAQS
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/order.png') }}" class="nav-img" alt="articles">
+                            Order Management
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/tracking.png') }}" class="nav-img" alt="articles">
+                            Track Users
+                        </a>
+                    </div>
                 </div>
             </nav>
         </div>
