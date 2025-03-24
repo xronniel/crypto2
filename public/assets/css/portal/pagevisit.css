@@ -1,0 +1,29 @@
+.visit-table {
+    overflow: auto;
+}
+
+.visit-table th {
+    background-color: #f8f9fa;
+    font-size: 16px;
+    padding: 10px;
+    border: 0;
+    min-width: 120px;
+}
+
+.visit-table td {
+    font-size: 16px;
+    padding: 10px;
+    font-weight: 400;
+    border: 00;
+    min-width: 120px;
+}
+
+td:last-child,
+th:last-child {
+    text-align: left;
+    min-width: auto;
+}
+
+.visit-table .mt-4 ul {
+    justify-content: center;
+}

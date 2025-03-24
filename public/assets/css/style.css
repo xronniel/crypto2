@@ -1,0 +1,163 @@
+/* font-family: "Playfair Display", serif;  */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth; 
+}
+
+
+
+
+/* general css container */
+.max-width-container {
+    width: 100%;
+    padding: 20px 110px;
+}
+
+@media (max-width: 1100px) {
+    .max-width-container {
+        padding: 20px;
+    }
+}
+@media (max-width: 920px) {
+    .max-width-container {
+        padding: 20px 5px;
+    }
+
+}
+/* ////////  */
+
+
+ul {
+    list-style-type: none;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  a:hover{
+    text-decoration: none;
+  }
+/* font-family: "AvenirLTPro", sans-serif; */
+
+/* font-family: "AvenirLTProLight", sans-serif; */
+
+/* font-family: "AvenirLTProMedium", sans-serif;  */
+
+/* font-family: "AvenirLTProBlack", sans-serif;  */
+
+/* #####  google font ####### */
+
+/* font-family: 'Inter', sans-serif; */
+
+
+select {
+    color: #000000; 
+}
+select option {
+    color: #000000; 
+}
+
+button {
+    color: #000000;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color: black;
+    background-color: white;
+}
+
+.arrow-icon-checkout-two-input{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    bottom: 0;
+    margin: auto;
+    transition: transform 0.3s;
+}
+
+
+.arrow-icon-checkout-two-input-two {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    right: -24px;
+    bottom: 0;
+    margin: auto;
+    transition: transform 0.3s;
+}
+
+
+#city:focus + .arrow-icon-checkout-two-input,
+#city:active + .arrow-icon-checkout-two-input {
+    transform: rotate(180deg);
+}
+
+#district:focus + .arrow-icon-checkout-two-input,
+#district:active + .arrow-icon-checkout-two-input {
+    transform: rotate(180deg);
+}
+.delivery-type-select:focus + .arrow-icon-checkout-two-input-two,
+.delivery-type-select:active + .arrow-icon-checkout-two-input-two {
+    transform: rotate(180deg); 
+}
+
+
+
+@media (max-width: 768px) {
+
+    .arrow-icon-checkout-two-input-two {
+
+        right: -13px;
+
+    }
+    
+
+}
+
+@supports (-webkit-appearance:none) {
+    select {
+        -webkit-appearance: none;
+    }
+}
+
+
+  .no-scroll {
+    overflow: hidden;
+}
+* {
+    -webkit-tap-highlight-color: black; 
+  }
+  button, a, .tappable {
+    -webkit-tap-highlight-color: black;
+  }
+  
+
+
+
+
+
+  .pagination svg {
+    width: 15px;
+  }
+
+
+
+
+
+
+
+
+
+

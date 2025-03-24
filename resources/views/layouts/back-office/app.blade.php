@@ -1,45 +1,41 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRYPTOHOME</title>
+    <title>CRYPTOHOME.</title>
 
+    <meta name="locale" content="{{ App::getLocale() }}">
     <link style="wiath:500px;" rel="shortcut icon" href="{{ asset('assets/img/logo/Logo.png') }}">
 
-    {{-- font  --}}
+    <!-- Link to CSS files -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    {{-- fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/swiper.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/odometer.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
-</head>
-<body>
-    @include('partials.front-office.header')
-    <div>
-        @yield('content')
-    </div>
-    @include('partials.front-office.footer')
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <!-- JavaScript Files -->
-    <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/swiper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
-    <script src="{{ asset('assets/js/appear.js') }}"></script>
-    <script src="{{ asset('assets/js/odometer.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/easing.min.js') }}"></script>
-    <script src="{{ asset('assets/js/scrollspy.js') }}"></script>
-    <script src="{{ asset('assets/js/countdown.js') }}"></script>
-    <script src="{{ asset('assets/js/parallax-scroll.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
+</head>
+
+<body>
+    @include('partials.back-office.header-admin')
+    {{-- <x-toast-notification /> --}}
+    <div id="app">
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    @yield('scripts')
 </body>
+
 </html>

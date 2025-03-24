@@ -1,7 +1,7 @@
 @extends('layouts.back-office.app')
 
 @section('content')
-<div class="container">
+<div class="report-container pt-2">
     <h1>Edit Home Page</h1>
 
     <form action="{{ route('admin.homepage.update') }}" method="POST" enctype="multipart/form-data">

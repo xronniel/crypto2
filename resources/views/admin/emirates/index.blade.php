@@ -1,7 +1,7 @@
 @extends('layouts.back-office.app')
 
 @section('content')
-<div class="container">
+<div class="report-container pt-2">
     <h1>Emirates</h1>
     <a href="{{ route('admin.emirates.create') }}" class="btn btn-primary mb-3">Add Emirate</a>
     @if(session('success'))

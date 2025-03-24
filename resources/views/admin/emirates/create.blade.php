@@ -1,7 +1,7 @@
 @extends('layouts.back-office.app')
 
 @section('content')
-<div class="container">
+<div class="report-container pt-2">
     <h1>Add New Emirate</h1>
     <form action="{{ route('admin.emirates.store') }}" method="POST">
         @csrf

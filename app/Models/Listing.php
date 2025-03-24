@@ -54,6 +54,7 @@ class Listing extends Model
         'off_plan',
         'permit_number',
         'completion_status',
+        'xml'
     ];
 
 
