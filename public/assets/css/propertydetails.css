@@ -1,0 +1,20 @@
+.page-path-line {
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.page-path-line p{
+    font-family: "Poppins", sans-serif;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+color: #FFFFFF80;
+}
+.page-path-line .active-path-line {
+    color: #FFFFFF;
+
+}
+
+.page-path-line img {
+margin: 0 10px 0 0;
+    }

@@ -42,6 +42,9 @@ Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show
 Route::get('/property', function () {
     return view('property');
 });
+Route::get('/property-details', function () {
+    return view('propertydetails');
+});
 Route::get('/contact-us', function () {
     return view('contact');
 });
