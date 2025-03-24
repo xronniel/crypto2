@@ -1,0 +1,358 @@
+/* Content */
+.sales-report-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.sales-report-content .content {
+    position: relative;
+    margin: auto;
+}
+.content-middle-box{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.content-middle-box-two{
+    width: 50%;
+    display: flex
+;
+    gap: 20px;
+    flex-direction: column;
+}
+
+
+.loyalCustomers-title{
+    margin: 0;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 900;
+}
+
+
+.loyalCustomers {
+
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+    overflow-x: hidden; 
+}
+
+.customer-name {
+    margin: 0;
+}
+
+
+.sales-report-content .chart-order,
+.sales-report-content .breakdown>div,
+.sales-report-content .content-middle>div,
+.sales-report-content .content-bottom>div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sales-report-content h4,
+.sales-report-content .content-top h4>span {
+    margin: 0;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 900;
+}
+
+.sales-report-content span {
+    font-size: 32px;
+    font-family: "AvenirLTProBlack", sans-serif;
+}
+
+/* Content Top */
+.sales-report-content .content-top,
+.sales-report-content .breakdown {
+    display: flex;
+    gap: 20px;
+}
+
+.sales-report-content .content-top>div,
+.sales-report-content .breakdown>div {
+    flex: 50%;
+}
+
+.sales-report-content .breakdown span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sales-report-content .chart-order h4 {
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.sales-report-content .chart-order .content {
+    width: 550px;
+}
+
+.sales-report-content .breakdown .content {
+    width: 270px;
+}
+
+/* Content Middle */
+.sales-report-content .content-middle {
+    display: flex;
+    gap: 20px;
+}
+
+.sales-report-content .content-middle>div {
+    flex: 1;
+}
+
+.sales-report-content .content-middle>div {
+    height: 180px;
+}
+
+/* Content Botttom */
+.sales-report-content .content-bottom {
+    display: flex;
+    gap: 20px;
+}
+
+.sales-report-content .content-bottom>div {
+    flex: 1;
+}
+
+.sales-report-content .content-bottom>div {
+    height: 180px;
+}
+
+
+@media (max-width: 1720px) {
+    .sales-report-content .chart-order .content {
+        width: 550px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 260px;
+    }
+}
+
+@media (max-width: 1600px) {
+    .sales-report-content .chart-order .content {
+        width: 470px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 250px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .sales-report-content .content-top {
+        flex-direction: column;
+    }
+
+    .sales-report-content .chart-order .content {
+        width: 850px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 270px;
+    }
+
+    .sales-report-content span {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .sales-report-content .chart-order .content {
+        width: 650px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 250px;
+    }
+
+    .sales-report-content span {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .sales-report-content .chart-order .content {
+        width: 540px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 240px;
+    }
+
+    .sales-report-content span {
+        font-size: 26px;
+    }
+
+    .sales-report-content .content-middle>div,
+    .sales-report-content .content-bottom>div {
+        height: 160px;
+    }
+}
+
+@media (max-width: 920px) {
+    .sales-report-content .chart-order .content {
+        width: 470px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 200px;
+    }
+
+    .sales-report-content span {
+        font-size: 24px;
+    }
+
+    .sales-report-content h4,
+    .sales-report-content h4>span {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 850px) {
+    .sales-report-content .chart-order .content {
+        width: 500px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 260px;
+    }
+
+    .sales-report-content {
+        padding-top: 30px;
+    }
+
+    .sales-report-content .content-middle h4,
+    .sales-report-content .content-bottom h4,
+    .sales-report-content .breakdown h4 {
+        text-align: center;
+    }
+
+    .sales-report-content .content-middle>div,
+    .sales-report-content .content-bottom>div {
+        height: 160px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sales-report-content .chart-order .content {
+        width: 480px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 210px;
+    }
+
+    .sales-report-content h4,
+    .sales-report-content h4>span {
+        font-size: 16px;
+    }
+
+    .content-middle-box {
+
+        flex-direction: column;
+    }
+    .content-middle-box-two{
+        width: 100%;
+    }
+    .loyalCustomers {
+        width: 100% !important;
+    }
+
+
+
+}
+
+@media (max-width: 640px) {
+    .sales-report-content .chart-order .content {
+        width: 370px;
+    }
+
+    .sales-report-content .breakdown {
+        flex-direction: column;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 270px;
+    }
+
+    .sales-report-content span {
+        font-size: 22px;
+    }
+
+    .sales-report-content .content-middle>div,
+    .sales-report-content .content-bottom>div {
+        height: auto;
+        min-height: 140px;
+    }
+}
+
+@media (max-width: 520px) {
+    .sales-report-content .chart-order .content {
+        width: 330px;
+    }
+
+    .sales-report-content .content-middle,
+    .sales-report-content .content-bottom {
+        flex-wrap: wrap;
+    }
+
+    /* .sales-report-content .content-middle>div,
+    .sales-report-content .content-bottom>div {
+        flex: unset;
+        width: calc(50% - 10px);
+    } */
+
+    .sales-report-content .content-middle>div:last-child,
+    .sales-report-content .content-bottom>div:first-child {
+        width: 100%;
+    }
+
+    .sales-report-content .content-bottom>div:first-child {
+        order: 3;
+    }
+
+    .sales-report-content .content-bottom>div:nth-child(2) {
+        order: 1;
+    }
+
+    .sales-report-content .content-bottom>div:last-child {
+        order: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .sales-report-content .chart-order .content {
+        width: 270px;
+    }
+
+    .sales-report-content .breakdown .content {
+        width: 250px;
+    }
+}
