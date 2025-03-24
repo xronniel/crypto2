@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('districts', function (Blueprint $table) {
-            $table->renameColumn('city_id', 'emirates_id');
+        Schema::table('listings', function (Blueprint $table) {
+            $table->boolean('xml')->default(true)->after('completion_status');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('districts', function (Blueprint $table) {
-            $table->renameColumn('emirates_id', 'city_id');
+        Schema::table('listings', function (Blueprint $table) {
+            $table->dropColumn('xml');
         });
     }
 };
