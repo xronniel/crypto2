@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\DistrictRequest;
 use App\Models\District;
-use App\Models\Emirate;
 use App\Models\Emirates;
 use Illuminate\Support\Facades\Storage;
 
