@@ -92,50 +92,50 @@
             <nav class="nav" style="z-index: 1;">
                 <div class="nav-upper-options">
                     <div class="nav-option-home option1">
-                        <a href="{{ route('sales.report') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/dashboard.png') }}" class="nav-img"
                                 alt="dashboard">
                             <h3 style="margin: 0; font-size: 18px;"> Dashboard</h3>
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('users.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
                             Users
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('about-us.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/info.png') }}" class="nav-img" alt="articles">
                             About Us
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('values.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/values.png') }}" class="nav-img" alt="articles">
                             Values
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('contact.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/phone.png') }}" class="nav-img" alt="articles">
                             Contact Us
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('admin.contact-leads.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
                             Contact Leads
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('refunds.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/refund.png') }}" class="nav-img" alt="articles">
                             Refunds
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('admin.refund-requests.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/cashback.png') }}" class="nav-img" alt="articles">
                             Refund Requests
                         </a>
@@ -147,44 +147,44 @@
                         </a>
                     </div> --}}
                     <div class="option2 nav-option">
-                        <a href="{{ route('terms.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="articles">
                             Terms and Conditions
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('blogs.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blogs.png') }}" class="nav-img" alt="articles">
                             Blogs
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('products.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/box.png') }}" class="nav-img" alt="articles">
                             Product
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('faq_categories.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/faq-book.png') }}" class="nav-img"
                                 alt="articles">
                             FAQS Categories
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('faqs.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/faq.png') }}" class="nav-img" alt="articles">
                             FAQS
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('orders.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/order.png') }}" class="nav-img" alt="articles">
                             Order Management
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="{{ route('visits.index') }}">
+                        <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/tracking.png') }}" class="nav-img" alt="articles">
                             Track Users
                         </a>
