@@ -39,6 +39,9 @@ Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
 Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
 Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show');
 
+Route::get('/property', function () {
+    return view('property');
+});
 Route::get('/contact-us', function () {
     return view('contact');
 });

@@ -713,6 +713,24 @@
 	});
 	
 
+	var slider = new Swiper(".blog__item-property-one", {
+		loop: true,
+		spaceBetween: 0,
+		speed: 400,
+		slidesPerView: 1,
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+		},
+		navigation: false, 
+	});
+
+
+
+
+
+
+
 	/*------------------------------------------
 	= magnificPopup
 	-------------------------------------------*/
