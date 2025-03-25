@@ -101,4 +101,31 @@ class ArticleController extends Controller
 
         return redirect()->route('admin.articles.index')->with('success', 'Article deleted successfully!');
     }
+
+    public function userIndex()
+    {
+        $articleList = Article::with('galleries')->latest()->paginate(10); // Paginate results
+        return view('user.articles.index', compact('articleList'));
+    }
+
+    public function userShow(Article $article)
+    {
+        $article->load('galleries');
+        return view('user.articles.show', compact('article'));
+    }
+
+    public function deleteGalleryImage($id)
+    {
+        $gallery = ArticleGallery::findOrFail($id);
+
+        // Delete the image file from storage
+        if ($gallery->image_path && \Storage::disk('public')->exists($gallery->image_path)) {
+            \Storage::disk('public')->delete($gallery->image_path);
+        }
+
+        // Delete the gallery record from the database
+        $gallery->delete();
+
+        return redirect()->back()->with('success', 'Gallery image deleted successfully!');
+    }
 }
