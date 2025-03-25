@@ -1,6 +1,10 @@
 @extends('layouts.front-office.app')
 
 @section('content')
+
+{{-- {{$property}} --}}
+
+
     <section style="background: #080B18;" class="blog pt-50 pb-50">
         <div class="container">
             <div class="property-filter-box">
