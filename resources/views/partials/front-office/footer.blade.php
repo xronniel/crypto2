@@ -8,7 +8,7 @@
             <div class="xb-contact">
                 <div class="row g-0 mt-none-30">
                     <div class="col-lg-7 mt-30">
-                        <div class="xb-inner bg_img" data-background="assets/img/bg/form_bg.png">
+                        <div class="xb-inner bg_img" data-background="{{ asset('assets/img/bg/form_bg.png') }}">
                             <h2 class="xb-item--title">if you have question, feel free to contact us</h2>
                             <form class="xb-item--form" action="#!">
                                 <div class="row">
