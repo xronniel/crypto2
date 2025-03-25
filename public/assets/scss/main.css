@@ -3025,6 +3025,9 @@ body[data-aos-easing=ease] [data-aos] {
   align-items: center;
   justify-content: center;
   transition: 0.3s;
+
+
+  
 }
 @media (max-width: 767px) {
   .header-btn .login-btn {
@@ -9871,3 +9874,22 @@ blockquote .quote {
   right: 4%;
   bottom: 25%;
 }/*# sourceMappingURL=main.css.map */
+
+
+
+
+
+
+
+
+
+.header-btn .login-btn{
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  text-transform: capitalize;
+
+}
