@@ -2,7 +2,7 @@
    <footer class="footer z-1 second-footer pos-rel" >
 
 
-    <div class="bg_img top-center pos-rel pb-145" data-background="{{ asset('assets/img/bg/team-bg.png') }}">
+    <div class="bg_img top-center pos-rel pb-5" data-background="{{ asset('assets/img/bg/team-bg.png') }}">
        
         <div class="container pt-110">
             <div class="xb-contact">
