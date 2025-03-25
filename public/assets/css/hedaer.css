@@ -46,6 +46,16 @@
     transition: 0.3s;
     gap: 10px;
     padding: 0 20px;
+
+
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    text-transform: capitalize;
+
 }
 
 .btc-btn:hover {
