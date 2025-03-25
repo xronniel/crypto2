@@ -3905,20 +3905,7 @@ body[data-aos-easing=ease] [data-aos] {
   color: #080b18;
 }
 
-.second-footer {
-  padding-top: 409px;
-  z-index: 1;
-}
-@media (max-width: 991px) {
-  .second-footer {
-    padding-top: 250px;
-  }
-}
-@media (max-width: 767px) {
-  .second-footer {
-    padding-top: 180px;
-  }
-}
+
 
 .footer-bg {
   position: absolute;
@@ -9782,20 +9769,7 @@ blockquote .quote {
   color: #080b18;
 }
 
-.second-footer {
-  padding-top: 409px;
-  z-index: 1;
-}
-@media (max-width: 991px) {
-  .second-footer {
-    padding-top: 250px;
-  }
-}
-@media (max-width: 767px) {
-  .second-footer {
-    padding-top: 180px;
-  }
-}
+
 
 .footer-bg {
   position: absolute;

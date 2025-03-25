@@ -84,7 +84,7 @@
     <!-- breadcrumb end -->
 
     <!-- blog start -->
-    <section class="blog pt-130 pb-130">
+    <section class="blog pt-130">
         <div class="container">
 
             <div class="page-line-path">

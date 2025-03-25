@@ -605,10 +605,10 @@
     }
 }
 .second-footer {
-    padding-top: 409px;
+    padding-top: 200px;
     z-index: 1;
     @include respond(md) {
-        padding-top: 250px;
+        padding-top: 200px;
     }
     @include respond(xs) {
         padding-top: 180px;
