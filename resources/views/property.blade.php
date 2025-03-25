@@ -152,8 +152,12 @@
 
 
                                 <div class="budge-three-div">
-                                    <p>Verified</p>
-                                    <p>SuperAgent</p>
+                                    <p>
+                                        <img class="" src="assets/img/property/Verified-img.png" alt="location">
+                                        Verified</p>
+                                        <p>
+                                        <img class="" src="assets/img/property/SuperAgent-img.png" alt="location">
+                                        SuperAgent</p>
                                     <p>New</p>
 
                                 </div>
@@ -172,7 +176,9 @@
                                 <!-- Pagination -->
                                 <div class="swiper-pagination"></div>
                             </div>
-                            <div style="background-image: url(assets/img/bg/tm_bg.png);" class="blog__item-property-two">
+                            <div style="background-image: url(assets/img/bg/tm_bg.png);
+                                background-size: cover;
+                            " class="blog__item-property-two">
 
                                 <div class="blog__item-property-two-box">
                                     <h1 class="blog__item-property-two-title">Villa</h1>

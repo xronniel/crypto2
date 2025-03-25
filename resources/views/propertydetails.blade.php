@@ -1,86 +1,547 @@
 @extends('layouts.front-office.app')
 
 @section('content')
-<section 
-style="background: #080B18;"
-class="blog pt-50 pb-50">
-    <div class="container">
-
-        <div class="property-filter-box">
-            <div class="property-filter">
-                <img src="assets/img/property/search.png" alt="search">
-                <input placeholder="City, community or building" type="text">
-            </div>
-
-            <div class="property-filter-two">
-                <div class="property-filter-select">
-                    <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                    <p class="filter-badge">NEW</p>
-                    <select name="cars" id="cars">
-                        <option value="Buy">Buy</option>
-                    </select>
+    <section style="background: #080B18;" class="blog pt-50 pb-50">
+        <div class="container">
+            <div class="property-filter-box">
+                <div class="property-filter">
+                    <img src="assets/img/property/search.png" alt="search">
+                    <input placeholder="City, community or building" type="text">
                 </div>
-                <div class="property-filter-select">
-                    <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                    <select name="cars" id="cars">
-                        <option value="Buy">Property type</option>
-                    </select>
+                <div class="property-filter-two">
+                    <div class="property-filter-select">
+                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                        <p class="filter-badge">NEW</p>
+                        <select name="cars" id="cars">
+                            <option value="Buy">Buy</option>
+                        </select>
+                    </div>
+                    <div class="property-filter-select">
+                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                        <select name="cars" id="cars">
+                            <option value="Buy">Property type</option>
+                        </select>
+                    </div>
+                    <div class="property-filter-select">
+                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                        <select name="cars" id="cars">
+                            <option value="Buy">Beds & Baths</option>
+                        </select>
+                    </div>
+                    <div class="property-filter-select">
+                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                        <select name="cars" id="cars">
+                            <option value="Buy">Price</option>
+                        </select>
+                    </div>
+                    <div class="property-filter-select">
+                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                        <select name="cars" id="cars">
+                            <option value="Buy">More Filters</option>
+                        </select>
+                    </div>
+                    <button class="property-filter-button">
+                        Find
+                    </button>
                 </div>
-                <div class="property-filter-select">
-                    <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                    <select name="cars" id="cars">
-                        <option value="Buy">Beds & Baths</option>
-                    </select>
-                </div>
-                <div class="property-filter-select">
-                    <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                    <select name="cars" id="cars">
-                        <option value="Buy">Price</option>
-                    </select>
-                </div>
-                <div class="property-filter-select">
-                    <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                    <select name="cars" id="cars">
-                        <option value="Buy">More Filters</option>
-                    </select>
-                </div>
-                <button class="property-filter-button">
-                    Find
-                </button>
-
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <div style="background: #0B0F28;
+            padding: 50px 0;
+            ">
+        <div class="container">
+            <div class="page-path-line">
+                <img src="assets/img/propertydetails/arrow-left.png" alt="home">
+                <p>Home</p>
+                <p>/ Property Listing</p>
+                <p class="active-path-line">/ Bespoke Upgrades | Extended | Vacant</p>
+            </div>
+            <div class="grid-img-container">
+                <div class="grid-container">
+                    <div class="main-image">
+                        <div class="budge-three-div">
+                            <p>
+                                <img class="" src="assets/img/property/Verified-img.png" alt="location">
+                                Verified
+                            </p>
+                            <p>
+                                <img class="" src="assets/img/property/SuperAgent-img.png" alt="location">
+                                SuperAgent
+                            </p>
+                        </div>
+                        <img class="main-image-img" src="assets/img/propertydetails/img-one.png" alt="home">
+                        <div class="floor-plan-div">
+                            <img src="assets/img/propertydetails/floor-plan.png" alt="floor-plan">
+                            <p>Floor Plan</p>
+                        </div>
+                    </div>
+                    <div class="small-images">
+                        <img class="small-images-img" src="assets/img/propertydetails/img-one.png" alt="home">
+                        <img class="small-images-img" src="assets/img/propertydetails/img-one.png" alt="home">
+                        <img class="small-images-img" src="assets/img/propertydetails/img-one.png" alt="home">
+                    </div>
+                </div>
+                <div class="grid-left-side">
+                    <div class="grid-left-side-fisrt-dev">
+                        <p>RENT</p>
+                        <p>6% OFF</p>
+                    </div>
+                    <h3 class="grid-left-side-one">VILLA FOR RENT IN HATTAN, ARABIAN RANCHES</h3>
+                    <h3 class="grid-left-side-two">Bespoke Upgrades | Extended | Vacant</h3>
+                    <h3 class="grid-left-side-three">
+                        Listed exclusively with Espace Real Estate is this fabulous example of an E2 in Hattan, Arabian
+                        Ranches. This property has been completely remodeled from its original design, now boasting over
+                        6,000 sq ft BUA and 6 functional double bedrooms. The designer kitchen with Miele appliances has
+                        been moved to the rear of the house and opens to three spacious living/dining areas. The property
+                        has been fully refitted throughout, including all MEP works, Spanish porcelain floor tiles, Bagno
+                        design sanitary ware and a fully landscaped garden amongst others. Call today for a full spec list
+                        or to book your viewing via the exclusive agent.
+                    </h3>
+                    <div class="grid-left-side-price-box">
+                        <div class=" grid-left-side-price">
+                            <img src="assets/img/propertydetails/USDT.png" alt="USDT">
+                            <div class="grid-left-side-price-div">
+                                <p class="grid-left-side-price-div-one">830.22 XRP</p>
+                                <p class="grid-left-side-price-div-two">36,238.45 <span>XRP</span></p>
+                            </div>
+                            <h4 class="grid-left-side-price-div-four">/Month</h4>
+                        </div>
+                        <div class="grid-left-side-price-two">
+                            <div class="grid-left-side-price-two-one">
+                                <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
+                                <p>6 Bedroom</p>
+                            </div>
+                            <img src="assets/img/property/pipeline.png" alt="pipeline">
+                            <div class="grid-left-side-price-two-one">
+                                <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
+                                <p>6 Bathroom</p>
+                            </div>
+                            <img src="assets/img/property/pipeline.png" alt="pipeline">
+                            <div class="grid-left-side-price-two-one">
+                                <img class="img-four" src="assets/img/property/green-size.png" alt="size">
+                                <p>6,000 sq. ft.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Converter-div-box">
+                        <div style="width: 35%;" class="Converter-div-input">
+                            <div style="width: 100%;" class="Converter-select-input">
+                                <select style="width: 100%;" name="cars" id="cars">
+                                    <option value="Bitcoin">
+                                        Bitcoin
+                                        <span class="Converter-select-span">BTC</span>
+                                    </option>
+                                </select>
+                                <img class="Converter-img-select" src="assets/img/home/frame-7.svg.png" alt="">
+                                <img class="Converter-img" src="assets/img/home/Border.png" alt="icon">
+                            </div>
+                        </div>
+                        <div class="icon-box-Converter">
+                            <img src="assets/img/home/frame-7.svg.png" alt="icon">
+                            <img src="assets/img/propertydetails/USDT2.png" alt="">
+                            <img src="assets/img/propertydetails/USDT3.png" alt="icon">
+                            <img src="assets/img/propertydetails/USDT.png" alt="icon">
+                        </div>
+                    </div>
+                    <div class="property-two-box-five-box">
+                        <div class="property-two-box-five-one">
+                            <div class="property-two-box-five-one-img">
+                                <img src="assets/img/property/person.jpeg" alt="person">
+                            </div>
+                            <div class="property-two-box-five-one-name">
+                                <p>John Doe</p>
+                                <h4>Real Estate Agent</h4>
+                            </div>
+                        </div>
+                        <div class="property-two-box-five-two">
+                            <a href="#">
+                                <img src="assets/img/property/dark-call.png" alt="size">
+                                Call</a>
+                            <a href="#">
+                                <img src="assets/img/property/dark-mail.png" alt="size">
+                                Email</a>
+                            <a href="#">
+                                <img src="assets/img/property/dark-WhatsApp.png" alt="size">
+                                WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Description-big-box">
+                <div class="property-details-Description">
+                    <span class="active-filter-link">Description</span>
+                </div>
+                <div class="Description-second-box">
+                    <div class="Description-second-box-one">
+                        <ul class="custom-list">
+                            <li>Item 1</li>
+                            <li>Item 2</li>
+                            <li>Item 3</li>
+                            <li>Item 4</li>
+                            <li>Item 5</li>
+                            <li>Item 6</li>
+                        </ul>
+                        <p>Finance is available on this property through Espace Real Estate.</p>
+                        <div class="custom-list-two">
+                            <p><span>Office location :</span> Unit 2702 and 2703 Marina Plaza, Dubai Marina, Dubai UAE.</p>
+                            <p><span>Tel No :</span> 04 306 9999</p>
+                            <p><span>RERA No :</span> 34335; ORN: 936</p>
+                        </div>
+                        <p>This property is managed by Espace Real Estate Broker..</p>
+                    </div>
+                    <div class="Description-second-box-two">
+                        <p>Property details</p>
+                        <div class="Description-second-box-two-one">
+                            <div class="Description-second-box-two-box-one">
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component3.png" alt="size">
+                                        Property
+                                    </p>
+                                    <span>Apartment</span>
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component2.png" alt="size">
+                                        Bedrooms
+                                    </p>
+                                    <span>6</span>
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component1.png" alt="size">
+                                        Available from
+                                    </p>
+                                    <span>14 Mar 2025</span>
+                                </div>
+                            </div>
+                            <div class="Description-second-box-two-box-one">
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component3.png" alt="size">
+                                        Property Size
+                                    </p>
+                                    <span>485 sqft / 45 sqm</span>
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component2.png" alt="size">
+                                        Bathrooms
+                                    </p>
+                                    <span>6</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="Amenities-p-tag">Amenities</p>
+                        <div class="Description-second-box-two-one">
+                            <div class="Description-second-box-two-box-one">
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component5.png" alt="size">
+                                        Study
+                                    </p>
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component4.png" alt="size">
+                                        Balcony
+                                    </p>
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component6.png" alt="size">
+                                        Security
+                                    </p>
+
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component7.png" alt="size">
+                                        Covered Parking
+                                    </p>
+
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component8.png" alt="size">
+                                        Kitchen Appliances
+                                    </p>
+
+                                </div>
+                            </div>
 
 
-<div style="background: #0B0F28;
-padding: 50px 0;
-">
-    <div 
-    class="container">
 
-    <div class="page-path-line">
-        <img src="assets/img/propertydetails/arrow-left.png" alt="home">
-        <p>Home</p>
-        <p>/ Property Listing</p>
-        <p class="active-path-line">/ Bespoke Upgrades  |  Extended  |  Vacant</p>
-    </div>
-    
-    
-    <div
-    style="display: flex;
-    gap:20px;"
-    >
-        <div style="width: 40%;">
-            <img src="assets/img/propertydetails/img-one.png" alt="home">
-            <img src="assets/img/propertydetails/img-one.png" alt="home">
-            <img src="assets/img/propertydetails/img-one.png" alt="home">
-            <img src="assets/img/propertydetails/img-one.png" alt="home">
+                            <div class="Description-second-box-two-box-one">
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component9.png" alt="size">
+                                        Central A/C
+                                    </p>
+
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component10.png" alt="size">
+                                        Shared Pool
+                                    </p>
+
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component11.png" alt="size">
+                                        Concierge
+                                    </p>
+
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component12.png" alt="size">
+                                        Built in Wardrobes
+                                    </p>
+
+                                </div>
+                                <div class="property-details-Description-two">
+                                    <p>
+                                        <img src="assets/img/propertydetails/Component13.png" alt="size">
+                                        Pets Allowed
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="Description-big-box">
+                <div class="property-details-Description">
+                    <span class="active-filter-link">Floor Plan</span>
+                </div>
+                <div class="Floor-Plan-div">
+                    <div class="Floor-Plan-div-one">
+                        <img src="assets/img/propertydetails/Floor-Plan-bg.png" alt="floor-plan">
+                    </div>
+                    <div class="Floor-Plan-div-two">
+                        <div class="video-container">
+                            <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}"
+                                alt="floor-plan"></video>
+                            <button id="playButton" class="play-button">
+                                <img src="assets/img/propertydetails/play-icon.png" alt="floor-plan">
+                                Watch video tour</button>
+                        </div>
+                        <div class="Floor-Plan-div-three">
+                            <div class="Floor-Plan-div-three-box">
+                                <div class="Floor-Plan-div-three-box-one">
+                                    <p>
+                                        Rent this property from just
+                                    </p>
+                                    <h3>83338.37
+                                        <span>USDT /month</span>
+                                    </h3>
+                                    <h4>
+                                        59, 383 AED
+                                    </h4>
+                                    <h4>Fixed rates from: <span>3.75%</span></h4>
+                                </div>
+                                <div class="Floor-Plan-div-three-line"></div>
+                                <div class="Floor-Plan-div-three-box-two">
+                                    <p>
+                                        In partnership with
+                                    </p>
+                                    <img src="assets/img/propertydetails/logo-1.png" alt="logo">
+                                    <a class="pre-approved" href="#">Get pre-approved</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
-        <div style="width: 60%;">
+    </div>
 
+    <div style="background: #0B0F28;
+    padding: 50px 0;
+    " class="bg_img top-center pos-rel pb-145" data-background="assets/img/bg/team-bg.png">
+
+
+
+
+        <div class="container">
+            <div class="Description-big-box">
+                <div class="property-details-Description">
+                    <span class="active-filter-link">Location</span>
+                </div>
+                <div class="Floor-Plan-div">
+                    <div class="map-div-one">
+                        <img src="assets/img/propertydetails/map.jpeg" alt="floor-plan">
+                    </div>
+    
+    
+                    <div class="Floor-Plan-div-two">
+    
+                        <div class="map-div-three">
+                            <div class="Location-div-three-box ">
+                                <div class="Location-div-three-box-one">
+                                    <div class="Location-img-one">
+                                        <img src="assets/img/propertydetails/map-section-one.png" alt="floor-plan">
+                                    </div>
+                                    <div>
+                                        <p>
+                                            Collective 2.0 Tower B
+                                        </p>
+                                        <p>
+                                            Residential Insights
+                                        </p>
+                                    </div>
+                                    <img class="Location-img-two" src="assets/img/propertydetails/arrow-right-green.png"
+                                        alt="floor-plan">
+                                </div>
+                                <div class="Location-div-three-line"></div>
+                                <div class="map-div-three-box-two">
+                                    <div class="map-div-three-box-two-one">
+                                        <img src="assets/img/propertydetails/Component15.png" alt="floor-plan">
+                                        <p> Floor Plans :</p>
+                                        <span>256 units</span>
+                                    </div>
+                                    <div class="map-div-three-box-two-one">
+                                        <img src="assets/img/propertydetails/Component16.png" alt="floor-plan">
+                                        <p> Price Range :</p>
+                                        <span>80K - 165K AED/year</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-div-three">
+                            <div class="Location-div-three-box ">
+                                <div class="Location-div-three-box-one">
+                                    <div class="Location-img-one">
+                                        <img src="assets/img/propertydetails/map-section-one.png" alt="floor-plan">
+                                    </div>
+                                    <div>
+                                        <p>
+                                            Collective 2.0 Tower B
+                                        </p>
+                                        <p>
+                                            Residential Insights
+                                        </p>
+                                    </div>
+                                    <img class="Location-img-two" src="assets/img/propertydetails/arrow-right-green.png"
+                                        alt="floor-plan">
+                                </div>
+                                <div class="Location-div-three-line"></div>
+                                <div class="map-div-three-box-two">
+                                    <div class="map-div-three-box-two-one">
+                                        <span>Apartments and villas | Family-Friendly</span>
+                                    </div>
+                                    <div class="map-div-three-box-two-one">
+                                        <img src="assets/img/propertydetails/Component16.png" alt="floor-plan">
+                                        <p> Price Range :</p>
+                                        <span>80K - 165K AED/year</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+      <!-- faq start -->
+      <section class="faq pt-130">
+        <div class="container">
+            <div class="section-title pb-55 wow fadeInUp"  data-wow-duration=".7s">
+                <h1 class="title">Have Any Questions?</h1>
+            </div>
+            <div class="faq__blockchain wow fadeInUp" data-wow-duration=".7s" data-wow-delay="200ms">
+                <ul class="accordion_box clearfix">
+                    <li class="accordion block">
+                        <div class="acc-btn">
+                            How do I participate in the ICO?
+                            <span class="arrow"><span></span></span>
+                        </div>
+                        <div class="acc_body">
+                            <div class="content">
+                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="accordion block active-block">
+                        <div class="acc-btn">
+                            What is an ICO?
+                            <span class="arrow"><span></span></span>
+                        </div>
+                        <div class="acc_body current">
+                            <div class="content">
+                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services. 
+                            </div>
+                        </div>
+                    </li>
+                    <li class="accordion block">
+                        <div class="acc-btn">
+                            What is the purpose of your project?
+                            <span class="arrow"><span></span></span>
+                        </div>
+                        <div class="acc_body">
+                            <div class="content">
+                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="accordion block">
+                        <div class="acc-btn">
+                            What are the benefits of holding your token?
+                            <span class="arrow"><span></span></span>
+                        </div>
+                        <div class="acc_body">
+                            <div class="content">
+                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="accordion block">
+                        <div class="acc-btn">
+                            How is the token distributed?
+                            <span class="arrow"><span></span></span>
+                        </div>
+                        <div class="acc_body">
+                            <div class="content">
+                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                            </div>
+                        </div>
+                    </li>
+                    <li class="accordion block">
+                        <div class="acc-btn">
+                            Is there a minimum investment requirement?
+                            <span class="arrow"><span></span></span>
+                        </div>
+                        <div class="acc_body">
+                            <div class="content">
+                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- faq end -->
+
+
+        <div class="footer-shape">
+            <div class="shape shape--1">
+                <img class="leftToRight" src="assets/img/shape/team-sp_01.svg" alt="">
+            </div>
+            <div class="shape shape--2">
+                <img class="topToBottom" src="assets/img/shape/team-sp_02.svg" alt="">
+            </div>
         </div>
     </div>
 
@@ -92,20 +553,15 @@ padding: 50px 0;
 
 
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById("propertyVideo");
+            const playButton = document.getElementById("playButton");
 
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-</div>
-
+            playButton.addEventListener("click", function() {
+                video.play();
+                playButton.style.display = "none"; // Hide button when video starts playing
+            });
+        });
+    </script>
 @endsection
