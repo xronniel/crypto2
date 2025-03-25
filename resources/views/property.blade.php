@@ -277,17 +277,8 @@ class="blog-post-wrap mt-none-30">
 </div>
 @endforeach
 {{-- end card   --}}
-{{-- {{ $properties->links() }} --}}
-                    <div class="pagination_wrap pt-50">
-                        <ul>
-                            <li><a href="#"><i class="far fa-long-arrow-left"></i></a></li>
-                            <li><a href="#" class="current_page">01</a></li>
-                            <li><a href="#">02</a></li>
-                            <li><a href="#"><i class="fal fa-ellipsis-h"></i></a></li>
-                            <li><a href="#">08</a></li>
-                            <li><a href="#"><i class="far fa-long-arrow-right"></i></a></li>
-                        </ul>
-                    </div>
+{{ $properties->links() }}
+
 
                 </div>
                 <div class="col-lg-3 mt-30">
