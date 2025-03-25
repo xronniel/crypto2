@@ -146,9 +146,9 @@
                         </a>
                     </div> --}}
                     <div class="option2 nav-option">
-                        <a href="">
+                        <a href="{{ route('admin.articles.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="articles">
-                            Terms and Conditions
+                            Articles
                         </a>
                     </div>
                     <div class="option2 nav-option">
