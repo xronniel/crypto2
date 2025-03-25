@@ -147,7 +147,9 @@
 @foreach($properties as $property)
 
 <div 
-style="margin-bottom: 50px;"
+onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
+
+style="margin-bottom: 50px; cursor: pointer;"
 class="blog-post-wrap mt-none-30">
     <article class="blog__item mt-30 blog__item-property">
         <div class="blog__item-property-one swiper">
