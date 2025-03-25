@@ -1,6 +1,10 @@
 @extends('layouts.front-office.app')
 
 @section('content')
+
+{{-- {{$property}} --}}
+
+
     <section style="background: #080B18;" class="blog pt-50 pb-50">
         <div class="container">
             <div class="property-filter-box">
@@ -48,7 +52,7 @@
         </div>
     </section>
     <div style="background: #0B0F28;
-            padding: 50px 0;
+            padding: 1px 0;
             ">
         <div class="container">
             <div class="page-path-line">
@@ -361,178 +365,338 @@
 
 
 
+
+
+  
+                <div style="margin: 20px 0;">
+                    <div class="property-details-Description">
+                        <span class="active-filter-link">Location</span>
+                    </div>
+                    <div class="Floor-Plan-div">
+                        <div class="map-div-one">
+                            <img src="assets/img/propertydetails/map.jpeg" alt="floor-plan">
+                        </div>
+        
+        
+                        <div class="Floor-Plan-div-two">
+        
+                            <div class="map-div-three">
+                                <div class="Location-div-three-box ">
+                                    <div class="Location-div-three-box-one">
+                                        <div class="Location-img-one">
+                                            <img src="assets/img/propertydetails/map-section-one.png" alt="floor-plan">
+                                        </div>
+                                        <div>
+                                            <p>
+                                                Collective 2.0 Tower B
+                                            </p>
+                                            <p class="Location-img-one-p-two">
+                                                Residential Insights
+                                            </p>
+                                        </div>
+                                        <img class="Location-img-two" src="assets/img/propertydetails/arrow-right-green.png"
+                                            alt="floor-plan">
+                                    </div>
+                                    <div class="Location-div-three-line"></div>
+                                    <div class="map-div-three-box-two">
+                                        <div class="map-div-three-box-two-one">
+                                            <img src="assets/img/propertydetails/Component15.png" alt="floor-plan">
+                                            <p> Floor Plans :</p>
+                                            <span>256 units</span>
+                                        </div>
+                                        <div class="map-div-three-box-two-one">
+                                            <img src="assets/img/propertydetails/Component16.png" alt="floor-plan">
+                                            <p> Price Range :</p>
+                                            <span>80K - 165K AED/year</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="map-div-three">
+                                <div class="Location-div-three-box ">
+                                    <div class="Location-div-three-box-one">
+                                        <div class="Location-img-one">
+                                            <img src="assets/img/propertydetails/map-section-one.png" alt="floor-plan">
+                                        </div>
+                                        <div>
+                                            <p>
+                                                Collective 2.0 Tower B
+                                            </p>
+                                            <p class="Location-img-one-p-two">
+                                                Residential Insights
+                                            </p>
+    
+    
+                                            <div class="Location-one-p-box">
+                                                <p  class="Location-img-one-p-three">4.2/5 </p>
+                                                <span class="Location-img-one-span">19 building reviews</span>
+                                            </div>
+                                        </div>
+                                        <img class="Location-img-two" src="assets/img/propertydetails/arrow-right-green.png"
+                                            alt="floor-plan">
+                                    </div>
+                                    <div class="Location-div-three-line"></div>
+                                    <div class="map-div-three-box-two">
+                                        <div class="map-div-three-box-two-one">
+                                            <span>Apartments and villas | Family-Friendly</span>
+                                        </div>
+                                        <div class="map-div-three-box-two-one">
+                                            <img src="assets/img/propertydetails/Component16.png" alt="floor-plan">
+                                            <p> Price Range :</p>
+                                            <span>80K - 165K AED/year</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+         
+
         </div>
     </div>
 
     <div style="background: #0B0F28;
-    padding: 50px 0;
+    padding: 1px 0;
     " class="bg_img top-center pos-rel pb-145" data-background="assets/img/bg/team-bg.png">
 
 
 
 
-        <div class="container">
-            <div class="Description-big-box">
-                <div class="property-details-Description">
-                    <span class="active-filter-link">Location</span>
-                </div>
-                <div class="Floor-Plan-div">
-                    <div class="map-div-one">
-                        <img src="assets/img/propertydetails/map.jpeg" alt="floor-plan">
-                    </div>
-    
-    
-                    <div class="Floor-Plan-div-two">
-    
-                        <div class="map-div-three">
-                            <div class="Location-div-three-box ">
-                                <div class="Location-div-three-box-one">
-                                    <div class="Location-img-one">
-                                        <img src="assets/img/propertydetails/map-section-one.png" alt="floor-plan">
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Collective 2.0 Tower B
-                                        </p>
-                                        <p>
-                                            Residential Insights
-                                        </p>
-                                    </div>
-                                    <img class="Location-img-two" src="assets/img/propertydetails/arrow-right-green.png"
-                                        alt="floor-plan">
+
+
+        <div 
+        class="container">
+            <div 
+            
+            class="card-title">
+                <h1>More available in the same area</h1>
+            </div>
+            <div class="row mt-none-30 justify-content-center">
+                <div class="col-lg-3 col-md-6 mt-30">
+                    <div class="xb-event-card">
+                        <div class="cards-property-img">
+                            <img src="assets/img/event/event-img01.jpg" alt="">
+                        </div>
+                        <div class="xb-item--cards-property">
+
+                            <p class="">APARTMENT</p>
+                            <p class="cards-property-title-two">2623.06 BTC</p>
+                            <p class="cards-property-title-three">2623.06 ETH / month</p>
+                            <p class="cards-property-title-four">87, 000 AED/ month</p>
+                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills Estate, Dubai</p>
+                           
+                            <div class="grid-left-side-price-two">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-bed.png" alt="bed">
+                                    <p>6</p>
                                 </div>
-                                <div class="Location-div-three-line"></div>
-                                <div class="map-div-three-box-two">
-                                    <div class="map-div-three-box-two-one">
-                                        <img src="assets/img/propertydetails/Component15.png" alt="floor-plan">
-                                        <p> Floor Plans :</p>
-                                        <span>256 units</span>
-                                    </div>
-                                    <div class="map-div-three-box-two-one">
-                                        <img src="assets/img/propertydetails/Component16.png" alt="floor-plan">
-                                        <p> Price Range :</p>
-                                        <span>80K - 165K AED/year</span>
-                                    </div>
+                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-bath.png" alt="bath">
+                                    <p>6 </p>
+                                </div>
+                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-size.png" alt="size">
+                                    <p>6,000 sq. ft.</p>
                                 </div>
                             </div>
+
+
                         </div>
-                        <div class="map-div-three">
-                            <div class="Location-div-three-box ">
-                                <div class="Location-div-three-box-one">
-                                    <div class="Location-img-one">
-                                        <img src="assets/img/propertydetails/map-section-one.png" alt="floor-plan">
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Collective 2.0 Tower B
-                                        </p>
-                                        <p>
-                                            Residential Insights
-                                        </p>
-                                    </div>
-                                    <img class="Location-img-two" src="assets/img/propertydetails/arrow-right-green.png"
-                                        alt="floor-plan">
-                                </div>
-                                <div class="Location-div-three-line"></div>
-                                <div class="map-div-three-box-two">
-                                    <div class="map-div-three-box-two-one">
-                                        <span>Apartments and villas | Family-Friendly</span>
-                                    </div>
-                                    <div class="map-div-three-box-two-one">
-                                        <img src="assets/img/propertydetails/Component16.png" alt="floor-plan">
-                                        <p> Price Range :</p>
-                                        <span>80K - 165K AED/year</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
                     </div>
                 </div>
+
+                {{-- cards  --}}
+                <div class="col-lg-3 col-md-6 mt-30">
+                    <div class="xb-event-card">
+                        <div class="cards-property-img">
+                            <img src="assets/img/event/event-img01.jpg" alt="">
+                        </div>
+                        <div class="xb-item--cards-property">
+
+                            <p class="">APARTMENT</p>
+                            <p class="cards-property-title-two">2623.06 BTC</p>
+                            <p class="cards-property-title-three">2623.06 ETH / month</p>
+                            <p class="cards-property-title-four">87, 000 AED/ month</p>
+                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills Estate, Dubai</p>
+                           
+                            <div class="grid-left-side-price-two">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-bed.png" alt="bed">
+                                    <p>6</p>
+                                </div>
+                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-bath.png" alt="bath">
+                                    <p>6 </p>
+                                </div>
+                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-size.png" alt="size">
+                                    <p>6,000 sq. ft.</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mt-30">
+                    <div class="xb-event-card">
+                        <div class="cards-property-img">
+                            <img src="assets/img/event/event-img01.jpg" alt="">
+                        </div>
+                        <div class="xb-item--cards-property">
+
+                            <p class="">APARTMENT</p>
+                            <p class="cards-property-title-two">2623.06 BTC</p>
+                            <p class="cards-property-title-three">2623.06 ETH / month</p>
+                            <p class="cards-property-title-four">87, 000 AED/ month</p>
+                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills Estate, Dubai</p>
+                           
+                            <div class="grid-left-side-price-two">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-bed.png" alt="bed">
+                                    <p>6</p>
+                                </div>
+                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-bath.png" alt="bath">
+                                    <p>6 </p>
+                                </div>
+                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-size.png" alt="size">
+                                    <p>6,000 sq. ft.</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mt-30">
+                    <div class="xb-event-card">
+                        <div class="cards-property-img">
+                            <img src="assets/img/event/event-img01.jpg" alt="">
+                        </div>
+                        <div class="xb-item--cards-property">
+
+                            <p class="">APARTMENT</p>
+                            <p class="cards-property-title-two">2623.06 BTC</p>
+                            <p class="cards-property-title-three">2623.06 ETH / month</p>
+                            <p class="cards-property-title-four">87, 000 AED/ month</p>
+                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills Estate, Dubai</p>
+                           
+                            <div class="grid-left-side-price-two">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-bed.png" alt="bed">
+                                    <p>6</p>
+                                </div>
+                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-bath.png" alt="bath">
+                                    <p>6 </p>
+                                </div>
+                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <div class="grid-left-side-price-two-card">
+                                    <img class="img-card" src="assets/img/property/green-size.png" alt="size">
+                                    <p>6,000 sq. ft.</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-
         </div>
-      <!-- faq start -->
-      <section class="faq pt-130">
-        <div class="container">
-            <div class="section-title pb-55 wow fadeInUp"  data-wow-duration=".7s">
-                <h1 class="title">Have Any Questions?</h1>
+
+
+        <!-- faq start -->
+        <section 
+        style="    padding-bottom: 126px;"
+        class="faq pt-130">
+            <div class="container">
+                <div class="section-title pb-55 wow fadeInUp"  data-wow-duration=".7s">
+                    <h1 class="title">Have Any Questions?</h1>
+                </div>
+                <div class="faq__blockchain wow fadeInUp" data-wow-duration=".7s" data-wow-delay="200ms">
+                    <ul class="accordion_box clearfix">
+                        <li class="accordion block">
+                            <div class="acc-btn">
+                                How do I participate in the ICO?
+                                <span class="arrow"><span></span></span>
+                            </div>
+                            <div class="acc_body">
+                                <div class="content">
+                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                                </div>
+                            </div>
+                        </li>
+                        <li class="accordion block active-block">
+                            <div class="acc-btn">
+                                What is an ICO?
+                                <span class="arrow"><span></span></span>
+                            </div>
+                            <div class="acc_body current">
+                                <div class="content">
+                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services. 
+                                </div>
+                            </div>
+                        </li>
+                        <li class="accordion block">
+                            <div class="acc-btn">
+                                What is the purpose of your project?
+                                <span class="arrow"><span></span></span>
+                            </div>
+                            <div class="acc_body">
+                                <div class="content">
+                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                                </div>
+                            </div>
+                        </li>
+                        <li class="accordion block">
+                            <div class="acc-btn">
+                                What are the benefits of holding your token?
+                                <span class="arrow"><span></span></span>
+                            </div>
+                            <div class="acc_body">
+                                <div class="content">
+                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                                </div>
+                            </div>
+                        </li>
+                        <li class="accordion block">
+                            <div class="acc-btn">
+                                How is the token distributed?
+                                <span class="arrow"><span></span></span>
+                            </div>
+                            <div class="acc_body">
+                                <div class="content">
+                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                                </div>
+                            </div>
+                        </li>
+                        <li class="accordion block">
+                            <div class="acc-btn">
+                                Is there a minimum investment requirement?
+                                <span class="arrow"><span></span></span>
+                            </div>
+                            <div class="acc_body">
+                                <div class="content">
+                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="faq__blockchain wow fadeInUp" data-wow-duration=".7s" data-wow-delay="200ms">
-                <ul class="accordion_box clearfix">
-                    <li class="accordion block">
-                        <div class="acc-btn">
-                            How do I participate in the ICO?
-                            <span class="arrow"><span></span></span>
-                        </div>
-                        <div class="acc_body">
-                            <div class="content">
-                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
-                            </div>
-                        </div>
-                    </li>
-                    <li class="accordion block active-block">
-                        <div class="acc-btn">
-                            What is an ICO?
-                            <span class="arrow"><span></span></span>
-                        </div>
-                        <div class="acc_body current">
-                            <div class="content">
-                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services. 
-                            </div>
-                        </div>
-                    </li>
-                    <li class="accordion block">
-                        <div class="acc-btn">
-                            What is the purpose of your project?
-                            <span class="arrow"><span></span></span>
-                        </div>
-                        <div class="acc_body">
-                            <div class="content">
-                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
-                            </div>
-                        </div>
-                    </li>
-                    <li class="accordion block">
-                        <div class="acc-btn">
-                            What are the benefits of holding your token?
-                            <span class="arrow"><span></span></span>
-                        </div>
-                        <div class="acc_body">
-                            <div class="content">
-                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
-                            </div>
-                        </div>
-                    </li>
-                    <li class="accordion block">
-                        <div class="acc-btn">
-                            How is the token distributed?
-                            <span class="arrow"><span></span></span>
-                        </div>
-                        <div class="acc_body">
-                            <div class="content">
-                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
-                            </div>
-                        </div>
-                    </li>
-                    <li class="accordion block">
-                        <div class="acc-btn">
-                            Is there a minimum investment requirement?
-                            <span class="arrow"><span></span></span>
-                        </div>
-                        <div class="acc_body">
-                            <div class="content">
-                                An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and blockchain projects to raise capital by issuing tokens to investors. In an ICO, investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for a stake to its products or services.
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- faq end -->
+        </section>
+        <!-- faq end -->
 
 
         <div class="footer-shape">

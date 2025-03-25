@@ -49,7 +49,7 @@ class PropertyController extends Controller
         }
 
         // Get paginated properties with filters applied
-        $properties = $query->latest()->paginate(10);
+        $properties = $query->with(['images', 'facilities'])->latest()->paginate(10);
 
         // Get unique unit_type and unit_model
         $unitTypesAndModels = Listing::select('unit_type', 'unit_model')
@@ -69,7 +69,7 @@ class PropertyController extends Controller
             ->whereNotNull('unit_type')
             ->distinct()
             ->pluck('unit_type');
-
+        // dd($properties);
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType'));
     }
 

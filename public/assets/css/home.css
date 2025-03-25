@@ -424,3 +424,11 @@ input[type="text"] {
     visibility: visible;
     transform: translateY(0); 
 }
+
+
+.xb-item--icon img {
+    width: 80px;
+}
+.xb-item--feature-icon img {
+    width: 100px;
+}

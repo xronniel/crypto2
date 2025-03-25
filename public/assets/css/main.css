@@ -4050,7 +4050,38 @@ body[data-aos-easing="ease"] [data-aos] {
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
+
+
+
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    text-transform: capitalize;
+
 }
+
+
+
+
+.login-btn{
+    
+    font-family: "Outfit", sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    line-height: 22px !important;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    text-transform: capitalize;
+}
+
+
+
+
+
+
 .main-menu ul li a::before {
     position: absolute;
     content: "";
@@ -5127,7 +5158,7 @@ body[data-aos-easing="ease"] [data-aos] {
 }
 .about .about-img img {
     position: absolute;
-    right: 300px;
+    right: 220px;
     top: 138px;
     z-index: -1;
 }
