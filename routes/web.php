@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->group(function () {
 
     Route::resource('news', NewsController::class);
+    Route::delete('news/gallery/{id}', [NewsController::class, 'deleteGalleryImage'])->name('gallery.delete');
     Route::resource('listings', ListingController::class);
 
     Route::get('homepage', [HomepageContentController::class, 'index'])->name('homepage.index');

@@ -5,7 +5,7 @@
     <h1 class="mb-4">Edit News</h1>
 
     <!-- Form to Edit News -->
-    <form action="{{ route('admin.news.update', $news->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.news.update', $news) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -71,25 +71,27 @@
             <input type="file" name="gallery[]" class="form-control" id="gallery" multiple>
         </div>
 
-        <!-- Existing Gallery Images -->
-        @if($news->galleries->count() > 0)
-            <h5 class="mt-3">Current Gallery Images:</h5>
-            <div class="row">
-                @foreach($news->galleries as $gallery)
-                <div class="col-md-2 mb-3 text-center">
-                    <img src="{{ asset('storage/' . $gallery->image_path) }}" class="img-thumbnail mb-2" width="150">
-                    <form action="{{ route('admin.gallery.delete', $gallery->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-                </div>
-                @endforeach
-            </div>
-        @endif
-
         <button type="submit" class="btn btn-primary">Update News</button>
         <a href="{{ route('admin.news.index') }}" class="btn btn-secondary">Back to List</a>
     </form>
+
+    <!-- Existing Gallery Images -->
+    @if($news->galleries->count() > 0)
+        <h5 class="mt-3">Current Gallery Images:</h5>
+        <div class="row">
+            @foreach($news->galleries as $gallery)
+            <div class="col-md-2 mb-3 text-center">
+                <img src="{{ asset('storage/' . $gallery->image_path) }}" class="img-thumbnail mb-2" width="150">
+
+                <!-- Move this delete form outside the parent form -->
+                <form action="{{ route('admin.gallery.delete', $gallery->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
+            @endforeach
+        </div>
+    @endif
 </div>
 @endsection
