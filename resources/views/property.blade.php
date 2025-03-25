@@ -1,5 +1,10 @@
 @extends('layouts.front-office.app')
 
+
+{{-- @php
+    dd( $properties);
+@endphp --}}
+
 @section('content')
     <section class="blog pt-50 pb-50">
         <div class="container">
@@ -137,344 +142,142 @@
             <div class="row mt-none-30">
                 <div class="col-lg-9 mt-30">
 {{-- card   --}}
-                    <div 
-                    style="margin-bottom: 50px;"
-                    class="blog-post-wrap mt-none-30">
-                        <article class="blog__item mt-30 blog__item-property">
-                            <div class="blog__item-property-one swiper">
-                                <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite">
-                                <img class="location-green" src="assets/img/property/location-green.png" alt="location">
+  {{-- card   --}}
 
-                                <div class="img-slider-count">
-                                    <img class="" src="assets/img/property/cam.png" alt="location">
-                                    <p></p>
-                                </div>
+@foreach($properties as $property)
 
-
-                                <div class="budge-three-div">
-                                    <p>
-                                        <img class="" src="assets/img/property/Verified-img.png" alt="location">
-                                        Verified</p>
-                                        <p>
-                                        <img class="" src="assets/img/property/SuperAgent-img.png" alt="location">
-                                        SuperAgent</p>
-                                    <p>New</p>
-
-                                </div>
+<div 
+style="margin-bottom: 50px;"
+class="blog-post-wrap mt-none-30">
+    <article class="blog__item mt-30 blog__item-property">
+        <div class="blog__item-property-one swiper">
+            <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite">
+            <img class="location-green" src="assets/img/property/location-green.png" alt="location">
+        <!-- Image Slider Count -->
+        <div class="img-slider-count">
+            <img class="" src="assets/img/property/cam.png" alt="location">
+            <p>{{ $property->images->count() }}</p>
+        </div>
 
 
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                </div>
-                                <!-- Pagination -->
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div style="background-image: url(assets/img/bg/tm_bg.png);
-                                background-size: cover;
-                            " class="blog__item-property-two">
-
-                                <div class="blog__item-property-two-box">
-                                    <h1 class="blog__item-property-two-title">Villa</h1>
-                                    <p>Premium</p>
-                                </div>
-                                <div class="blog__item-property-two-box-two">
-                                    <div class="blog__item-property-two-box-one">
-                                        <p class="box-two-p-one">
-                                            53.64 (BTC)
-                                        </p>
-                                        <p class="box-two-p-two">
-                                            16,500,000 AED
-                                        </p>
-                                    </div>
-
-                                    <div class="blog__item-property-two-img">
-                                        <img src="assets/img/property/state-logo.jpeg" alt="logo">
-                                    </div>
-
-                                </div>
-                                <div class="blog__item-property-two-box-three">
-                                    <p>Bespoke Upgrades | Extended | Vacant</p>
-                                </div>
-                                <div class="location-property-two-box-three">
-                                    <img src="assets/img/property/green-location.png" alt="location">
-                                    <p>Hattan, Arabian Ranches, Dubai</p>
-                                </div>
-                                <div class="property-two-box-four">
-                                    <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
-                                    <p>5</p>
-                                    <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                    <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
-                                    <p>5</p>
-                                    <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                    <img class="img-four" src="assets/img/property/green-size.png" alt="size">
-                                    <p>5</p>
-                                </div>
-
-                                <div class="property-two-box-five">
-
-                                    <div class="property-two-box-five-one">
-
-                                        <div class="property-two-box-five-one-img">
-                                            <img src="assets/img/property/person.jpeg" alt="person">
-                                        </div>
-                                        <div class="property-two-box-five-one-name">
-                                            <p>John Doe</p>
-                                            <h4>Real Estate Agent</h4>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="property-two-box-five-two">
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-call.png" alt="size">
-                                            Call</a>
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-mail.png" alt="size">
-                                            Email</a>
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-WhatsApp.png" alt="size">
-
-                                            WhatsApp</a>
-                                    </div>
-                                </div>
-
-
-
-
-
-                            </div>
-                        </article>
+        <div class="budge-three-div">
+            <!-- If Verified -->
+            @if($property->verified == 1)
+                <p>
+                    <img class="" src="assets/img/property/Verified-img.png" alt="location">
+                    Verified
+                </p>
+            @endif
+        
+            <!-- If SuperAgent -->
+            @if($property->superagent == 1)
+                <p>
+                    <img class="" src="assets/img/property/SuperAgent-img.png" alt="location">
+                    SuperAgent
+                </p>
+            @endif
+        
+            <!-- If New -->
+            @if($property->new == 1)
+                <p>New</p>
+            @endif
+        </div>
+            <div class="swiper-wrapper">
+                @foreach($property->images as $image)
+                    <div class="swiper-slide">
+                        <img class="blog__item-property-one-img-slide" src="{{ $image->url }}" alt="Property Image">
                     </div>
-{{-- end card   --}}
-{{-- card   --}}
-                    <div 
-                    style="margin-bottom: 50px;"
-                    class="blog-post-wrap mt-none-30">
-                        <article class="blog__item mt-30 blog__item-property">
-                            <div class="blog__item-property-one swiper">
-                                <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite">
-                                <img class="location-green" src="assets/img/property/location-green.png" alt="location">
+                @endforeach
+            </div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+        <div style="background-image: url(assets/img/bg/tm_bg.png);
+            background-size: cover;
+        " class="blog__item-property-two">
 
-                                <div class="img-slider-count">
-                                    <img class="" src="assets/img/property/cam.png" alt="location">
-                                    <p></p>
-                                </div>
+            <div class="blog__item-property-two-box">
+                <h1 class="blog__item-property-two-title">{{$property->unit_type}}</h1>
+                <p>Premium</p>
+            </div>
+            <div class="blog__item-property-two-box-two">
+                <div class="blog__item-property-two-box-one">
+                    <p class="box-two-p-one">
+                        53.64 (BTC)
+                    </p>
+                    <p class="box-two-p-two">
+                        {{$property->price }} AED
+                    </p>
+                </div>
 
+                <div class="blog__item-property-two-img">
+                    <img src="assets/img/property/state-logo.jpeg" alt="logo">
+                </div>
 
-                                <div class="budge-three-div">
-                                    <p>Verified</p>
-                                    <p>SuperAgent</p>
-                                    <p>New</p>
+            </div>
+            <div class="blog__item-property-two-box-three">
+                <p>{{$property->property_title}}</p>
+            </div>
+            <div class="location-property-two-box-three">
+                <img src="assets/img/property/green-location.png" alt="location">
+                <p>Hattan, Arabian Ranches, Dubai</p>
+            </div>
+            <div class="property-two-box-four">
+                <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
+                <p>{{$property->no_of_rooms}}</p>
+                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
+                <p>{{$property->no_of_bathroom}}</p>
+                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                <img class="img-four" src="assets/img/property/green-size.png" alt="size">
+                <p>{{$property->unit_builtup_area}}{{$property->unit_measure}}</p>
+            </div>
 
-                                </div>
+            <div class="property-two-box-five">
 
+                <div class="property-two-box-five-one">
 
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                </div>
-                                <!-- Pagination -->
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div style="background-image: url(assets/img/bg/tm_bg.png);" class="blog__item-property-two">
-
-                                <div class="blog__item-property-two-box">
-                                    <h1 class="blog__item-property-two-title">Villa</h1>
-                                    <p>Premium</p>
-                                </div>
-                                <div class="blog__item-property-two-box-two">
-                                    <div class="blog__item-property-two-box-one">
-                                        <p class="box-two-p-one">
-                                            53.64 (BTC)
-                                        </p>
-                                        <p class="box-two-p-two">
-                                            16,500,000 AED
-                                        </p>
-                                    </div>
-
-                                    <div class="blog__item-property-two-img">
-                                        <img src="assets/img/property/state-logo.jpeg" alt="logo">
-                                    </div>
-
-                                </div>
-                                <div class="blog__item-property-two-box-three">
-                                    <p>Bespoke Upgrades | Extended | Vacant</p>
-                                </div>
-                                <div class="location-property-two-box-three">
-                                    <img src="assets/img/property/green-location.png" alt="location">
-                                    <p>Hattan, Arabian Ranches, Dubai</p>
-                                </div>
-                                <div class="property-two-box-four">
-                                    <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
-                                    <p>5</p>
-                                    <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                    <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
-                                    <p>5</p>
-                                    <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                    <img class="img-four" src="assets/img/property/green-size.png" alt="size">
-                                    <p>5</p>
-                                </div>
-
-                                <div class="property-two-box-five">
-
-                                    <div class="property-two-box-five-one">
-
-                                        <div class="property-two-box-five-one-img">
-                                            <img src="assets/img/property/person.jpeg" alt="person">
-                                        </div>
-                                        <div class="property-two-box-five-one-name">
-                                            <p>John Doe</p>
-                                            <h4>Real Estate Agent</h4>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="property-two-box-five-two">
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-call.png" alt="size">
-                                            Call</a>
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-mail.png" alt="size">
-                                            Email</a>
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-WhatsApp.png" alt="size">
-
-                                            WhatsApp</a>
-                                    </div>
-                                </div>
-
-
-
-
-
-                            </div>
-                        </article>
+                    <div class="property-two-box-five-one-img">
+                        <img 
+                           src="{{ asset($property->listing_agent_photo) }}"
+                     alt="person">
                     </div>
-{{-- end card   --}}
-{{-- card   --}}
-                    <div 
-                    style="margin-bottom: 50px;"
-                    class="blog-post-wrap mt-none-30">
-                        <article class="blog__item mt-30 blog__item-property">
-                            <div class="blog__item-property-one swiper">
-                                <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite">
-                                <img class="location-green" src="assets/img/property/location-green.png" alt="location">
-
-                                <div class="img-slider-count">
-                                    <img class="" src="assets/img/property/cam.png" alt="location">
-                                    <p></p>
-                                </div>
-
-
-                                <div class="budge-three-div">
-                                    <p>Verified</p>
-                                    <p>SuperAgent</p>
-                                    <p>New</p>
-
-                                </div>
-
-
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                    <div class="swiper-slide"><img class="blog__item-property-one-img-slide"
-                                            src="assets/img/property/bulding-1.jpeg" alt="amar"></div>
-                                </div>
-                                <!-- Pagination -->
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div style="background-image: url(assets/img/bg/tm_bg.png);" class="blog__item-property-two">
-
-                                <div class="blog__item-property-two-box">
-                                    <h1 class="blog__item-property-two-title">Villa</h1>
-                                    <p>Premium</p>
-                                </div>
-                                <div class="blog__item-property-two-box-two">
-                                    <div class="blog__item-property-two-box-one">
-                                        <p class="box-two-p-one">
-                                            53.64 (BTC)
-                                        </p>
-                                        <p class="box-two-p-two">
-                                            16,500,000 AED
-                                        </p>
-                                    </div>
-
-                                    <div class="blog__item-property-two-img">
-                                        <img src="assets/img/property/state-logo.jpeg" alt="logo">
-                                    </div>
-
-                                </div>
-                                <div class="blog__item-property-two-box-three">
-                                    <p>Bespoke Upgrades | Extended | Vacant</p>
-                                </div>
-                                <div class="location-property-two-box-three">
-                                    <img src="assets/img/property/green-location.png" alt="location">
-                                    <p>Hattan, Arabian Ranches, Dubai</p>
-                                </div>
-                                <div class="property-two-box-four">
-                                    <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
-                                    <p>5</p>
-                                    <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                    <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
-                                    <p>5</p>
-                                    <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                    <img class="img-four" src="assets/img/property/green-size.png" alt="size">
-                                    <p>5</p>
-                                </div>
-
-                                <div class="property-two-box-five">
-
-                                    <div class="property-two-box-five-one">
-
-                                        <div class="property-two-box-five-one-img">
-                                            <img src="assets/img/property/person.jpeg" alt="person">
-                                        </div>
-                                        <div class="property-two-box-five-one-name">
-                                            <p>John Doe</p>
-                                            <h4>Real Estate Agent</h4>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="property-two-box-five-two">
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-call.png" alt="size">
-                                            Call</a>
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-mail.png" alt="size">
-                                            Email</a>
-                                        <a href="#">
-                                            <img src="assets/img/property/dark-WhatsApp.png" alt="size">
-
-                                            WhatsApp</a>
-                                    </div>
-                                </div>
-
-
-
-
-
-                            </div>
-                        </article>
+                    <div class="property-two-box-five-one-name">
+                        <p>{{$property->listing_agent}}</p>
+                        <h4>Real Estate Agent</h4>
                     </div>
+                </div>
+
+
+                <div class="property-two-box-five-two">
+                    <!-- Phone Call -->
+                    <a href="tel:{{$property->listing_agent_phone}}">
+                        <img src="assets/img/property/dark-call.png" alt="Call">
+                        Call
+                    </a>
+                    <!-- Email -->
+                    <a href="mailto:{{$property->listing_agent_email}}">
+                        <img src="assets/img/property/dark-mail.png" alt="Email">
+                        Email
+                    </a>
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/{{$property->listing_agent_whatsapp}}" target="_blank">
+                        <img src="assets/img/property/dark-WhatsApp.png" alt="WhatsApp">
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </article>
+</div>
+@endforeach
 {{-- end card   --}}
+{{-- {{ $properties->links() }} --}}
                     <div class="pagination_wrap pt-50">
                         <ul>
                             <li><a href="#"><i class="far fa-long-arrow-left"></i></a></li>
@@ -547,15 +350,5 @@
 
 
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
 
-            const sliderWrapper = document.querySelector(".swiper-wrapper");
-
-            const slideCount = sliderWrapper.querySelectorAll(".swiper-slide").length;
-
-            const countElement = document.querySelector(".img-slider-count p");
-            countElement.textContent = `${slideCount}`;
-        });
-    </script>
 @endsection
