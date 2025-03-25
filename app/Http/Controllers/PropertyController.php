@@ -69,7 +69,7 @@ class PropertyController extends Controller
             ->whereNotNull('unit_type')
             ->distinct()
             ->pluck('unit_type');
-        dd($properties);
+        // dd($properties);
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType'));
     }
 
