@@ -4900,12 +4900,12 @@ body[data-aos-easing="ease"] [data-aos] {
 }
 
 .second-footer {
-    padding-top: 409px;
+    padding-top: 200px;
     z-index: 1;
 }
 @media (max-width: 991px) {
     .second-footer {
-        padding-top: 250px;
+        padding-top: 200px;
     }
 }
 @media (max-width: 767px) {
@@ -11082,12 +11082,12 @@ blockquote .quote {
 }
 
 .second-footer {
-    padding-top: 409px;
+    padding-top: 200px;
     z-index: 1;
 }
 @media (max-width: 991px) {
     .second-footer {
-        padding-top: 250px;
+        padding-top: 200px;
     }
 }
 @media (max-width: 767px) {

@@ -2,34 +2,35 @@
    <footer class="footer z-1 second-footer pos-rel" >
 
 
-    <div class="bg_img top-center pos-rel pb-145" data-background="assets/img/bg/team-bg.png">
+    <div class="bg_img top-center pos-rel pb-5" data-background="{{ asset('assets/img/bg/team-bg.png') }}">
        
         <div class="container pt-110">
             <div class="xb-contact">
                 <div class="row g-0 mt-none-30">
                     <div class="col-lg-7 mt-30">
-                        <div class="xb-inner bg_img" data-background="assets/img/bg/form_bg.png">
+                        <div class="xb-inner bg_img" data-background="{{ asset('assets/img/bg/form_bg.png') }}">
                             <h2 class="xb-item--title">if you have question, feel free to contact us</h2>
                             <form class="xb-item--form" action="#!">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="xb-item--field">
-                                            <span><img src="assets/img/footer/contact-user.svg" alt=""></span>
+                                            <span><img src="{{ asset('assets/img/footer/contact-user.svg') }}" alt="User Icon"></span>
                                             <input type="text" placeholder="Full Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="xb-item--field">
-                                            <span><img src="assets/img/footer/contact-email.svg" alt=""></span>
+                                            <span><img src="{{ asset('assets/img/footer/contact-email.svg') }}" alt="Email Icon"></span>
                                             <input type="email" placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="xb-item--field">
-                                            <span><img src="assets/img/footer/contact-massage.svg" alt=""></span>
+                                            <span><img src="{{ asset('assets/img/footer/contact-massage.svg') }}" alt="Message Icon"></span>
                                             <input type="text" placeholder="Type Your Message">
                                         </div>
                                     </div>
+
                                     <div class="col-lg-12 form-check xb-item--checkbox">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
@@ -51,18 +52,18 @@
                         </div>
                     </div>
                     <div class="col-lg-5 mt-30">
-                        <div class="testimonial-wrap bg_img" data-background="assets/img/bg/tm_bg.png">
+                        <div class="testimonial-wrap bg_img" data-background="{{ asset('assets/img/bg/tm_bg.png') }}">
                             <div class="testimonial-slider swiper-container">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
                                         <div class="xb-testimonial">
                                             <div class="xb-item--avater ul_li">
                                                 <div class="xb-item--img">
-                                                    <img src="assets/img/footer/testimonial.jpg" alt="">
+                                                    <img src="{{ asset('assets/img/footer/testimonial.jpg') }}" alt="Testimonial Image">
                                                 </div>
                                                 <div class="xb-item--holder">
                                                     <div class="xb-item--nationality ul_li">
-                                                        <img src="assets/img/footer/tes-flag.png" alt="">
+                                                        <img src="{{ asset('assets/img/footer/tes-flag.png') }}" alt="Flag Image">
                                                         <span>Denmark</span>
                                                     </div>
                                                     <h2 class="xb-item--title">Christopher Anthony</h2>
@@ -76,11 +77,11 @@
                                         <div class="xb-testimonial">
                                             <div class="xb-item--avater ul_li">
                                                 <div class="xb-item--img">
-                                                    <img src="assets/img/footer/testimonial.jpg" alt="">
+                                                    <img src="{{ asset('assets/img/footer/testimonial.jpg') }}" alt="Testimonial Image">
                                                 </div>
                                                 <div class="xb-item--holder">
                                                     <div class="xb-item--nationality ul_li">
-                                                        <img src="assets/img/footer/tes-flag.png" alt="">
+                                                        <img src="{{ asset('assets/img/footer/tes-flag.png') }}" alt="Flag Image">
                                                         <span>Denmark</span>
                                                     </div>
                                                     <h2 class="xb-item--title">Christopher Anthony</h2>
@@ -94,11 +95,11 @@
                                         <div class="xb-testimonial">
                                             <div class="xb-item--avater ul_li">
                                                 <div class="xb-item--img">
-                                                    <img src="assets/img/footer/testimonial.jpg" alt="">
+                                                    <img src="{{ asset('assets/img/footer/testimonial.jpg') }}" alt="Testimonial Image">
                                                 </div>
                                                 <div class="xb-item--holder">
                                                     <div class="xb-item--nationality ul_li">
-                                                        <img src="assets/img/footer/tes-flag.png" alt="">
+                                                        <img src="{{ asset('assets/img/footer/tes-flag.png') }}" alt="Flag Image">
                                                         <span>Denmark</span>
                                                     </div>
                                                     <h2 class="xb-item--title">Christopher Anthony</h2>
@@ -164,10 +165,10 @@
         </div>
         <div class="footer-shape">
             <div class="shape shape--1">
-                <img class="leftToRight" src="assets/img/shape/team-sp_01.svg" alt="">
+                <img class="leftToRight" src="{{ asset('assets/img/shape/team-sp_01.svg') }}" alt="">
             </div>
             <div class="shape shape--2">
-                <img class="topToBottom" src="assets/img/shape/team-sp_02.svg" alt="">
+                <img class="topToBottom" src="{{ asset('assets/img/shape/team-sp_02.svg') }}" alt="">
             </div>
         </div>
 
