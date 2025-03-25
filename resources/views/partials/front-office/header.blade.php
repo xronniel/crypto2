@@ -3,7 +3,9 @@
         <div class="container">
             <div class="header__wrap ul_li_between">
                 <div class="header-logo">
-                    <a href="/"><img src="assets/img/logo/Logo.png" alt=""></a>
+                    <a href="/">
+                        <img src="{{ asset('assets/img/logo/Logo.png') }}" alt="Logo">
+                    </a>
                 </div>
                 <div class="main-menu__wrap ul_li navbar navbar-expand-lg">
                     <nav class="main-menu collapse navbar-collapse">
@@ -40,8 +42,10 @@
                             <div class="xb-header-menu-scroll">
                                 <div class="xb-menu-close xb-hide-xl xb-close"></div>
                                 <div class="xb-logo-mobile xb-hide-xl">
-                                    <a href="/" rel="home"><img src="assets/img/logo/Logo.png"
-                                            alt=""></a>
+                                    <a href="/" rel="home">
+                                        <img src="{{ asset('assets/img/logo/Logo.png') }}" alt="Logo">
+                                        
+                                        </a>
                                 </div>
                                 <div class="xb-header-mobile-search xb-hide-xl">
                                     <form role="search" action="#">
@@ -86,20 +90,17 @@
                 <div class="header-last-btn">
                     <div class="header-btn-one ul_li">
                         <a class="btc-btn" href="#">
-
-                            <img src="assets/img/icon/hero-icon01.svg" alt="">
+                            <img src="{{ asset('assets/img/icon/hero-icon01.svg') }}" alt="BTC Icon">
                             (BTC)
-                            <img class="header-arrow-img" src="assets/img/home/arrow.png" alt="">
+                            <img class="header-arrow-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="Arrow">
                         </a>
                         <ul class="">
-                            <li><img src="assets/img/icon/hero-icon01.svg" alt="">(BTC)</li>
-                            <li><img src="assets/img/icon/hero-icon02.svg" alt="">(ETH)</li>
-                            <li><img src="assets/img/icon/hero-icon03.svg" alt="">(XRP)</li>
-                            <li><img src="assets/img/icon/hero-icon04.svg" alt="">(USDT)</li>
+                            <li><img src="{{ asset('assets/img/icon/hero-icon01.svg') }}" alt="BTC Icon">(BTC)</li>
+                            <li><img src="{{ asset('assets/img/icon/hero-icon02.svg') }}" alt="ETH Icon">(ETH)</li>
+                            <li><img src="{{ asset('assets/img/icon/hero-icon03.svg') }}" alt="XRP Icon">(XRP)</li>
+                            <li><img src="{{ asset('assets/img/icon/hero-icon04.svg') }}" alt="USDT Icon">(USDT)</li>
                         </ul>
-
                     </div>
-
 
                     <div class="header-btn ul_li">
                         <a class="login-btn" href="#!"><i class="fas fa-user"></i> Login</a>
@@ -116,24 +117,25 @@
 
 <!-- Login Modal -->
 <div class="login-modal">
-    <form style="background-image: url('assets/img/footer/login-bg-mode.png');" class="login-modal-form" method="POST" action="{{ route('login') }}" id="loginForm">
+    <form style="background-image: url('{{ asset('assets/img/footer/login-bg-mode.png') }}');" class="login-modal-form" method="POST" action="{{ route('login') }}" id="loginForm">
         @csrf
         <div class="login-modal-close">
-            <img src="assets/img/footer/close-icon.png" alt="close-icon">
+            <img src="{{ asset('assets/img/footer/close-icon.png') }}" alt="close-icon">
         </div>
         <h1 class="login-modal-form-title">Get Started with Crypto Property Investments</h1>
 
         <a class="login-modal-form-links" href="#">
-            <img src="assets/img/footer/google.png" alt="close-icon">
+            <img src="{{ asset('assets/img/footer/google.png') }}" alt="Google Icon">
             Continue with Google
         </a>
-
+        
         <a class="login-modal-form-links" href="#">
-            <img src="assets/img/footer/Facebook.png" alt="close-icon">
+            <img src="{{ asset('assets/img/footer/Facebook.png') }}" alt="Facebook Icon">
             Continue with Facebook
         </a>
 
-        <img class="OR-icon" src="assets/img/footer/or.png" alt="OR">
+
+<img class="OR-icon" src="{{ asset('assets/img/footer/or.png') }}" alt="OR">
         
         <div class="col-md-6 input-div">
             <span>Email</span>
@@ -164,10 +166,10 @@
     </form>
 
     <!-- Register Form -->
-    <form id="registerForm" style="background-image: url('assets/img/footer/login-bg-mode.png'); display: none;" class="login-modal-form" method="POST" action="{{ route('register') }}">
+    <form id="registerForm" style="background-image: url('{{ asset('assets/img/footer/login-bg-mode.png') }}'); display: none;" class="login-modal-form" method="POST" action="{{ route('register') }}">
         @csrf
         <div class="login-modal-close-two">
-            <img src="assets/img/footer/close-icon.png" alt="close-icon">
+            <img src="{{ asset('assets/img/footer/close-icon.png') }}" alt="close-icon">
         </div>
         <h1 class="login-modal-form-title">Create Your Account</h1>
 
