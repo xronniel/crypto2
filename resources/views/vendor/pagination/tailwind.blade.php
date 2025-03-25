@@ -9,10 +9,15 @@
         @endif
 
         {{-- Pagination Elements --}}
+        @php
+            $previousPage = null; // Track last displayed page
+            $dotsAdded = false; // Ensure dots appear only once
+        @endphp
         @foreach ($elements as $element)
             {{-- "Three Dots" Separator --}}
-            @if (is_string($element))
+            @if (is_string($element) && !$dotsAdded)
                 <li><span><i class="fal fa-ellipsis-h"></i></span></li>
+                @php $dotsAdded = true; @endphp
             @endif
 
             {{-- Array Of Links --}}
@@ -22,18 +27,25 @@
                         $page == $paginator->currentPage() || 
                         $page >= $paginator->currentPage() - 3 && $page <= $paginator->currentPage() + 3
                     )
+                        {{-- Reset dots flag when inside visible range --}}
+                        @php $dotsAdded = false; @endphp
+                        
+                        {{-- Display Page Numbers --}}
                         @if ($page == $paginator->currentPage())
                             <li><a href="#" class="current_page">{{ $page }}</a></li>
                         @else
                             <li><a href="{{ $url }}">{{ $page }}</a></li>
                         @endif
+                        @php $previousPage = $page; @endphp
+
                     @elseif ($page == 1 || $page == $paginator->lastPage())
-                        <li><a href="{{ $url }}">{{ $page }}</a></li>
-                    @else
-                        {{-- Skip intermediate pages if too far away --}}
-                        @if ($loop->last || $loop->first)
+                        {{-- Always Show First & Last Page --}}
+                        @if ($previousPage && $page > $previousPage + 1 && !$dotsAdded)
                             <li><span><i class="fal fa-ellipsis-h"></i></span></li>
+                            @php $dotsAdded = true; @endphp
                         @endif
+                        <li><a href="{{ $url }}">{{ $page }}</a></li>
+                        @php $previousPage = $page; @endphp
                     @endif
                 @endforeach
             @endif

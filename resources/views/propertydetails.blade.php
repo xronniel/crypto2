@@ -1,45 +1,53 @@
 @extends('layouts.front-office.app')
 
 @section('content')
-
 {{-- {{$property}} --}}
+
 
 
     <section style="background: #080B18;" class="blog pt-50 pb-50">
         <div class="container">
             <div class="property-filter-box">
                 <div class="property-filter">
-                    <img src="assets/img/property/search.png" alt="search">
+                    <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
                     <input placeholder="City, community or building" type="text">
                 </div>
                 <div class="property-filter-two">
                     <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                        <img class="property-filter-img" 
+                        src="{{ asset('assets/img/home/arrow.png') }}"
+                        alt="arrow">
                         <p class="filter-badge">NEW</p>
                         <select name="cars" id="cars">
                             <option value="Buy">Buy</option>
                         </select>
                     </div>
                     <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                        <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"  alt="arrow">
                         <select name="cars" id="cars">
                             <option value="Buy">Property type</option>
                         </select>
                     </div>
                     <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                        <img class="property-filter-img" 
+                        src="{{ asset('assets/img/home/arrow.png') }}"
+                        alt="arrow">
                         <select name="cars" id="cars">
                             <option value="Buy">Beds & Baths</option>
                         </select>
                     </div>
                     <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                              <img class="property-filter-img" 
+                        src="{{ asset('assets/img/home/arrow.png') }}"
+                        alt="arrow">
                         <select name="cars" id="cars">
                             <option value="Buy">Price</option>
                         </select>
                     </div>
                     <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
+                              <img class="property-filter-img" 
+                        src="{{ asset('assets/img/home/arrow.png') }}"
+                        alt="arrow">
                         <select name="cars" id="cars">
                             <option value="Buy">More Filters</option>
                         </select>
@@ -56,7 +64,9 @@
             ">
         <div class="container">
             <div class="page-path-line">
-                <img src="assets/img/propertydetails/arrow-left.png" alt="home">
+                <img 
+                   src="{{ asset('assets/img/propertydetails/arrow-left.png') }}"
+                 alt="home">
                 <p>Home</p>
                 <p>/ Property Listing</p>
                 <p class="active-path-line">/ Bespoke Upgrades | Extended | Vacant</p>
@@ -66,33 +76,47 @@
                     <div class="main-image">
                         <div class="budge-three-div">
                             <p>
-                                <img class="" src="assets/img/property/Verified-img.png" alt="location">
+                                <img 
+                                  src="{{ asset('assets/img/property/Verified-img.png') }}"
+                                class=""  alt="location">
                                 Verified
                             </p>
                             <p>
-                                <img class="" src="assets/img/property/SuperAgent-img.png" alt="location">
+                                <img class="" 
+                                  src="{{ asset('assets/img/property/SuperAgent-img.png') }}"
+                                     alt="location">
                                 SuperAgent
                             </p>
                         </div>
-                        <img class="main-image-img" src="assets/img/propertydetails/img-one.png" alt="home">
+                        <img class="main-image-img" 
+                            src="{{ asset('assets/img/propertydetails/img-one.png') }}"
+                       alt="home">
                         <div class="floor-plan-div">
-                            <img src="assets/img/propertydetails/floor-plan.png" alt="floor-plan">
+                            <img 
+                              src="{{ asset('assets/img/propertydetails/floor-plan.png') }}"
+                         alt="floor-plan">
                             <p>Floor Plan</p>
                         </div>
                     </div>
                     <div class="small-images">
-                        <img class="small-images-img" src="assets/img/propertydetails/img-one.png" alt="home">
-                        <img class="small-images-img" src="assets/img/propertydetails/img-one.png" alt="home">
-                        <img class="small-images-img" src="assets/img/propertydetails/img-one.png" alt="home">
+                        <img class="small-images-img" 
+                          src="{{ asset('assets/img/propertydetails/img-one.png') }}"
+                        alt="home">
+                        <img class="small-images-img" 
+                          src="{{ asset('assets/img/propertydetails/img-one.png') }}"
+                       alt="home">
+                        <img class="small-images-img" 
+                          src="{{ asset('assets/img/propertydetails/img-one.png') }}"
+                        alt="home">
                     </div>
                 </div>
                 <div class="grid-left-side">
                     <div class="grid-left-side-fisrt-dev">
-                        <p>RENT</p>
+                        <p>{{$property->ad_type}}</p>
                         <p>6% OFF</p>
                     </div>
-                    <h3 class="grid-left-side-one">VILLA FOR RENT IN HATTAN, ARABIAN RANCHES</h3>
-                    <h3 class="grid-left-side-two">Bespoke Upgrades | Extended | Vacant</h3>
+                    <h3 class="grid-left-side-one">{{ $property->property_title }}</h3>
+                    <h3 class="grid-left-side-two">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
                     <h3 class="grid-left-side-three">
                         Listed exclusively with Espace Real Estate is this fabulous example of an E2 in Hattan, Arabian
                         Ranches. This property has been completely remodeled from its original design, now boasting over
@@ -104,7 +128,9 @@
                     </h3>
                     <div class="grid-left-side-price-box">
                         <div class=" grid-left-side-price">
-                            <img src="assets/img/propertydetails/USDT.png" alt="USDT">
+                            <img 
+                               src="{{ asset('assets/img/propertydetails/USDT.png') }}"
+                            alt="USDT">
                             <div class="grid-left-side-price-div">
                                 <p class="grid-left-side-price-div-one">830.22 XRP</p>
                                 <p class="grid-left-side-price-div-two">36,238.45 <span>XRP</span></p>
@@ -113,18 +139,18 @@
                         </div>
                         <div class="grid-left-side-price-two">
                             <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
-                                <p>6 Bedroom</p>
+                                <img class="img-four" src="{{ asset('assets/img/property/green-bed.png') }}" alt="bed">
+                                <p>{{ $property->bedrooms ?? 'N/A' }} Bedroom</p>
                             </div>
-                            <img src="assets/img/property/pipeline.png" alt="pipeline">
+                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
                             <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
-                                <p>6 Bathroom</p>
+                                <img class="img-four" src="{{ asset('assets/img/property/green-bath.png') }}" alt="bath">
+                                <p>{{ $property->no_of_bathroom }} Bathroom</p>
                             </div>
-                            <img src="assets/img/property/pipeline.png" alt="pipeline">
+                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
                             <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="assets/img/property/green-size.png" alt="size">
-                                <p>6,000 sq. ft.</p>
+                                <img class="img-four" src="{{ asset('assets/img/property/green-size.png') }}" alt="size">
+                                <p>{{ number_format($property->unit_builtup_area, 2) }} sq. ft.</p>
                             </div>
                         </div>
                     </div>
@@ -137,21 +163,21 @@
                                         <span class="Converter-select-span">BTC</span>
                                     </option>
                                 </select>
-                                <img class="Converter-img-select" src="assets/img/home/frame-7.svg.png" alt="">
-                                <img class="Converter-img" src="assets/img/home/Border.png" alt="icon">
+                                <img class="Converter-img-select" src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="">
+                                <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}" alt="icon">
                             </div>
                         </div>
                         <div class="icon-box-Converter">
-                            <img src="assets/img/home/frame-7.svg.png" alt="icon">
-                            <img src="assets/img/propertydetails/USDT2.png" alt="">
-                            <img src="assets/img/propertydetails/USDT3.png" alt="icon">
-                            <img src="assets/img/propertydetails/USDT.png" alt="icon">
+                            <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="icon">
+                            <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="icon">
+                            <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="icon">
+                            <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="icon">
                         </div>
                     </div>
                     <div class="property-two-box-five-box">
                         <div class="property-two-box-five-one">
                             <div class="property-two-box-five-one-img">
-                                <img src="assets/img/property/person.jpeg" alt="person">
+                                <img src="{{ asset('assets/img/property/person.jpeg') }}" alt="person">
                             </div>
                             <div class="property-two-box-five-one-name">
                                 <p>John Doe</p>
@@ -159,40 +185,43 @@
                             </div>
                         </div>
                         <div class="property-two-box-five-two">
-                            <a href="#">
-                                <img src="assets/img/property/dark-call.png" alt="size">
-                                Call</a>
-                            <a href="#">
-                                <img src="assets/img/property/dark-mail.png" alt="size">
-                                Email</a>
-                            <a href="#">
-                                <img src="assets/img/property/dark-WhatsApp.png" alt="size">
-                                WhatsApp</a>
+                            <!-- Phone Call -->
+                            <a href="tel:{{ $property->listing_agent_phone }}">
+                                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
+                                Call
+                            </a>
+                            
+                            <!-- Email -->
+                            <a href="mailto:{{ $property->listing_agent_email }}">
+                                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
+                                Email
+                            </a>
+                            
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" target="_blank">
+                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
+                                WhatsApp
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="Description-big-box">
                 <div class="property-details-Description">
                     <span class="active-filter-link">Description</span>
                 </div>
                 <div class="Description-second-box">
                     <div class="Description-second-box-one">
-                        <ul class="custom-list">
-                            <li>Item 1</li>
-                            <li>Item 2</li>
-                            <li>Item 3</li>
-                            <li>Item 4</li>
-                            <li>Item 5</li>
-                            <li>Item 6</li>
-                        </ul>
-                        <p>Finance is available on this property through Espace Real Estate.</p>
+                        {!! $property->web_remarks !!} <!-- Render HTML content -->
+                        
                         <div class="custom-list-two">
-                            <p><span>Office location :</span> Unit 2702 and 2703 Marina Plaza, Dubai Marina, Dubai UAE.</p>
-                            <p><span>Tel No :</span> 04 306 9999</p>
-                            <p><span>RERA No :</span> 34335; ORN: 936</p>
+                            <p><span>Office location :</span> {{ $property->company_name }} - {{ $property->community }}, {{ $property->emirate }}</p>
+                            <p><span>Tel No :</span> {{ $property->listing_agent_phone }}</p>
+                            <p><span>RERA No :</span> {{ $property->listing_agent_permit }}</p>
                         </div>
-                        <p>This property is managed by Espace Real Estate Broker..</p>
+            
+                        <p>This property is managed by {{ $property->company_name }}.</p>
                     </div>
                     <div class="Description-second-box-two">
                         <p>Property details</p>
@@ -200,139 +229,104 @@
                             <div class="Description-second-box-two-box-one">
                                 <div class="property-details-Description-two">
                                     <p>
-                                        <img src="assets/img/propertydetails/Component3.png" alt="size">
+                                        <img src="{{ asset('assets/img/propertydetails/Component3.png') }}" alt="Property">
                                         Property
                                     </p>
-                                    <span>Apartment</span>
+                                    <span>{{ $property->unit_type }}</span>
                                 </div>
                                 <div class="property-details-Description-two">
                                     <p>
-                                        <img src="assets/img/propertydetails/Component2.png" alt="size">
-                                        Bedrooms
+                                        <img src="{{ asset('assets/img/propertydetails/Component2.png') }}" alt="Bathrooms">
+                                        Bathrooms
                                     </p>
-                                    <span>6</span>
+                                    <span>{{ $property->bedrooms ?? 'N/A' }}</span>
                                 </div>
                                 <div class="property-details-Description-two">
                                     <p>
-                                        <img src="assets/img/propertydetails/Component1.png" alt="size">
+                                        <img src="{{ asset('assets/img/propertydetails/Component1.png') }}" alt="Available from">
                                         Available from
                                     </p>
-                                    <span>14 Mar 2025</span>
+                                    <span>Q2 2026</span>
                                 </div>
                             </div>
                             <div class="Description-second-box-two-box-one">
                                 <div class="property-details-Description-two">
                                     <p>
-                                        <img src="assets/img/propertydetails/Component3.png" alt="size">
+                                        <img src="{{ asset('assets/img/propertydetails/Component3.png') }}" alt="Property Size">
                                         Property Size
                                     </p>
-                                    <span>485 sqft / 45 sqm</span>
+                                    <span>{{ number_format($property->unit_builtup_area, 0) }} {{ $property->unit_measure }}</span>
                                 </div>
                                 <div class="property-details-Description-two">
                                     <p>
-                                        <img src="assets/img/propertydetails/Component2.png" alt="size">
+                                        <img src="{{ asset('assets/img/propertydetails/Component2.png') }}" alt="Price">
                                         Bathrooms
                                     </p>
-                                    <span>6</span>
+                                    <span>{{ $property->no_of_bathroom }}</span>
                                 </div>
                             </div>
                         </div>
                         <p class="Amenities-p-tag">Amenities</p>
                         <div class="Description-second-box-two-one">
+                            @php
+                                $amenities = [
+                                    'Study' => 'Component5.png',
+                                    'Balcony' => 'Component4.png',
+                                    'Security' => 'Component6.png',
+                                    'Covered Parking' => 'Component7.png',
+                                    'Kitchen Appliances' => 'Component8.png',
+                                    'Central A/C' => 'Component9.png',
+                                    'Shared Pool' => 'Component10.png',
+                                    'Concierge' => 'Component11.png',
+                                    'Built in Wardrobes' => 'Component12.png',
+                                    'Pets Allowed' => 'Component13.png',
+                                ];
+                                $splitIndex = ceil(count($amenities) / 2); // Divide the amenities into two equal parts
+                                $firstHalf = array_slice($amenities, 0, $splitIndex, true);
+                                $secondHalf = array_slice($amenities, $splitIndex, null, true);
+                            @endphp
+                        
                             <div class="Description-second-box-two-box-one">
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component5.png" alt="size">
-                                        Study
-                                    </p>
-                                </div>
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component4.png" alt="size">
-                                        Balcony
-                                    </p>
-                                </div>
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component6.png" alt="size">
-                                        Security
-                                    </p>
-
-                                </div>
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component7.png" alt="size">
-                                        Covered Parking
-                                    </p>
-
-                                </div>
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component8.png" alt="size">
-                                        Kitchen Appliances
-                                    </p>
-
-                                </div>
+                                @foreach ($firstHalf as $amenity => $icon)
+                                    <div class="property-details-Description-two">
+                                        <p>
+                                            <img src="{{ asset('assets/img/propertydetails/' . $icon) }}" alt="{{ $amenity }}">
+                                            {{ $amenity }}
+                                        </p>
+                                    </div>
+                                @endforeach
                             </div>
-
-
-
+                        
                             <div class="Description-second-box-two-box-one">
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component9.png" alt="size">
-                                        Central A/C
-                                    </p>
-
-                                </div>
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component10.png" alt="size">
-                                        Shared Pool
-                                    </p>
-
-                                </div>
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component11.png" alt="size">
-                                        Concierge
-                                    </p>
-
-                                </div>
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component12.png" alt="size">
-                                        Built in Wardrobes
-                                    </p>
-
-                                </div>
-                                <div class="property-details-Description-two">
-                                    <p>
-                                        <img src="assets/img/propertydetails/Component13.png" alt="size">
-                                        Pets Allowed
-                                    </p>
-                                </div>
+                                @foreach ($secondHalf as $amenity => $icon)
+                                    <div class="property-details-Description-two">
+                                        <p>
+                                            <img src="{{ asset('assets/img/propertydetails/' . $icon) }}" alt="{{ $amenity }}">
+                                            {{ $amenity }}
+                                        </p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
-
-
+            
             <div class="Description-big-box">
                 <div class="property-details-Description">
                     <span class="active-filter-link">Floor Plan</span>
                 </div>
                 <div class="Floor-Plan-div">
                     <div class="Floor-Plan-div-one">
-                        <img src="assets/img/propertydetails/Floor-Plan-bg.png" alt="floor-plan">
+                        <img src="{{ asset('assets/img/propertydetails/Floor-Plan-bg.png') }}" alt="floor-plan">
                     </div>
                     <div class="Floor-Plan-div-two">
                         <div class="video-container">
                             <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}"
                                 alt="floor-plan"></video>
                             <button id="playButton" class="play-button">
-                                <img src="assets/img/propertydetails/play-icon.png" alt="floor-plan">
+                                <img src="{{ asset('assets/img/propertydetails/play-icon.png') }}" alt="floor-plan">
                                 Watch video tour</button>
                         </div>
                         <div class="Floor-Plan-div-three">
@@ -354,7 +348,7 @@
                                     <p>
                                         In partnership with
                                     </p>
-                                    <img src="assets/img/propertydetails/logo-1.png" alt="logo">
+                                    <img src="{{ asset('assets/img/propertydetails/logo-1.png') }}" alt="logo">
                                     <a class="pre-approved" href="#">Get pre-approved</a>
                                 </div>
                             </div>
@@ -374,17 +368,17 @@
                     </div>
                     <div class="Floor-Plan-div">
                         <div class="map-div-one">
-                            <img src="assets/img/propertydetails/map.jpeg" alt="floor-plan">
+                            <img src="{{ asset('assets/img/propertydetails/map.jpeg') }}" alt="floor-plan">
                         </div>
         
         
                         <div class="Floor-Plan-div-two">
         
                             <div class="map-div-three">
-                                <div class="Location-div-three-box ">
+                                <div class="Location-div-three-box">
                                     <div class="Location-div-three-box-one">
                                         <div class="Location-img-one">
-                                            <img src="assets/img/propertydetails/map-section-one.png" alt="floor-plan">
+                                            <img src="{{ asset('assets/img/propertydetails/map-section-one.png') }}" alt="floor-plan">
                                         </div>
                                         <div>
                                             <p>
@@ -394,29 +388,30 @@
                                                 Residential Insights
                                             </p>
                                         </div>
-                                        <img class="Location-img-two" src="assets/img/propertydetails/arrow-right-green.png"
-                                            alt="floor-plan">
+                                        <img class="Location-img-two" src="{{ asset('assets/img/propertydetails/arrow-right-green.png') }}" alt="floor-plan">
                                     </div>
                                     <div class="Location-div-three-line"></div>
                                     <div class="map-div-three-box-two">
                                         <div class="map-div-three-box-two-one">
-                                            <img src="assets/img/propertydetails/Component15.png" alt="floor-plan">
+                                            <img src="{{ asset('assets/img/propertydetails/Component15.png') }}" alt="floor-plan">
                                             <p> Floor Plans :</p>
                                             <span>256 units</span>
                                         </div>
                                         <div class="map-div-three-box-two-one">
-                                            <img src="assets/img/propertydetails/Component16.png" alt="floor-plan">
+                                            <img src="{{ asset('assets/img/propertydetails/Component16.png') }}" alt="floor-plan">
                                             <p> Price Range :</p>
                                             <span>80K - 165K AED/year</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="map-div-three">
-                                <div class="Location-div-three-box ">
+                                <div class="Location-div-three-box">
                                     <div class="Location-div-three-box-one">
                                         <div class="Location-img-one">
-                                            <img src="assets/img/propertydetails/map-section-one.png" alt="floor-plan">
+                                            <img src="{{ asset('assets/img/propertydetails/map-section-one.png') }}" alt="floor-plan">
                                         </div>
                                         <div>
                                             <p>
@@ -425,15 +420,12 @@
                                             <p class="Location-img-one-p-two">
                                                 Residential Insights
                                             </p>
-    
-    
                                             <div class="Location-one-p-box">
-                                                <p  class="Location-img-one-p-three">4.2/5 </p>
+                                                <p class="Location-img-one-p-three">4.2/5</p>
                                                 <span class="Location-img-one-span">19 building reviews</span>
                                             </div>
                                         </div>
-                                        <img class="Location-img-two" src="assets/img/propertydetails/arrow-right-green.png"
-                                            alt="floor-plan">
+                                        <img class="Location-img-two" src="{{ asset('assets/img/propertydetails/arrow-right-green.png') }}" alt="floor-plan">
                                     </div>
                                     <div class="Location-div-three-line"></div>
                                     <div class="map-div-three-box-two">
@@ -441,7 +433,7 @@
                                             <span>Apartments and villas | Family-Friendly</span>
                                         </div>
                                         <div class="map-div-three-box-two-one">
-                                            <img src="assets/img/propertydetails/Component16.png" alt="floor-plan">
+                                            <img src="{{ asset('assets/img/propertydetails/Component16.png') }}" alt="floor-plan">
                                             <p> Price Range :</p>
                                             <span>80K - 165K AED/year</span>
                                         </div>
@@ -477,138 +469,31 @@
                 <div class="col-lg-3 col-md-6 mt-30">
                     <div class="xb-event-card">
                         <div class="cards-property-img">
-                            <img src="assets/img/event/event-img01.jpg" alt="">
+                            <img src="{{ asset('assets/img/event/event-img01.jpg') }}" alt="">
                         </div>
                         <div class="xb-item--cards-property">
-
                             <p class="">APARTMENT</p>
                             <p class="cards-property-title-two">2623.06 BTC</p>
                             <p class="cards-property-title-three">2623.06 ETH / month</p>
                             <p class="cards-property-title-four">87, 000 AED/ month</p>
                             <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills Estate, Dubai</p>
-                           
+                            
                             <div class="grid-left-side-price-two">
                                 <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-bed.png" alt="bed">
+                                    <img class="img-card" src="{{ asset('assets/img/property/green-bed.png') }}" alt="bed">
                                     <p>6</p>
                                 </div>
-                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
                                 <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-bath.png" alt="bath">
+                                    <img class="img-card" src="{{ asset('assets/img/property/green-bath.png') }}" alt="bath">
                                     <p>6 </p>
                                 </div>
-                                <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
                                 <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-size.png" alt="size">
+                                    <img class="img-card" src="{{ asset('assets/img/property/green-size.png') }}" alt="size">
                                     <p>6,000 sq. ft.</p>
                                 </div>
                             </div>
-
-
-                        </div>
-                    </div>
-                </div>
-
-                {{-- cards  --}}
-                <div class="col-lg-3 col-md-6 mt-30">
-                    <div class="xb-event-card">
-                        <div class="cards-property-img">
-                            <img src="assets/img/event/event-img01.jpg" alt="">
-                        </div>
-                        <div class="xb-item--cards-property">
-
-                            <p class="">APARTMENT</p>
-                            <p class="cards-property-title-two">2623.06 BTC</p>
-                            <p class="cards-property-title-three">2623.06 ETH / month</p>
-                            <p class="cards-property-title-four">87, 000 AED/ month</p>
-                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills Estate, Dubai</p>
-                           
-                            <div class="grid-left-side-price-two">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-bed.png" alt="bed">
-                                    <p>6</p>
-                                </div>
-                                <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-bath.png" alt="bath">
-                                    <p>6 </p>
-                                </div>
-                                <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-size.png" alt="size">
-                                    <p>6,000 sq. ft.</p>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mt-30">
-                    <div class="xb-event-card">
-                        <div class="cards-property-img">
-                            <img src="assets/img/event/event-img01.jpg" alt="">
-                        </div>
-                        <div class="xb-item--cards-property">
-
-                            <p class="">APARTMENT</p>
-                            <p class="cards-property-title-two">2623.06 BTC</p>
-                            <p class="cards-property-title-three">2623.06 ETH / month</p>
-                            <p class="cards-property-title-four">87, 000 AED/ month</p>
-                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills Estate, Dubai</p>
-                           
-                            <div class="grid-left-side-price-two">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-bed.png" alt="bed">
-                                    <p>6</p>
-                                </div>
-                                <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-bath.png" alt="bath">
-                                    <p>6 </p>
-                                </div>
-                                <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-size.png" alt="size">
-                                    <p>6,000 sq. ft.</p>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mt-30">
-                    <div class="xb-event-card">
-                        <div class="cards-property-img">
-                            <img src="assets/img/event/event-img01.jpg" alt="">
-                        </div>
-                        <div class="xb-item--cards-property">
-
-                            <p class="">APARTMENT</p>
-                            <p class="cards-property-title-two">2623.06 BTC</p>
-                            <p class="cards-property-title-three">2623.06 ETH / month</p>
-                            <p class="cards-property-title-four">87, 000 AED/ month</p>
-                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills Estate, Dubai</p>
-                           
-                            <div class="grid-left-side-price-two">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-bed.png" alt="bed">
-                                    <p>6</p>
-                                </div>
-                                <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-bath.png" alt="bath">
-                                    <p>6 </p>
-                                </div>
-                                <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="assets/img/property/green-size.png" alt="size">
-                                    <p>6,000 sq. ft.</p>
-                                </div>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -701,10 +586,10 @@
 
         <div class="footer-shape">
             <div class="shape shape--1">
-                <img class="leftToRight" src="assets/img/shape/team-sp_01.svg" alt="">
+                <img class="leftToRight" src="{{ asset('assets/img/shape/team-sp_01.svg') }}" alt="">
             </div>
             <div class="shape shape--2">
-                <img class="topToBottom" src="assets/img/shape/team-sp_02.svg" alt="">
+                <img class="topToBottom" src="{{ asset('assets/img/shape/team-sp_02.svg') }}" alt="">
             </div>
         </div>
     </div>
