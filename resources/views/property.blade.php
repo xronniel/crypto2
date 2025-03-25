@@ -61,8 +61,8 @@
             <div class="breadcrumb__content">
                 <h2 class="breadcrumb__title">Properties for Sale in UAE</h2>
                 <ul style="    flex-direction: column;" class="bread-crumb clearfix ul_li_center">
-                    <li class="breadcrumb-item"><a href="index.html">Items Found</a></li>
-                    <li class="breadcrumb-item"> 218,954 properties</li>
+                    <li class="breadcrumb-item"><a href="#">Items Found</a></li>
+                    <li class="breadcrumb-item">{{ $properties->total() }} properties</li>
                 </ul>
             </div>
         </div>
@@ -99,9 +99,8 @@
 
 
             <div class="page-line-filter">
-
                 <div class="page-line-filter-h3">
-                    <p>218,954</p>
+                    <p>{{ $properties->count() }}</p>
                     <span>properties available</span>
                 </div>
 
