@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\DistrictController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\HomepageContentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::delete('news/gallery/{id}', [NewsController::class, 'deleteGalleryImage'])->name('gallery.delete');
     Route::resource('listings', ListingController::class);
 
+    Route::resource('articles', ArticleController::class);
+    Route::delete('articles/gallery/{id}', [ArticleController::class, 'deleteGalleryImage']);
+
     Route::get('homepage', [HomepageContentController::class, 'index'])->name('homepage.index');
     Route::get('homepage/edit', [HomepageContentController::class, 'edit'])->name('homepage.edit');
     Route::put('homepage', [HomepageContentController::class, 'update'])->name('homepage.update');
@@ -40,15 +45,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
 });
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
+
 Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
 Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show');
 
-Route::get('/property', function () {
-    return view('property');
-});
-Route::get('/property-details', function () {
-    return view('propertydetails');
-});
+Route::get('/articles', [ArticleController::class, 'userIndex'])->name('articles.index');
+Route::get('/articles/{article}', [ArticleController::class, 'userShow'])->name('articles.show');
+
+Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
+Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
+
 Route::get('/contact-us', function () {
     return view('contact');
 });

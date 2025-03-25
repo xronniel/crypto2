@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="report-container pt-2">
-    <h1 class="mb-4">Home Page Settings</h1>
+    <h1 class="mb-4">Home Page Content Management</h1>
 
     {{-- Display Success Message --}}
     @if(session('success'))
@@ -24,7 +24,7 @@
     @endif
 
     {{-- Edit Button --}}
-    <a href="{{ route('admin.homepage.edit') }}" class="btn btn-primary mb-4">Edit Settings</a>
+    <a href="{{ route('admin.homepage.edit') }}" class="btn btn-primary mb-4">Edit Contents</a>
 
     {{-- Main Content Sections --}}
     <div class="row">
