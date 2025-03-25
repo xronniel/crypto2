@@ -18,10 +18,22 @@
             {{-- Array Of Links --}}
             @if (is_array($element))
                 @foreach ($element as $page => $url)
-                    @if ($page == $paginator->currentPage())
-                        <li><a href="#" class="current_page">{{ $page }}</a></li>
-                    @else
+                    @if (
+                        $page == $paginator->currentPage() || 
+                        $page >= $paginator->currentPage() - 3 && $page <= $paginator->currentPage() + 3
+                    )
+                        @if ($page == $paginator->currentPage())
+                            <li><a href="#" class="current_page">{{ $page }}</a></li>
+                        @else
+                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                        @endif
+                    @elseif ($page == 1 || $page == $paginator->lastPage())
                         <li><a href="{{ $url }}">{{ $page }}</a></li>
+                    @else
+                        {{-- Skip intermediate pages if too far away --}}
+                        @if ($loop->last || $loop->first)
+                            <li><span><i class="fal fa-ellipsis-h"></i></span></li>
+                        @endif
                     @endif
                 @endforeach
             @endif
