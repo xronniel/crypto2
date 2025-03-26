@@ -13,7 +13,6 @@ class PropertyController extends Controller
         $adType = $request->input('ad_type');
         $propertyType = $request->input('property_type');
         $unitType = $request->input('unit_type');
-        $price = $request->input('price');
 
         $query = Listing::query();
 
@@ -95,6 +94,10 @@ class PropertyController extends Controller
             $q->where('price', '<=', request('max_price'));
         });
 
+        $query->when(request('completion_status'), function ($q) {
+            $q->where('completion_status', request('completion_status'));
+        });
+
         // Filter by ad_type
         if ($adType) {
             $query->where('ad_type', $adType);
@@ -110,13 +113,6 @@ class PropertyController extends Controller
             $query->where('unit_type', $unitType);
         }
 
-        // Filter by price with 5% difference
-        if ($price !== null) {
-            $price = (float) $price;
-            $minPrice = $price - ($price * 0.05); // 5% below
-            $maxPrice = $price + ($price * 0.05); // 5% above
-            $query->whereBetween('price', [$minPrice, $maxPrice]);
-        }
 
         // Get paginated properties with filters applied
         $properties = $query->with(['images', 'facilities'])->latest()->paginate(10);
@@ -149,9 +145,11 @@ class PropertyController extends Controller
             ->distinct()
             ->pluck('no_of_bathroom');
 
-        
-
-        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType'));
+        $completionStatus = Listing::where('completion_status', '!=', '')
+            ->distinct()
+            ->pluck('completion_status');
+   
+        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'request'));
     }
 
     public function show($property_ref_no)
@@ -160,6 +158,38 @@ class PropertyController extends Controller
         ->where('property_ref_no', $property_ref_no)
         ->firstOrFail();
 
-        return view('propertydetails', compact('property'));
+        // Get unique unit_type and unit_model
+        $unitTypesAndModels = Listing::select('unit_type', 'unit_model')
+            ->whereNotNull('unit_type')
+            ->whereNotNull('unit_model')
+            ->distinct()
+            ->get();
+
+        // Get unique ad_types for filter
+        $adTypes = Listing::select('ad_type')
+            ->whereNotNull('ad_type')
+            ->distinct()
+            ->pluck('ad_type');
+
+        // Get unique property types (unit_type)
+        $propertyTypes = Listing::select('unit_type')
+            ->whereNotNull('unit_type')
+            ->distinct()
+            ->pluck('unit_type');
+
+    
+        $noOfRooms = Listing::where('no_of_rooms', '!=', '')
+            ->distinct()
+            ->pluck('no_of_rooms');
+
+        $noOfBathrooms = Listing::where('no_of_bathroom', '!=', '')
+            ->distinct()
+            ->pluck('no_of_bathroom');
+
+        $completionStatus = Listing::where('completion_status', '!=', '')
+            ->distinct()
+            ->pluck('completion_status');
+
+        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'request'));
     }
 }

@@ -57,12 +57,17 @@
             <h4 class="mt-4">Images</h4>
             <div class="row">
                 @if($listing->images->isNotEmpty())
-                @foreach($listing->images as $image)
-                <div class="col-md-3 mb-3">
-                    <img src="{{ $image->url }}" alt="Image" class="img-fluid" style="max-height: 200px;">
-                </div>
-            @endforeach
-            
+                    @foreach($listing->images as $image)
+                        <div class="col-md-3 mb-3">
+                            @if($listing->xml)
+                                <!-- Use direct URL if XML is 1 -->
+                                <img src="{{ $image->url }}" alt="Image" class="img-fluid" style="max-height: 200px;">
+                            @else
+                                <!-- Use storage path if XML is not 1 -->
+                                <img src="{{ asset('storage/' . $image->url) }}" alt="Image" class="img-fluid" style="max-height: 200px;">
+                            @endif
+                        </div>
+                    @endforeach
                 @else
                     <p class="col-md-12">No images available.</p>
                 @endif
