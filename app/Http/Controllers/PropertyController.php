@@ -51,6 +51,25 @@ class PropertyController extends Controller
             $q->where('no_of_bathroom', request('no_of_bathroom'));
         });
 
+
+        // Filter by `min_area` and `max_area` if present
+        $query->when(request()->has('min_area') && request('min_area') != '', function ($q) {
+            $q->where('unit_builtup_area', '>=', request('min_area'));
+        });
+
+        $query->when(request()->has('max_area') && request('max_area') != '', function ($q) {
+            $q->where('unit_builtup_area', '<=', request('max_area'));
+        });
+
+        // Filter by `min_price` and `max_price` if present
+        $query->when(request()->has('min_price') && request('min_price') != '', function ($q) {
+            $q->where('price', '>=', request('min_price'));
+        });
+
+        $query->when(request()->has('max_price') && request('max_price') != '', function ($q) {
+            $q->where('price', '<=', request('max_price'));
+        });
+
         // Filter by ad_type
         if ($adType) {
             $query->where('ad_type', $adType);
@@ -104,6 +123,8 @@ class PropertyController extends Controller
         $noOfBathrooms = Listing::where('no_of_bathroom', '!=', '')
             ->distinct()
             ->pluck('no_of_bathroom');
+
+        
 
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType'));
     }
