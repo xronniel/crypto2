@@ -69,13 +69,14 @@ class PropertyController extends Controller
             ->whereNotNull('unit_type')
             ->distinct()
             ->pluck('unit_type');
-        // dd($properties);
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType'));
     }
 
     public function show($property_ref_no)
     {
-        $property = Listing::where('property_ref_no', $property_ref_no)->firstOrFail();
+        $property = Listing::with(['images', 'facilities'])
+        ->where('property_ref_no', $property_ref_no)
+        ->firstOrFail();
 
         return view('propertydetails', compact('property'));
     }
