@@ -25,6 +25,31 @@ class PropertyController extends Controller
             });
         }
 
+        $query->when(request('filter_type') == 'rent', function ($q) {
+            $q->where('ad_type', 'Rent');
+        });
+        
+        $query->when(request('filter_type') == 'buy', function ($q) {
+            $q->where('ad_type', 'Sale');
+        });
+        
+        $query->when(request('filter_type') == 'new_projects', function ($q) {
+            $q->where('new', 1);
+        });
+        
+        $query->when(request('filter_type') == 'commercial', function ($q) {
+            $q->whereIn('unit_type', [
+                'Commercial Full Building',
+                'Retail',
+                'Warehouse',
+                'Labour Camp',
+                'Land Commercial',
+                'Factory',
+                'Land Mixed Use',
+                'Commercial Full Floor',
+            ]);
+        });
+
         $query->when(request()->has('new') && request('new') == 1, function ($q) {
             $q->where('new', 1);
         });
