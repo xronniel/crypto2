@@ -25,6 +25,32 @@ class PropertyController extends Controller
             });
         }
 
+        $query->when(request()->has('new') && request('new') == 1, function ($q) {
+            $q->where('new', 1);
+        });
+
+        // Filter by `commercial` if it's present and equals 1
+        $query->when(request()->has('commercial') && request('commercial') == 1, function ($q) {
+            $q->whereIn('unit_type', [
+                'Commercial Full Building',
+                'Retail',
+                'Warehouse',
+                'Labour Camp',
+                'Land Commercial',
+                'Factory',
+                'Land Mixed Use',
+                'Commercial Full Floor',
+            ]);
+        });
+
+        $query->when(request()->has('no_of_rooms') && request('no_of_rooms') != '', function ($q) {
+            $q->where('no_of_rooms', request('no_of_rooms'));
+        });
+        
+        $query->when(request()->has('no_of_bathroom') && request('no_of_rooms') != '', function ($q) {
+            $q->where('no_of_bathroom', request('no_of_bathroom'));
+        });
+
         // Filter by ad_type
         if ($adType) {
             $query->where('ad_type', $adType);
@@ -69,6 +95,15 @@ class PropertyController extends Controller
             ->whereNotNull('unit_type')
             ->distinct()
             ->pluck('unit_type');
+
+     
+        $noOfRooms = Listing::where('no_of_rooms', '!=', '')
+            ->distinct()
+            ->pluck('no_of_rooms');
+
+        $noOfBathrooms = Listing::where('no_of_bathroom', '!=', '')
+            ->distinct()
+            ->pluck('no_of_bathroom');
 
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType'));
     }
