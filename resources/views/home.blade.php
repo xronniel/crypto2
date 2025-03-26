@@ -2,8 +2,11 @@
 
 @section('content')
 
-
-
+{{-- 
+{{$propertyTypes}}
+{{$noOfRooms}} 
+{{$noOfBathrooms}}  --}}
+{{-- {{$adTypes}}  --}}
 
     <section class="hero bg_img pos-rel pt-80" data-background="assets/img/bg/hero-bg1.svg">
         <div class="hero-shape">
