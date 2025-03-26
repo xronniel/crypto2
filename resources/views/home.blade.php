@@ -34,38 +34,70 @@
                 <div class="wow fadeInUp" data-wow-duration=".7s">
                     <h1 class="title first-banner-title">{!! $homepageContent->text_hero_banner !!}</h1>
                 </div>
-         
-                <div class="hero__btn btns pt-50 wow fadeInUp" >
-                    <div class="first-section-border">
-
-                        <div class="first-section-border-first-div">
-                            <span>Rent</span>
-                            <span>Buy</span>
-                            <span>
-                                <p class="new-bar">New</p>
-                                New projects
-                            </span>
-                            <span>Commercial</span>
+             
+                <form action="{{ route('properties.index') }}" method="GET">
+                    @csrf
+                
+                    <input type="hidden" name="filter_type" id="filterTypeInput" value="rent"> <!-- Default value -->
+                    <input type="hidden" name="no_of_rooms" id="selectedRooms" value=""> <!-- Selected rooms -->
+                    <input type="hidden" name="no_of_bathroom" id="selectedBathrooms" value=""> <!-- Selected bathrooms -->
+                
+                    <div class="hero__btn btns pt-50 wow fadeInUp">
+                        <div class="first-section-border">
+                            <div class="first-section-border-first-div">
+                                <span class="filter-btn active-button-home" data-value="rent">Rent</span>
+                                <span class="filter-btn" data-value="buy">Buy</span>
+                                <span class="filter-btn" data-value="new_projects">
+                                    <p class="new-bar">New</p>
+                                    New projects
+                                </span>
+                                <span class="filter-btn" data-value="commercial">Commercial</span>
+                            </div>
+                
+                            <div class="first-section-border-second-div">
+                                <span>
+                                    <img class="Vector-img" src="assets/img/home/Vector.png" alt="">
+                                    <input type="text" placeholder="City, community or building" value="" name="search">
+                                </span>
+                
+                                <select name="property_type" id="propertyTypeSelect" class="form-select">
+                                    <option value="">Select Property Type</option>
+                                    @foreach($propertyTypes as $type)
+                                        <option value="{{ $type }}">{{ $type }}</option>
+                                    @endforeach
+                                </select>
+                
+                                <span id="bedsBathsToggle">
+                                    <p>Beds & Baths</p>
+                                    <img class="arrow-img" src="assets/img/home/arrow.png" alt="">
+                                </span>
+                
+                                <!-- Beds & Baths Dropdown -->
+                                <div class="beds-baths-dropdown" id="bedsBathsDropdown">
+                                    <p>Bedroom</p>
+                                    <div class="beds-baths-options">
+                                        <button type="button" class="room-option" data-value="Studio">Studio</button>
+                                        @foreach ($noOfRooms as $room)
+                                            <button type="button" class="room-option" data-value="{{ $room }}">{{ $room }}</button>
+                                        @endforeach
+                                    </div>
+                
+                                    <p>Bathroom</p>
+                                    <div class="beds-baths-options">
+                                        @foreach ($noOfBathrooms as $bathroom)
+                                            <button type="button" class="bath-option" data-value="{{ $bathroom }}">{{ $bathroom }}</button>
+                                        @endforeach
+                                    </div>
+                
+                                    <button type="button" class="done-btn" onclick="closeDropdown()">Done</button>
+                                </div>
+                
+                                <button class="submit-button" type="submit">Search</button>
+                            </div>
                         </div>
-
-                        <div class="first-section-border-second-div">
-                            <span>
-                                <img class="Vector-img" src="assets/img/home/Vector.png" alt="">
-                                <input type="text" placeholder="City, community or building">
-                            </span>
-                            <span>
-                                <p>Property type</p>
-                                <img class="arrow-img" src="assets/img/home/arrow.png" alt="">
-                            </span>
-                            <span>
-                                <p>Beds & Baths</p>
-                                <img class="arrow-img" src="assets/img/home/arrow.png" alt="">
-                            </span>
-                            <span>Search</span>
-                        </div>
-                  
                     </div>
-                </div>
+                </form>
+                
             </div>
             <div class="hero-scroll pt-105">
                 <span>scroll to down</span>
@@ -745,6 +777,60 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".filter-btn");
+            const hiddenInput = document.getElementById("filterTypeInput");
+        
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+          
+                    buttons.forEach(btn => btn.classList.remove("active-button-home"));
+        
+             
+                    this.classList.add("active-button-home");
+        
+        
+                    hiddenInput.value = this.dataset.value;
+                });
+            });
+        });
 
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+    // Show/Hide Beds & Baths Dropdown
+    document.getElementById("bedsBathsToggle").addEventListener("click", function () {
+        document.getElementById("bedsBathsDropdown").classList.toggle("active");
+    });
+
+    // Selecting Room and Bathroom options
+    document.querySelectorAll(".room-option").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".room-option").forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+            document.getElementById("selectedRooms").value = this.getAttribute("data-value");
+        });
+    });
+
+    document.querySelectorAll(".bath-option").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".bath-option").forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+            document.getElementById("selectedBathrooms").value = this.getAttribute("data-value");
+        });
+    });
+});
+
+// Close dropdown
+function closeDropdown() {
+    document.getElementById("bedsBathsDropdown").classList.remove("active");
+}
+
+
+
+
+        </script>
+        
 
 @endsection

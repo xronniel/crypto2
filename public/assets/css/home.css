@@ -13,7 +13,7 @@
     line-height: 1;
     padding: 35px 40px;
     font-size: 18px;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-weight: 700;
     -webkit-transition: 300ms;
     transition: 300ms;
@@ -83,10 +83,70 @@
     cursor: pointer;
 }
 
-.first-section-border-first-div span:first-child {
+
+.submit-button {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px 40px;
+    color: #080b18;
+    cursor: pointer;
     background: #2dd98f;
-    border-radius: 40px 0 0 40px;
     font-weight: 700;
+}
+
+
+.form-select option {
+    background: #000000; 
+    color: #EBF7FD; 
+    border: 1px solid #C1C7DE;
+border-radius: 3px;
+border-width: 1px;
+
+}
+.form-select::-webkit-scrollbar {
+    display: none;
+}
+
+option:hover {
+    background: #444444 !important; 
+    color: #FFFFFF !important; 
+}
+
+.first-section-border-second-div select {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px 40px;
+    color: #080b18;
+    cursor: pointer;
+    border-radius: 0;
+    border-right: 1px solid #7bd6ff;
+    height: fit-content;
+    width: fit-content;
+
+}
+
+.form-select:focus {
+    border-color: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+
+
+.first-section-border-first-div span:first-child {
+    border-right: 1px solid #7bd6ff;
+    border-radius: 40px 0 0 40px;
+
 }
 .first-section-border-second-div span:last-child {
     background: #2dd98f;
@@ -117,6 +177,9 @@
 
 .first-section-border-first-div span:nth-child(3) {
     position: relative;
+}
+.first-section-border-first-div span:nth-child(4) {
+    border-radius: 0 40px 40px 0 !important;
 }
 
 .new-bar {
@@ -431,4 +494,89 @@ input[type="text"] {
 }
 .xb-item--feature-icon img {
     width: 100px;
+}
+
+
+.active-button-home {
+    background: #2dd98f;
+    font-weight: 700 !important;
+}
+
+
+
+
+
+
+
+
+.beds-baths-dropdown {
+    position: absolute;
+    width: 388px;
+    height: fit-content;
+    top: 180px;
+    left: 600px;
+    background: #000;
+    border-radius: 5px;
+    border: 1px solid #C1C7DE;
+    padding: 20px;
+    display: none; 
+    z-index: 100;
+}
+
+.beds-baths-dropdown.active {
+    display: block; 
+}
+
+.beds-baths-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.beds-baths-options button {
+    background: transparent;
+    border: 1px solid #C1C7DE;
+    color: #EBF7FD;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.beds-baths-options button:hover,
+.beds-baths-options button.active {
+    background: #C1C7DE;
+    color: #000;
+}
+
+.done-btn {
+    width: 100%;
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.done-btn:hover {
+    background: #45a049;
+}
+
+
+.beds-baths-dropdown p {
+    font-family: "Manrope", sans-serif;
+font-weight: 400;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: 0%;
+vertical-align: middle;
+color: #FFFFFF80;
+padding: 10px 0;
+
+
+
 }
