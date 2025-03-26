@@ -8,51 +8,144 @@
 @section('content')
     <section class="blog pt-50 pb-50">
         <div class="container">
+            <form action="{{ route('properties.index') }}" method="GET">
+                @csrf
+                <div class="property-filter-box">
+                    <div class="property-filter">
+                        <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                        <input type="text" placeholder="City, community or building" value="" name="search">
+                    </div>
 
-            <div class="property-filter-box">
-                <div class="property-filter">
-                    <img src="assets/img/property/search.png" alt="search">
-                    <input placeholder="City, community or building" type="text">
+                    <div class="property-filter-two">
+                        <div class="property-filter-select">
+                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <p class="filter-badge">NEW</p>
+                            <select name="filter_type" class="form-select" id="filter_type">
+                                <option value="">Select Type</option>
+                                <option value="rent">Rent</option>
+                                <option value="buy">Buy</option>
+                                <option value="new_projects">New Projects</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <div class="property-filter-select">
+                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <select name="property_type" id="propertyTypeSelect" class="form-select">
+                                <option value="">Select Property Type</option>
+                                @foreach ($propertyTypes as $type)
+                                    <option value="{{ $type }}">{{ $type }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+                        <!-- Price Filter -->
+                        <div class="property-filter-select">
+                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <button class="Price-button" type="button" id="priceToggle">Price</button>
+                            <input type="hidden" name="min_price" id="selectedMinPrice" value="">
+                            <input type="hidden" name="max_price" id="selectedMaxPrice" value="">
+                        </div>
+                        <!-- Area Filter -->
+                        <div class="property-filter-select">
+                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <button class="Price-button" type="button" id="AreaToggle">Area Size</button>
+                            <input type="hidden" name="min_area" id="selectedMinArea" value="">
+                            <input type="hidden" name="max_area" id="selectedMaxArea" value="">
+                        </div>
+        
+
+<!-- Filters Toggle Button -->
+<div class="property-filter-select">
+          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+    <button class="Price-button" type="button" id="FiltersToggle">More Filters</button>
+    <input type="hidden" name="" id="" value="">
+</div>  
+
+                        {{-- !-- Area Dropdown --> --}}
+                        <div class="dropdown-dialog" id="areaDropdown">
+                            <p>Area Size</p>
+
+                            <div class="dropdown-dialog-content">
+                                <div class="black-dropdown black-dropdown-one ">
+                                          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                    <select name="min_area" class="price-dropdown form-select">
+                                        <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
+                                        @for ($price = 500; $price <= 9000; $price += 100)
+                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="black-dropdown black-dropdown-one ">
+                                          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                    <select name="max_area" class="price-dropdown form-select">
+                                        <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
+                                        @for ($price = 500; $price <= 9000; $price += 100)
+                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="done-btn"
+                                onclick="closeDropdownArea('areaDropdown')">Done</button>
+                        </div>
+
+
+                        {{-- !-- Price Dropdown --> --}}
+                        <div class="dropdown-dialog" id="priceDropdown">
+
+                            <div class="dropdown-dialog-content">
+                                <div class="dropdown-dialog-content-one">
+                                    <p>Minimum Price</p>
+                                    <div class="black-dropdown">
+                                              <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                        <select name="min_price" class="price-dropdown form-select">
+                                            <option value="" selected>Min. price</option>
+                                            <!-- Default option set to 0 -->
+                                            @for ($price = 500; $price <= 9000; $price += 100)
+                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown-dialog-content-one">
+                                    <p>Maximum Price</p>
+                                    <div class="black-dropdown">
+                                              <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                        <select name="max_price" class="price-dropdown form-select">
+                                            <option value="" selected>Max. price</option>
+                                            <!-- Default option set to 0 -->
+                                            @for ($price = 500; $price <= 9000; $price += 100)
+                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="done-btn"
+                                onclick="closeDropdown('priceDropdown')">Done</button>
+                        </div>
+
+                       {{-- !-- More Filters --> --}}
+{{-- <div class="dropdown-dialog" id="FiltersDropdown">
+    <p>amenities</p>
+    <div class="beds-baths-options">
+        <button type="button" class="room-option" data-value="Studio">Studio</button>
+        @foreach ($amenities as $amenity)
+            <button type="button" class="amenities" data-value="{{ $amenity }}">{{ $amenity }}</button>
+        @endforeach
+    </div>
+    <button type="button" class="done-btn" onclick="closeDropdown('FiltersDropdown')">Done</button>
+</div>  --}}
+
+
+
+                        <button class="property-filter-button" type="submit">Find</button>
+                    </div>
                 </div>
-
-                <div class="property-filter-two">
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                        <p class="filter-badge">NEW</p>
-                        <select name="cars" id="cars">
-                            <option value="Buy">Buy</option>
-                        </select>
-                    </div>
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                        <select name="cars" id="cars">
-                            <option value="Buy">Property type</option>
-                        </select>
-                    </div>
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                        <select name="cars" id="cars">
-                            <option value="Buy">Beds & Baths</option>
-                        </select>
-                    </div>
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                        <select name="cars" id="cars">
-                            <option value="Buy">Price</option>
-                        </select>
-                    </div>
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="assets/img/home/arrow.png" alt="">
-                        <select name="cars" id="cars">
-                            <option value="Buy">More Filters</option>
-                        </select>
-                    </div>
-                    <button class="property-filter-button">
-                        Find
-                    </button>
-
-                </div>
-            </div>
+            </form>
         </div>
     </section>
     <!-- breadcrumb start -->
@@ -128,9 +221,9 @@
 
                 <div class="page-line-filter-links-two">
                     <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
-                    <label for="cars">Sort by:</label>
+                    <label for="#">Sort by:</label>
 
-                    <select name="cars" id="cars">
+                    <select name="#" id="#">
                         <option value="volvo">1</option>
                     </select>
                 </div>
@@ -140,147 +233,147 @@
 
             <div class="row mt-none-30">
                 <div class="col-lg-9 mt-30">
-{{-- card   --}}
-  {{-- card   --}}
+                    {{-- card   --}}
+                    {{-- card   --}}
 
-@foreach($properties as $property)
-
-<div 
-onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
-
-style="margin-bottom: 50px; cursor: pointer;"
-class="blog-post-wrap mt-none-30">
-    <article class="blog__item mt-30 blog__item-property">
-        <div class="blog__item-property-one swiper">
-            <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite">
-            <img class="location-green" src="assets/img/property/location-green.png" alt="location">
-        <!-- Image Slider Count -->
-        <div class="img-slider-count">
-            <img class="" src="assets/img/property/cam.png" alt="location">
-            <p>{{ $property->images->count() }}</p>
-        </div>
+                    @foreach ($properties as $property)
+                        <div onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
+                            style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap mt-none-30">
+                            <article class="blog__item mt-30 blog__item-property">
+                                <div class="blog__item-property-one swiper">
+                                    <img class="Favorite-green" src="assets/img/property/green-Favorite.png"
+                                        alt="Favorite">
+                                    <img class="location-green" src="assets/img/property/location-green.png"
+                                        alt="location">
+                                    <!-- Image Slider Count -->
+                                    <div class="img-slider-count">
+                                        <img class="" src="assets/img/property/cam.png" alt="location">
+                                        <p>{{ $property->images->count() }}</p>
+                                    </div>
 
 
-        <div class="budge-three-div">
-            <!-- If Verified -->
-            @if($property->verified == 1)
-                <p>
-                    <img class="" src="assets/img/property/Verified-img.png" alt="location">
-                    Verified
-                </p>
-            @endif
-        
-            <!-- If SuperAgent -->
-            @if($property->superagent == 1)
-                <p>
-                    <img class="" src="assets/img/property/SuperAgent-img.png" alt="location">
-                    SuperAgent
-                </p>
-            @endif
-        
-            <!-- If New -->
-            @if($property->new == 1)
-                <p>New</p>
-            @endif
-        </div>
-            <div class="swiper-wrapper">
-                @foreach($property->images as $image)
-                    <div class="swiper-slide">
-                        <img class="blog__item-property-one-img-slide" 
-                          src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}"
-                      alt="Property Image">
-                    </div>
-                @endforeach
-            </div>
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
-        </div>
-        <div style="background-image: url(assets/img/bg/tm_bg.png);
+                                    <div class="budge-three-div">
+                                        <!-- If Verified -->
+                                        @if ($property->verified == 1)
+                                            <p>
+                                                <img class="" src="assets/img/property/Verified-img.png"
+                                                    alt="location">
+                                                Verified
+                                            </p>
+                                        @endif
+
+                                        <!-- If SuperAgent -->
+                                        @if ($property->superagent == 1)
+                                            <p>
+                                                <img class="" src="assets/img/property/SuperAgent-img.png"
+                                                    alt="location">
+                                                SuperAgent
+                                            </p>
+                                        @endif
+
+                                        <!-- If New -->
+                                        @if ($property->new == 1)
+                                            <p>New</p>
+                                        @endif
+                                    </div>
+                                    <div class="swiper-wrapper">
+                                        @foreach ($property->images as $image)
+                                            <div class="swiper-slide">
+                                                <img class="blog__item-property-one-img-slide"
+                                                    src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}"
+                                                    alt="Property Image">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                                <div style="background-image: url(assets/img/bg/tm_bg.png);
             background-size: cover;
-        " class="blog__item-property-two">
+        "
+                                    class="blog__item-property-two">
 
-            <div class="blog__item-property-two-box">
-                <h1 class="blog__item-property-two-title">{{$property->unit_type}}</h1>
-                <p>Premium</p>
-            </div>
-            <div class="blog__item-property-two-box-two">
-                <div class="blog__item-property-two-box-one">
-                    <p class="box-two-p-one">
-                        53.64 (BTC)
-                    </p>
-                    <p class="box-two-p-two">
-                        {{$property->price }} AED
-                    </p>
-                </div>
+                                    <div class="blog__item-property-two-box">
+                                        <h1 class="blog__item-property-two-title">{{ $property->unit_type }}</h1>
+                                        <p>Premium</p>
+                                    </div>
+                                    <div class="blog__item-property-two-box-two">
+                                        <div class="blog__item-property-two-box-one">
+                                            <p class="box-two-p-one">
+                                                53.64 (BTC)
+                                            </p>
+                                            <p class="box-two-p-two">
+                                                {{ $property->price }} AED
+                                            </p>
+                                        </div>
 
-                <div class="blog__item-property-two-img">
-                    <img src="assets/img/property/state-logo.jpeg" alt="logo">
-                </div>
+                                        <div class="blog__item-property-two-img">
+                                            <img src="assets/img/property/state-logo.jpeg" alt="logo">
+                                        </div>
 
-            </div>
-            <div class="blog__item-property-two-box-three">
-                <p>{{$property->property_title}}</p>
-            </div>
-            <div class="location-property-two-box-three">
-                <img src="assets/img/property/green-location.png" alt="location">
-                <p>Hattan, Arabian Ranches, Dubai</p>
-            </div>
-            <div class="property-two-box-four">
-                <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
-                <p>{{$property->no_of_rooms}}</p>
-                <img src="assets/img/property/pipeline.png" alt="pipeline">
-                <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
-                <p>{{$property->no_of_bathroom}}</p>
-                <img src="assets/img/property/pipeline.png" alt="pipeline">
-                <img class="img-four" src="assets/img/property/green-size.png" alt="size">
-                <p>{{$property->unit_builtup_area}}{{$property->unit_measure}}</p>
-            </div>
+                                    </div>
+                                    <div class="blog__item-property-two-box-three">
+                                        <p>{{ $property->property_title }}</p>
+                                    </div>
+                                    <div class="location-property-two-box-three">
+                                        <img src="assets/img/property/green-location.png" alt="location">
+                                        <p>Hattan, Arabian Ranches, Dubai</p>
+                                    </div>
+                                    <div class="property-two-box-four">
+                                        <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
+                                        <p>{{ $property->no_of_rooms }}</p>
+                                        <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                        <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
+                                        <p>{{ $property->no_of_bathroom }}</p>
+                                        <img src="assets/img/property/pipeline.png" alt="pipeline">
+                                        <img class="img-four" src="assets/img/property/green-size.png" alt="size">
+                                        <p>{{ $property->unit_builtup_area }}{{ $property->unit_measure }}</p>
+                                    </div>
 
-            <div class="property-two-box-five">
+                                    <div class="property-two-box-five">
 
-                <div class="property-two-box-five-one">
+                                        <div class="property-two-box-five-one">
 
-                    <div class="property-two-box-five-one-img">
-                        <img 
-                           src="{{ asset($property->listing_agent_photo) }}"
-                     alt="person">
-                    </div>
-                    <div class="property-two-box-five-one-name">
-                        <p>{{$property->listing_agent}}</p>
-                        <h4>Real Estate Agent</h4>
-                    </div>
-                </div>
-
-
-                <div class="property-two-box-five-two">
-                    <!-- Phone Call -->
-                    <a href="tel:{{$property->listing_agent_phone}}">
-                        <img src="assets/img/property/dark-call.png" alt="Call">
-                        Call
-                    </a>
-                    <!-- Email -->
-                    <a href="mailto:{{$property->listing_agent_email}}">
-                        <img src="assets/img/property/dark-mail.png" alt="Email">
-                        Email
-                    </a>
-                    <!-- WhatsApp -->
-                    <a href="https://wa.me/{{$property->listing_agent_whatsapp}}" target="_blank">
-                        <img src="assets/img/property/dark-WhatsApp.png" alt="WhatsApp">
-                        WhatsApp
-                    </a>
-                </div>
-            </div>
+                                            <div class="property-two-box-five-one-img">
+                                                <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
+                                            </div>
+                                            <div class="property-two-box-five-one-name">
+                                                <p>{{ $property->listing_agent }}</p>
+                                                <h4>Real Estate Agent</h4>
+                                            </div>
+                                        </div>
 
 
+                                        <div class="property-two-box-five-two">
+                                            <!-- Phone Call -->
+                                            <a href="tel:{{ $property->listing_agent_phone }}">
+                                                <img src="assets/img/property/dark-call.png" alt="Call">
+                                                Call
+                                            </a>
+                                            <!-- Email -->
+                                            <a href="mailto:{{ $property->listing_agent_email }}">
+                                                <img src="assets/img/property/dark-mail.png" alt="Email">
+                                                Email
+                                            </a>
+                                            <!-- WhatsApp -->
+                                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+                                                target="_blank">
+                                                <img src="assets/img/property/dark-WhatsApp.png" alt="WhatsApp">
+                                                WhatsApp
+                                            </a>
+                                        </div>
+                                    </div>
 
 
 
-        </div>
-    </article>
-</div>
-@endforeach
-{{-- end card   --}}
-{{ $properties->links() }}
+
+
+                                </div>
+                            </article>
+                        </div>
+                    @endforeach
+                    {{-- end card   --}}
+                    {{ $properties->links() }}
 
 
                 </div>
@@ -343,6 +436,97 @@ class="blog-post-wrap mt-none-30">
 
 
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Show/Hide Price Dropdown
+            document.getElementById("priceToggle").addEventListener("click", function() {
+                document.getElementById("priceDropdown").classList.toggle("active");
+            });
+
+            // Selecting Min Price
+            document.querySelectorAll(".price-option[data-min]").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".price-option[data-min]").forEach(btn => btn
+                        .classList.remove("active"));
+                    this.classList.add("active");
+                    document.getElementById("selectedMinPrice").value = this.getAttribute(
+                        "data-min");
+                });
+            });
+
+            // Selecting Max Price
+            document.querySelectorAll(".price-option[data-max]").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".price-option[data-max]").forEach(btn => btn
+                        .classList.remove("active"));
+                    this.classList.add("active");
+                    document.getElementById("selectedMaxPrice").value = this.getAttribute(
+                        "data-max");
+                });
+            });
+        });
+
+        // Close dropdown
+        function closeDropdown(id) {
+            document.getElementById(id).classList.remove("active");
+        }
 
 
+
+
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // Show/Hide Area Dropdown
+            document.getElementById("AreaToggle").addEventListener("click", function() {
+                document.getElementById("areaDropdown").classList.toggle("active-Area");
+            });
+
+            // Selecting Min Area
+            document.querySelectorAll("select[name='min_area']").forEach(select => {
+                select.addEventListener("change", function() {
+                    document.getElementById("selectedMinPrice").value = this.value;
+                });
+            });
+
+            // Selecting Max Area
+            document.querySelectorAll("select[name='max_area']").forEach(select => {
+                select.addEventListener("change", function() {
+                    document.getElementById("selectedMaxPrice").value = this.value;
+                });
+            });
+        });
+
+        // Close dropdown
+        function closeDropdownArea(id) {
+            document.getElementById(id).classList.remove("active-Area");
+        }
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+    // Show/Hide Filters Dropdown
+    let filtersToggle = document.getElementById("FiltersToggle");
+    let filtersDropdown = document.getElementById("FiltersDropdown");
+
+    filtersToggle.addEventListener("click", function() {
+        filtersDropdown.classList.toggle("active");
+    });
+});
+
+// Close dropdown function
+function closeDropdown(id) {
+    document.getElementById(id).classList.remove("active");
+}
+
+
+
+
+
+
+    </script>
 @endsection
