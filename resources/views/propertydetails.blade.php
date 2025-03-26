@@ -67,40 +67,59 @@
                 <div class="grid-container">
                     <div class="main-image">
                         <div class="budge-three-div">
-                            <p>
-                                <img src="{{ asset('assets/img/property/Verified-img.png') }}" alt="Verified">
-                                Verified
-                            </p>
-                            <p>
-                                <img src="{{ asset('assets/img/property/SuperAgent-img.png') }}" alt="SuperAgent">
-                                SuperAgent
-                            </p>
+
+                                     <!-- If Verified -->
+                            @if($property->verified == 1)
+                                <p>
+                                    <img class="" src="assets/img/property/Verified-img.png" alt="location">
+                                    Verified
+                                </p>
+                            @endif
+                        
+                            <!-- If SuperAgent -->
+                            @if($property->superagent == 1)
+                                <p>
+                                    <img class="" src="assets/img/property/SuperAgent-img.png" alt="location">
+                                    SuperAgent
+                                </p>
+                            @endif
+
+
+                    
                         </div>
-                
+
                         {{-- Show One Main Image --}}
                         @if ($property->images->isNotEmpty())
-                            <img class="main-image-img" alt="home" src="{{ $property->images->first()->url }}" alt="Property Image">
+              
+
+
+                                <img class="main-image-img" alt="Property Image"
+                                 src="{{ $property->xml ? $property->images->first()->url : asset('storage/' . $property->images->first()->url) }}">
+
                         @endif
-                
+
                         <div class="floor-plan-div">
-                            <img  src="{{ asset('assets/img/propertydetails/floor-plan.png') }}" alt="floor-plan">
+                            <img src="{{ asset('assets/img/propertydetails/floor-plan.png') }}" alt="floor-plan">
                             <p>Floor Plan</p>
                         </div>
                     </div>
-                
+
                     {{-- Small Images --}}
                     <div class="small-images">
                         @foreach ($property->images->take(3) as $image)
-                            <img class="small-images-img" src="{{ $image->url }}" alt="home">
+                            <img class="small-images-img" 
+                               src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}"
+                            
+                        alt="home">
                         @endforeach
-                
+
                         {{-- See More Button --}}
                         <div class="small-images-see-more" onclick="openSwiperPopup()">
                             See More
                         </div>
                     </div>
                 </div>
-                
+
                 {{-- Swiper Popup Modal --}}
                 <div id="imagePopup" class="image-popup">
                     <span class="close-btn" onclick="closeSwiperPopup()">&times;</span>
@@ -109,7 +128,7 @@
                             <div class="swiper-wrapper">
                                 @foreach ($property->images as $image)
                                     <div class="swiper-slide">
-                                        <img src="{{ $image->url }}" alt="Property Image">
+                                        <img   src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}" alt="Property Image">
                                     </div>
                                 @endforeach
                             </div>
@@ -123,12 +142,12 @@
                     </div>
                     <div class="popup-small-img">
                         @foreach ($property->images as $image)
-                            <img src="{{ $image->url }}" alt="Property Image" class="thumbnail-img">
+                            <img   src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}" alt="Property Image" class="thumbnail-img">
                         @endforeach
                     </div>
-                    
+
                 </div>
-                
+
                 <div class="grid-left-side">
                     <div class="grid-left-side-fisrt-dev">
                         <p>{{ $property->ad_type }}</p>
@@ -137,13 +156,7 @@
                     <h3 class="grid-left-side-one">{{ $property->property_title }}</h3>
                     <h3 class="grid-left-side-two">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
                     <h3 class="grid-left-side-three">
-                        Listed exclusively with Espace Real Estate is this fabulous example of an E2 in Hattan, Arabian
-                        Ranches. This property has been completely remodeled from its original design, now boasting over
-                        6,000 sq ft BUA and 6 functional double bedrooms. The designer kitchen with Miele appliances has
-                        been moved to the rear of the house and opens to three spacious living/dining areas. The property
-                        has been fully refitted throughout, including all MEP works, Spanish porcelain floor tiles, Bagno
-                        design sanitary ware and a fully landscaped garden amongst others. Call today for a full spec list
-                        or to book your viewing via the exclusive agent.
+                        {!! $property->web_remarks !!}
                     </h3>
                     <div class="grid-left-side-price-box">
                         <div class=" grid-left-side-price">
@@ -199,10 +212,10 @@
                     <div class="property-two-box-five-box">
                         <div class="property-two-box-five-one">
                             <div class="property-two-box-five-one-img">
-                                <img src="{{ asset('assets/img/property/person.jpeg') }}" alt="person">
+                                <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
                             </div>
                             <div class="property-two-box-five-one-name">
-                                <p>John Doe</p>
+                                <p>{{ $property->listing_agent }}</p>
                                 <h4>Real Estate Agent</h4>
                             </div>
                         </div>
@@ -396,10 +409,13 @@
             <div style="margin: 20px 0;">
                 <div class="property-details-Description">
                     <span class="active-filter-link">Location</span>
+                    {{-- {{ $property->latitude }}, {{ $property->longitude }} --}}
                 </div>
+
+
                 <div class="Floor-Plan-div">
                     <div class="map-div-one">
-                        <img src="{{ asset('assets/img/propertydetails/map.jpeg') }}" alt="floor-plan">
+                        <div id="map" style="height: 100%; width: 100%;  border-radius: 5px;"></div>
                     </div>
 
 
@@ -656,18 +672,35 @@
 
 
 
-
-
-
+    <!-- Leaflet.js CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var latitude = {{ $property->latitude }};
+            var longitude = {{ $property->longitude }};
+
+            var map = L.map('map').setView([latitude, longitude], 15); // Zoom level 15
+
+            // Load OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add a marker at the location
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup("Property Location")
+                .openPopup();
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             const video = document.getElementById("propertyVideo");
             const playButton = document.getElementById("playButton");
 
             playButton.addEventListener("click", function() {
                 video.play();
-                playButton.style.display = "none"; 
+                playButton.style.display = "none";
             });
         });
 
@@ -675,94 +708,89 @@
 
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-    var swiper;
+        document.addEventListener("DOMContentLoaded", function() {
+            var swiper;
 
-    window.openSwiperPopup = function () {
-        document.getElementById("imagePopup").style.display = "flex";
+            window.openSwiperPopup = function() {
+                document.getElementById("imagePopup").style.display = "flex";
 
-        if (!swiper) {
-            swiper = new Swiper(".mySwiper", {
-                loop: true,
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-                autoplay: {
-                    delay: 3000,
-                },
-                on: {
-                    slideChange: function () {
-                        document.getElementById("current-slide").textContent = this.realIndex + 1;
-                        updateActiveThumbnail(this.realIndex);
-                    },
-                },
-            });
-        }
-        updateActiveThumbnail(swiper.realIndex); // Ensure correct initial border
-    };
+                if (!swiper) {
+                    swiper = new Swiper(".mySwiper", {
+                        loop: true,
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        },
+                        autoplay: {
+                            delay: 3000,
+                        },
+                        on: {
+                            slideChange: function() {
+                                document.getElementById("current-slide").textContent = this
+                                    .realIndex + 1;
+                                updateActiveThumbnail(this.realIndex);
+                            },
+                        },
+                    });
+                }
+                updateActiveThumbnail(swiper.realIndex); // Ensure correct initial border
+            };
 
-    window.closeSwiperPopup = function () {
-        document.getElementById("imagePopup").style.display = "none";
-    };
+            window.closeSwiperPopup = function() {
+                document.getElementById("imagePopup").style.display = "none";
+            };
 
-    function updateActiveThumbnail(activeIndex) {
-        const thumbnails = document.querySelectorAll(".popup-small-img img");
+            function updateActiveThumbnail(activeIndex) {
+                const thumbnails = document.querySelectorAll(".popup-small-img img");
 
-        thumbnails.forEach((thumb, index) => {
-            if (index === activeIndex) {
-                thumb.classList.add("active-thumbnail");
-            } else {
-                thumb.classList.remove("active-thumbnail");
+                thumbnails.forEach((thumb, index) => {
+                    if (index === activeIndex) {
+                        thumb.classList.add("active-thumbnail");
+                    } else {
+                        thumb.classList.remove("active-thumbnail");
+                    }
+                });
             }
         });
-    }
-});
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    const scrollContainer = document.querySelector(".popup-small-img");
+        document.addEventListener("DOMContentLoaded", function() {
+            const scrollContainer = document.querySelector(".popup-small-img");
 
-    let isHolding = false;
-    let speed = 5; // Adjust scrolling speed
+            let isHolding = false;
+            let speed = 5; // Adjust scrolling speed
 
-    // Function to scroll while holding
-    function scrollLeft() {
-        if (isHolding) {
-            scrollContainer.scrollLeft -= speed;
-            requestAnimationFrame(scrollLeft);
-        }
-    }
+            // Function to scroll while holding
+            function scrollLeft() {
+                if (isHolding) {
+                    scrollContainer.scrollLeft -= speed;
+                    requestAnimationFrame(scrollLeft);
+                }
+            }
 
-    function scrollRight() {
-        if (isHolding) {
-            scrollContainer.scrollLeft += speed;
-            requestAnimationFrame(scrollRight);
-        }
-    }
+            function scrollRight() {
+                if (isHolding) {
+                    scrollContainer.scrollLeft += speed;
+                    requestAnimationFrame(scrollRight);
+                }
+            }
 
-    scrollContainer.addEventListener("mousedown", (e) => {
-        isHolding = true;
-        if (e.clientX < window.innerWidth / 2) {
-            scrollLeft();
-        } else {
-            scrollRight();
-        }
-    });
+            scrollContainer.addEventListener("mousedown", (e) => {
+                isHolding = true;
+                if (e.clientX < window.innerWidth / 2) {
+                    scrollLeft();
+                } else {
+                    scrollRight();
+                }
+            });
 
-    scrollContainer.addEventListener("mouseup", () => {
-        isHolding = false;
-    });
+            scrollContainer.addEventListener("mouseup", () => {
+                isHolding = false;
+            });
 
-    scrollContainer.addEventListener("mouseleave", () => {
-        isHolding = false; // Stop scrolling when leaving the container
-    });
-});
-
-
-
-
-
-
+            scrollContainer.addEventListener("mouseleave", () => {
+                isHolding = false; // Stop scrolling when leaving the container
+            });
+        });
     </script>
 @endsection

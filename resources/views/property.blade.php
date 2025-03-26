@@ -186,7 +186,9 @@ class="blog-post-wrap mt-none-30">
             <div class="swiper-wrapper">
                 @foreach($property->images as $image)
                     <div class="swiper-slide">
-                        <img class="blog__item-property-one-img-slide" src="{{ $image->url }}" alt="Property Image">
+                        <img class="blog__item-property-one-img-slide" 
+                          src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}"
+                      alt="Property Image">
                     </div>
                 @endforeach
             </div>
