@@ -114,13 +114,19 @@
                                 @endforeach
                             </div>
                             <!-- Swiper navigation -->
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next swiper-button-next-property"></div>
+                            <div class="swiper-button-prev swiper-button-prev-property"></div>
                         </div>
                     </div>
                     <div class="slide-count">
-                        1 / 6
+                        <span id="current-slide">1</span> / <span id="total-slides">{{ count($property->images) }}</span>
                     </div>
+                    <div class="popup-small-img">
+                        @foreach ($property->images as $image)
+                            <img src="{{ $image->url }}" alt="Property Image" class="thumbnail-img">
+                        @endforeach
+                    </div>
+                    
                 </div>
                 
                 <div class="grid-left-side">
@@ -682,19 +688,76 @@
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",
                 },
-                // autoplay: {
-                //     delay: 3000,
-                // },
+                autoplay: {
+                    delay: 3000,
+                },
+                on: {
+                    slideChange: function () {
+                        document.getElementById("current-slide").textContent = this.realIndex + 1;
+                        updateActiveThumbnail(this.realIndex);
+                    },
+                },
             });
         }
+        updateActiveThumbnail(swiper.realIndex); // Ensure correct initial border
     };
 
     window.closeSwiperPopup = function () {
         document.getElementById("imagePopup").style.display = "none";
     };
+
+    function updateActiveThumbnail(activeIndex) {
+        const thumbnails = document.querySelectorAll(".popup-small-img img");
+
+        thumbnails.forEach((thumb, index) => {
+            if (index === activeIndex) {
+                thumb.classList.add("active-thumbnail");
+            } else {
+                thumb.classList.remove("active-thumbnail");
+            }
+        });
+    }
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const scrollContainer = document.querySelector(".popup-small-img");
+
+    let isHolding = false;
+    let speed = 5; // Adjust scrolling speed
+
+    // Function to scroll while holding
+    function scrollLeft() {
+        if (isHolding) {
+            scrollContainer.scrollLeft -= speed;
+            requestAnimationFrame(scrollLeft);
+        }
+    }
+
+    function scrollRight() {
+        if (isHolding) {
+            scrollContainer.scrollLeft += speed;
+            requestAnimationFrame(scrollRight);
+        }
+    }
+
+    scrollContainer.addEventListener("mousedown", (e) => {
+        isHolding = true;
+        if (e.clientX < window.innerWidth / 2) {
+            scrollLeft();
+        } else {
+            scrollRight();
+        }
+    });
+
+    scrollContainer.addEventListener("mouseup", () => {
+        isHolding = false;
+    });
+
+    scrollContainer.addEventListener("mouseleave", () => {
+        isHolding = false; // Stop scrolling when leaving the container
+    });
+});
 
 
 
