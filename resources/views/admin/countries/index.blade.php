@@ -32,6 +32,8 @@
             @endforeach
         </tbody>
     </table>
-    {{ $countries->links() }}
+    <div class="d-flex justify-content-center mt-4">
+        {{ $countries->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection

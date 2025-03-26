@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewsRequest;
+use App\Models\Country;
+use App\Models\Emirates;
 use App\Models\News;
 use App\Models\NewsGallery;
 use Illuminate\Http\Request;
@@ -17,7 +19,9 @@ class NewsController extends Controller
 
     public function create()
     {
-        return view('admin.news.create');
+        $emirates = Emirates::all();
+        $countries = Country::all();
+        return view('admin.news.create', compact('emirates', 'countries'));
     }
 
     public function store(NewsRequest $request)
@@ -62,8 +66,10 @@ class NewsController extends Controller
 
     public function edit(News $news)
     {
+        $emirates = Emirates::all();
+        $countries = Country::all();
         $news->load('galleries');
-        return view('admin.news.edit', compact('news'));
+        return view('admin.news.edit', compact('news', 'emirates', 'countries'));
     }
 
     public function update(NewsRequest $request, News $news)

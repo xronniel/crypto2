@@ -6,6 +6,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\EmiratesController;
+use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\HomepageContentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ListingController;
@@ -42,6 +43,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('districts', DistrictController::class);
     Route::resource('emirates', EmiratesController::class);
     Route::resource('countries', CountryController::class);
+    Route::resource('facilities', FacilityController::class);
 });
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');

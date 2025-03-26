@@ -47,6 +47,8 @@
             @endforelse
         </tbody>
     </table>
-    {{ $districts->links() }}
+    <div class="d-flex justify-content-center mt-4">
+        {{ $districts->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection

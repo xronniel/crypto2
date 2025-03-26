@@ -17,16 +17,26 @@
         </div>
 
         <div class="row">
-            <!-- State -->
+               <!-- Emirates -->
             <div class="col-md-6 mb-3">
-                <label for="state">State:</label>
-                <input type="text" name="state" class="form-control" id="state" value="{{ old('state') }}" required>
+                <label for="state">Emirates:</label>
+                <select name="state" class="form-control" id="state" required>
+                    <option value="" disabled selected>Select Emirates</option>
+                    @foreach ($emirates as $emirate)
+                        <option value="{{ $emirate->name }}" {{ old('state') == $emirate->name  ? 'selected' : '' }}>{{ $emirate->name }}</option>
+                    @endforeach
+                </select>
             </div>
-
+        
             <!-- Country -->
             <div class="col-md-6 mb-3">
                 <label for="country">Country:</label>
-                <input type="text" name="country" class="form-control" id="country" value="{{ old('country') }}" required>
+                <select name="country" class="form-control" id="country" required>
+                    <option value="" disabled selected>Select Country</option>
+                    @foreach ($countries as $country)
+                        <option value="{{ $country->name }}" {{ old('country') ==  $country->name  ? 'selected' : '' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
 

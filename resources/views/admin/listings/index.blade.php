@@ -45,8 +45,9 @@
             @endforelse
         </tbody>
     </table>
-<div class="pagination">
-    {{ $listings->links() }}
-</div>
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4">
+        {{ $listings->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection

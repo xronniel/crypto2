@@ -79,4 +79,14 @@ class Listing extends Model
         return $this->hasMany(Image::class);
     }
 
+    public function developer()
+    {
+        return $this->belongsTo(Developer::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
 }
