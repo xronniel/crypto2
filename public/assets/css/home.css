@@ -443,17 +443,54 @@ input[type="text"] {
     display: flex;
     gap: 40px;
     padding: 0 0 15px 0;
+    overflow-x: auto; /* Keep scrollable but prevent shrinking */
+    white-space: nowrap; /* Ensure text remains on one line */
 }
 
 .token-wrap-location-filter span {
-    font-family: "Open Sans";
+    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 28px;
-    letter-spacing: 0%;
+    letter-spacing: 0.5px; /* Adjusted for better readability */
     color: #ffffff;
+    flex-shrink: 0; /* Prevents compression */
 }
 
+.token-wrap-location-filter {
+    border-bottom: 1px solid #ffffff;
+    display: flex;
+    gap: 40px;
+    padding: 0 0 5px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    
+    /* Hide scrollbar track and thumb */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: transparent transparent; /* Hide scrollbar track */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+.token-wrap-location-filter::-webkit-scrollbar {
+    width: 0px; /* Hide vertical scrollbar */
+    height: 10px; /* Adjust height if needed */
+    background: transparent; /* Remove background */
+}
+
+/* Hide scrollbar track */
+.token-wrap-location-filter::-webkit-scrollbar-track {
+    background: transparent; /* Removes track */
+}
+
+/* Hide scrollbar thumb (scrollbar bar) */
+.token-wrap-location-filter::-webkit-scrollbar-thumb {
+    background: transparent; /* Makes scrollbar bar invisible */
+}
+
+/* Keep scrollbar arrows visible */
+.token-wrap-location-filter::-webkit-scrollbar-button {
+    display: block;
+}
 
 .token-wrap-location-filter-two{
     font-family: "Open Sans";

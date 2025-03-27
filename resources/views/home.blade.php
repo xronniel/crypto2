@@ -396,11 +396,13 @@
             <div class="section-title pb-55">
                 <h1 class="title ">Featured Properties</h1>
             </div>
-            <div class="token-wrap-location-filter">
-                <span class="active-filter-link">Dubai</span>
-                <span>Abu Dhabi</span>
-                <span>Sharjah</span>
-                <span>Ras Al Khaimah</span>
+            <div id="communities-span" class="token-wrap-location-filter">
+                @foreach($communities as $communityName)
+                    <span 
+                        class="{{ $communityName === $community ? 'active-filter-link' : '' }}">
+                        {{ $communityName }}
+                    </span>
+                @endforeach
             </div>
             <div  class="token-wrap-location-filter-two">
                 Discover the latest off-plan properties and be informed.
@@ -861,6 +863,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const locationFilter = document.getElementById("communities-span");
+
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+
+    locationFilter.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        locationFilter.classList.add("dragging");
+        startX = e.pageX - locationFilter.offsetLeft;
+        scrollLeft = locationFilter.scrollLeft;
+    });
+
+    locationFilter.addEventListener("mouseleave", () => {
+        isDragging = false;
+        locationFilter.classList.remove("dragging");
+    });
+
+    locationFilter.addEventListener("mouseup", () => {
+        isDragging = false;
+        locationFilter.classList.remove("dragging");
+    });
+
+    locationFilter.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - locationFilter.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust the speed of drag
+        locationFilter.scrollLeft = scrollLeft - walk;
+    });
+});
+
+
+
+
+
+
+
+
+
         </script>
         
 
