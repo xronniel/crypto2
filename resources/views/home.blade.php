@@ -53,7 +53,6 @@
                                 </span>
                                 <span class="filter-btn" data-value="commercial">Commercial</span>
                             </div>
-                
                             <div class="first-section-border-second-div">
                                 <span>
                                     <img class="Vector-img" src="assets/img/home/Vector.png" alt="">
@@ -62,9 +61,11 @@
                 
                                 <select name="property_type" id="propertyTypeSelect" class="form-select">
                                     <option value="">Select Property Type</option>
+                                    
                                     @foreach($propertyTypes as $type)
                                         <option value="{{ $type }}">{{ $type }}</option>
                                     @endforeach
+                                
                                 </select>
                 
                                 <span id="bedsBathsToggle">
@@ -827,9 +828,39 @@ function closeDropdown() {
     document.getElementById("bedsBathsDropdown").classList.remove("active");
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const propertyTypeSelect = document.getElementById("propertyTypeSelect");
+    const bedsBathsToggle = document.getElementById("bedsBathsToggle");
+    const roomInput = document.getElementById("selectedRooms"); // Input for Rooms
+    const bathroomInput = document.getElementById("selectedBathrooms"); // Input for Bathrooms
 
+    const commercialPropertyTypes = [
+        "Commercial Full Building",
+        "Retail",
+        "Warehouse",
+        "Labour Camp",
+        "Land Commercial",
+        "Factory",
+        "Land Mixed Use",
+        "Commercial Full Floor"
+    ];
 
+    propertyTypeSelect.addEventListener("change", () => {
+        const selectedValue = propertyTypeSelect.value;
 
+        if (commercialPropertyTypes.includes(selectedValue)) {
+            // Hide Beds & Baths section
+            bedsBathsToggle.style.display = "none";
+
+            // Clear room and bathroom input values
+            if (roomInput) roomInput.value = "";
+            if (bathroomInput) bathroomInput.value = "";
+        } else {
+            // Show Beds & Baths section
+            bedsBathsToggle.style.display = "flex";
+        }
+    });
+});
         </script>
         
 
