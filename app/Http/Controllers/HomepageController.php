@@ -31,7 +31,19 @@ class HomepageController extends Controller
             ->distinct()
             ->pluck('no_of_bathroom');
 
+        $featuredListings = Listing::with(['images', 'facilities'])
+            ->where('featured', 1)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        $communities = Listing::where('community', '!=', '')
+            ->distinct()
+            ->pluck('community');
+        
+
         $newsList = News::latest()->take(3)->get();
-        return view('home', compact('newsList', 'homepageContent', 'propertyTypes', 'unitType', 'noOfRooms', 'noOfBathrooms', 'request'));
+    
+        return view('home', compact('newsList', 'homepageContent', 'propertyTypes', 'unitType', 'noOfRooms', 'noOfBathrooms', 'request', 'featuredListings', 'communities'));
     }
 }
