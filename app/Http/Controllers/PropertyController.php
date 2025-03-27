@@ -99,6 +99,10 @@ class PropertyController extends Controller
             $q->where('completion_status', request('completion_status'));
         });
 
+        if ($request->has('furnishing') && !empty($request->furnishing)) {
+            $query->where('property_title', 'like', '%' . $request->furnishing . '%');
+        }
+
         // Filter by ad_type
         if ($adType) {
             $query->where('ad_type', $adType);
