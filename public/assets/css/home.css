@@ -563,7 +563,7 @@ input[type="text"] {
 
     /* Centering */
     display: block;
-    margin: 20px auto 0;
+    margin: 15px auto;
 }
 
 .done-btn:hover {

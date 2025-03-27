@@ -734,3 +734,108 @@ border-radius: 4px;
 .black-dropdown-one {
     width: 50%;
 }
+
+
+.amenities-box{
+    height: 200px;
+    overflow-y: scroll;
+    display: flex
+;
+    flex-wrap: wrap;
+}
+
+
+.amenities-box label{
+    border: 1px solid #C1C7DE;
+    display: flex
+;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    margin: 5px;
+    align-content: center;
+    align-items: center;
+    width: fit-content;
+    gap: 6px;
+    flex-wrap: wrap;
+
+    height: fit-content;
+}
+
+
+.amenities-box input[type="checkbox"] {
+  
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    background-color: none;
+    border: 2px solid #2DD98F; 
+    
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+
+  .amenities-box input[type="checkbox"]:hover {
+    background-color: #2DD98F4D;
+  }
+
+  .amenities-box label:hover {
+    background-color: #2DD98F4D;
+  }
+
+
+.amenities-box input[type="checkbox"]:checked {
+
+    background-color: none; 
+  }
+
+  
+.amenities-box input[type="checkbox"]:checked::before {
+    content: "✓";
+    color: #2DD98F;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .dropdown-dialog p {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #FFFFFF80;
+    padding: 20px 0;
+    display: flex
+;
+    align-items: center;
+    gap: 6px;
+}
+  .dropdown-dialog h1 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #2DD98F;
+text-align: center;
+padding: 20px 0;
+}
+
+
+.filters-secroll-box{
+    height: 400px;
+    overflow-y: scroll; 
+    width: 100%;
+    padding: 0 20px;
+}
