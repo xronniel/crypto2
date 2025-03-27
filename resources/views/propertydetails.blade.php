@@ -7,7 +7,7 @@
 
     <section style="background: #080B18;" class="blog pt-50 pb-50">
         <div class="container">
-          <form action="{{ route('properties.index') }}" method="GET">
+            <form action="{{ route('properties.index') }}" method="GET">
                 @csrf
                 <div class="property-filter-box">
                     <div class="property-filter">
@@ -17,7 +17,7 @@
 
                     <div class="property-filter-two">
                         <div class="property-filter-select">
-                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <p class="filter-badge">NEW</p>
                             <select name="filter_type" class="form-select" id="filter_type">
                                 <option value="">Select Type</option>
@@ -28,7 +28,7 @@
                             </select>
                         </div>
                         <div class="property-filter-select">
-                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <select name="property_type" id="propertyTypeSelect" class="form-select">
                                 <option value="">Select Property Type</option>
                                 @foreach ($propertyTypes as $type)
@@ -40,34 +40,36 @@
 
                         <!-- Price Filter -->
                         <div class="property-filter-select">
-                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="priceToggle">Price</button>
                             <input type="hidden" name="min_price" id="selectedMinPrice" value="">
                             <input type="hidden" name="max_price" id="selectedMaxPrice" value="">
                         </div>
                         <!-- Area Filter -->
                         <div class="property-filter-select">
-                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="AreaToggle">Area Size</button>
                             <input type="hidden" name="min_area" id="selectedMinArea" value="">
                             <input type="hidden" name="max_area" id="selectedMaxArea" value="">
                         </div>
-        
 
-<!-- Filters Toggle Button -->
-<div class="property-filter-select">
-          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
-    <button class="Price-button" type="button" id="FiltersToggle">More Filters</button>
-    <input type="hidden" name="" id="" value="">
-</div>  
 
+                        <!-- Filters Toggle Button -->
+                        <div class="property-filter-select">
+                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <button class="Price-button" type="button" id="FiltersToggle">More Filters</button>
+                            <input type="hidden" name="" id="" value="">
+                        </div>
+
+                        <button class="property-filter-button" type="submit">Find</button>
                         {{-- !-- Area Dropdown --> --}}
                         <div class="dropdown-dialog" id="areaDropdown">
                             <p>Area Size</p>
 
                             <div class="dropdown-dialog-content">
                                 <div class="black-dropdown black-dropdown-one ">
-                                          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                    <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
+                                        alt="arrow">
                                     <select name="min_area" class="price-dropdown form-select">
                                         <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
                                         @for ($price = 500; $price <= 9000; $price += 100)
@@ -76,7 +78,8 @@
                                     </select>
                                 </div>
                                 <div class="black-dropdown black-dropdown-one ">
-                                          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                    <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
+                                        alt="arrow">
                                     <select name="max_area" class="price-dropdown form-select">
                                         <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
                                         @for ($price = 500; $price <= 9000; $price += 100)
@@ -97,7 +100,8 @@
                                 <div class="dropdown-dialog-content-one">
                                     <p>Minimum Price</p>
                                     <div class="black-dropdown">
-                                              <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                        <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
+                                            alt="arrow">
                                         <select name="min_price" class="price-dropdown form-select">
                                             <option value="" selected>Min. price</option>
                                             <!-- Default option set to 0 -->
@@ -111,7 +115,8 @@
                                 <div class="dropdown-dialog-content-one">
                                     <p>Maximum Price</p>
                                     <div class="black-dropdown">
-                                              <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                        <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
+                                            alt="arrow">
                                         <select name="max_price" class="price-dropdown form-select">
                                             <option value="" selected>Max. price</option>
                                             <!-- Default option set to 0 -->
@@ -127,21 +132,93 @@
                                 onclick="closeDropdown('priceDropdown')">Done</button>
                         </div>
 
-                       {{-- !-- More Filters --> --}}
-{{-- <div class="dropdown-dialog" id="FiltersDropdown">
-    <p>amenities</p>
-    <div class="beds-baths-options">
-        <button type="button" class="room-option" data-value="Studio">Studio</button>
-        @foreach ($amenities as $amenity)
-            <button type="button" class="amenities" data-value="{{ $amenity }}">{{ $amenity }}</button>
-        @endforeach
-    </div>
-    <button type="button" class="done-btn" onclick="closeDropdown('FiltersDropdown')">Done</button>
-</div>  --}}
+
+
+                        <!-- More Filters Dropdown -->
+                        <div style="padding:0 20px; width: 600px;"
+                            class="dropdown-dialog" id="FiltersDropdown">
+
+                            <div>
+                                <h1>
+                                    More FIlters
+                                </h1>
+                            </div>
+                            <div
+                            style="padding:20px;"
+                            >
+                                <p>
+                                    <img src="{{ asset('assets/img/property/search-icon.svg') }}" alt="search">
+                                    Search
+                                </p>
+
+                                <div class="property-filter">
+                                    <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                                    <input type="text" placeholder="Search : e.g. Villa, Office, etc." value=""
+                                        name="search-filters">
+                                </div>
+                            </div>
+                            <div class="filters-secroll-box">
+
+                     
+
+                                    <p>
+                                        <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
+                                        Furnishing
+                                    </p>
+
+                                    <div class="beds-baths-options">
+
+                                        <button type="button" class="furnished" data-value="">All
+                                            Furnishing</button>
+                                        <button type="button" class="furnished" data-value="furnished">Furnished</button>
+                                        <button type="button" class="furnished" data-value="unfurnished">Unfurnished</button>
+                                        <button type="button" class="furnished" data-value="partly furnished">Partly
+                                            Furnished</button>
+
+                                    </div>
+
+                                    <p>
+                                        <img src="{{ asset('assets/img/property/completion.svg') }}" alt="search">
+                                        Completion Status
+                                    </p>
+
+                                    <div class="beds-baths-options">
+
+                                        <button type="button" class="Completion" data-value="">Any</button>
+                                        <button type="button" class="Completion" data-value="off_plan">Off-plan</button>
+                                        <button type="button" class="Completion" data-value="ready">Ready</button>
+
+                                    </div>
+
+                                    <p>
+                                        <img src="{{ asset('assets/img/property/amenities-icon-1.svg') }}" alt="search">
+                                        Amenities
+                                    </p>
+                                    <div class="amenities-box">
+
+
+                                        @foreach ($amenities as $amenity)
+                                            <label class="amenities">
+                                                <input type="checkbox" name="amenities[]" value="{{ $amenity }}">
+                                                {{ $amenity }}
+                                            </label>
+                                        @endforeach
+                                    </div>
+                            </div>
+
+
+                            <input type="hidden" name="furnishing" id="" value="">
+                            <input type="hidden" name="completion" id="" value="">
+                            <input type="hidden" type="checkbox" name="amenities[]" value="">
 
 
 
-                        <button class="property-filter-button" type="submit">Find</button>
+
+
+                            <button type="button" class="done-btn"
+                                onclick="closeDropdown('FiltersDropdown')">Done</button>
+                        </div>
+
                     </div>
                 </div>
             </form>
@@ -247,7 +324,7 @@
                 <div class="grid-left-side">
                     <div class="grid-left-side-fisrt-dev">
                         <p>{{ $property->ad_type }}</p>
-                        <p>6% OFF</p>
+                        {{-- <p>6% OFF</p> --}}
                     </div>
                     <h3 class="grid-left-side-one">{{ $property->property_title }}</h3>
                     <h3 class="grid-left-side-two">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
@@ -258,30 +335,57 @@
                         <div class=" grid-left-side-price">
                             <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
                             <div class="grid-left-side-price-div">
-                                <p class="grid-left-side-price-div-one">830.22 XRP</p>
-                                <p class="grid-left-side-price-div-two">36,238.45 <span>XRP</span></p>
+                                {{-- <p class="grid-left-side-price-div-one">830.22 XRP</p> --}}
+                                <p class="grid-left-side-price-div-two">{{ $property->price }}<span>AED</span></p>
                             </div>
                             <h4 class="grid-left-side-price-div-four">/Month</h4>
                         </div>
+
                         <div class="grid-left-side-price-two">
-                            <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="{{ asset('assets/img/property/green-bed.png') }}"
-                                    alt="bed">
-                                <p>{{ $property->bedrooms ?? 'N/A' }} Bedroom</p>
-                            </div>
-                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
-                            <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="{{ asset('assets/img/property/green-bath.png') }}"
-                                    alt="bath">
-                                <p>{{ $property->no_of_bathroom }} Bathroom</p>
-                            </div>
-                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
-                            <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="{{ asset('assets/img/property/green-size.png') }}"
-                                    alt="size">
-                                <p>{{ number_format($property->unit_builtup_area, 2) }} sq. ft.</p>
-                            </div>
+                            @php
+                                // Build an array of available segments.
+                                $segments = [];
+                            @endphp
+                        
+                            @if (isset($property->bedrooms) && $property->bedrooms > 0)
+                                @php
+                                    $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-bed.png") . '" alt="bed">
+                                            <p>' . $property->bedrooms . ' Bedroom</p>
+                                        </div>';
+                                @endphp
+                            @endif
+                        
+                            @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
+                                @php
+                                    $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-bath.png") . '" alt="bath">
+                                            <p>' . $property->no_of_bathroom . ' Bathroom</p>
+                                        </div>';
+                                @endphp
+                            @endif
+                        
+                            @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
+                                @php
+                                    $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-size.png") . '" alt="size">
+                                            <p>' . number_format($property->unit_builtup_area, 2) . ' sq. ft.</p>
+                                        </div>';
+                                @endphp
+                            @endif
+                        
+                            {{-- Loop through segments and insert pipeline image in-between --}}
+                            @foreach ($segments as $index => $segment)
+                                {!! $segment !!}
+                                @if ($index < count($segments) - 1)
+                                    <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                @endif
+                            @endforeach
                         </div>
+
                     </div>
                     <div class="Converter-div-box">
                         <div style="width: 35%;" class="Converter-div-input">
@@ -888,5 +992,156 @@
                 isHolding = false; // Stop scrolling when leaving the container
             });
         });
-    </script>
+
+
+
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Show/Hide Price Dropdown
+            document.getElementById("priceToggle").addEventListener("click", function() {
+                document.getElementById("priceDropdown").classList.toggle("active");
+            });
+
+            // Selecting Min Price
+            document.querySelectorAll(".price-option[data-min]").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".price-option[data-min]").forEach(btn => btn
+                        .classList.remove("active"));
+                    this.classList.add("active");
+                    document.getElementById("selectedMinPrice").value = this.getAttribute(
+                        "data-min");
+                });
+            });
+
+            // Selecting Max Price
+            document.querySelectorAll(".price-option[data-max]").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".price-option[data-max]").forEach(btn => btn
+                        .classList.remove("active"));
+                    this.classList.add("active");
+                    document.getElementById("selectedMaxPrice").value = this.getAttribute(
+                        "data-max");
+                });
+            });
+        });
+
+        // Close dropdown
+        function closeDropdown(id) {
+            document.getElementById(id).classList.remove("active");
+        }
+
+
+
+
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // Show/Hide Area Dropdown
+            document.getElementById("AreaToggle").addEventListener("click", function() {
+                document.getElementById("areaDropdown").classList.toggle("active-Area");
+            });
+
+            // Selecting Min Area
+            document.querySelectorAll("select[name='min_area']").forEach(select => {
+                select.addEventListener("change", function() {
+                    document.getElementById("selectedMinPrice").value = this.value;
+                });
+            });
+
+            // Selecting Max Area
+            document.querySelectorAll("select[name='max_area']").forEach(select => {
+                select.addEventListener("change", function() {
+                    document.getElementById("selectedMaxPrice").value = this.value;
+                });
+            });
+        });
+
+
+
+        // Close dropdown
+        function closeDropdownArea(id) {
+            document.getElementById(id).classList.remove("active-Area");
+        }
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Show/Hide More Filters Dropdown
+            let filtersToggle = document.getElementById("FiltersToggle");
+            let filtersDropdown = document.getElementById("FiltersDropdown");
+
+            if (filtersToggle && filtersDropdown) {
+                filtersToggle.addEventListener("click", function() {
+                    filtersDropdown.classList.toggle("active");
+                });
+            }
+
+            // Selecting Furnishing
+            document.querySelectorAll(".furnished").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".furnished").forEach(btn => btn.classList.remove(
+                        "active"));
+                    this.classList.add("active");
+                    document.querySelector("input[name='furnishing']").value = this.getAttribute(
+                        "data-value");
+                });
+            });
+
+            // Selecting Completion Status
+            document.querySelectorAll(".Completion").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".Completion").forEach(btn => btn.classList.remove(
+                        "active"));
+                    this.classList.add("active");
+                    document.querySelector("input[name='completion_status']").value = this.getAttribute(
+                        "data-value");
+                });
+            });
+
+            // Selecting Amenities
+            document.querySelectorAll(".amenities input[type='checkbox']").forEach(checkbox => {
+                checkbox.addEventListener("change", function() {
+                    let selectedAmenities = [];
+                    document.querySelectorAll(".amenities input[type='checkbox']:checked").forEach(
+                        checkedBox => {
+                            selectedAmenities.push(checkedBox.value);
+                        });
+                    document.querySelector("input[name='amenities[]']").value = selectedAmenities
+                        .join(",");
+                });
+            });
+
+        });
+
+        // Close dropdown function
+        function closeDropdown(id) {
+            document.getElementById(id).classList.remove("active");
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+    // Amenities Search Filtering
+    document.querySelector("input[name='search-filters']").addEventListener("input", function () {
+        let searchValue = this.value.toLowerCase();
+        document.querySelectorAll(".amenities").forEach(label => {
+            let amenityText = label.textContent.toLowerCase();
+            if (amenityText.includes(searchValue)) {
+                label.style.display = "flex"; 
+            } else {
+                label.style.display = "none"; 
+            }
+        });
+    });
+});
+
+
+</script>
 @endsection

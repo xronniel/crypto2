@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoinLayerController;
+use App\Http\Controllers\HomepageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,7 @@ Route::get('/coinlayer/live', [CoinLayerController::class, 'getLiveRates']);
 Route::get('/coinlayer/historical', [CoinLayerController::class, 'getHistoricalRates']);
 Route::get('/coinlayer/list', [CoinLayerController::class, 'getCryptoList']);
 Route::get('/coinlayer/convert', [CoinLayerController::class, 'convertCurrency']);
+
+Route::get('/featured-listings', [HomepageController::class, 'getFeaturedListingsByCommunity'])->name('featured.listings');
 
 
