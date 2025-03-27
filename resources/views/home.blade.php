@@ -2,8 +2,6 @@
 
 @section('content')
 
-{{$faqs}}
-
     <style>
         .hero.dynamic-bg {
             background-image: url('{{ asset("storage/{$homepageContent->hero_image}") }}');

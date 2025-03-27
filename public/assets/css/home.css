@@ -510,7 +510,7 @@ input[type="text"] {
 .active-filter-link {
     color: #2DD98F !important;
     text-decoration: underline;  
-    text-underline-offset: 24px
+    text-underline-offset: 13px
 }
 
 

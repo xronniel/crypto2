@@ -563,8 +563,10 @@
                 </div>
                 <div class="Floor-Plan-div">
                     <div class="Floor-Plan-div-one">
-                        <img src="{{ asset('assets/img/propertydetails/Floor-Plan-bg.png') }}" alt="floor-plan">
+                        {{-- <img src="{{ asset('assets/img/propertydetails/Floor-Plan-bg.png') }}" alt="floor-plan"> --}}
+                        <img src="{{asset('storage/' . $property->floor_plan ) }}" alt="floor-plan">
                     </div>
+        
                     <div class="Floor-Plan-div-two">
                         <div class="video-container">
                             <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}"
@@ -592,8 +594,8 @@
                                     <p>
                                         In partnership with
                                     </p>
-                                    <img src="{{ asset('assets/img/propertydetails/logo-1.png') }}" alt="logo">
-                                    <a class="pre-approved" href="#">Get pre-approved</a>
+                                    <img src="{{ asset($property->company_logo) }}" alt="logo">
+                                    <a class="pre-approved" href="{{$property->preview_link}}">Get pre-approved</a>
                                 </div>
                             </div>
                         </div>
@@ -767,90 +769,19 @@
                 </div>
                 <div class="faq__blockchain wow fadeInUp" data-wow-duration=".7s" data-wow-delay="200ms">
                     <ul class="accordion_box clearfix">
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                How do I participate in the ICO?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
+                        @foreach($faqs as $faq)
+                            <li class="accordion block">
+                                <div class="acc-btn">
+                                    {{ $faq['question'] }}
+                                    <span class="arrow"><span></span></span>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="accordion block active-block">
-                            <div class="acc-btn">
-                                What is an ICO?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body current">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
+                                <div class="acc_body">
+                                    <div class="content">
+                                        {{ $faq['answer'] }}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                What is the purpose of your project?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
-                                </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                What are the benefits of holding your token?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
-                                </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                How is the token distributed?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
-                                </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                Is there a minimum investment requirement?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
