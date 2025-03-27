@@ -238,18 +238,19 @@
         </div>
         <div class="breadcrumb__icon">
             <div class="icon icon--1">
-                <img class="leftToRight" src="assets/img/icon/bi_01.png" alt="">
+                <img class="leftToRight" src="{{ asset('assets/img/icon/bi_01.png') }}" alt="">
             </div>
             <div class="icon icon--2">
-                <img class="topToBottom" src="assets/img/icon/bi_02.png" alt="">
+                <img class="topToBottom" src="{{ asset('assets/img/icon/bi_02.png') }}" alt="">
             </div>
             <div class="icon icon--3">
-                <img class="topToBottom" src="assets/img/icon/bi_03.png" alt="">
+                <img class="topToBottom" src="{{ asset('assets/img/icon/bi_03.png') }}" alt="">
             </div>
             <div class="icon icon--4">
-                <img class="leftToRight" src="assets/img/icon/bi_04.png" alt="">
+                <img class="leftToRight" src="{{ asset('assets/img/icon/bi_04.png') }}" alt="">
             </div>
         </div>
+        
     </section>
     <!-- breadcrumb end -->
 
@@ -397,14 +398,25 @@
                                         <p>Hattan, Arabian Ranches, Dubai</p>
                                     </div>
                                     <div class="property-two-box-four">
-                                        <img class="img-four" src="assets/img/property/green-bed.png" alt="bed">
-                                        <p>{{ $property->no_of_rooms }}</p>
-                                        <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                        <img class="img-four" src="assets/img/property/green-bath.png" alt="bath">
-                                        <p>{{ $property->no_of_bathroom }}</p>
-                                        <img src="assets/img/property/pipeline.png" alt="pipeline">
-                                        <img class="img-four" src="assets/img/property/green-size.png" alt="size">
-                                        <p>{{ $property->unit_builtup_area }}{{ $property->unit_measure }}</p>
+                                        {{-- Rooms --}}
+                                        @if (isset($property->no_of_rooms) && $property->no_of_rooms > 0)
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-bed.png') }}" alt="bed">
+                                            <p>{{ $property->no_of_rooms }}</p>
+                                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                        @endif
+                                    
+                                        {{-- Bathrooms --}}
+                                        @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-bath.png') }}" alt="bath">
+                                            <p>{{ $property->no_of_bathroom }}</p>
+                                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                        @endif
+                                    
+                                        {{-- Built-Up Area --}}
+                                        @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-size.png') }}" alt="size">
+                                            <p>{{ $property->unit_builtup_area }}{{ $property->unit_measure }}</p>
+                                        @endif
                                     </div>
 
                                     <div class="property-two-box-five">

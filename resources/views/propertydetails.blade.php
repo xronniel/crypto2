@@ -324,7 +324,7 @@
                 <div class="grid-left-side">
                     <div class="grid-left-side-fisrt-dev">
                         <p>{{ $property->ad_type }}</p>
-                        <p>6% OFF</p>
+                        {{-- <p>6% OFF</p> --}}
                     </div>
                     <h3 class="grid-left-side-one">{{ $property->property_title }}</h3>
                     <h3 class="grid-left-side-two">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
@@ -340,25 +340,52 @@
                             </div>
                             <h4 class="grid-left-side-price-div-four">/Month</h4>
                         </div>
+
                         <div class="grid-left-side-price-two">
-                            <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="{{ asset('assets/img/property/green-bed.png') }}"
-                                    alt="bed">
-                                <p>{{ $property->bedrooms ?? 'N/A' }} Bedroom</p>
-                            </div>
-                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
-                            <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="{{ asset('assets/img/property/green-bath.png') }}"
-                                    alt="bath">
-                                <p>{{ $property->no_of_bathroom }} Bathroom</p>
-                            </div>
-                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
-                            <div class="grid-left-side-price-two-one">
-                                <img class="img-four" src="{{ asset('assets/img/property/green-size.png') }}"
-                                    alt="size">
-                                <p>{{ number_format($property->unit_builtup_area, 2) }} sq. ft.</p>
-                            </div>
+                            @php
+                                // Build an array of available segments.
+                                $segments = [];
+                            @endphp
+                        
+                            @if (isset($property->bedrooms) && $property->bedrooms > 0)
+                                @php
+                                    $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-bed.png") . '" alt="bed">
+                                            <p>' . $property->bedrooms . ' Bedroom</p>
+                                        </div>';
+                                @endphp
+                            @endif
+                        
+                            @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
+                                @php
+                                    $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-bath.png") . '" alt="bath">
+                                            <p>' . $property->no_of_bathroom . ' Bathroom</p>
+                                        </div>';
+                                @endphp
+                            @endif
+                        
+                            @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
+                                @php
+                                    $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-size.png") . '" alt="size">
+                                            <p>' . number_format($property->unit_builtup_area, 2) . ' sq. ft.</p>
+                                        </div>';
+                                @endphp
+                            @endif
+                        
+                            {{-- Loop through segments and insert pipeline image in-between --}}
+                            @foreach ($segments as $index => $segment)
+                                {!! $segment !!}
+                                @if ($index < count($segments) - 1)
+                                    <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                @endif
+                            @endforeach
                         </div>
+
                     </div>
                     <div class="Converter-div-box">
                         <div style="width: 35%;" class="Converter-div-input">
