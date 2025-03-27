@@ -112,6 +112,10 @@ border-width: 1px;
     display: none;
 }
 
+.form-select-option{
+    padding: 0 0 0 20px;
+}
+
 option:hover {
     background: #444444 !important; 
     color: #FFFFFF !important; 
