@@ -25,6 +25,6 @@ Route::get('/coinlayer/historical', [CoinLayerController::class, 'getHistoricalR
 Route::get('/coinlayer/list', [CoinLayerController::class, 'getCryptoList']);
 Route::get('/coinlayer/convert', [CoinLayerController::class, 'convertCurrency']);
 
-Route::get('/featured-listings', [HomepageController::class, 'getFeaturedListingsByCommunity'])->name('api.featured.listings');
+Route::get('/featured-listings', [HomepageController::class, 'getFeaturedListingsByCommunity'])->name('featured.listings');
 
 
