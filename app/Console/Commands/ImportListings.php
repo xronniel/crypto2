@@ -28,11 +28,17 @@ class ImportListings extends Command
         $fetchedPropertyRefNos = []; 
 
         foreach ($xml->Listing as $listing) {
+
+            $agentId = $this->updateAgent($listing);
+            $communityId = $this->updateCommunity($listing);
+
             $listingData = Listing::updateOrCreate(
                 [
                     'property_ref_no' => (string)$listing->Property_Ref_No,
                 ],
                 [
+                    'agent_id' => $agentId,
+                    'community_id' => $communityId,
                     'ad_type' => (string)$listing->Ad_Type,
                     'unit_type' => (string)$listing->Unit_Type,
                     'unit_model' => (string)$listing->Unit_Model,
@@ -170,5 +176,48 @@ class ImportListings extends Command
             $listing->delete();
         }
     }
+
+    private function updateAgent($listing)
+    {
+        // Skip if email is empty or null
+        $agentEmail = (string)$listing->Listing_Agent_Email;
+        if (empty($agentEmail)) {
+            return null;
+        }
+
+        // Check if agent with the same email exists
+        $agent = \App\Models\Agent::where('email', $agentEmail)->first();
+
+        // If the agent does not exist, create a new agent
+        if (!$agent) {
+            $agent = \App\Models\Agent::create([
+                'name' => (string)$listing->Listing_Agent,
+                'photo' => (string)$listing->Listing_Agent_Photo,
+                'phone' => (string)$listing->Listing_Agent_Phone,
+                'permit' => (string)$listing->Listing_Agent_Permit,
+                'email' => $agentEmail,
+            ]);
+        }
+
+        return $agent->id;
+    }
+
+    private function updateCommunity($listing)
+{
+    $communityName = (string)$listing->Community;
+
+    // Skip if the community name is empty
+    if (empty($communityName)) {
+        return null;
+    }
+
+    // Check if the community exists, if not create it
+    $community = \App\Models\Community::firstOrCreate(
+        ['name' => $communityName],
+        ['image' => null, 'emirates_id' => null]
+    );
+
+    return $community->id;
+}
 }
 

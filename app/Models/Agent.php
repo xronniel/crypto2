@@ -18,4 +18,8 @@ class Agent extends Model
         'whatsapp',
     ];
 
+    public function listings()
+    {
+        return $this->hasMany(Listing::class);
+    }
 }

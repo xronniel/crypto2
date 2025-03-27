@@ -124,7 +124,7 @@
                     <div class="option2 nav-option">
                         <a href="{{ route('admin.districts.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
-                            Community (Districts)
+                            Districts
                         </a>
                     </div>
                     <div class="option2 nav-option">
@@ -139,12 +139,12 @@
                             Properties (Listings)
                         </a>
                     </div>
-                    {{-- <div class="option2 nav-option">
-                        <a href="{{ route('admin.size-guide.index') }}">
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.communities.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
-                            Size Guide
+                            Communities
                         </a>
-                    </div> --}}
+                    </div>
                     <div class="option2 nav-option">
                         <a href="{{ route('admin.articles.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="articles">
@@ -157,13 +157,13 @@
                             Facilities
                         </a>
                     </div>
-                    {{-- <div class="option2 nav-option">
-                        <a href="{{ route('admin.facilities.index') }}">
+                 <div class="option2 nav-option">
+                        <a href="{{ route('admin.faqs.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/box.png') }}" class="nav-img" alt="articles">
-                            Product
+                            FAQ
                         </a>
                     </div>
-                    <div class="option2 nav-option">
+                       {{-- <div class="option2 nav-option">
                         <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/faq-book.png') }}" class="nav-img"
                                 alt="articles">

@@ -21,11 +21,17 @@
                     <td>{{ $agent->name }}</td>
                     <td>
                         @if($agent->photo)
-                            <img src="{{ asset('storage/'.$agent->photo) }}" alt="{{ $agent->name }}" width="50">
+                            @php
+                                // Check if the agent photo is a URL or stored in storage
+                                $isUrl = filter_var($agent->photo, FILTER_VALIDATE_URL);
+                            @endphp
+                            <img src="{{ $isUrl ? $agent->photo : asset('storage/' . $agent->photo) }}" 
+                                 alt="{{ $agent->name }}" width="50">
                         @else
                             No Image
                         @endif
                     </td>
+                    
                     <td>{{ $agent->phone }}</td>
                     <td>{{ $agent->email }}</td>
                     <td>
