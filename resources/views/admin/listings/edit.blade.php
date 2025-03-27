@@ -224,6 +224,17 @@
         @endif
     </div>
 
+    <div class="form-group">
+        <label for="floor_plan">Floor Plan</label>
+        <input type="file" name="floor_plan" class="form-control" accept="image/*">
+        @if($listing->floor_plan)
+            <div class="mt-2">
+                <img src="{{ asset('storage/' . $listing->floor_plan) }}" alt="Floor Plan" width="100">
+                <p><a href="{{ asset('storage/' . $listing->floor_plan) }}" target="_blank">View Current Floor Plan</a></p>
+            </div>
+        @endif
+    </div>
+
         <div class="form-group">
             <label for="images">Upload Images (Multiple)</label>
             <input type="file" name="images[]" class="form-control" multiple>

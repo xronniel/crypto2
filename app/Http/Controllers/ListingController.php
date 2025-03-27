@@ -75,6 +75,10 @@ class ListingController extends Controller
             $validatedData['brochure'] = $request->file('brochure')->store('uploads/brochures', 'public');
         }
 
+        if ($request->hasFile('floor_plan')) {
+            $validatedData['floor_plan'] = $request->file('floor_plan')->store('uploads/floor_plans', 'public');
+        }
+
         $listing = Listing::create($validatedData);
 
         if ($validatedData['xml'] == 0) {
@@ -163,6 +167,13 @@ class ListingController extends Controller
                 Storage::disk('public')->delete($listing->brochure);
             }
             $validatedData['brochure'] = $request->file('brochure')->store('uploads/brochures', 'public');
+        }
+
+        if ($request->hasFile('floor_plan')) {
+            if ($listing->floor_plan) {
+                Storage::disk('public')->delete($listing->floor_plan);
+            }
+            $validatedData['floor_plan'] = $request->file('floor_plan')->store('uploads/floor_plans', 'public');
         }
     
         // ✅ Update Listing

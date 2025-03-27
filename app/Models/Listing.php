@@ -59,6 +59,7 @@ class Listing extends Model
         'description',
         'location',
         'brochure',
+        'floor_plan',
         'new',
         'verified',
         'superagent',

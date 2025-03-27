@@ -260,6 +260,11 @@
         </div>
 
         <div class="form-group">
+            <label for="floor_plan">Floor Plan</label>
+            <input type="file" name="floor_plan" class="form-control" accept="image/*">
+        </div>
+
+        <div class="form-group">
             <label for="images">Upload Images (Multiple)</label>
             <input type="file" name="images[]" class="form-control" multiple>
         </div>

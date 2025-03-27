@@ -54,6 +54,7 @@ class ListingRequest extends FormRequest
             'web_remarks' => 'nullable|string',
             'description' => 'nullable|string',
             'brochure' => 'nullable|mimes:pdf,jpeg,png,jpg,gif,svg',
+            'floor_plan' => 'nullable|mimes:pdf,jpeg,png,jpg,gif,svg',
             'cheques' => 'nullable|integer|min:1',
             'parking' => 'nullable|integer|min:0',
             'unit_measure' => 'nullable|string|max:255',
