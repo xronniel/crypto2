@@ -168,7 +168,7 @@
 
                                     <div class="beds-baths-options">
 
-                                        <button type="button" class="furnished" data-value="partly furnished">All
+                                        <button type="button" class="furnished" data-value="">All
                                             Furnishing</button>
                                         <button type="button" class="furnished" data-value="furnished">Furnished</button>
                                         <button type="button" class="furnished" data-value="unfurnished">Unfurnished</button>
@@ -178,14 +178,14 @@
                                     </div>
 
                                     <p>
-                                        <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
+                                        <img src="{{ asset('assets/img/property/completion.svg') }}" alt="search">
                                         Completion Status
                                     </p>
 
                                     <div class="beds-baths-options">
 
                                         <button type="button" class="Completion" data-value="">Any</button>
-                                        <button type="button" class="Completion" data-value="off-plan">Off-plan</button>
+                                        <button type="button" class="Completion" data-value="off_plan">Off-plan</button>
                                         <button type="button" class="Completion" data-value="ready">Ready</button>
 
                                     </div>
@@ -973,167 +973,148 @@
 
 
 
+        document.addEventListener("DOMContentLoaded", function() {
+            // Show/Hide Price Dropdown
+            document.getElementById("priceToggle").addEventListener("click", function() {
+                document.getElementById("priceDropdown").classList.toggle("active");
+            });
 
+            // Selecting Min Price
+            document.querySelectorAll(".price-option[data-min]").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".price-option[data-min]").forEach(btn => btn
+                        .classList.remove("active"));
+                    this.classList.add("active");
+                    document.getElementById("selectedMinPrice").value = this.getAttribute(
+                        "data-min");
+                });
+            });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // Show/Hide Price Dropdown
-        document.getElementById("priceToggle").addEventListener("click", function() {
-            document.getElementById("priceDropdown").classList.toggle("active");
-        });
-
-        // Selecting Min Price
-        document.querySelectorAll(".price-option[data-min]").forEach(button => {
-            button.addEventListener("click", function() {
-                document.querySelectorAll(".price-option[data-min]").forEach(btn => btn
-                    .classList.remove("active"));
-                this.classList.add("active");
-                document.getElementById("selectedMinPrice").value = this.getAttribute(
-                    "data-min");
+            // Selecting Max Price
+            document.querySelectorAll(".price-option[data-max]").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".price-option[data-max]").forEach(btn => btn
+                        .classList.remove("active"));
+                    this.classList.add("active");
+                    document.getElementById("selectedMaxPrice").value = this.getAttribute(
+                        "data-max");
+                });
             });
         });
 
-        // Selecting Max Price
-        document.querySelectorAll(".price-option[data-max]").forEach(button => {
-            button.addEventListener("click", function() {
-                document.querySelectorAll(".price-option[data-max]").forEach(btn => btn
-                    .classList.remove("active"));
-                this.classList.add("active");
-                document.getElementById("selectedMaxPrice").value = this.getAttribute(
-                    "data-max");
-            });
-        });
-    });
-
-    // Close dropdown
-    function closeDropdown(id) {
-        document.getElementById(id).classList.remove("active");
-    }
-
-
-
-
-
-
-
-
-
-    document.addEventListener("DOMContentLoaded", function() {
-
-        // Show/Hide Area Dropdown
-        document.getElementById("AreaToggle").addEventListener("click", function() {
-            document.getElementById("areaDropdown").classList.toggle("active-Area");
-        });
-
-        // Selecting Min Area
-        document.querySelectorAll("select[name='min_area']").forEach(select => {
-            select.addEventListener("change", function() {
-                document.getElementById("selectedMinPrice").value = this.value;
-            });
-        });
-
-        // Selecting Max Area
-        document.querySelectorAll("select[name='max_area']").forEach(select => {
-            select.addEventListener("change", function() {
-                document.getElementById("selectedMaxPrice").value = this.value;
-            });
-        });
-    });
-
-
-
-    // Close dropdown
-    function closeDropdownArea(id) {
-        document.getElementById(id).classList.remove("active-Area");
-    }
-
-
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // Show/Hide More Filters Dropdown
-        let filtersToggle = document.getElementById("FiltersToggle");
-        let filtersDropdown = document.getElementById("FiltersDropdown");
-
-        if (filtersToggle && filtersDropdown) {
-            filtersToggle.addEventListener("click", function() {
-                filtersDropdown.classList.toggle("active");
-            });
+        // Close dropdown
+        function closeDropdown(id) {
+            document.getElementById(id).classList.remove("active");
         }
 
-        // Selecting Furnishing
-        document.querySelectorAll(".furnished").forEach(button => {
-            button.addEventListener("click", function() {
-                document.querySelectorAll(".furnished").forEach(btn => btn.classList.remove(
-                    "active"));
-                this.classList.add("active");
-                document.querySelector("input[name='furnishing']").value = this.getAttribute(
-                    "data-value");
+
+
+
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // Show/Hide Area Dropdown
+            document.getElementById("AreaToggle").addEventListener("click", function() {
+                document.getElementById("areaDropdown").classList.toggle("active-Area");
+            });
+
+            // Selecting Min Area
+            document.querySelectorAll("select[name='min_area']").forEach(select => {
+                select.addEventListener("change", function() {
+                    document.getElementById("selectedMinPrice").value = this.value;
+                });
+            });
+
+            // Selecting Max Area
+            document.querySelectorAll("select[name='max_area']").forEach(select => {
+                select.addEventListener("change", function() {
+                    document.getElementById("selectedMaxPrice").value = this.value;
+                });
             });
         });
 
-        // Selecting Completion Status
-        document.querySelectorAll(".Completion").forEach(button => {
-            button.addEventListener("click", function() {
-                document.querySelectorAll(".Completion").forEach(btn => btn.classList.remove(
-                    "active"));
-                this.classList.add("active");
-                document.querySelector("input[name='completion']").value = this.getAttribute(
-                    "data-value");
-            });
-        });
-
-        // Selecting Amenities
-        document.querySelectorAll(".amenities input[type='checkbox']").forEach(checkbox => {
-            checkbox.addEventListener("change", function() {
-                let selectedAmenities = [];
-                document.querySelectorAll(".amenities input[type='checkbox']:checked").forEach(
-                    checkedBox => {
-                        selectedAmenities.push(checkedBox.value);
-                    });
-                document.querySelector("input[name='amenities[]']").value = selectedAmenities
-                    .join(",");
-            });
-        });
-
-    });
-
-    // Close dropdown function
-    function closeDropdown(id) {
-        document.getElementById(id).classList.remove("active");
-    }
 
 
-    document.addEventListener("DOMContentLoaded", function () {
-// Amenities Search Filtering
-document.querySelector("input[name='search-filters']").addEventListener("input", function () {
-    let searchValue = this.value.toLowerCase();
-    document.querySelectorAll(".amenities").forEach(label => {
-        let amenityText = label.textContent.toLowerCase();
-        if (amenityText.includes(searchValue)) {
-            label.style.display = "flex"; 
-        } else {
-            label.style.display = "none"; 
+        // Close dropdown
+        function closeDropdownArea(id) {
+            document.getElementById(id).classList.remove("active-Area");
         }
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Show/Hide More Filters Dropdown
+            let filtersToggle = document.getElementById("FiltersToggle");
+            let filtersDropdown = document.getElementById("FiltersDropdown");
+
+            if (filtersToggle && filtersDropdown) {
+                filtersToggle.addEventListener("click", function() {
+                    filtersDropdown.classList.toggle("active");
+                });
+            }
+
+            // Selecting Furnishing
+            document.querySelectorAll(".furnished").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".furnished").forEach(btn => btn.classList.remove(
+                        "active"));
+                    this.classList.add("active");
+                    document.querySelector("input[name='furnishing']").value = this.getAttribute(
+                        "data-value");
+                });
+            });
+
+            // Selecting Completion Status
+            document.querySelectorAll(".Completion").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.querySelectorAll(".Completion").forEach(btn => btn.classList.remove(
+                        "active"));
+                    this.classList.add("active");
+                    document.querySelector("input[name='completion_status']").value = this.getAttribute(
+                        "data-value");
+                });
+            });
+
+            // Selecting Amenities
+            document.querySelectorAll(".amenities input[type='checkbox']").forEach(checkbox => {
+                checkbox.addEventListener("change", function() {
+                    let selectedAmenities = [];
+                    document.querySelectorAll(".amenities input[type='checkbox']:checked").forEach(
+                        checkedBox => {
+                            selectedAmenities.push(checkedBox.value);
+                        });
+                    document.querySelector("input[name='amenities[]']").value = selectedAmenities
+                        .join(",");
+                });
+            });
+
+        });
+
+        // Close dropdown function
+        function closeDropdown(id) {
+            document.getElementById(id).classList.remove("active");
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+    // Amenities Search Filtering
+    document.querySelector("input[name='search-filters']").addEventListener("input", function () {
+        let searchValue = this.value.toLowerCase();
+        document.querySelectorAll(".amenities").forEach(label => {
+            let amenityText = label.textContent.toLowerCase();
+            if (amenityText.includes(searchValue)) {
+                label.style.display = "flex"; 
+            } else {
+                label.style.display = "none"; 
+            }
+        });
     });
 });
-});
+
 
 </script>
 @endsection

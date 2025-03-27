@@ -169,7 +169,7 @@
 
                                     <div class="beds-baths-options">
 
-                                        <button type="button" class="furnished" data-value="partly furnished">All
+                                        <button type="button" class="furnished" data-value="">All
                                             Furnishing</button>
                                         <button type="button" class="furnished" data-value="furnished">Furnished</button>
                                         <button type="button" class="furnished" data-value="unfurnished">Unfurnished</button>
@@ -179,14 +179,14 @@
                                     </div>
 
                                     <p>
-                                        <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
+                                        <img src="{{ asset('assets/img/property/completion.svg') }}" alt="search">
                                         Completion Status
                                     </p>
 
                                     <div class="beds-baths-options">
 
                                         <button type="button" class="Completion" data-value="">Any</button>
-                                        <button type="button" class="Completion" data-value="off-plan">Off-plan</button>
+                                        <button type="button" class="Completion" data-value="off_plan">Off-plan</button>
                                         <button type="button" class="Completion" data-value="ready">Ready</button>
 
                                     </div>
@@ -615,7 +615,7 @@
                     document.querySelectorAll(".Completion").forEach(btn => btn.classList.remove(
                         "active"));
                     this.classList.add("active");
-                    document.querySelector("input[name='completion']").value = this.getAttribute(
+                    document.querySelector("input[name='completion_status']").value = this.getAttribute(
                         "data-value");
                 });
             });
