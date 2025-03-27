@@ -58,7 +58,7 @@
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="FiltersToggle">More Filters</button>
-                            <input type="hidden" name="" id="" value="">
+                            {{-- <input type="hidden" name="" id="" value=""> --}}
                         </div>
 
                         <button class="property-filter-button" type="submit">Find</button>
@@ -207,8 +207,8 @@
                             </div>
 
 
-                            <input type="hidden" name="furnishing" id="" value="">
-                            <input type="hidden" name="completion" id="" value="">
+                            <input type="hidden" name="furnishing" id="furnishing" value="">
+                            <input type="hidden" name="completion" id="completion" value="">
                             <input type="hidden" type="checkbox" name="amenities[]" value="">
 
 
@@ -560,6 +560,8 @@
             <div class="Description-big-box">
                 <div class="property-details-Description">
                     <span class="active-filter-link">Floor Plan</span>
+
+                   
                 </div>
                 <div class="Floor-Plan-div">
                     <div class="Floor-Plan-div-one">
@@ -568,12 +570,32 @@
                     </div>
         
                     <div class="Floor-Plan-div-two">
+               
                         <div class="video-container">
-                            <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}"
-                                alt="floor-plan"></video>
+                            @if($property->web_tour)
+                            @php
+                                // Extract the video ID from a YouTube Shorts URL
+                                $videoId = Str::afterLast($property->web_tour, '/');
+                            @endphp
+                        
+                                <iframe 
+                                    width="100%" 
+                                    height="100%" 
+                                    src="https://www.youtube.com/embed/{{ $videoId }}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                     
+                        @else
+                            <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}" controls alt="floor-plan"></video>
                             <button id="playButton" class="play-button">
                                 <img src="{{ asset('assets/img/propertydetails/play-icon.png') }}" alt="floor-plan">
                                 Watch video tour</button>
+                        @endif
+
+
+
                         </div>
                         <div class="Floor-Plan-div-three">
                             <div class="Floor-Plan-div-three-box">
@@ -581,13 +603,13 @@
                                     <p>
                                         Rent this property from just
                                     </p>
-                                    <h3>83338.37
+                                    {{-- <h3>83338.37
                                         <span>USDT /month</span>
                                     </h3>
                                     <h4>
                                         59, 383 AED
                                     </h4>
-                                    <h4>Fixed rates from: <span>3.75%</span></h4>
+                                    <h4>Fixed rates from: <span>3.75%</span></h4> --}}
                                 </div>
                                 <div class="Floor-Plan-div-three-line"></div>
                                 <div class="Floor-Plan-div-three-box-two">
@@ -611,7 +633,6 @@
             <div style="margin: 20px 0;">
                 <div class="property-details-Description">
                     <span class="active-filter-link">Location</span>
-                    {{-- {{ $property->latitude }}, {{ $property->longitude }} --}}
                 </div>
 
 
@@ -710,7 +731,7 @@
     <div style="background: #0B0F28;
     padding: 1px 0;
     " class="bg_img top-center pos-rel pb-145"
-        data-background="assets/img/bg/team-bg.png">
+      data-background="{{ asset('assets/img/bg/team-bg.png') }}">
 
 
 

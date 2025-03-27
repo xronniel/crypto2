@@ -627,7 +627,7 @@
     <!-- feature section end -->
 
     <!-- team & faq section start -->
-    <div class="bg_img top-center pos-rel pb-145" data-background="assets/img/bg/team-bg.png">
+    <div class="bg_img top-center pos-rel pb-145" data-background="{{ asset('assets/img/bg/team-bg.png') }}">
         <!-- team section start -->
         <section class="team pt-140">
             <div class="container">
