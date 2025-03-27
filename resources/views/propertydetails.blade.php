@@ -58,7 +58,7 @@
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="FiltersToggle">More Filters</button>
-                            <input type="hidden" name="" id="" value="">
+                            {{-- <input type="hidden" name="" id="" value=""> --}}
                         </div>
 
                         <button class="property-filter-button" type="submit">Find</button>
@@ -207,8 +207,8 @@
                             </div>
 
 
-                            <input type="hidden" name="furnishing" id="" value="">
-                            <input type="hidden" name="completion" id="" value="">
+                            <input type="hidden" name="furnishing" id="furnishing" value="">
+                            <input type="hidden" name="completion" id="completion" value="">
                             <input type="hidden" type="checkbox" name="amenities[]" value="">
 
 
@@ -560,18 +560,42 @@
             <div class="Description-big-box">
                 <div class="property-details-Description">
                     <span class="active-filter-link">Floor Plan</span>
+
+                   
                 </div>
                 <div class="Floor-Plan-div">
                     <div class="Floor-Plan-div-one">
-                        <img src="{{ asset('assets/img/propertydetails/Floor-Plan-bg.png') }}" alt="floor-plan">
+                        {{-- <img src="{{ asset('assets/img/propertydetails/Floor-Plan-bg.png') }}" alt="floor-plan"> --}}
+                        <img src="{{asset('storage/' . $property->floor_plan ) }}" alt="floor-plan">
                     </div>
+        
                     <div class="Floor-Plan-div-two">
+               
                         <div class="video-container">
-                            <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}"
-                                alt="floor-plan"></video>
+                            @if($property->web_tour)
+                            @php
+                                // Extract the video ID from a YouTube Shorts URL
+                                $videoId = Str::afterLast($property->web_tour, '/');
+                            @endphp
+                        
+                                <iframe 
+                                    width="100%" 
+                                    height="100%" 
+                                    src="https://www.youtube.com/embed/{{ $videoId }}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                     
+                        @else
+                            <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}" controls alt="floor-plan"></video>
                             <button id="playButton" class="play-button">
                                 <img src="{{ asset('assets/img/propertydetails/play-icon.png') }}" alt="floor-plan">
                                 Watch video tour</button>
+                        @endif
+
+
+
                         </div>
                         <div class="Floor-Plan-div-three">
                             <div class="Floor-Plan-div-three-box">
@@ -579,21 +603,21 @@
                                     <p>
                                         Rent this property from just
                                     </p>
-                                    <h3>83338.37
+                                    {{-- <h3>83338.37
                                         <span>USDT /month</span>
                                     </h3>
                                     <h4>
                                         59, 383 AED
                                     </h4>
-                                    <h4>Fixed rates from: <span>3.75%</span></h4>
+                                    <h4>Fixed rates from: <span>3.75%</span></h4> --}}
                                 </div>
                                 <div class="Floor-Plan-div-three-line"></div>
                                 <div class="Floor-Plan-div-three-box-two">
                                     <p>
                                         In partnership with
                                     </p>
-                                    <img src="{{ asset('assets/img/propertydetails/logo-1.png') }}" alt="logo">
-                                    <a class="pre-approved" href="#">Get pre-approved</a>
+                                    <img src="{{ asset($property->company_logo) }}" alt="logo">
+                                    <a class="pre-approved" href="{{$property->preview_link}}">Get pre-approved</a>
                                 </div>
                             </div>
                         </div>
@@ -609,7 +633,6 @@
             <div style="margin: 20px 0;">
                 <div class="property-details-Description">
                     <span class="active-filter-link">Location</span>
-                    {{-- {{ $property->latitude }}, {{ $property->longitude }} --}}
                 </div>
 
 
@@ -708,7 +731,7 @@
     <div style="background: #0B0F28;
     padding: 1px 0;
     " class="bg_img top-center pos-rel pb-145"
-        data-background="assets/img/bg/team-bg.png">
+      data-background="{{ asset('assets/img/bg/team-bg.png') }}">
 
 
 
@@ -767,90 +790,19 @@
                 </div>
                 <div class="faq__blockchain wow fadeInUp" data-wow-duration=".7s" data-wow-delay="200ms">
                     <ul class="accordion_box clearfix">
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                How do I participate in the ICO?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
+                        @foreach($faqs as $faq)
+                            <li class="accordion block">
+                                <div class="acc-btn">
+                                    {{ $faq['question'] }}
+                                    <span class="arrow"><span></span></span>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="accordion block active-block">
-                            <div class="acc-btn">
-                                What is an ICO?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body current">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
+                                <div class="acc_body">
+                                    <div class="content">
+                                        {{ $faq['answer'] }}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                What is the purpose of your project?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
-                                </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                What are the benefits of holding your token?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
-                                </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                How is the token distributed?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
-                                </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                Is there a minimum investment requirement?
-                                <span class="arrow"><span></span></span>
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    An ICO, or Initial Coin Offering, is a fundraising method used by cryptocurrency and
-                                    blockchain projects to raise capital by issuing tokens to investors. In an ICO,
-                                    investors purchase these tokens with cryptocurrencies or fiat currencies in exchange for
-                                    a stake to its products or services.
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

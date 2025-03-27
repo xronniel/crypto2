@@ -112,6 +112,10 @@ border-width: 1px;
     display: none;
 }
 
+.form-select-option{
+    padding: 0 0 0 20px;
+}
+
 option:hover {
     background: #444444 !important; 
     color: #FFFFFF !important; 
@@ -506,7 +510,7 @@ input[type="text"] {
 .active-filter-link {
     color: #2DD98F !important;
     text-decoration: underline;  
-    text-underline-offset: 24px
+    text-underline-offset: 13px
 }
 
 
