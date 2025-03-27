@@ -968,7 +968,7 @@
                 fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}`)
                     .then(response => response.json())
                     .then(responseData => {
-                        console.log("API Response:", responseData.data.data[0].images[0].url); 
+                        // console.log("API Response:", responseData.data.data[0].images[0].url); 
                         
                         let propertiesContainer = document.getElementById("featured-properties");
                         propertiesContainer.innerHTML = "";
