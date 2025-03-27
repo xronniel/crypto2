@@ -44,7 +44,12 @@
 
                 <div class="form-group">
                     <label for="community">Community</label>
-                    <input type="text" name="community" class="form-control" >
+                    <select name="community_id" class="form-control">
+                        <option value="">Select Community</option>
+                        @foreach($communities as $community)
+                            <option value="{{ $community->id }}">{{ $community->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -54,22 +59,27 @@
 
                 <div class="form-group">
                     <label for="listing_agent">Listing Agent</label>
-                    <input type="text" name="listing_agent" class="form-control" >
+                    <select name="agent_id" class="form-control">
+                        <option value="">Select Listing Agent</option>
+                        @foreach($agents as $agent)
+                            <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="listing_agent_phone">Listing Agent Phone</label>
                     <input type="text" name="listing_agent_phone" class="form-control" >
-                </div>
+                </div> --}}
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="listing_agent_email">Listing Agent Email</label>
                     <input type="email" name="listing_agent_email" class="form-control" >
-                </div>
-                <div class="form-group">
+                </div> --}}
+                {{-- <div class="form-group">
                     <label for="listing_agent_photo">Listing Agent Photo</label>
                     <input type="file" name="listing_agent_photo" class="form-control" accept="image/*">
-                </div>
+                </div> --}}
                 
                 <!-- Company Logo -->
                 <div class="form-group">
@@ -87,10 +97,10 @@
                     <input type="number" name="cheques" class="form-control" >
                 </div>
                 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="listing_agent_permit">Listing Agent Permit</label>
                     <input type="text" name="listing_agent_permit" class="form-control" >
-                </div>
+                </div> --}}
                 
                 <div class="form-group">
                     <label for="unit_measure">Unit Measure (e.g., Sq.Ft.)</label>

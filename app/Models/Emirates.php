@@ -18,4 +18,9 @@ class Emirates extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function communities()
+    {
+        return $this->hasMany(Community::class, 'emirates_id');
+    }
 }

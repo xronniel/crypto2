@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ListingRequest;
+use App\Models\Agent;
+use App\Models\Community;
 use App\Models\Developer;
 use App\Models\District;
 use App\Models\Facility;
@@ -22,7 +24,9 @@ class ListingController extends Controller
         $facilities = Facility::all();
         $districts = District::all();
         $developers = Developer::all();
-        return view('admin.listings.create', compact('facilities', 'districts', 'developers'));
+        $agents = Agent::all(); 
+        $communities = Community::all();
+        return view('admin.listings.create', compact('facilities', 'districts', 'developers', 'agents', 'communities'));
     }
 
     public function store(ListingRequest $request)

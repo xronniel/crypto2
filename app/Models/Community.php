@@ -5,21 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Agent extends Model
+class Community extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'photo',
-        'phone',
-        'permit',
-        'email',
-        'whatsapp',
+        'image',
+        'emirates_id',
     ];
+
+    public function emirate()
+    {
+        return $this->belongsTo(Emirates::class, 'emirates_id');
+    }
 
     public function listings()
     {
-        return $this->hasMany(Listing::class);
+        return $this->hasMany(Listing::class, 'community_id');
     }
 }

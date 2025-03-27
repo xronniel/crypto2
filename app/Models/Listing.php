@@ -66,6 +66,8 @@ class Listing extends Model
         'type',
         'developer_id',
         'district_id',
+        'agent_id',
+        'community_id',
     ];
 
 
@@ -87,6 +89,16 @@ class Listing extends Model
     public function district()
     {
         return $this->belongsTo(District::class);
+    }
+
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class, 'agent_id');
+    }
+
+    public function community()
+    {
+        return $this->belongsTo(Community::class, 'community_id');
     }
 
 }
