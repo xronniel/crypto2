@@ -162,7 +162,7 @@ class PropertyController extends Controller
             ->distinct()
             ->pluck('name');
    
-        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request'));
+        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities'));
     }
 
     public function show($property_ref_no)
