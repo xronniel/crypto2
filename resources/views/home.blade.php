@@ -399,11 +399,22 @@
             <div id="communities-span" class="token-wrap-location-filter">
                 @foreach($communities as $communityName)
                     <span 
-                        class="{{ $communityName === $community ? 'active-filter-link' : '' }}">
+                        class="community-tab {{ $communityName === $community ? 'active-filter-link' : '' }}"
+                        data-community="{{ $communityName }}">
                         {{ $communityName }}
                     </span>
                 @endforeach
             </div>
+            
+            <!-- Section where new properties will be displayed -->
+            <div id="featured-properties" class="token-wrap">
+                @foreach($featuredListings as $listing)
+                    <div class="featured-property">
+                        <h1>{{ $listing }}</h1>
+                    </div>
+                @endforeach
+            </div>
+            
             <div  class="token-wrap-location-filter-two">
                 Discover the latest off-plan properties and be informed.
             </div>
@@ -901,6 +912,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".community-tab").forEach(tab => {
+        tab.addEventListener("click", function () {
+            let communityName = this.getAttribute("data-community");
+
+            if (!communityName) {
+                console.error("Community is undefined or missing.");
+                return;
+            }
+
+            document.querySelectorAll(".community-tab").forEach(el => el.classList.remove("active-filter-link"));
+            this.classList.add("active-filter-link");
+
+            fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=1`)
+                .then(response => response.json())
+                .then(responseData => {
+                    console.log("API Response:", responseData); // Debugging step
+
+                    let propertiesContainer = document.getElementById("featured-properties");
+                    propertiesContainer.innerHTML = ""; // Clear previous listings
+
+                    // Ensure data exists and has the expected structure
+                    if (!responseData.success || !responseData.data || !Array.isArray(responseData.data.featuredListings)) {
+                        console.error("Invalid API response format:", responseData);
+                        return;
+                    }
+
+                    responseData.data.featuredListings.forEach(listing => {
+                        propertiesContainer.innerHTML += `
+                            <div class="featured-property">
+                                <h1>${listing}</h1>
+               
+                            </div>
+                        `;
+                    });
+                })
+                .catch(error => console.error("Error fetching data:", error));
+        });
+    });
+});
 
 
 
