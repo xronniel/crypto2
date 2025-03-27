@@ -22,11 +22,13 @@ class ListingRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'agent_id' => 'nullable|exists:agents,id',
+            'community_id' => 'nullable|exists:communities,id',
             'property_title' => 'required|string|max:255',
             'ad_type' => 'required|string|max:255',
-            'community' => 'required|string|max:255',
+            'community' => 'nullable|string|max:255',
             'price' => 'required|numeric|min:0',
-            'listing_agent' => 'required|string|max:255',
+            'listing_agent' => 'nullable|string|max:255',
             'listing_agent_phone' => 'nullable|string|max:255',
             'listing_agent_email' => 'nullable|email|max:255',
             'listing_agent_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',

@@ -124,7 +124,7 @@
                     <div class="option2 nav-option">
                         <a href="{{ route('admin.districts.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
-                            Community (Districts)
+                            Districts
                         </a>
                     </div>
                     <div class="option2 nav-option">
@@ -139,12 +139,12 @@
                             Properties (Listings)
                         </a>
                     </div>
-                    {{-- <div class="option2 nav-option">
-                        <a href="{{ route('admin.size-guide.index') }}">
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.communities.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
-                            Size Guide
+                            Communities
                         </a>
-                    </div> --}}
+                    </div>
                     <div class="option2 nav-option">
                         <a href="{{ route('admin.articles.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="articles">

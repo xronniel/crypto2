@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\DistrictController;
@@ -44,6 +45,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('emirates', EmiratesController::class);
     Route::resource('countries', CountryController::class);
     Route::resource('facilities', FacilityController::class);
+    Route::resource('communities', CommunityController::class);
 });
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
