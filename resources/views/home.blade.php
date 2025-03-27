@@ -841,24 +841,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    function loadListings(communityName) {
+    let currentPage = 1;
+    let totalPages = 1; // This will be updated dynamically.
+
+    function loadListings(communityName, page = 1) {
         if (!communityName) {
             console.error("Community is undefined or missing.");
             return;
         }
 
-        fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=1`)
+        fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}`)
             .then(response => response.json())
             .then(responseData => {
-                console.log("API Response:", responseData.data.data); // Debugging step
+                console.log("API Response:", responseData.data); // Debugging step
 
                 let propertiesContainer = document.getElementById("featured-properties");
                 propertiesContainer.innerHTML = ""; // Clear previous listings
 
                 let listings = responseData.data?.data || [];
-                let listingsCount = listings.length;
+                totalPages = responseData.data?.last_page || 1;
+                currentPage = responseData.data?.current_page || 1;
 
-                if (listingsCount === 0) {
+                if (listings.length === 0) {
                     propertiesContainer.innerHTML = "<p>No properties found.</p>";
                     return;
                 }
@@ -880,7 +884,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="row mt-none-30">
                 `;
 
-                if (listingsCount >= 1) {
+                if (listings.length >= 1) {
                     cardsHTML += `
                         <div class="col-xl-5 col-lg-6 mt-30">
                             <div style="background-image: url('${agentPhoto1}');" class="token-distribut">
@@ -904,7 +908,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     `;
                 }
 
-                if (listingsCount >= 2) {
+                if (listings.length >= 2) {
                     cardsHTML += `
                         <div class="col-xl-7 col-lg-6 mt-30">
                             <div style="background-image: url('${agentPhoto2}');" class="token-sale img-cards-Featured">
@@ -927,7 +931,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     `;
                 }
 
-                if (listingsCount === 3) {
+                if (listings.length === 3) {
                     cardsHTML += `
                             <div style="background-image: url('${agentPhoto3}');" class="token-sale img-cards-Featured model">
                                 <div class="token-distribut-location-div">
@@ -953,9 +957,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 cardsHTML += `
                         </div>
                     </div>
+                    <div class="pagination">
+                        <button id="prevPage" class="pagination-btn" ${currentPage === 1 ? "disabled" : ""}>Previous</button>
+                        <span>Page ${currentPage} of ${totalPages}</span>
+                        <button id="nextPage" class="pagination-btn" ${currentPage === totalPages ? "disabled" : ""}>Next</button>
+                    </div>
                 `;
 
                 propertiesContainer.innerHTML = cardsHTML;
+
+                document.getElementById("prevPage").addEventListener("click", function () {
+                    if (currentPage > 1) {
+                        loadListings(communityName, currentPage - 1);
+                    }
+                });
+
+                document.getElementById("nextPage").addEventListener("click", function () {
+                    if (currentPage < totalPages) {
+                        loadListings(communityName, currentPage + 1);
+                    }
+                });
             })
             .catch(error => console.error("Error fetching data:", error));
     }
