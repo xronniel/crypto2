@@ -968,30 +968,31 @@
                 fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}`)
                     .then(response => response.json())
                     .then(responseData => {
-                        // console.log("API Response:", responseData.data); 
-
+                        console.log("API Response:", responseData.data.data[0].images[0].url); 
+                        
                         let propertiesContainer = document.getElementById("featured-properties");
                         propertiesContainer.innerHTML = "";
-
+                        
                         let listings = responseData.data?.data || [];
                         totalPages = responseData.data?.last_page || 1;
                         currentPage = responseData.data?.current_page || 1;
-
+                        
                         if (listings.length === 0) {
                             propertiesContainer.innerHTML = "<p>No properties found.</p>";
                             return;
                         }
-
+                        
                         let listing1 = listings[0] || {};
                         let listing2 = listings[1] || {};
                         let listing3 = listings[2] || {};
 
-                        let agentPhoto1 = listing1.listing_agent_photo || "default-image.jpg";
-                        let agentPhoto2 = listing2.listing_agent_photo || "default-image.jpg";
-                        let agentPhoto3 = listing3.listing_agent_photo || "default-image.jpg";
+
+                        let agentPhoto1 = listing1.images[0].url || "default-image.jpg";
+                        let agentPhoto2 = listing2.images[0].url || "default-image.jpg";
+                        let agentPhoto3 = listing3.images[0].url || "default-image.jpg";
 
                         let whatsappLink1 = listing1.listing_agent_whatsapp ?
-                            `href="${listing1.listing_agent_whatsapp}"` : "";
+                            `href="${listing1.listing_agent_whatsapp} h"` : "";
                         let whatsappLink2 = listing2.listing_agent_whatsapp ?
                             `href="${listing2.listing_agent_whatsapp}"` : "";
                         let whatsappLink3 = listing3.listing_agent_whatsapp ?
