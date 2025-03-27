@@ -157,13 +157,13 @@
                             Facilities
                         </a>
                     </div>
-                    {{-- <div class="option2 nav-option">
-                        <a href="{{ route('admin.facilities.index') }}">
+                 <div class="option2 nav-option">
+                        <a href="{{ route('admin.faqs.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/box.png') }}" class="nav-img" alt="articles">
-                            Product
+                            FAQ
                         </a>
                     </div>
-                    <div class="option2 nav-option">
+                       {{-- <div class="option2 nav-option">
                         <a href="">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/faq-book.png') }}" class="nav-img"
                                 alt="articles">
