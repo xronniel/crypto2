@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Facility;
+use App\Models\Faq;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class PropertyController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('emirate', 'LIKE', "%{$search}%")
                   ->orWhere('community', 'LIKE', "%{$search}%")
-                  ->orWhere('property_name', 'LIKE', "%{$search}%");
+                  ->orWhere('property_name', 'LIKE', "%{$search}%")
+                  ->orWhere('property_title', 'LIKE', "%{$search}%");;
             });
         }
 
@@ -207,6 +209,8 @@ class PropertyController extends Controller
             ->distinct()
             ->pluck('name');
 
-        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities'));
+            $faqs = Faq::all();
+          
+        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs'));
     }
 }
