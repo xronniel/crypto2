@@ -406,86 +406,18 @@
                 @endforeach
             </div>
             
-            <!-- Section where new properties will be displayed -->
-            <div id="featured-properties" class="token-wrap">
-                @foreach($featuredListings as $listing)
-                    <div class="featured-property">
-                        <h1>{{ $listing }}</h1>
-                    </div>
-                @endforeach
-            </div>
+        
             
             <div  class="token-wrap-location-filter-two">
                 Discover the latest off-plan properties and be informed.
             </div>
-            <div class="token-wrap">
-                <div class="row mt-none-30">
-                    <div class="col-xl-5 col-lg-6 mt-30 ">
-                        <div 
-                        style="background-image: url('assets/img/home/street.jpeg');"
-                        class="token-distribut">
-                            <div class="token-distribut-location-div">
-                                <h1 class="token-distribut-location-h1">City Walk Phase 3 By Meraas</h1>
-                                <div class="token-distribut-location-span">
-                                    <i class="fal fa-map-marker-alt"></i>
-                                    <span>New York, USA</span>
-                                </div>
-                                <div class="token-distribut-location-span-two"> 
-                                    <span class="token-distribut-location-span-two-one">Launch price:</span>
-                                    <span class="token-distribut-location-span-two-two">11M AED</span>
-                                </div>
 
-                                <a class="token-location-button" href="#">
-                                    <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
-                                    <span>WhatsApp</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-7 col-lg-6 mt-30">
-                        <div 
-                        style="background-image: url('assets/img/home/street.jpeg');"
-                        class="token-sale">
-                            <div class="token-distribut-location-div">
-                                <h1 class="token-distribut-location-h1">City Walk Phase 3 By Meraas</h1>
-                                <div class="token-distribut-location-span">
-                                    <i class="fal fa-map-marker-alt"></i>
-                                    <span>New York, USA</span>
-                                </div>
-                                <div class="token-distribut-location-span-two"> 
-                                    <span class="token-distribut-location-span-two-one">Launch price:</span>
-                                    <span class="token-distribut-location-span-two-two">11M AED</span>
-                                </div>
+    <!-- Section where new properties will be displayed -->
+    <div id="featured-properties">
+        show the loop of data .data 
+        </div>
 
-                                <a class="token-location-button" href="#">
-                                    <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
-                                    <span>WhatsApp</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div 
-                        style="background-image: url('assets/img/home/street.jpeg');"
-                        class="token-sale model">
-                            <div class="token-distribut-location-div">
-                                <h1 class="token-distribut-location-h1">City Walk Phase 3 By Meraas</h1>
-                                <div class="token-distribut-location-span">
-                                    <i class="fal fa-map-marker-alt"></i>
-                                    <span>New York, USA</span>
-                                </div>
-                                <div class="token-distribut-location-span-two"> 
-                                    <span class="token-distribut-location-span-two-one">Launch price:</span>
-                                    <span class="token-distribut-location-span-two-two">11M AED</span>
-                                </div>
-
-                                <a class="token-location-button" href="#">
-                                    <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
-                                    <span>WhatsApp</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+         
         </div>
         <div class="toke-shape">
             <div class="shape--one">
@@ -909,10 +841,120 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
+    // Separate function to load listings for a given community
+    function loadListings(communityName) {
+        if (!communityName) {
+            console.error("Community is undefined or missing.");
+            return;
+        }
+
+        // Fetch the filtered listings
+        fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=1`)
+            .then(response => response.json())
+            .then(responseData => {
+                console.log("API Response:", responseData.data.data); // Debugging step
+
+                let propertiesContainer = document.getElementById("featured-properties");
+                propertiesContainer.innerHTML = ""; // Clear previous listings
+
+                if (!responseData.data || responseData.data.data.length < 3) {
+                    propertiesContainer.innerHTML = "<p>Not enough properties found.</p>";
+                    return;
+                }
+
+                // Get the first three listings only
+                let listing1 = responseData.data.data[0];
+                let listing2 = responseData.data.data[1];
+                let listing3 = responseData.data.data[2];
+
+                let agentPhoto1 = listing1?.listing_agent_photo || "default-image.jpg";
+                let agentPhoto2 = listing2?.listing_agent_photo || "default-image.jpg";
+                let agentPhoto3 = listing3?.listing_agent_photo || "default-image.jpg";
+
+                let whatsappLink1 = listing1?.listing_agent_whatsapp ? `href="${listing1.listing_agent_whatsapp}"` : "";
+                let whatsappLink2 = listing2?.listing_agent_whatsapp ? `href="${listing2.listing_agent_whatsapp}"` : "";
+                let whatsappLink3 = listing3?.listing_agent_whatsapp ? `href="${listing3.listing_agent_whatsapp}"` : "";
+
+                // Manually assign listings to each card as per your existing HTML
+                propertiesContainer.innerHTML = `
+                    <div class="token-wrap">
+                        <div class="row mt-none-30">
+                            <!-- First card (index 1) -->
+                            <div class="col-xl-5 col-lg-6 mt-30">
+                                <div style="background-image: url('${agentPhoto1}');" class="token-distribut">
+                                    <div class="token-distribut-location-div">
+                                        <h1 class="token-distribut-location-h1">${listing1.community}</h1>
+                                        <div class="token-distribut-location-span">
+                                            <i class="fal fa-map-marker-alt"></i>
+                                            <span>${listing1.location}</span>
+                                        </div>
+                                        <div class="token-distribut-location-span-two">
+                                            <span class="token-distribut-location-span-two-one">Launch price:</span>
+                                            <span class="token-distribut-location-span-two-two">${listing1.price || "N/A"} AED</span>
+                                        </div>
+                                        <a class="token-location-button" ${whatsappLink1}>
+                                            <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
+                                            <span>WhatsApp</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Second card (index 2) -->
+                            <div class="col-xl-7 col-lg-6 mt-30">
+                                <div style="background-image: url('${agentPhoto2}');" class="token-sale img-cards-Featured">
+                                    <div class="token-distribut-location-div">
+                                        <h1 class="token-distribut-location-h1">${listing2.community}</h1>
+                                        <div class="token-distribut-location-span">
+                                            <i class="fal fa-map-marker-alt"></i>
+                                            <span>${listing2.location}</span>
+                                        </div>
+                                        <div class="token-distribut-location-span-two">
+                                            <span class="token-distribut-location-span-two-one">Launch price:</span>
+                                            <span class="token-distribut-location-span-two-two">${listing2.price || "N/A"} AED</span>
+                                        </div>
+                                        <a class="token-location-button" ${whatsappLink2}>
+                                            <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
+                                            <span>WhatsApp</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Third card (index 3) -->
+                                <div style="background-image: url('${agentPhoto3}');" class="token-sale img-cards-Featured model">
+                                    <div class="token-distribut-location-div">
+                                        <h1 class="token-distribut-location-h1">${listing3.community}</h1>
+                                        <div class="token-distribut-location-span">
+                                            <i class="fal fa-map-marker-alt"></i>
+                                            <span>${listing3.location}</span>
+                                        </div>
+                                        <div class="token-distribut-location-span-two">
+                                            <span class="token-distribut-location-span-two-one">Launch price:</span>
+                                            <span class="token-distribut-location-span-two-two">${listing3.price || "N/A"} AED</span>
+                                        </div>
+                                        <a class="token-location-button" ${whatsappLink3}>
+                                            <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
+                                            <span>WhatsApp</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            })
+            .catch(error => console.error("Error fetching data:", error));
+    }
+
+    // On page load, call the AJAX using the default value from back end (active tab)
+    let defaultTab = document.querySelector(".community-tab.active-filter-link");
+    if (defaultTab) {
+        let defaultCommunity = defaultTab.getAttribute("data-community");
+        loadListings(defaultCommunity);
+    }
+
+    // Set up click event for all community tabs
     document.querySelectorAll(".community-tab").forEach(tab => {
         tab.addEventListener("click", function () {
             let communityName = this.getAttribute("data-community");
@@ -922,38 +964,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            // Remove active class from all tabs and add it to the clicked one
             document.querySelectorAll(".community-tab").forEach(el => el.classList.remove("active-filter-link"));
             this.classList.add("active-filter-link");
 
-            fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=1`)
-                .then(response => response.json())
-                .then(responseData => {
-                    console.log("API Response:", responseData); // Debugging step
-
-                    let propertiesContainer = document.getElementById("featured-properties");
-                    propertiesContainer.innerHTML = ""; // Clear previous listings
-
-                    // Ensure data exists and has the expected structure
-                    if (!responseData.success || !responseData.data || !Array.isArray(responseData.data.featuredListings)) {
-                        console.error("Invalid API response format:", responseData);
-                        return;
-                    }
-
-                    responseData.data.featuredListings.forEach(listing => {
-                        propertiesContainer.innerHTML += `
-                            <div class="featured-property">
-                                <h1>${listing}</h1>
-               
-                            </div>
-                        `;
-                    });
-                })
-                .catch(error => console.error("Error fetching data:", error));
+            // Call the AJAX function with the selected community
+            loadListings(communityName);
         });
     });
 });
-
-
 
 
         </script>

@@ -621,3 +621,11 @@ padding: 10px 0;
 
 
 }
+
+
+
+.img-cards-Featured {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
