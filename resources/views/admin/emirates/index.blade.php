@@ -34,6 +34,8 @@
             @endforeach
         </tbody>
     </table>
-    {{ $emirates->links() }}
+    <div class="d-flex justify-content-center mt-4">
+        {{ $emirates->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection

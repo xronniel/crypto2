@@ -51,7 +51,7 @@
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4">
-        {{ $articleList->links() }}
+        {{ $articleList->links('pagination::bootstrap-4') }}
     </div>
 </div>
 @endsection

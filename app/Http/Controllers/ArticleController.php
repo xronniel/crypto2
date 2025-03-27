@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleGallery;
+use App\Models\Country;
+use App\Models\Emirates;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -17,7 +19,9 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return view('admin.articles.create');
+        $emirates = Emirates::all();
+        $countries = Country::all();
+        return view('admin.articles.create', compact('emirates', 'countries'));
     }
 
     public function store(ArticleRequest $request)
@@ -62,8 +66,10 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
+        $emirates = Emirates::all();
+        $countries = Country::all();
         $article->load('galleries');
-        return view('admin.articles.edit', compact('article'));
+        return view('admin.articles.edit', compact('article', 'emirates', 'countries'));
     }
 
     public function update(ArticleRequest $request, Article $article)

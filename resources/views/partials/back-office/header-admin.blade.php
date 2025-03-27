@@ -152,13 +152,13 @@
                         </a>
                     </div>
                     <div class="option2 nav-option">
-                        <a href="">
+                        <a href="{{ route('admin.facilities.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blogs.png') }}" class="nav-img" alt="articles">
-                            Blogs
+                            Facilities
                         </a>
                     </div>
-                    <div class="option2 nav-option">
-                        <a href="">
+                    {{-- <div class="option2 nav-option">
+                        <a href="{{ route('admin.facilities.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/box.png') }}" class="nav-img" alt="articles">
                             Product
                         </a>
@@ -187,7 +187,7 @@
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/tracking.png') }}" class="nav-img" alt="articles">
                             Track Users
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </nav>
         </div>

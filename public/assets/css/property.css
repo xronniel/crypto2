@@ -188,6 +188,9 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
+    color: #000000;
+
+    width: 140px;
 }
 
 .property-filter-box {
@@ -198,6 +201,7 @@
 .property-filter-two {
     display: flex;
     gap: 13px;
+    position: relative;
 }
 
 .property-filter-button {
@@ -639,4 +643,94 @@ border-radius: 4px;
 
 
 
+}
+
+
+
+
+
+.dropdown-dialog {
+    position: absolute;
+    width: 400px;
+    background: #000;
+    border-radius: 5px;
+    border: 1px solid #C1C7DE;
+    padding: 20px;
+    display: none;
+    z-index: 100;
+    top: 60px;
+    right: 100px;
+}
+
+.dropdown-dialog.active {
+    display: block;
+}
+.dropdown-dialog.active-Area {
+    display: block;
+}
+
+.dropdown-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.dropdown-options button {
+    background: transparent;
+    border: 1px solid #C1C7DE;
+    color: #EBF7FD;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown-options button:hover,
+.dropdown-options button.active {
+    background: #C1C7DE;
+    color: #000;
+}
+
+
+
+.price-dropdown{
+    height: fit-content;
+    background: black;
+    color: white;
+}
+
+
+.Price-button{
+    height: 48px;
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: rgb(0, 0, 0);
+    border-radius: 3px;
+    background: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(123, 214, 255);
+    border-image: initial;
+    padding: 0px 30px 0px 10px;
+}
+
+
+.black-dropdown{
+    position: relative;
+}
+
+.black-dropdown img {
+    filter: brightness(0) invert(1);
+}
+
+
+.dropdown-dialog-content {
+    display: flex;
+    gap: 10px;
+}
+.dropdown-dialog-content-one,
+.black-dropdown-one {
+    width: 50%;
 }

@@ -7,48 +7,144 @@
 
     <section style="background: #080B18;" class="blog pt-50 pb-50">
         <div class="container">
-            <div class="property-filter-box">
-                <div class="property-filter">
-                    <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
-                    <input placeholder="City, community or building" type="text">
+          <form action="{{ route('properties.index') }}" method="GET">
+                @csrf
+                <div class="property-filter-box">
+                    <div class="property-filter">
+                        <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                        <input type="text" placeholder="City, community or building" value="" name="search">
+                    </div>
+
+                    <div class="property-filter-two">
+                        <div class="property-filter-select">
+                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <p class="filter-badge">NEW</p>
+                            <select name="filter_type" class="form-select" id="filter_type">
+                                <option value="">Select Type</option>
+                                <option value="rent">Rent</option>
+                                <option value="buy">Buy</option>
+                                <option value="new_projects">New Projects</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <div class="property-filter-select">
+                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <select name="property_type" id="propertyTypeSelect" class="form-select">
+                                <option value="">Select Property Type</option>
+                                @foreach ($propertyTypes as $type)
+                                    <option value="{{ $type }}">{{ $type }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+                        <!-- Price Filter -->
+                        <div class="property-filter-select">
+                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <button class="Price-button" type="button" id="priceToggle">Price</button>
+                            <input type="hidden" name="min_price" id="selectedMinPrice" value="">
+                            <input type="hidden" name="max_price" id="selectedMaxPrice" value="">
+                        </div>
+                        <!-- Area Filter -->
+                        <div class="property-filter-select">
+                                  <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                            <button class="Price-button" type="button" id="AreaToggle">Area Size</button>
+                            <input type="hidden" name="min_area" id="selectedMinArea" value="">
+                            <input type="hidden" name="max_area" id="selectedMaxArea" value="">
+                        </div>
+        
+
+<!-- Filters Toggle Button -->
+<div class="property-filter-select">
+          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+    <button class="Price-button" type="button" id="FiltersToggle">More Filters</button>
+    <input type="hidden" name="" id="" value="">
+</div>  
+
+                        {{-- !-- Area Dropdown --> --}}
+                        <div class="dropdown-dialog" id="areaDropdown">
+                            <p>Area Size</p>
+
+                            <div class="dropdown-dialog-content">
+                                <div class="black-dropdown black-dropdown-one ">
+                                          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                    <select name="min_area" class="price-dropdown form-select">
+                                        <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
+                                        @for ($price = 500; $price <= 9000; $price += 100)
+                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="black-dropdown black-dropdown-one ">
+                                          <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                    <select name="max_area" class="price-dropdown form-select">
+                                        <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
+                                        @for ($price = 500; $price <= 9000; $price += 100)
+                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="done-btn"
+                                onclick="closeDropdownArea('areaDropdown')">Done</button>
+                        </div>
+
+
+                        {{-- !-- Price Dropdown --> --}}
+                        <div class="dropdown-dialog" id="priceDropdown">
+
+                            <div class="dropdown-dialog-content">
+                                <div class="dropdown-dialog-content-one">
+                                    <p>Minimum Price</p>
+                                    <div class="black-dropdown">
+                                              <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                        <select name="min_price" class="price-dropdown form-select">
+                                            <option value="" selected>Min. price</option>
+                                            <!-- Default option set to 0 -->
+                                            @for ($price = 500; $price <= 9000; $price += 100)
+                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown-dialog-content-one">
+                                    <p>Maximum Price</p>
+                                    <div class="black-dropdown">
+                                              <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                                        <select name="max_price" class="price-dropdown form-select">
+                                            <option value="" selected>Max. price</option>
+                                            <!-- Default option set to 0 -->
+                                            @for ($price = 500; $price <= 9000; $price += 100)
+                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="done-btn"
+                                onclick="closeDropdown('priceDropdown')">Done</button>
+                        </div>
+
+                       {{-- !-- More Filters --> --}}
+{{-- <div class="dropdown-dialog" id="FiltersDropdown">
+    <p>amenities</p>
+    <div class="beds-baths-options">
+        <button type="button" class="room-option" data-value="Studio">Studio</button>
+        @foreach ($amenities as $amenity)
+            <button type="button" class="amenities" data-value="{{ $amenity }}">{{ $amenity }}</button>
+        @endforeach
+    </div>
+    <button type="button" class="done-btn" onclick="closeDropdown('FiltersDropdown')">Done</button>
+</div>  --}}
+
+
+
+                        <button class="property-filter-button" type="submit">Find</button>
+                    </div>
                 </div>
-                <div class="property-filter-two">
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
-                        <p class="filter-badge">NEW</p>
-                        <select name="cars" id="cars">
-                            <option value="Buy">Buy</option>
-                        </select>
-                    </div>
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
-                        <select name="cars" id="cars">
-                            <option value="Buy">Property type</option>
-                        </select>
-                    </div>
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
-                        <select name="cars" id="cars">
-                            <option value="Buy">Beds & Baths</option>
-                        </select>
-                    </div>
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
-                        <select name="cars" id="cars">
-                            <option value="Buy">Price</option>
-                        </select>
-                    </div>
-                    <div class="property-filter-select">
-                        <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
-                        <select name="cars" id="cars">
-                            <option value="Buy">More Filters</option>
-                        </select>
-                    </div>
-                    <button class="property-filter-button">
-                        Find
-                    </button>
-                </div>
-            </div>
+            </form>
         </div>
     </section>
     <div style="background: #0B0F28;

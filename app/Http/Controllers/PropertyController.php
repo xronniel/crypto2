@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Facility;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -113,7 +114,11 @@ class PropertyController extends Controller
             $query->where('unit_type', $unitType);
         }
 
-
+        if ($request->has('amenities') && is_array($request->amenities)) {
+            $query->whereHas('facilities', function ($q) use ($request) {
+                $q->whereIn('name', $request->amenities);
+            });
+        }
         // Get paginated properties with filters applied
         $properties = $query->with(['images', 'facilities'])->latest()->paginate(10);
 
@@ -148,8 +153,12 @@ class PropertyController extends Controller
         $completionStatus = Listing::where('completion_status', '!=', '')
             ->distinct()
             ->pluck('completion_status');
+
+        $amenities = Facility::where('name', '!=', '')
+            ->distinct()
+            ->pluck('name');
    
-        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'request'));
+        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request'));
     }
 
     public function show($property_ref_no)
@@ -190,6 +199,10 @@ class PropertyController extends Controller
             ->distinct()
             ->pluck('completion_status');
 
-        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search', 'adType', 'propertyType', 'unitType', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'request'));
+        $amenities = Facility::where('name', '!=', '')
+            ->distinct()
+            ->pluck('name');
+
+        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities'));
     }
 }
