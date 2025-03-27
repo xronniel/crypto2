@@ -336,7 +336,7 @@
                             <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
                             <div class="grid-left-side-price-div">
                                 {{-- <p class="grid-left-side-price-div-one">830.22 XRP</p> --}}
-                                <p class="grid-left-side-price-div-two">{{ $property->price }}<span>XRP</span></p>
+                                <p class="grid-left-side-price-div-two">{{ $property->price }}<span>AED</span></p>
                             </div>
                             <h4 class="grid-left-side-price-div-four">/Month</h4>
                         </div>
