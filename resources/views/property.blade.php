@@ -378,7 +378,7 @@
                                     <div class="blog__item-property-two-box-two">
                                         <div class="blog__item-property-two-box-one">
                                             <p class="box-two-p-one">
-                                                53.64 (BTC)
+                                                {{$property->getConvertedPrice()['converted_price']}}({{$property->getConvertedPrice()['currency_code']}})
                                             </p>
                                             <p class="box-two-p-two">
                                                 {{ $property->price }} AED

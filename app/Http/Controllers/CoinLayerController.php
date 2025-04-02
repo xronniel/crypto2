@@ -24,6 +24,7 @@ class CoinLayerController extends Controller
         // $currencies = $request->query('currencies', 'BTC,ETH,LTC');
         $response = Http::get($this->apiUrl . 'live', [
             'access_key' => $this->apiKey,
+            'target' => 'AED',
         ]);
 
         if ($response->failed()) {

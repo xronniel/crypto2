@@ -4,6 +4,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\EmiratesController;
@@ -69,3 +70,5 @@ Route::get('/blog', function () {
 });
 
 Auth::routes();
+
+Route::post('/currency/select', [CurrencyController::class, 'selectCurrency'])->name('currency.select');

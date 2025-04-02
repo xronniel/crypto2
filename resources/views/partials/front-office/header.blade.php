@@ -102,6 +102,15 @@
                         </ul>
                     </div>
 
+                    {{-- <form action="{{ route('currency.select') }}" method="POST">
+                        @csrf
+                        <select name="currency_code" onchange="this.form.submit()">
+                            <option value="XRP" {{ (Cookie::get('currency_code') == 'XRP' || Auth::user()->currency_code == 'XRP') ? 'selected' : '' }}>XRP</option>
+                            <option value="BTC" {{ (Cookie::get('currency_code') == 'BTC' || Auth::user()->currency_code == 'BTC') ? 'selected' : '' }}>BTC</option>
+                            <!-- Add more currencies here -->
+                        </select>
+                    </form> --}}
+
                     <div class="header-btn ul_li">
                         <a class="login-btn" href="#!"><i class="fas fa-user"></i> Login</a>
                         <div class="header-bar-mobile side-menu d-lg-none ml-20">
