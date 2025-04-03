@@ -55,6 +55,7 @@
     border-radius: 40px;
     display: flex;
     overflow: hidden;
+    width: 100%;
 }
 
 .first-section-border-first-div span {
@@ -83,7 +84,6 @@
     cursor: pointer;
 }
 
-
 .submit-button {
     font-family: "Manrope", sans-serif;
     font-weight: 400;
@@ -99,26 +99,24 @@
     font-weight: 700;
 }
 
-
 .form-select option {
-    background: #000000; 
-    color: #EBF7FD; 
-    border: 1px solid #C1C7DE;
-border-radius: 3px;
-border-width: 1px;
-
+    background: #000000;
+    color: #ebf7fd;
+    border: 1px solid #c1c7de;
+    border-radius: 3px;
+    border-width: 1px;
 }
 .form-select::-webkit-scrollbar {
     display: none;
 }
 
-.form-select-option{
+.form-select-option {
     padding: 0 0 0 20px;
 }
 
 option:hover {
-    background: #444444 !important; 
-    color: #FFFFFF !important; 
+    background: #444444 !important;
+    color: #ffffff !important;
 }
 
 .first-section-border-second-div select {
@@ -136,7 +134,6 @@ option:hover {
     border-right: 1px solid #7bd6ff;
     height: fit-content;
     width: fit-content;
-
 }
 
 .form-select:focus {
@@ -145,12 +142,9 @@ option:hover {
     box-shadow: none;
 }
 
-
-
 .first-section-border-first-div span:first-child {
     border-right: 1px solid #7bd6ff;
     border-radius: 40px 0 0 40px;
-
 }
 .first-section-border-second-div span:last-child {
     background: #2dd98f;
@@ -268,7 +262,7 @@ input[type="text"] {
     align-items: center;
 }
 
-.Converter-div h2 {
+.Converter-div h2, h3 {
     font-family: "Manrope", sans-serif;
     font-weight: 700;
     font-size: 30px;
@@ -278,6 +272,10 @@ input[type="text"] {
     text-transform: capitalize;
     margin: 0 0 40px 0;
 }
+.hero-token h3 {
+    text-align: start !important;
+}
+
 
 .Converter-div-input {
     width: fit-content;
@@ -468,7 +466,7 @@ input[type="text"] {
     padding: 0 0 5px 0;
     overflow-x: auto;
     white-space: nowrap;
-    
+
     /* Hide scrollbar track and thumb */
     scrollbar-width: thin; /* Firefox */
     scrollbar-color: transparent transparent; /* Hide scrollbar track */
@@ -496,39 +494,36 @@ input[type="text"] {
     display: block;
 }
 
-.token-wrap-location-filter-two{
+.token-wrap-location-filter-two {
     font-family: "Open Sans";
     font-weight: 400;
     font-size: 14px;
     line-height: 28px;
     letter-spacing: 0%;
-    color: #ffffff;    
-    padding: 15px 0  15px 0;
+    color: #ffffff;
+    padding: 15px 0 15px 0;
 }
-
 
 .active-filter-link {
-    color: #2DD98F !important;
-    text-decoration: underline;  
-    text-underline-offset: 13px
+    color: #2dd98f !important;
+    text-decoration: underline;
+    text-underline-offset: 13px;
 }
 
-
-.xb-item--content-process, 
+.xb-item--content-process,
 .xb-item--title-process {
     opacity: 0;
     visibility: hidden;
-    transform: translateY(20px); 
+    transform: translateY(20px);
     transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
 
-.process:hover .xb-item--content-process, 
+.process:hover .xb-item--content-process,
 .process:hover .xb-item--title-process {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0); 
+    transform: translateY(0);
 }
-
 
 .xb-item--icon img {
     width: 80px;
@@ -537,18 +532,10 @@ input[type="text"] {
     width: 100px;
 }
 
-
 .active-button-home {
     background: #2dd98f;
     font-weight: 700 !important;
 }
-
-
-
-
-
-
-
 
 .beds-baths-dropdown {
     position: absolute;
@@ -558,14 +545,14 @@ input[type="text"] {
     left: 600px;
     background: #000;
     border-radius: 5px;
-    border: 1px solid #C1C7DE;
+    border: 1px solid #c1c7de;
     padding: 20px;
-    display: none; 
+    display: none;
     z-index: 100;
 }
 
 .beds-baths-dropdown.active {
-    display: block; 
+    display: block;
 }
 
 .beds-baths-options {
@@ -576,8 +563,8 @@ input[type="text"] {
 
 .beds-baths-options button {
     background: transparent;
-    border: 1px solid #C1C7DE;
-    color: #EBF7FD;
+    border: 1px solid #c1c7de;
+    color: #ebf7fd;
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
@@ -586,12 +573,12 @@ input[type="text"] {
 
 .beds-baths-options button:hover,
 .beds-baths-options button.active {
-    background: #C1C7DE;
+    background: #c1c7de;
     color: #000;
 }
 
 .done-btn {
-    background: #4CAF50;
+    background: #4caf50;
     color: white;
     padding: 10px 20px;
     font-size: 18px;
@@ -611,22 +598,16 @@ input[type="text"] {
     background: #45a049;
 }
 
-
 .beds-baths-dropdown p {
     font-family: "Manrope", sans-serif;
-font-weight: 400;
-font-size: 18px;
-line-height: 24px;
-letter-spacing: 0%;
-vertical-align: middle;
-color: #FFFFFF80;
-padding: 10px 0;
-
-
-
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #ffffff80;
+    padding: 10px 0;
 }
-
-
 
 .img-cards-Featured {
     background-size: cover !important;
@@ -634,7 +615,220 @@ padding: 10px 0;
     background-repeat: no-repeat !important;
 }
 
+.login-mobile-button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #41445c;
+    color: var(--color-white);
+    font-size: 18px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+.login-mobile-button i {
+    color: var(--color-primary);
+}
+
+.mobile-form-home {
+    display: none;
+}
+
+.Filters-close-button-home {
+    position: absolute;
+    right: 0;
+    top: 8px;
+}
+
+.dropdown-dialog-home {
+    position: absolute;
+    background: #000;
+    border-radius: 5px;
+    border: 1px solid #c1c7de;
+    display: none;
+    z-index: 100;
+    top: -321px;
+
+    padding: 0 20px;
+    width: 110%;
+}
+
+.dropdown-dialog-home.active {
+    display: block;
+}
+
+.dropdown-dialog-home p {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #ffffff80;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.dropdown-dialog-home h1 {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #2dd98f;
+    text-align: center;
+    padding: 20px 0;
+}
+.partners,
+.about-wrap {
+    padding-top: 135px; 
+}
+
+@media (max-width: 768px) { 
+    .partners,
+    .about-wrap {
+        padding-top: 40px;
+    }
+}
+@media (max-width: 1199px) {
+    .first-banner-title {
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+        text-transform: capitalize;
+    }
+
+    .desktop-form-home {
+        display: none;
+    }
+
+    .mobile-form-home {
+        display: block;
+    }
+
+    .first-section-border {
+        background: linear-gradient(
+            180deg,
+            rgba(8, 11, 24, 0.2) 0%,
+            rgba(32, 42, 207, 0.2) 100%
+        );
+        border: 1px solid;
+
+        border-image-source: linear-gradient(
+            180deg,
+            rgba(123, 214, 255, 0.5) 0%,
+            rgba(41, 69, 81, 0.5) 100%
+        );
+
+        border-radius: 20px;
+        border-width: 1px;
+        padding: 17px;
+        max-width: 90%;
+    }
+
+    .first-section-border-second-div span:last-child {
+        background: #0d0d17;
+        border: 1px solid #8fe4f880;
+
+        border-radius: 1000px;
+        border-width: 1px;
+    }
+
+    .Vector-img {
+        filter: brightness(0) invert(1);
+    }
+
+    .first-section-border-second-div input[type="text"] {
+        background-color: #0d0d17;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color: #ffffff;
+    }
+
+    .row-mobile {
+        flex-direction: column-reverse;
+    }
+
+    .hero-token,
+    .hero-sale {
+        width: 100%;
+    }
+
+    .Converter-div-two {
+        flex-direction: column;
+    }
+
+    .hero .hero-sale {
+        padding: 33px;
+    }
+
+    .Converter-div-input,
+    .Converter-button {
+        width: 100%;
+    }
 
 
 
 
+    .Converter-div h2,h3{
+font-weight: 700;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+text-transform: capitalize;
+
+    }
+
+
+
+    .patners-title span {
+
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 28px;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+        text-transform: uppercase;
+
+    }
+
+
+    .about .about-img img {
+        position: unset;
+        margin-bottom: 0;
+        display: flex;
+        width: 100%;
+    }
+    .about {
+        display: flex
+    ;
+        flex-direction: column-reverse;
+        padding: 72px 10px 0 10px;
+    }
+
+
+    .ul_li {
+
+        flex-direction: column-reverse;
+    }
+
+ .xb-item--social-link{
+        width: 100%;
+        display: flex
+    ;
+        flex-direction: row;
+    }
+
+
+}

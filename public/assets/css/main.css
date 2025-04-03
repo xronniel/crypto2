@@ -3923,10 +3923,13 @@ body[data-aos-easing="ease"] [data-aos] {
     -o-transition: 0.3s;
     transition: 0.3s;
 }
-@media (max-width: 767px) {
+@media (max-width: 1250px) {
     .header-btn .login-btn {
         display: none;
     }
+    .btc-btn span{
+        display: none;
+      }
 }
 .header-btn .login-btn:hover {
     color: #080b18;
@@ -8376,7 +8379,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 }
 @media (max-width: 767px) {
     .hero .hero-shape {
-        display: none;
+        /* display: none; */
     }
 }
 .hero .hero-shape .shape--1 {
@@ -8398,6 +8401,8 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 }
 @media (max-width: 991px) {
     .hero .hero-shape .shape--1 {
+        top: 1%;
+        left: 20%;
         max-width: 50px;
     }
 }
@@ -8409,14 +8414,14 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
     .hero .hero-shape .shape--2 {
         left: 5%;
-        top: 40%;
+        top: 3%;
         max-width: 100px;
     }
 }
 @media (max-width: 1199px) {
     .hero .hero-shape .shape--2 {
         left: 1%;
-        top: 31%;
+        top: 3%;
         max-width: 70px;
     }
 }
@@ -8439,12 +8444,14 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 @media (max-width: 1199px) {
     .hero .hero-shape .shape--3 {
         right: 2%;
+        top: 2.5%;
         max-width: 80px;
     }
 }
 @media (max-width: 991px) {
     .hero .hero-shape .shape--3 {
         max-width: 50px;
+        top: 2.5%;
     }
 }
 .hero .hero-shape .shape--4 {
@@ -8460,7 +8467,8 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 }
 @media (max-width: 1199px) {
     .hero .hero-shape .shape--4 {
-        right: 2%;
+        right: 20%;
+        top: 1.5%;
         max-width: 71px;
     }
 }
@@ -9969,7 +9977,6 @@ blockquote .quote {
     background: linear-gradient(334deg, #6780d2 0%, #2f3b8d 100%);
     background-image: url(../img/shape/icon_bg.png);
     background-repeat: no-repeat;
-    background-size: ;
 }
 .contact-info__item h3 {
     font-size: 20px;
@@ -10933,6 +10940,7 @@ blockquote .quote {
     .footer-apps .xb-item--button .apps-btn {
         font-size: 15px;
     }
+    
 }
 .footer-apps .xb-item--button .apps-btn span {
     margin-right: 10px;
@@ -11175,3 +11183,11 @@ blockquote .quote {
 }
 
 /*# sourceMappingURL=main.css.map */
+
+
+@media (max-width: 767px) {
+
+    .xb-footer-wrap .xb-item--footer_widget-community a {
+        font-size: 14px;
+    }
+}

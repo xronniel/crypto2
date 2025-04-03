@@ -187,11 +187,10 @@
 			1200: { slidesPerView: 4 },
 			992: { slidesPerView: 4 },
 			768: { slidesPerView: 3 },
-			576: { slidesPerView: 2 },
-			0: { slidesPerView: 2 },
+			576: { slidesPerView: 1.5 }, // Show one and a half slides on small screens
+			0: { slidesPerView: 1.5 }, // Apply the same setting for extra-small screens
 		},
 	});
-	
 	/*------------------------------------------
 	= partner slider two
 	-------------------------------------------*/
