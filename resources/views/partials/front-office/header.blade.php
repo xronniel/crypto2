@@ -2,6 +2,10 @@
     <div class="xb-header stricky">
         <div class="container">
             <div class="header__wrap ul_li_between">
+                <div class="header-bar-mobile side-menu d-lg-none">
+                    <a class="login-mobile-button login-btn" href="javascript:void(0);"><i 
+                        class="fas fa-user"></i></a>
+                </div>
                 <div class="header-logo">
                     <a href="/">
                         <img src="{{ asset('assets/img/logo/Logo.png') }}" alt="Logo">
@@ -91,7 +95,9 @@
                     <div class="header-btn-one ul_li">
                         <a class="btc-btn" href="#">
                             <img src="{{ asset('assets/img/icon/hero-icon01.svg') }}" alt="BTC Icon">
-                            (BTC)
+                            <span>
+                                (BTC)
+                            </span>
                             <img class="header-arrow-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="Arrow">
                         </a>
                         <ul class="">
@@ -112,8 +118,12 @@
                     </form> --}}
 
                     <div class="header-btn ul_li">
-                        <a class="login-btn" href="#!"><i class="fas fa-user"></i> Login</a>
-                        <div class="header-bar-mobile side-menu d-lg-none ml-20">
+                        <a class="login-btn" href="#!"><i class="fas fa-user"></i>
+                            <span>
+                                Login
+                            </span>
+                        </a>
+                        <div class="header-bar-mobile side-menu d-lg-none ">
                             <a class="xb-nav-mobile" href="javascript:void(0);"><i class="far fa-bars"></i></a>
                         </div>
                     </div>

@@ -3029,8 +3029,11 @@ body[data-aos-easing=ease] [data-aos] {
 
   
 }
-@media (max-width: 767px) {
+@media (max-width: 1250px) {
   .header-btn .login-btn {
+    display: none;
+  }
+  .btc-btn span{
     display: none;
   }
 }
@@ -7180,7 +7183,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
 }
 @media (max-width: 767px) {
   .hero .hero-shape {
-    display: none;
+    /* display: none; */
   }
 }
 .hero .hero-shape .shape--1 {
@@ -7220,7 +7223,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
 @media (max-width: 1199px) {
   .hero .hero-shape .shape--2 {
     left: 1%;
-    top: 31%;
+    top: 3%;
     max-width: 70px;
   }
 }
@@ -7243,12 +7246,14 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
 @media (max-width: 1199px) {
   .hero .hero-shape .shape--3 {
     right: 2%;
+    top: 2.5%;
     max-width: 80px;
   }
 }
 @media (max-width: 991px) {
   .hero .hero-shape .shape--3 {
     max-width: 50px;
+    top: 2.5%;
   }
 }
 .hero .hero-shape .shape--4 {
@@ -9866,4 +9871,13 @@ blockquote .quote {
   vertical-align: middle;
   text-transform: capitalize;
 
+}
+
+
+
+@media (max-width: 767px) {
+
+  .xb-footer-wrap .xb-item--footer_widget-community a {
+      font-size: 14px;
+  }
 }

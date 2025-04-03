@@ -1,7 +1,6 @@
 @extends('layouts.front-office.app')
 
 @section('content')
-
     <style>
         .hero.dynamic-bg {
             background-image: url('{{ asset("storage/{$homepageContent->hero_image}") }}');
@@ -38,14 +37,14 @@
                 <img class="leftToRight" src="{{ asset('assets/img/shape/hero-sp_06.svg') }}" alt="">
             </div>
         </div>
-        
+
         <div class="container">
             <div class="hero__content-wrap">
                 <div class="wow fadeInUp" data-wow-duration=".7s">
                     <h1 class="title first-banner-title">{!! $homepageContent->text_hero_banner !!}</h1>
                 </div>
 
-                <form action="{{ route('properties.index') }}" method="GET">
+                <form class="desktop-form-home" action="{{ route('properties.index') }}" method="GET">
                     @csrf
 
                     <input type="hidden" name="filter_type" id="filterTypeInput" value="rent"> <!-- Default value -->
@@ -75,7 +74,8 @@
                                     <option value="">Select Property Type</option>
 
                                     @foreach ($propertyTypes as $type)
-                                        <option class="form-select-option" value="{{ $type }}">{{ $type }}</option>
+                                        <option class="form-select-option" value="{{ $type }}">{{ $type }}
+                                        </option>
                                     @endforeach
 
                                 </select>
@@ -113,6 +113,133 @@
                     </div>
                 </form>
 
+
+
+                <form class="mobile-form-home" action="{{ route('properties.index') }}" method="GET">
+                    @csrf
+
+                    <input type="hidden" name="filter_type" id="filterTypeInput" value="rent"> <!-- Default value -->
+                    <input type="hidden" name="no_of_rooms" id="selectedRooms" value=""> <!-- Selected rooms -->
+                    <input type="hidden" name="no_of_bathroom" id="selectedBathrooms" value="">
+                    <!-- Selected bathrooms -->
+
+                    <div class="hero__btn btns pt-50 wow fadeInUp">
+                        <div class="first-section-border">
+                            <div class="first-section-border-second-div">
+                                <span>
+                                    <img class="Vector-img" src="assets/img/home/Vector.png" alt="">
+                                    <input type="text" placeholder="City, community or building" value=""
+                                        name="search">
+                                </span>
+                            </div>
+
+                            <button style="width:100%;" class="them-btn" id='More-Filters' type="button">
+                                <span style="    padding: 17px 0px 14px;" class="btn_label"
+                                    data-text="Filters">Filters</span>
+                                <span class="btn_icon">
+                                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z"
+                                            fill="white"></path>
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <!-- More Filters Dropdown -->
+                            <div class="dropdown-dialog-home" id="Filters-Dropdown">
+
+                                <div style="position: relative;">
+                                    <h1>
+                                        More FIlters
+                                    </h1>
+                                    <img class="Filters-close-button-home"
+                                        src="{{ asset('assets/img/property/mobile-close-icon.png') }}" alt="search">
+                                </div>
+                                <div style="padding:20px;">
+                                    <p>
+                                        <img src="{{ asset('assets/img/property/search-icon.svg') }}" alt="search">
+                                        Search
+                                    </p>
+
+                                    <div class="property-filter">
+                                        <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                                        <input type="text" placeholder="Search : e.g. Villa, Office, etc."
+                                            value="" name="search-filters">
+                                    </div>
+                                </div>
+                                <div class="filters-secroll-box">
+
+
+
+                                    <p>
+                                        <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
+                                        Furnishing
+                                    </p>
+
+                                    <div class="beds-baths-options">
+
+                                        <button type="button" class="furnished" data-value="">All
+                                            Furnishing</button>
+                                        <button type="button" class="furnished"
+                                            data-value="furnished">Furnished</button>
+                                        <button type="button" class="furnished"
+                                            data-value="unfurnished">Unfurnished</button>
+                                        <button type="button" class="furnished" data-value="partly furnished">Partly
+                                            Furnished</button>
+
+                                    </div>
+
+                                    <p>
+                                        <img src="{{ asset('assets/img/property/completion.svg') }}" alt="search">
+                                        Completion Status
+                                    </p>
+
+                                    <div class="beds-baths-options">
+
+                                        <button type="button" class="Completion" data-value="">Any</button>
+                                        <button type="button" class="Completion" data-value="off_plan">Off-plan</button>
+                                        <button type="button" class="Completion" data-value="ready">Ready</button>
+
+                                    </div>
+
+                                    <p>
+                                        <img src="{{ asset('assets/img/property/amenities-icon-1.svg') }}"
+                                            alt="search">
+                                        Amenities
+                                    </p>
+                                    <div class="amenities-box">
+
+
+                                        @foreach ($amenities as $amenity)
+                                            <label class="amenities">
+                                                <input type="checkbox" name="amenities[]" value="{{ $amenity }}">
+                                                {{ $amenity }}
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+
+                                <input type="hidden" name="furnishing" id="furnishing" value="">
+                                <input type="hidden" name="completion" id="completion" value="">
+                                <input type="hidden" type="checkbox" name="amenities[]" value="">
+
+
+
+
+
+                                <button type="button" class="done-btn"
+                                    onclick="closeDropdown('FiltersDropdown')">Done</button>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </form>
+
             </div>
             <div class="hero-scroll pt-105">
                 <span>scroll to down</span>
@@ -128,11 +255,15 @@
                     </div>
                 </div>
             </div>
-            <div class="token-structure mt-145 wow fadeInUp" data-wow-duration=".7s" data-wow-delay="450ms">
-                <div class="row">
 
-                    <div class="hero-token">
-                        <h3 class="xb-item--title"> {!! $homepageContent->calculator_title2 !!}</h3>
+
+            <div class="token-structure mt-145 wow fadeInUp" data-wow-duration=".7s" data-wow-delay="450ms">
+                <div class="row row-mobile">
+
+                    <div 
+                    style="padding-bottom: 20px;"
+                    class="hero-token">
+                        <h3 > {!! $homepageContent->calculator_title2 !!}</h3>
 
                         <p class="xb-item--content">
                             {!! $homepageContent->calculator_text !!}
@@ -195,7 +326,7 @@
     <!-- hero section end  -->
 
     <!-- partners section start  -->
-    <section class="partners z-3 pt-135">
+    <section class="partners z-3">
         <div class="patners-title text-center">
             <span><img src="assets/img/partner/partner_07.png" alt=""> our top partners <img
                     src="assets/img/partner/partner_08.png" alt=""></span>
@@ -268,7 +399,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="about-wrap pt-140 wow fadeInLeft" data-wow-duration=".7s">
+                    <div class="about-wrap wow fadeInLeft" data-wow-duration=".7s">
                         <h2 class="xb-item--title">{!! $homepageContent->buying_process_title !!}</h2>
                         <p class="xb-item--content">
                             {!! $homepageContent->buying_process_text !!}
@@ -593,7 +724,9 @@
                                             fill="#080B18"></path>
                                     </svg> Integration with third-party payment wallets or services</li>
                             </ul>
-                            <div class="xb-item--crypto-btn">
+                            <div
+                            style="flex-wrap: nowrap;"
+                            class="xb-item--crypto-btn">
                                 <a class="them-btn crp-btn" href="#!">
                                     <span class="btn_icon">
                                         <i class="fab fa-apple"></i>
@@ -730,7 +863,7 @@
                 </div>
                 <div class="faq__blockchain wow fadeInUp" data-wow-duration=".7s" data-wow-delay="200ms">
                     <ul class="accordion_box clearfix">
-                        @foreach($faqs as $faq)
+                        @foreach ($faqs as $faq)
                             <li class="accordion block">
                                 <div class="acc-btn">
                                     {{ $faq['question'] }}
@@ -899,19 +1032,19 @@
                     .then(response => response.json())
                     .then(responseData => {
                         // console.log("API Response:", responseData.data.data[0].images[0].url); 
-                        
+
                         let propertiesContainer = document.getElementById("featured-properties");
                         propertiesContainer.innerHTML = "";
-                        
+
                         let listings = responseData.data?.data || [];
                         totalPages = responseData.data?.last_page || 1;
                         currentPage = responseData.data?.current_page || 1;
-                        
+
                         if (listings.length === 0) {
                             propertiesContainer.innerHTML = "<p>No properties found.</p>";
                             return;
                         }
-                        
+
                         let listing1 = listings[0] || {};
                         let listing2 = listings[1] || {};
                         let listing3 = listings[2] || {};
@@ -1068,5 +1201,27 @@
                 });
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+    const filterButton = document.getElementById("More-Filters");
+    const filterDropdown = document.getElementById("Filters-Dropdown");
+    const doneButton = document.querySelector(".done-btn");
+    const closeButton = document.querySelector(".Filters-close-button-home");
+
+
+    filterButton.addEventListener("click", function () {
+        filterDropdown.classList.toggle("active");
+    });
+
+
+    doneButton.addEventListener("click", function () {
+        filterDropdown.classList.remove("active");
+    });
+
+  
+    closeButton.addEventListener("click", function () {
+        filterDropdown.classList.remove("active");
+    });
+});
     </script>
 @endsection
