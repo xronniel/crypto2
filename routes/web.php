@@ -72,6 +72,12 @@ Route::get('/contact-us', function () {
 Route::get('/blog', function () {
     return view('blog');
 });
+Route::get('/news', function () {
+    return view('news');
+});
+Route::get('/news-details', function () {
+    return view('news-details');
+});
 
 Auth::routes();
 

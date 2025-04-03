@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/hedaer.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/property.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/propertydetails.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/blog.css') }}">
 </head>
 <body>
     @include('partials.front-office.header')
