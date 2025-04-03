@@ -14,7 +14,9 @@ use App\Http\Controllers\HomepageContentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +37,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('listings', ListingController::class);
 
     Route::resource('articles', ArticleController::class);
-    Route::delete('articles/gallery/{id}', [ArticleController::class, 'deleteGalleryImage']);
+    Route::delete('articles/gallery/{id}', [ArticleController::class, 'deleteGalleryImage'])->name('article.gallery.delete');
 
     Route::get('homepage', [HomepageContentController::class, 'index'])->name('homepage.index');
     Route::get('homepage/edit', [HomepageContentController::class, 'edit'])->name('homepage.edit');
@@ -49,6 +51,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('facilities', FacilityController::class);
     Route::resource('communities', CommunityController::class);
     Route::resource('faqs', FaqController::class);
+    Route::resource('partners', PartnerController::class);
+    Route::resource('reviews', ReviewController::class);
 });
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
