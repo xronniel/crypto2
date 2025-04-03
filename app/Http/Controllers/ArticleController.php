@@ -49,7 +49,7 @@ class ArticleController extends Controller
             foreach ($request->file('gallery') as $image) {
                 $galleryPath = $image->store('articles/gallery', 'public');
                 ArticleGallery::create([
-                    'news_id' => $article->id,
+                    'article_id' => $article->id,
                     'image_path' => $galleryPath,
                 ]);
             }
@@ -123,7 +123,6 @@ class ArticleController extends Controller
     public function deleteGalleryImage($id)
     {
         $gallery = ArticleGallery::findOrFail($id);
-
         // Delete the image file from storage
         if ($gallery->image_path && \Storage::disk('public')->exists($gallery->image_path)) {
             \Storage::disk('public')->delete($gallery->image_path);

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoinLayerController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomepageController;
 
 /*
@@ -26,5 +27,6 @@ Route::get('/coinlayer/list', [CoinLayerController::class, 'getCryptoList']);
 Route::get('/coinlayer/convert', [CoinLayerController::class, 'convertCurrency']);
 
 Route::get('/featured-listings', [HomepageController::class, 'getFeaturedListingsByCommunity'])->name('featured.listings');
+Route::get('/crypto-currencies', [CurrencyController::class, 'getCryptoCurrencies'])->name('crypto.currencies');
 
 

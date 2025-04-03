@@ -112,16 +112,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="district_id">District</label>
-                    <select name="district_id" class="form-control">
-                        <option value="">Select District</option>
-                        @foreach($districts as $district)
-                            <option value="{{ $district->id }}">{{ $district->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="developer_id">Developer</label>
                     <select name="developer_id" class="form-control">
                         <option value="">Select Developer</option>
@@ -166,6 +156,11 @@
                 <div class="form-group">
                     <label for="permit_number">Permit Number</label>
                     <input type="text" name="permit_number" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="permit_number">Company Name</label>
+                    <input type="text" name="company_name" class="form-control">
                 </div>
 
                 <div class="form-group">
@@ -298,6 +293,20 @@
         </div>
 
         <hr>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h4>Location</h4>
+                <div class="form-group">
+                    <label for="property_name">Latitude</label>
+                    <input type="text" name="latitude" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="property_name">Longitude</label>
+                    <input type="text" name="longitude" class="form-control">
+                </div>
+            </div>
+        </div>
 
         {{-- Submit Button --}}
         <div class="form-group mt-3">

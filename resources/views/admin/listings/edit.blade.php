@@ -17,7 +17,7 @@
         </div>
     @endif
 
-    {{-- Form to Update Listing --}}
+    {{-- Form to Edit Listing --}}
     <form action="{{ route('admin.listings.update', $listing->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -52,7 +52,7 @@
                     <select name="ad_type" class="form-control">
                         <option value="">Select Ad Type</option>
                         @foreach($adTypes as $ad)
-                            <option value="{{ $ad }}" {{ old('ad_type', $listing->ad_type) == $ad ? 'selected' : '' }}>{{ $ad }}</option>
+                            <option value="{{ $ad }}" {{ $listing->ad_type == $ad ? 'selected' : '' }}>{{ $ad }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -62,7 +62,7 @@
                     <select name="unit_type" class="form-control">
                         <option value="">Select Unit Type</option>
                         @foreach($unitTypes as $unit)
-                            <option value="{{ $unit }}" {{ old('unit_type', $listing->unit_type) == $unit ? 'selected' : '' }}>{{ $unit }}</option>
+                            <option value="{{ $unit }}" {{ $listing->unit_type == $unit ? 'selected' : '' }}>{{ $unit }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -97,27 +97,17 @@
                     <select name="emirate" class="form-control">
                         <option value="">Select Emirate</option>
                         @foreach($emirates as $emirate)
-                            <option value="{{ $emirate->name }}" {{ old('emirate', $listing->emirate) == $emirate->name ? 'selected' : '' }}>{{ $emirate->name }}</option>
+                            <option value="{{ $emirate->name }}" {{ $listing->emirate == $emirate->name ? 'selected' : '' }}>{{ $emirate->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="community_id">Community</label>
+                    <label for="community">Community</label>
                     <select name="community_id" class="form-control">
                         <option value="">Select Community</option>
                         @foreach($communities as $community)
-                            <option value="{{ $community->id }}" {{ old('community_id', $listing->community_id) == $community->id ? 'selected' : '' }}>{{ $community->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="district_id">District</label>
-                    <select name="district_id" class="form-control">
-                        <option value="">Select District</option>
-                        @foreach($districts as $district)
-                            <option value="{{ $district->id }}" {{ old('district_id', $listing->district_id) == $district->id ? 'selected' : '' }}>{{ $district->name }}</option>
+                            <option value="{{ $community->id }}" {{ $listing->community_id == $community->id ? 'selected' : '' }}>{{ $community->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -127,17 +117,17 @@
                     <select name="developer_id" class="form-control">
                         <option value="">Select Developer</option>
                         @foreach($developers as $developer)
-                            <option value="{{ $developer->id }}" {{ old('developer_id', $listing->developer_id) == $developer->id ? 'selected' : '' }}>{{ $developer->name }}</option>
+                            <option value="{{ $developer->id }}" {{ $listing->developer_id == $developer->id ? 'selected' : '' }}>{{ $developer->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="agent_id">Listing Agent</label>
+                    <label for="listing_agent">Listing Agent</label>
                     <select name="agent_id" class="form-control">
                         <option value="">Select Listing Agent</option>
                         @foreach($agents as $agent)
-                            <option value="{{ $agent->id }}" {{ old('agent_id', $listing->agent_id) == $agent->id ? 'selected' : '' }}>{{ $agent->name }}</option>
+                            <option value="{{ $agent->id }}" {{ $listing->agent_id == $agent->id ? 'selected' : '' }}>{{ $agent->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -170,6 +160,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="company_name">Company Name</label>
+                    <input type="text" name="company_name" class="form-control" value="{{ old('company_name', $listing->company_name) }}">
+                </div>
+
+                <div class="form-group">
                     <label for="listing_date">Listing Date</label>
                     <input type="date" name="listing_date" class="form-control" value="{{ old('listing_date', $listing->listing_date) }}">
                 </div>
@@ -178,7 +173,67 @@
 
         <hr>
 
-        {{-- Property Descriptions --}}
+        {{-- Property Details --}}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="no_of_bathroom">No. of Bathrooms</label>
+                    <input type="number" name="no_of_bathroom" class="form-control" value="{{ old('no_of_bathroom', $listing->no_of_bathroom) }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="bedrooms">No. of Bedrooms</label>
+                    <input type="number" name="bedrooms" class="form-control" value="{{ old('bedrooms', $listing->bedrooms) }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="no_of_rooms">No. of Rooms</label>
+                    <input type="number" name="no_of_rooms" class="form-control" value="{{ old('no_of_rooms', $listing->no_of_rooms) }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="parking">No. of Parking</label>
+                    <input type="number" name="parking" class="form-control" value="{{ old('parking', $listing->parking) }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="unit_measure">Unit Measure (e.g., Sq.Ft.)</label>
+                    <input type="text" name="unit_measure" class="form-control" value="{{ old('unit_measure', $listing->unit_measure) }}">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                {{-- Virtual Tours --}}
+                <div class="form-group">
+                    <label for="web_tour">Web Tour</label>
+                    <input type="text" name="web_tour" class="form-control" value="{{ old('web_tour', $listing->web_tour) }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="threesixty_tour">360 Tour</label>
+                    <input type="text" name="threesixty_tour" class="form-control" value="{{ old('threesixty_tour', $listing->threesixty_tour) }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="virtual_tour">Virtual Tour</label>
+                    <input type="text" name="virtual_tour" class="form-control" value="{{ old('virtual_tour', $listing->virtual_tour) }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="preview_link">Preview Link</label>
+                    <input type="text" name="preview_link" class="form-control" value="{{ old('preview_link', $listing->preview_link) }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="qr_code">QR Code</label>
+                    <input type="text" name="qr_code" class="form-control" value="{{ old('qr_code', $listing->qr_code) }}">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        {{-- Descriptions & Remarks --}}
         <div class="form-group">
             <label for="web_remarks">Web Remarks (HTML Allowed)</label>
             <textarea name="web_remarks" class="form-control" rows="3">{{ old('web_remarks', $listing->web_remarks) }}</textarea>
@@ -190,82 +245,47 @@
         </div>
 
         {{-- Uploads --}}
-    <!-- Company Logo -->
-    <div class="form-group">
-        <label for="company_logo">Company Logo</label>
-        <input type="file" name="company_logo" class="form-control" accept="image/*">
-
-        @if($listing->company_logo)
-            @if($listing->xml == 1)
-                {{-- External Logo Link --}}
-                <a href="{{ $listing->company_logo }}" target="_blank" class="d-block mt-2">
-                    <img src="{{ $listing->company_logo }}" alt="Company Logo" class="mt-2" width="100">
-                </a>
-            @else
-                {{-- Stored Logo --}}
-                <img src="{{ asset('storage/' . $listing->company_logo) }}" alt="Company Logo" class="mt-2" width="100">
+        <div class="form-group">
+            <label for="company_logo">Company Logo</label>
+            <input type="file" name="company_logo" class="form-control" accept="image/*">
+            @if($listing->company_logo)
+                <img src="{{ asset('storage/' . $listing->company_logo) }}" width="100">
             @endif
-        @endif
-    </div>
+        </div>
 
-    <!-- Brochure -->
-    <div class="form-group">
-        <label for="brochure">Brochure (PDF)</label>
-        <input type="file" name="brochure" class="form-control">
-
-        @if($listing->brochure)
-            @if($listing->xml == 1)
-                {{-- External Brochure Link --}}
-                <a href="{{ $listing->brochure }}" target="_blank" class="d-block mt-2">View Current Brochure</a>
-            @else
-                {{-- Stored Brochure --}}
-                <a href="{{ asset('storage/' . $listing->brochure) }}" target="_blank" class="d-block mt-2">View Current Brochure</a>
+        <div class="form-group">
+            <label for="brochure">Brochure (PDF)</label>
+            <input type="file" name="brochure" class="form-control">
+            @if($listing->brochure)
+                <a href="{{ asset('storage/' . $listing->brochure) }}" target="_blank">View Brochure</a>
             @endif
-        @endif
-    </div>
+        </div>
 
-    <div class="form-group">
-        <label for="floor_plan">Floor Plan</label>
-        <input type="file" name="floor_plan" class="form-control" accept="image/*">
-        @if($listing->floor_plan)
-            <div class="mt-2">
-                <img src="{{ asset('storage/' . $listing->floor_plan) }}" alt="Floor Plan" width="100">
-                <p><a href="{{ asset('storage/' . $listing->floor_plan) }}" target="_blank">View Current Floor Plan</a></p>
-            </div>
-        @endif
-    </div>
+        <div class="form-group">
+            <label for="floor_plan">Floor Plan</label>
+            <input type="file" name="floor_plan" class="form-control" accept="image/*">
+            @if($listing->floor_plan)
+                <img src="{{ asset('storage/' . $listing->floor_plan) }}" width="100">
+            @endif
+        </div>
 
         <div class="form-group">
             <label for="images">Upload Images (Multiple)</label>
             <input type="file" name="images[]" class="form-control" multiple>
-            
-            {{-- Show Images if Available --}}
-            @if($listing->images)
-                <div class="mt-3">
-                    @foreach($listing->images as $image)
-                        @if($listing->xml == 1)
-                            {{-- XML Image Link --}}
-                            <a href="{{ $image->url }}" target="_blank" class="d-block mb-2">
-                                <img src="{{ $image->url }}" alt="Listing Image" class="img-thumbnail mr-2" width="100">
-                            </a>
-                        @else
-                            {{-- Storage Image --}}
-                            <img src="{{ asset('storage/' . $image->url) }}" alt="Listing Image" class="img-thumbnail mr-2" width="100">
-                        @endif
-                    @endforeach
-                </div>
-            @endif
+            @foreach($listing->images as $image)
+                <img src="{{ asset('storage/' . $image->path) }}" width="100">
+            @endforeach
         </div>
 
-        {{-- Facilities --}}
+        {{-- Facilities Selection --}}
         <div class="form-group">
             <label for="facilities">Select Facilities</label>
             <div class="row">
                 @foreach($facilities as $facility)
                     <div class="col-md-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="facilities[]" value="{{ $facility->id }}"
-                                {{ in_array($facility->id, old('facilities', $listing->facilities->pluck('id')->toArray())) ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" name="facilities[]" value="{{ $facility->id }}" 
+                                   {{ in_array($facility->id, $listing->facilities->pluck('id')->toArray()) ? 'checked' : '' }}>
                             <label class="form-check-label">{{ $facility->name }}</label>
                         </div>
                     </div>
@@ -279,7 +299,8 @@
                 <h4>Additional Options</h4>
                 @foreach(['exclusive', 'featured', 'price_on_application', 'off_plan', 'new', 'verified', 'superagent'] as $field)
                     <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" name="{{ $field }}" value="1" {{ old($field, $listing->$field) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" name="{{ $field }}" value="1" 
+                               {{ old($field, $listing->$field) ? 'checked' : '' }}>
                         <label class="form-check-label">{{ ucfirst(str_replace('_', ' ', $field)) }}</label>
                     </div>
                 @endforeach
@@ -288,9 +309,23 @@
 
         <hr>
 
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h4>Location</h4>
+                <div class="form-group">
+                    <label for="property_name">Latitude</label>
+                    <input type="text" name="latitude" class="form-control" value="{{ old('latitude', $listing->latitude) }}">
+                </div>
+                <div class="form-group">
+                    <label for="property_name">Longitude</label>
+                    <input type="text" name="longitude" class="form-control" value="{{ old('longitude', $listing->longitude) }}">
+                </div>
+            </div>
+        </div>
+
         {{-- Submit Button --}}
-        <div class="form-group mt-3">
-            <button type="submit" class="btn btn-success">Update Listing</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Update Listing</button>
         </div>
     </form>
 </div>

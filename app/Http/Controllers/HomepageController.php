@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Facility;
 use App\Models\Faq;
 use App\Models\HomepageContent;
 use App\Models\Listing;
@@ -58,8 +59,12 @@ class HomepageController extends Controller
         $newsList = News::latest()->take(3)->get();
 
         $faqs = Faq::all();
- 
-        return view('home', compact('newsList', 'homepageContent', 'propertyTypes', 'unitType', 'noOfRooms', 'noOfBathrooms', 'request', 'featuredListings', 'communities', 'community', 'faqs'));
+
+        $amenities = Facility::where('name', '!=', '')
+        ->distinct()
+        ->pluck('name');
+    
+        return view('home', compact('newsList', 'homepageContent', 'propertyTypes', 'unitType', 'noOfRooms', 'noOfBathrooms', 'request', 'featuredListings', 'communities', 'community', 'faqs', 'amenities'));
     }
 
     public function getFeaturedListingsByCommunity(Request $request)

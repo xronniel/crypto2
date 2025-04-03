@@ -103,7 +103,7 @@
             <img src="{{ asset('storage/' . $gallery->image_path) }}" class="img-thumbnail mb-2" width="150">
 
             <!-- Delete Image Form (separate form to delete individual images) -->
-            <form action="{{ route('admin.gallery.delete', $gallery->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this image?');">
+            <form action="{{ route('admin.article.gallery.delete', $gallery->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this image?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>

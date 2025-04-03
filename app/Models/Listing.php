@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cookie;
 
 class Listing extends Model
 {
@@ -100,6 +101,38 @@ class Listing extends Model
     public function community()
     {
         return $this->belongsTo(Community::class, 'community_id');
+    }
+
+    public function getConvertedPrice()
+    {
+        // Get the selected currency code from the authenticated user or cookie (default to AED)
+        $currencyCode = auth()->user() ? auth()->user()->currency_code : Cookie::get('currency_code', 'AED');  // Default to AED (if you prefer a default)
+    
+        // Get the selected currency's rate from the `currencies` table
+        $currency = Currency::where('code', $currencyCode)->first();
+    
+        // If the currency is found
+        if ($currency) {
+            // If the selected currency is crypto
+            if ($currency->type == 'crypto') {
+                $convertedPrice = $this->price * $currency->rate;
+            } else {
+                // For fiat or no conversion needed
+                $convertedPrice = $this->price;
+            }
+    
+            // Return an array with converted price and selected currency code
+            return [
+                'converted_price' => $convertedPrice,
+                'currency_code' => $currencyCode
+            ];
+        }
+    
+        // If currency not found, return the original price and default currency (AED)
+        return [
+            'converted_price' => $this->price,
+            'currency_code' => 'AED' 
+        ];
     }
 
 }
