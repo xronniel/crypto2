@@ -7,6 +7,7 @@ use App\Models\Faq;
 use App\Models\HomepageContent;
 use App\Models\Listing;
 use App\Models\News;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -63,8 +64,8 @@ class HomepageController extends Controller
         $amenities = Facility::where('name', '!=', '')
         ->distinct()
         ->pluck('name');
-    
-        return view('home', compact('newsList', 'homepageContent', 'propertyTypes', 'unitType', 'noOfRooms', 'noOfBathrooms', 'request', 'featuredListings', 'communities', 'community', 'faqs', 'amenities'));
+        $partners = Partner::all();
+        return view('home', compact('newsList', 'homepageContent', 'propertyTypes', 'unitType', 'noOfRooms', 'noOfBathrooms', 'request', 'featuredListings', 'communities', 'community', 'faqs', 'amenities', 'partners'));
     }
 
     public function getFeaturedListingsByCommunity(Request $request)
