@@ -76,4 +76,14 @@ class ReviewController extends Controller
         return back();
     }
 
+    public function getAllReviews()
+    {
+        $reviews = Review::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $reviews,
+        ]);
+    }
+
 }
