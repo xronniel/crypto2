@@ -21,7 +21,7 @@
     <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-recent">
         <h3 class="widget__title blog-sidebar-title">Recent Posts</h3>
         <div class="widget__post">
-            <div class="widget__post-item ul_li">
+            <div class="widget__post-item ul_li blog-widget-post-item">
                 <div class="post-thumb">
                     <a href="blog-single.html"><img src="assets/img/blog/post_01.jpg" alt=""></a>
                 </div>
@@ -31,7 +31,7 @@
                             Time</a></h4>
                 </div>
             </div>
-            <div class="widget__post-item ul_li">
+            <div class="widget__post-item ul_li blog-widget-post-item">
                 <div class="post-thumb">
                     <a href="blog-single.html"><img src="assets/img/blog/w_02.jpg" alt=""></a>
                 </div>
@@ -41,7 +41,7 @@
                             field</a></h4>
                 </div>
             </div>
-            <div class="widget__post-item ul_li">
+            <div class="widget__post-item ul_li blog-widget-post-item">
                 <div class="post-thumb">
                     <a href="blog-single.html"><img src="assets/img/blog/w_03.jpg" alt=""></a>
                 </div>
@@ -56,7 +56,7 @@
     </div>
     <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-recent">
         <h3 class="widget__title blog-sidebar-title">Follow Us</h3>
-        <ul class="widget__social ul_li">
+        <ul class="widget__social ul_li blog-widget-social">
             <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
             <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
             <li><a href="#!"><i class="fab fa-linkedin-in"></i></a></li>

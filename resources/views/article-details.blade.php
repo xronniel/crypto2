@@ -9,7 +9,7 @@
         <section class="breadcrumb bg_img pos-rel" data-background="assets/img/bg/breadcrumb.jpg">
             <div class="container">
                 <div class="breadcrumb__content">
-                    <h2 class="breadcrumb__title">News Details</h2>
+                    <h2 class="breadcrumb__title">Article Details</h2>
                     <ul class="bread-crumb clearfix ul_li_center blog-flex-column">
                         <li class="breadcrumb-item"><a href="index.html">News Article Title</a></li>
                         <li class="breadcrumb-item blog-title-description">Examining the Rise, Evolution, and Future of
