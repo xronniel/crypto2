@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoinLayerController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,7 @@ Route::get('/coinlayer/convert', [CoinLayerController::class, 'convertCurrency']
 
 Route::get('/featured-listings', [HomepageController::class, 'getFeaturedListingsByCommunity'])->name('featured.listings');
 Route::get('/crypto-currencies', [CurrencyController::class, 'getCryptoCurrencies'])->name('crypto.currencies');
+
+Route::get('/reviews', [ReviewController::class, 'getAllReviews'])->name('reviews.all');
 
 

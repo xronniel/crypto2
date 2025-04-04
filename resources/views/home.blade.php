@@ -331,64 +331,22 @@
             <span><img src="assets/img/partner/partner_07.png" alt=""> our top partners <img
                     src="assets/img/partner/partner_08.png" alt=""></span>
         </div>
+   
         <div class="partner-active partner-slider ul_li">
             <div class="swiper-wrapper">
+                @foreach ($partners as $partner)
+               
                 <div class="swiper-slide">
                     <div class="xb-item--brand">
                         <div class="xb-item--brand_logo">
-                            <img src="assets/img/partner/partner_01.png" alt="">
+                            <img src="{{ asset('storage/' . $partner->image ) }}" alt="">
                         </div>
-                        <span>aptos</span>
+                        <span> {{ $partner->name }}</span>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="xb-item--brand">
-                        <div class="xb-item--brand_logo">
-                            <img src="assets/img/partner/partner_02.png" alt="">
-                        </div>
-                        <span>algorand</span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-item--brand">
-                        <div class="xb-item--brand_logo">
-                            <img src="assets/img/partner/partner_03.png" alt="">
-                        </div>
-                        <span>binance</span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-item--brand">
-                        <div class="xb-item--brand_logo">
-                            <img src="assets/img/partner/partner_04.png" alt="">
-                        </div>
-                        <span>cardano</span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-item--brand">
-                        <div class="xb-item--brand_logo">
-                            <img src="assets/img/partner/partner_05.png" alt="">
-                        </div>
-                        <span>ethereum</span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-item--brand">
-                        <div class="xb-item--brand_logo">
-                            <img src="assets/img/partner/partner_06.png" alt="">
-                        </div>
-                        <span>Arbitrum</span>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="xb-item--brand">
-                        <div class="xb-item--brand_logo">
-                            <img src="assets/img/partner/partner_01.png" alt="">
-                        </div>
-                        <span>aptos</span>
-                    </div>
-                </div>
+            @endforeach
+              
+           
             </div>
         </div>
     </section>

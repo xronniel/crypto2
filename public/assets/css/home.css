@@ -609,6 +609,16 @@ input[type="text"] {
     padding: 10px 0;
 }
 
+.xb-item--brand_logo{
+    width: 100%;
+    height: 70%;
+}
+.xb-item--brand_logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .img-cards-Featured {
     background-size: cover !important;
     background-position: center !important;

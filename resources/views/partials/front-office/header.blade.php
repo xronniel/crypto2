@@ -258,35 +258,33 @@
 
 
     document.addEventListener("DOMContentLoaded", function() {
-        const loginBtn = document.querySelector(".login-btn");
-        const loginModal = document.querySelector(".login-modal");
-        const closeModal = document.querySelector(".login-modal-close");
-        const closeModalTwo = document.querySelector(".login-modal-close-two");
-        const modalOverlay = document.createElement("div");
+    const loginBtns = document.querySelectorAll(".login-btn");
+    const loginModal = document.querySelector(".login-modal");
+    const closeModal = document.querySelector(".login-modal-close");
+    const closeModalTwo = document.querySelector(".login-modal-close-two");
+    const modalOverlay = document.createElement("div");
 
-        modalOverlay.classList.add("modal-overlay");
-        document.body.appendChild(modalOverlay);
+    modalOverlay.classList.add("modal-overlay");
+    document.body.appendChild(modalOverlay);
 
-
-        loginBtn.addEventListener("click", function() {
+    loginBtns.forEach(btn => {
+        btn.addEventListener("click", function() {
             loginModal.classList.add("active");
             modalOverlay.style.display = "block";
         });
-
-
-        modalOverlay.addEventListener("click", closeLoginModal);
-
-        closeModal.addEventListener("click", closeLoginModal);
-        closeModalTwo.addEventListener("click", closeLoginModal);
-
-
-        function closeLoginModal() {
-            loginModal.classList.remove("active");
-            setTimeout(() => {
-                modalOverlay.style.display = "none";
-            }, 500);
-        }
     });
+
+    modalOverlay.addEventListener("click", closeLoginModal);
+    closeModal.addEventListener("click", closeLoginModal);
+    closeModalTwo.addEventListener("click", closeLoginModal);
+
+    function closeLoginModal() {
+        loginModal.classList.remove("active");
+        setTimeout(() => {
+            modalOverlay.style.display = "none";
+        }, 500);
+    }
+});
 
     document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.getElementById("loginForm");
