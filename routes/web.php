@@ -72,11 +72,17 @@ Route::get('/contact-us', function () {
 Route::get('/blog', function () {
     return view('blog');
 });
-Route::get('/news', function () {
-    return view('news');
+Route::get('/news-gallery', function () {
+    return view('news-gallery');
 });
 Route::get('/news-details', function () {
     return view('news-details');
+});
+Route::get('/article-gallery', function () {
+    return view('article-gallery');
+});
+Route::get('/article-details', function () {
+    return view('article-details');
 });
 
 Auth::routes();

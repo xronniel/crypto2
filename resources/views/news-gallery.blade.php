@@ -9,7 +9,7 @@
         <section class="breadcrumb bg_img pos-rel" data-background="assets/img/bg/breadcrumb.jpg">
             <div class="container">
                 <div class="breadcrumb__content">
-                    <h2 class="breadcrumb__title">News Article</h2>
+                    <h2 class="breadcrumb__title">News Gallery</h2>
                     <ul class="bread-crumb clearfix ul_li_center blog-flex-column">
                         <li class="breadcrumb-item"><a href="index.html">Items Found</a></li>
                         <li class="breadcrumb-item">30 News Articles</li>
@@ -34,8 +34,8 @@
         <!-- breadcrumb end -->
 
         <!-- blog start -->
-        <section class="blog pb-130">
-            <div class="blog-back-button pt-55 pb-50">
+        <section class="blog pb-130 blog-content">
+            <div class="blog-back-button pt-55 pb-50 container">
                 <a href="#" class="blog-arrow-container">
                     <img src="/assets/img/blog/arrow-back.png" alt="Arrow Icon">
                 </a>
@@ -55,7 +55,7 @@
                                     </h4>
                                 </a>
                                 <div class="blog__inner">
-                                    <ul class="blog__meta ul_li mb-30">
+                                    <ul class="blog__meta ul_li mb-20 blog-meta-data">
                                         <li><a href="#!"><i class="far fa-map-marker-alt"></i>New York, USA</a></li>
                                         <li><i class="far fa-clock"></i>Dec 28, 2022</li>
                                         <li><a href="#!"><i class="far fa-comment"></i>(04) Comments</a></li>
@@ -85,7 +85,7 @@
                                     </h4>
                                 </a>
                                 <div class="blog__inner">
-                                    <ul class="blog__meta ul_li mb-20">
+                                    <ul class="blog__meta ul_li mb-20 blog-meta-data">
                                         <li><a href="#!"><i class="far fa-map-marker-alt"></i>London, United Kingdom</a>
                                         </li>
                                         <li><i class="far fa-clock"></i>Dec 28, 2022</li>
@@ -117,7 +117,7 @@
                                     </h4>
                                 </a>
                                 <div class="blog__inner">
-                                    <ul class="blog__meta ul_li mb-30">
+                                    <ul class="blog__meta ul_li mb-20 blog-meta-data">
                                         <li><a href="#!"><i class="far fa-map-marker-alt"></i>Berlin, Germany</a></li>
                                         <li><i class="far fa-clock"></i>Dec 28, 2022</li>
                                         <li><a href="#!"><i class="far fa-comment"></i>(04) Comments</a></li>
