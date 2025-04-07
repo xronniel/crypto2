@@ -792,7 +792,7 @@
 
                                     <!-- Button -->
                                     <div class="xb-item--event-btn">
-                                        <a class="them-btn" href="{{ route('news.show', ['news' => $news]) }}">
+                                        <a class="them-btn" href="{{ route('news.gallery.show', ['news' => $news]) }}">
                                             <span class="btn_label" data-text="Find out more">Find out more</span>
                                             <span class="btn_icon">
                                                 <svg width="15" height="14" viewBox="0 0 15 14" fill="none"

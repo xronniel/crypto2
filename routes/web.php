@@ -57,11 +57,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
 
-Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
-Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show');
+// Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
+// Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show');
 
-Route::get('/articles', [ArticleController::class, 'userIndex'])->name('articles.index');
-Route::get('/articles/{article}', [ArticleController::class, 'userShow'])->name('articles.show');
+// Route::get('/articles', [ArticleController::class, 'userIndex'])->name('articles.index');
+// Route::get('/articles/{article}', [ArticleController::class, 'userShow'])->name('articles.show');
 
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
@@ -72,18 +72,13 @@ Route::get('/contact-us', function () {
 Route::get('/blog', function () {
     return view('blog');
 });
-Route::get('/news-gallery', function () {
-    return view('news-gallery');
-});
-Route::get('/news-details', function () {
-    return view('news-details');
-});
-Route::get('/article-gallery', function () {
-    return view('article-gallery');
-});
-Route::get('/article-details', function () {
-    return view('article-details');
-});
+
+Route::get('news', [NewsController::class, 'indexUser'])->name('news.gallery');
+Route::get('/news/{news}', [NewsController::class, 'showUser'])->name('news.gallery.show');
+
+Route::get('articles', [ArticleController::class, 'indexUser'])->name('articles.gallery');
+Route::get('/articles/{article}', [ArticleController::class, 'showUser'])->name('articles.gallery.show');
+
 
 Auth::routes();
 

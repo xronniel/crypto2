@@ -1,5 +1,5 @@
 <div class="sidebar-area mt-none-30">
-    <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-search">
+    <!-- <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-search">
         <h3 class="widget__title blog-sidebar-title">Search</h3>
         <form class="widget__search blog-sidebar-search" action="#!">
             <input type="text" placeholder="Search your keyword">
@@ -23,7 +23,7 @@
         <div class="widget__post">
             <div class="widget__post-item ul_li blog-widget-post-item">
                 <div class="post-thumb">
-                    <a href="blog-single.html"><img src="assets/img/blog/post_01.jpg" alt=""></a>
+                    <a href="blog-single.html"><img src="{{ asset('/assets/img/blog/post_01.jpg') }}" alt=""></a>
                 </div>
                 <div class="post-content">
                     <span class="post-date">July 25,2023</span>
@@ -33,7 +33,7 @@
             </div>
             <div class="widget__post-item ul_li blog-widget-post-item">
                 <div class="post-thumb">
-                    <a href="blog-single.html"><img src="assets/img/blog/w_02.jpg" alt=""></a>
+                    <a href="blog-single.html"><img src="{{ asset('/assets/img/blog/w_02.jpg') }}" alt=""></a>
                 </div>
                 <div class="post-content">
                     <span class="post-date">March 20,2023</span>
@@ -43,7 +43,7 @@
             </div>
             <div class="widget__post-item ul_li blog-widget-post-item">
                 <div class="post-thumb">
-                    <a href="blog-single.html"><img src="assets/img/blog/w_03.jpg" alt=""></a>
+                    <a href="blog-single.html"><img src="{{ asset('/assets/img/blog/w_03.jpg') }}" alt=""></a>
                 </div>
                 <div class="post-content">
                     <span class="post-date">July 18,2023</span>
@@ -53,18 +53,18 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
     <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-recent">
         <h3 class="widget__title blog-sidebar-title">Follow Us</h3>
         <ul class="widget__social ul_li blog-widget-social">
-            <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#!"><i class="fab fa-linkedin-in"></i></a></li>
-            <li><a href="#!"><i class="fab fa-youtube"></i></a></li>
-            <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://x.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+            <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
         </ul>
     </div>
-    <div class="widget mt-30 blog-sidebar-widget-tags">
+    <!-- <div class="widget mt-30 blog-sidebar-widget-tags">
         <h3 class="widget__title blog-sidebar-title blog-sidebar-title-tags">Tags</h3>
         <div class="tagcloud">
             <a href="#!">Crypto Home</a>
@@ -77,5 +77,5 @@
             <a href="#!">Advisor</a>
             <a href="#!">Investment</a>
         </div>
-    </div>
+    </div> -->
 </div>

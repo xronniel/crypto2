@@ -133,4 +133,16 @@ class ArticleController extends Controller
 
         return redirect()->back()->with('success', 'Gallery image deleted successfully!');
     }
+
+        public function indexUser()
+        {
+            $articlesList = Article::with('galleries')->latest()->paginate(10); // Paginate results
+            return view('article-gallery', compact('articlesList'));
+        }
+
+        public function showUser($id)
+        {
+            $article = Article::with('galleries')->findOrFail($id);
+            return view('article-details', compact('article'));
+        }
 }
