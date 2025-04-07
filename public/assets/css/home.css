@@ -42,6 +42,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 .first-section-border-first-div {
@@ -82,6 +83,7 @@
     padding: 15px 40px;
     color: #080b18;
     cursor: pointer;
+    width: 100%;
 }
 
 .submit-button {
@@ -698,6 +700,16 @@ input[type="text"] {
     padding-top: 135px; 
 }
 
+
+
+.up-img{
+    position: fixed;
+    z-index: 4;
+    bottom: 20px;
+    right: 2.3%;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) { 
     .partners,
     .about-wrap {
@@ -740,7 +752,7 @@ input[type="text"] {
         border-radius: 20px;
         border-width: 1px;
         padding: 17px;
-        max-width: 90%;
+        max-width: 100%;
     }
 
     .first-section-border-second-div span:last-child {
@@ -840,5 +852,22 @@ text-transform: capitalize;
         flex-direction: row;
     }
 
+    .partner-slider .xb-item--brand {
+        height: 300px;
+  
+      }
+}
 
+
+
+@media (max-width: 700px) {
+
+    .first-section-border {
+        max-width: 92%;
+    }
+
+
+    .xb-footer-wrap .xb-item--footer_widget-community {
+        max-width: 100%;
+    }
 }

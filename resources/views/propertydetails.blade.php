@@ -16,6 +16,11 @@
                     </div>
 
                     <div class="property-filter-two">
+                        <div class="back-filter-box" onclick="window.location.href='/'">
+                            <img class="back-filter-img" src="{{ asset('assets/img/home/return-icon.svg') }}"
+                                alt="arrow">
+
+                        </div>
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <p class="filter-badge">NEW</p>
@@ -57,8 +62,13 @@
                         <!-- Filters Toggle Button -->
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
-                            <button class="Price-button" type="button" id="FiltersToggle">More Filters</button>
-                            {{-- <input type="hidden" name="" id="" value=""> --}}
+                            <button class="filter-button" type="button" id="FiltersToggle">
+                                <span>More Filters</span>
+
+                                <img class="property-filter-img-two"
+                                    src="{{ asset('assets/img/home/FilterButtonMobile.svg') }}" alt="FilterButtonMobile">
+                            </button>
+                            <input type="hidden" name="" id="" value="">
                         </div>
 
                         <button class="property-filter-button" type="submit">Find</button>
@@ -135,17 +145,14 @@
 
 
                         <!-- More Filters Dropdown -->
-                        <div style="padding:0 20px; width: 600px;"
-                            class="dropdown-dialog" id="FiltersDropdown">
+                        <div class="dropdown-dialog  More-FIlters-div" id="FiltersDropdown">
 
                             <div>
                                 <h1>
                                     More FIlters
                                 </h1>
                             </div>
-                            <div
-                            style="padding:20px;"
-                            >
+                            <div style="padding:20px;">
                                 <p>
                                     <img src="{{ asset('assets/img/property/search-icon.svg') }}" alt="search">
                                     Search
@@ -159,56 +166,57 @@
                             </div>
                             <div class="filters-secroll-box">
 
-                     
-
-                                    <p>
-                                        <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
-                                        Furnishing
-                                    </p>
-
-                                    <div class="beds-baths-options">
-
-                                        <button type="button" class="furnished" data-value="">All
-                                            Furnishing</button>
-                                        <button type="button" class="furnished" data-value="furnished">Furnished</button>
-                                        <button type="button" class="furnished" data-value="unfurnished">Unfurnished</button>
-                                        <button type="button" class="furnished" data-value="partly furnished">Partly
-                                            Furnished</button>
-
-                                    </div>
-
-                                    <p>
-                                        <img src="{{ asset('assets/img/property/completion.svg') }}" alt="search">
-                                        Completion Status
-                                    </p>
-
-                                    <div class="beds-baths-options">
-
-                                        <button type="button" class="Completion" data-value="">Any</button>
-                                        <button type="button" class="Completion" data-value="off_plan">Off-plan</button>
-                                        <button type="button" class="Completion" data-value="ready">Ready</button>
-
-                                    </div>
-
-                                    <p>
-                                        <img src="{{ asset('assets/img/property/amenities-icon-1.svg') }}" alt="search">
-                                        Amenities
-                                    </p>
-                                    <div class="amenities-box">
 
 
-                                        @foreach ($amenities as $amenity)
-                                            <label class="amenities">
-                                                <input type="checkbox" name="amenities[]" value="{{ $amenity }}">
-                                                {{ $amenity }}
-                                            </label>
-                                        @endforeach
-                                    </div>
+                                <p>
+                                    <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
+                                    Furnishing
+                                </p>
+
+                                <div class="beds-baths-options">
+
+                                    <button type="button" class="furnished" data-value="">All
+                                        Furnishing</button>
+                                    <button type="button" class="furnished" data-value="furnished">Furnished</button>
+                                    <button type="button" class="furnished"
+                                        data-value="unfurnished">Unfurnished</button>
+                                    <button type="button" class="furnished" data-value="partly furnished">Partly
+                                        Furnished</button>
+
+                                </div>
+
+                                <p>
+                                    <img src="{{ asset('assets/img/property/completion.svg') }}" alt="search">
+                                    Completion Status
+                                </p>
+
+                                <div class="beds-baths-options">
+
+                                    <button type="button" class="Completion" data-value="">Any</button>
+                                    <button type="button" class="Completion" data-value="off_plan">Off-plan</button>
+                                    <button type="button" class="Completion" data-value="ready">Ready</button>
+
+                                </div>
+
+                                <p>
+                                    <img src="{{ asset('assets/img/property/amenities-icon-1.svg') }}" alt="search">
+                                    Amenities
+                                </p>
+                                <div class="amenities-box">
+
+
+                                    @foreach ($amenities as $amenity)
+                                        <label class="amenities">
+                                            <input type="checkbox" name="amenities[]" value="{{ $amenity }}">
+                                            {{ $amenity }}
+                                        </label>
+                                    @endforeach
+                                </div>
                             </div>
 
 
-                            <input type="hidden" name="furnishing" id="furnishing" value="">
-                            <input type="hidden" name="completion" id="completion" value="">
+                            <input type="hidden" name="furnishing" id="" value="">
+                            <input type="hidden" name="completion" id="" value="">
                             <input type="hidden" type="checkbox" name="amenities[]" value="">
 
 
@@ -293,6 +301,36 @@
                     </div>
                 </div>
 
+<div class="properties-swiper-mobile swiper">
+    <div
+    
+    class="swiper-wrapper">
+        {{-- Main Image --}}
+        @if ($property->images->isNotEmpty())
+            <div class="swiper-slide">
+                <img class="main-image-img" alt="Property Image" 
+                     src="{{ $property->xml ? $property->images->first()->url : asset('storage/' . $property->images->first()->url) }}">
+            </div>
+        @endif
+
+        {{-- Small Images --}}
+        @foreach ($property->images->take(3) as $image)
+            <div class="swiper-slide">
+                <img class="small-images-img"  
+                     src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}" 
+                     alt="home">
+            </div>
+        @endforeach
+    </div>
+
+    <!-- Pagination & Navigation -->
+    <div class="swiper-pagination"></div>
+    {{-- <div class="swiper-button-prev"></div> --}}
+    {{-- <div class="swiper-button-next"></div> --}}
+</div>
+
+
+
                 {{-- Swiper Popup Modal --}}
                 <div id="imagePopup" class="image-popup">
                     <span class="close-btn" onclick="closeSwiperPopup()">&times;</span>
@@ -336,7 +374,20 @@
                             <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
                             <div class="grid-left-side-price-div">
                                 {{-- <p class="grid-left-side-price-div-one">830.22 XRP</p> --}}
-                                <p class="grid-left-side-price-div-two">{{ $property->price }}<span>AED</span></p>
+                                @php
+                                function formatNumber($num) {
+                                    if ($num >= 1000000000) {
+                                        return number_format($num / 1000000000, 2) . 'B';
+                                    } elseif ($num >= 1000000) {
+                                        return number_format($num / 1000000, 2) . 'M';
+                                    } elseif ($num >= 1000) {
+                                        return number_format($num / 1000, 2) . 'K';
+                                    }
+                                    return number_format($num, 2);
+                                }
+                            @endphp
+                            
+                            <p class="grid-left-side-price-div-two">{{ formatNumber($property->price) }}<span>AED</span></p>
                             </div>
                             <h4 class="grid-left-side-price-div-four">/Month</h4>
                         </div>
@@ -423,19 +474,25 @@
                             <!-- Phone Call -->
                             <a href="tel:{{ $property->listing_agent_phone }}">
                                 <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
-                                Call
+                                <span>
+                                    Call
+                                </span>
                             </a>
 
                             <!-- Email -->
                             <a href="mailto:{{ $property->listing_agent_email }}">
                                 <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
+                               <span>
                                 Email
+                               </span>
                             </a>
 
                             <!-- WhatsApp -->
                             <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" target="_blank">
                                 <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
-                                WhatsApp
+                          <span>
+                                    WhatsApp
+                          </span>
                             </a>
                         </div>
                     </div>

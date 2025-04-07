@@ -950,8 +950,13 @@ border-radius: 5px;
     color: #2DD98F !important;
 }
 
+#map{
+    z-index: 3 !important;
+}
 
-
+.properties-swiper-mobile{
+    display: none;
+}
 
 .popup-small-img {
     display: flex;
@@ -982,4 +987,110 @@ border-radius: 5px;
     border: 3px solid #2DD98F; /* Green border */
     border-radius: 5px;
     transition: border 0.3s ease-in-out;
+}
+@media (max-width: 986px) {
+
+
+.grid-img-container{
+    flex-direction: column;
+}
+
+.grid-container {
+    width: 100%;
+    display: none;
+}
+.grid-left-side {
+    width: 100%;
+    display: flex
+    ;
+            flex-direction: column-reverse;
+}
+
+
+.Description-second-box,
+.Floor-Plan-div{
+    flex-direction: column;
+}
+
+.page-path-line{
+    display: none;
+}
+
+.Description-second-box-one,
+.Description-second-box-two,
+.Floor-Plan-div-one,
+.Floor-Plan-div-two {
+    width: 100%;
+}
+
+.map-div-one {
+    width: 100%;
+    height: 500px;
+}
+
+.property-two-box-five-box {
+    padding: 10px;
+
+    margin: 20px 0 0 0;
+    display: flex
+;
+    justify-content: space-between;
+    width: 96%;
+    position: fixed;
+    bottom: 2%;
+    right: 0;
+    left: 0;
+    margin: auto;
+
+    background: #070A19;
+    border: 1px solid #8FE4F880;
+border-radius: 50px;
+z-index: 4;
+
+
+}
+
+.property-two-box-five-two a span {
+    display: none;
+}
+
+.property-two-box-five-two a {
+    border-radius: 50%;
+    padding: 0px 3px 0px 7px;
+
+}
+
+
+.grid-left-side-price-box {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.grid-left-side-price-div-two{
+    font-weight: 700;
+    font-size: 30px;
+
+}
+.properties-swiper-mobile {
+    display: block;
+    position: relative;
+}
+
+.properties-swiper-mobile .swiper-pagination-bullet-active {
+    width: 10px !important;
+    height: 10px !important;
+    background-color: white !important;
+    opacity: 1 !important;
+}
+
+.properties-swiper-mobile .swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: white !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease-in-out;
+}
+
 }
