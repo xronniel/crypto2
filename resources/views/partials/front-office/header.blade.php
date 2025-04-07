@@ -1,12 +1,13 @@
+<div class="space-header"></div>
 <header id="xb-header-area" class="header-area">
     <div class="xb-header stricky">
         <div class="container">
             <div class="header__wrap ul_li_between">
-                <div class="header-bar-mobile side-menu d-lg-none">
+                <div class="header-bar-mobile side-menu d-lg-none hide-item-header">
                     <a class="login-mobile-button login-btn" href="javascript:void(0);"><i 
                         class="fas fa-user"></i></a>
                 </div>
-                <div class="header-logo">
+                <div class="header-logo hide-item-header">
                     <a href="/">
                         <img src="{{ asset('assets/img/logo/Logo.png') }}" alt="Logo">
                     </a>
@@ -92,7 +93,7 @@
                 </div>
 
                 <div class="header-last-btn">
-                    <div class="header-btn-one ul_li">
+                    <div class="header-btn-one ul_li hide-item-header">
                         <a class="btc-btn" href="#">
                             <img src="{{ asset('assets/img/icon/hero-icon01.svg') }}" alt="BTC Icon">
                             <span>
@@ -216,6 +217,20 @@
 </div>
 
 
+<style>
+    .header-area{
+        width: 100%;
+        position: fixed;
+        top: 0;
+    }
+
+    .space-header{
+        width: 100%;
+        height: 100px;
+        background: black;
+    }
+</style>
+
 
 </header>
 
@@ -303,6 +318,51 @@
         registerForm.style.display = "none";
         loginForm.style.display = "flex";
     });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const hideItems = document.querySelectorAll(".hide-item-header");
+    const currentPath = window.location.pathname;
+
+    if (currentPath.startsWith("/properties/")) {
+        hideItems.forEach(item => {
+            item.style.display = "none";
+        });
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    function adjustStyles() {
+        const currentPath = window.location.pathname;
+        const headerLastBtns = document.querySelectorAll(".header-last-btn");
+        const spaceHeaders = document.querySelectorAll(".space-header");
+        const hideItems = document.querySelectorAll(".hide-item-header");
+
+        if (currentPath.startsWith("/properties") && window.innerWidth <= 1000) {
+            hideItems.forEach(item => {
+                item.style.display = "none";
+            });
+
+            headerLastBtns.forEach(el => el.style.width = "100%");
+            spaceHeaders.forEach(el => el.style.height = "73px");
+        } else {
+            hideItems.forEach(item => {
+                item.style.display = "";
+            });
+
+            headerLastBtns.forEach(el => el.style.width = "");
+            spaceHeaders.forEach(el => el.style.height = "");
+        }
+    }
+
+    // Run adjustments once on page load
+    adjustStyles();
+
+    // Apply styles on window resize
+    window.addEventListener("resize", adjustStyles);
 });
 
 </script>

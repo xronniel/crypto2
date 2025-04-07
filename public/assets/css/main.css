@@ -4998,8 +4998,8 @@ body[data-aos-easing="ease"] [data-aos] {
 .partner-slider .xb-item--brand {
     border: 1px solid #21294d;
     border-radius: 32px;
-    max-width: 289px;
-    height: 202px;
+    max-width: 400px;
+    height: 250px;
     background: #080b18;
     display: flex;
     align-items: center;
@@ -5242,6 +5242,7 @@ body[data-aos-easing="ease"] [data-aos] {
     left: 0;
     top: 27%;
     z-index: -1;
+    height: 100%;
 }
 @media (max-width: 991px) {
     .xb-process .xb-item--shape {
@@ -5869,7 +5870,7 @@ body[data-aos-easing="ease"] [data-aos] {
     align-items: center;
 }
 .feature .feature-crypto .cry-mobile-img {
-    margin-left: -20px;
+    /* margin-left: -20px; */
 }
 .feature .feature-shape {
     position: absolute;
@@ -10458,6 +10459,7 @@ blockquote .quote {
 @media (max-width: 767px) {
     .xb-inner {
         padding: 43px 25px 50px 25px;
+        border-radius: 30px;
     }
 }
 .xb-inner .xb-item--title {
@@ -10547,6 +10549,7 @@ blockquote .quote {
 @media (max-width: 767px) {
     .testimonial-wrap {
         padding: 30px;
+        border-radius: 30px;
     }
 }
 
