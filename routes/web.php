@@ -75,15 +75,12 @@ Route::get('/blog', function () {
 Route::get('/news-gallery', function () {
     return view('news-gallery');
 });
-Route::get('/news-details', function () {
-    return view('news-details');
-});
-Route::get('/article-gallery', function () {
-    return view('article-gallery');
-});
-Route::get('/article-details', function () {
-    return view('article-details');
-});
+Route::get('news', [NewsController::class, 'indexUser'])->name('news.gallery');
+Route::get('/news/{news}', [NewsController::class, 'showUser'])->name('news.gallery.show');
+
+Route::get('articles', [ArticleController::class, 'indexUser'])->name('articles.gallery');
+Route::get('/articles/{article}', [ArticleController::class, 'showUser'])->name('articles.gallery.show');
+
 
 Auth::routes();
 

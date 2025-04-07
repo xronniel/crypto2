@@ -135,4 +135,16 @@ class NewsController extends Controller
 
         return redirect()->back()->with('success', 'Gallery image deleted successfully!');
     }
+
+    public function indexUser()
+    {
+        $newsList = News::with('galleries')->latest()->paginate(10); // Paginate results
+        return view('news-gallery', compact('newsList'));
+    }
+
+    public function showUser($id)
+    {
+        $news = News::with('galleries')->findOrFail($id);
+        return view('news-details', compact('news'));
+    }
 }
