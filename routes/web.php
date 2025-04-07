@@ -57,11 +57,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
 
-Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
-Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show');
+// Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
+// Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show');
 
-Route::get('/articles', [ArticleController::class, 'userIndex'])->name('articles.index');
-Route::get('/articles/{article}', [ArticleController::class, 'userShow'])->name('articles.show');
+// Route::get('/articles', [ArticleController::class, 'userIndex'])->name('articles.index');
+// Route::get('/articles/{article}', [ArticleController::class, 'userShow'])->name('articles.show');
 
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
