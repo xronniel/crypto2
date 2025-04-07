@@ -40,7 +40,9 @@
         @yield('content')
     </div>
     @include('partials.front-office.footer')
-
+    <img class="up-img" 
+    src="{{ asset('assets/img/up-icon-green.png') }}" 
+    alt="up-img">
     <!-- JavaScript Files -->
     <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

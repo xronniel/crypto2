@@ -17,6 +17,11 @@
                     </div>
 
                     <div class="property-filter-two">
+                        <div class="back-filter-box" onclick="window.location.href='/'">
+                            <img class="back-filter-img" src="{{ asset('assets/img/home/return-icon.svg') }}"
+                                alt="arrow">
+
+                        </div>
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <p class="filter-badge">NEW</p>
@@ -58,7 +63,12 @@
                         <!-- Filters Toggle Button -->
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
-                            <button class="Price-button" type="button" id="FiltersToggle">More Filters</button>
+                            <button class="filter-button" type="button" id="FiltersToggle">
+                                <span>More Filters</span>
+
+                                <img class="property-filter-img-two"
+                                    src="{{ asset('assets/img/home/FilterButtonMobile.svg') }}" alt="FilterButtonMobile">
+                            </button>
                             <input type="hidden" name="" id="" value="">
                         </div>
 
@@ -136,17 +146,14 @@
 
 
                         <!-- More Filters Dropdown -->
-                        <div style="padding:0 20px; width: 600px;"
-                            class="dropdown-dialog" id="FiltersDropdown">
+                        <div class="dropdown-dialog  More-FIlters-div" id="FiltersDropdown">
 
                             <div>
                                 <h1>
                                     More FIlters
                                 </h1>
                             </div>
-                            <div
-                            style="padding:20px;"
-                            >
+                            <div style="padding:20px;">
                                 <p>
                                     <img src="{{ asset('assets/img/property/search-icon.svg') }}" alt="search">
                                     Search
@@ -160,51 +167,52 @@
                             </div>
                             <div class="filters-secroll-box">
 
-                     
-
-                                    <p>
-                                        <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
-                                        Furnishing
-                                    </p>
-
-                                    <div class="beds-baths-options">
-
-                                        <button type="button" class="furnished" data-value="">All
-                                            Furnishing</button>
-                                        <button type="button" class="furnished" data-value="furnished">Furnished</button>
-                                        <button type="button" class="furnished" data-value="unfurnished">Unfurnished</button>
-                                        <button type="button" class="furnished" data-value="partly furnished">Partly
-                                            Furnished</button>
-
-                                    </div>
-
-                                    <p>
-                                        <img src="{{ asset('assets/img/property/completion.svg') }}" alt="search">
-                                        Completion Status
-                                    </p>
-
-                                    <div class="beds-baths-options">
-
-                                        <button type="button" class="Completion" data-value="">Any</button>
-                                        <button type="button" class="Completion" data-value="off_plan">Off-plan</button>
-                                        <button type="button" class="Completion" data-value="ready">Ready</button>
-
-                                    </div>
-
-                                    <p>
-                                        <img src="{{ asset('assets/img/property/amenities-icon-1.svg') }}" alt="search">
-                                        Amenities
-                                    </p>
-                                    <div class="amenities-box">
 
 
-                                        @foreach ($amenities as $amenity)
-                                            <label class="amenities">
-                                                <input type="checkbox" name="amenities[]" value="{{ $amenity }}">
-                                                {{ $amenity }}
-                                            </label>
-                                        @endforeach
-                                    </div>
+                                <p>
+                                    <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
+                                    Furnishing
+                                </p>
+
+                                <div class="beds-baths-options">
+
+                                    <button type="button" class="furnished" data-value="">All
+                                        Furnishing</button>
+                                    <button type="button" class="furnished" data-value="furnished">Furnished</button>
+                                    <button type="button" class="furnished"
+                                        data-value="unfurnished">Unfurnished</button>
+                                    <button type="button" class="furnished" data-value="partly furnished">Partly
+                                        Furnished</button>
+
+                                </div>
+
+                                <p>
+                                    <img src="{{ asset('assets/img/property/completion.svg') }}" alt="search">
+                                    Completion Status
+                                </p>
+
+                                <div class="beds-baths-options">
+
+                                    <button type="button" class="Completion" data-value="">Any</button>
+                                    <button type="button" class="Completion" data-value="off_plan">Off-plan</button>
+                                    <button type="button" class="Completion" data-value="ready">Ready</button>
+
+                                </div>
+
+                                <p>
+                                    <img src="{{ asset('assets/img/property/amenities-icon-1.svg') }}" alt="search">
+                                    Amenities
+                                </p>
+                                <div class="amenities-box">
+
+
+                                    @foreach ($amenities as $amenity)
+                                        <label class="amenities">
+                                            <input type="checkbox" name="amenities[]" value="{{ $amenity }}">
+                                            {{ $amenity }}
+                                        </label>
+                                    @endforeach
+                                </div>
                             </div>
 
 
@@ -250,7 +258,7 @@
                 <img class="leftToRight" src="{{ asset('assets/img/icon/bi_04.png') }}" alt="">
             </div>
         </div>
-        
+
     </section>
     <!-- breadcrumb end -->
 
@@ -268,44 +276,45 @@
                 Buy Properties in Dubai
             </h2>
 
+            <div class="page-line-filter-box">
+                <div class="page-line-filter">
+                    <div class="page-line-filter-h3">
+                        <p>{{ $properties->count() }}</p>
+                        <span>properties available</span>
+                    </div>
 
-            <div class="page-line-filter">
-                <div class="page-line-filter-h3">
-                    <p>{{ $properties->count() }}</p>
-                    <span>properties available</span>
+                    <div class="page-line-filter-links">
+                        <a class="page-line-filter-links-ctive" href="#">Any</a>
+                        <a href="#">Off-plan</a>
+                        <a href="#">Ready</a>
+                    </div>
+
                 </div>
 
-                <div class="page-line-filter-links">
-                    <a class="page-line-filter-links-ctive" href="#">Any</a>
-                    <a href="#">Off-plan</a>
-                    <a href="#">Ready</a>
+
+                <div class="page-line-filter">
+
+                    <div class="page-line-filter-links-two mobile-view">
+                        <a href="#">
+                            <img style="    width: 22px;" class="page-line-filter-links-two-img"
+                                src="assets/img/property/location.png" alt="home">
+                            Map view</a>
+                        <a href="#">
+                            <img style="    width: 19px;" class="page-line-filter-links-two-img"
+                                src="assets/img/property/alert.png" alt="home">
+                            Create alert</a>
+                    </div>
+
+                    <div class="page-line-filter-links-two">
+                        <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
+                        <label for="#">Sort by:</label>
+
+                        <select name="#" id="#">
+                            <option value="volvo">1</option>
+                        </select>
+                    </div>
+
                 </div>
-
-            </div>
-
-
-            <div class="page-line-filter">
-
-                <div class="page-line-filter-links-two">
-                    <a href="#">
-                        <img style="    width: 22px;" class="page-line-filter-links-two-img"
-                            src="assets/img/property/location.png" alt="home">
-                        Map view</a>
-                    <a href="#">
-                        <img style="    width: 19px;" class="page-line-filter-links-two-img"
-                            src="assets/img/property/alert.png" alt="home">
-                        Create alert</a>
-                </div>
-
-                <div class="page-line-filter-links-two">
-                    <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
-                    <label for="#">Sort by:</label>
-
-                    <select name="#" id="#">
-                        <option value="volvo">1</option>
-                    </select>
-                </div>
-
             </div>
 
 
@@ -378,7 +387,7 @@
                                     <div class="blog__item-property-two-box-two">
                                         <div class="blog__item-property-two-box-one">
                                             <p class="box-two-p-one">
-                                                {{$property->getConvertedPrice()['converted_price']}}({{$property->getConvertedPrice()['currency_code']}})
+                                                {{ $property->getConvertedPrice()['converted_price'] }}({{ $property->getConvertedPrice()['currency_code'] }})
                                             </p>
                                             <p class="box-two-p-two">
                                                 {{ $property->price }} AED
@@ -400,21 +409,24 @@
                                     <div class="property-two-box-four">
                                         {{-- Rooms --}}
                                         @if (isset($property->no_of_rooms) && $property->no_of_rooms > 0)
-                                            <img class="img-four" src="{{ asset('assets/img/property/green-bed.png') }}" alt="bed">
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-bed.png') }}"
+                                                alt="bed">
                                             <p>{{ $property->no_of_rooms }}</p>
                                             <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
                                         @endif
-                                    
+
                                         {{-- Bathrooms --}}
                                         @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
-                                            <img class="img-four" src="{{ asset('assets/img/property/green-bath.png') }}" alt="bath">
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-bath.png') }}"
+                                                alt="bath">
                                             <p>{{ $property->no_of_bathroom }}</p>
                                             <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
                                         @endif
-                                    
+
                                         {{-- Built-Up Area --}}
                                         @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
-                                            <img class="img-four" src="{{ asset('assets/img/property/green-size.png') }}" alt="size">
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-size.png') }}"
+                                                alt="size">
                                             <p>{{ $property->unit_builtup_area }}{{ $property->unit_measure }}</p>
                                         @endif
                                     </div>
@@ -627,8 +639,9 @@
                     document.querySelectorAll(".Completion").forEach(btn => btn.classList.remove(
                         "active"));
                     this.classList.add("active");
-                    document.querySelector("input[name='completion_status']").value = this.getAttribute(
-                        "data-value");
+                    document.querySelector("input[name='completion_status']").value = this
+                        .getAttribute(
+                            "data-value");
                 });
             });
 
@@ -653,20 +666,19 @@
         }
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-    // Amenities Search Filtering
-    document.querySelector("input[name='search-filters']").addEventListener("input", function () {
-        let searchValue = this.value.toLowerCase();
-        document.querySelectorAll(".amenities").forEach(label => {
-            let amenityText = label.textContent.toLowerCase();
-            if (amenityText.includes(searchValue)) {
-                label.style.display = "flex"; 
-            } else {
-                label.style.display = "none"; 
-            }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Amenities Search Filtering
+            document.querySelector("input[name='search-filters']").addEventListener("input", function() {
+                let searchValue = this.value.toLowerCase();
+                document.querySelectorAll(".amenities").forEach(label => {
+                    let amenityText = label.textContent.toLowerCase();
+                    if (amenityText.includes(searchValue)) {
+                        label.style.display = "flex";
+                    } else {
+                        label.style.display = "none";
+                    }
+                });
+            });
         });
-    });
-});
-
     </script>
 @endsection

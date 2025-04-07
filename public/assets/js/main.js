@@ -36,21 +36,21 @@
 	= sticky header
 	-------------------------------------------*/
 	// sticky header
-	if ($('.stricky').length) {
-        $('.stricky').addClass('original').clone(true).insertAfter('.stricky').addClass('stricked-menu').removeClass('original');
-    }
-	$(window).on('scroll', function () {
-        if ($('.stricked-menu').length) {
-            var headerScrollPos = 100;
-            var stricky = $('.stricked-menu');
-            if ($(window).scrollTop() > headerScrollPos) {
-                stricky.addClass('stricky-fixed');
-            } else if ($(this).scrollTop() <= headerScrollPos) {
-                stricky.removeClass('stricky-fixed');
-            }
-        }
+	// if ($('.stricky').length) {
+    //     $('.stricky').addClass('original').clone(true).insertAfter('.stricky').addClass('stricked-menu').removeClass('original');
+    // }
+	// $(window).on('scroll', function () {
+    //     if ($('.stricked-menu').length) {
+    //         var headerScrollPos = 100;
+    //         var stricky = $('.stricked-menu');
+    //         if ($(window).scrollTop() > headerScrollPos) {
+    //             stricky.addClass('stricky-fixed');
+    //         } else if ($(this).scrollTop() <= headerScrollPos) {
+    //             stricky.removeClass('stricky-fixed');
+    //         }
+    //     }
 
-    });
+    // });
 
 
 	/*------------------------------------------
@@ -167,6 +167,28 @@
 	}
 
 
+
+		var slider = new Swiper(".properties-swiper-mobile", {
+			slidesPerView: 1,
+			spaceBetween: 10,
+			loop: true,
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+			autoplay: {
+				delay: 3000,
+			},
+		});
+	
+
+
+
+
 	/*------------------------------------------
 	= partner slider
 	-------------------------------------------*/
@@ -175,18 +197,18 @@
 		spaceBetween: 0,
 		speed: 5000, // Slow, continuous movement (adjust speed as needed)
 		slidesPerView: 6,
-		autoplay: {
-			delay: 0, // No pauses at all
-			disableOnInteraction: false, // Keeps autoplay running even after user interaction
-		},
+		// autoplay: {
+		// 	delay: 0, 
+		// 	disableOnInteraction: false, 
+		// },
 		freeMode: true, // Enables smooth, continuous scrolling
 		freeModeMomentum: false, // Prevents sudden stops after movement
 		allowTouchMove: false, // Prevents manual swiping
 		breakpoints: {
 			1600: { slidesPerView: 6 },
 			1200: { slidesPerView: 4 },
-			992: { slidesPerView: 4 },
-			768: { slidesPerView: 3 },
+			992: { slidesPerView: 3 },
+			768: { slidesPerView: 2 },
 			576: { slidesPerView: 1.5 }, // Show one and a half slides on small screens
 			0: { slidesPerView: 1.5 }, // Apply the same setting for extra-small screens
 		},
@@ -787,5 +809,23 @@
 
 })(jQuery);
 
+document.addEventListener("DOMContentLoaded", function () {
+    const upImg = document.querySelector(".up-img");
 
+    if (upImg) {
+        upImg.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
 
+ 
+    const currentPath = window.location.pathname;
+    if (currentPath.startsWith("/properties")) {
+        if (upImg) {
+            upImg.style.display = "none";
+        }
+    }
+});
