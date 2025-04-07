@@ -72,9 +72,7 @@ Route::get('/contact-us', function () {
 Route::get('/blog', function () {
     return view('blog');
 });
-Route::get('/news-gallery', function () {
-    return view('news-gallery');
-});
+
 Route::get('news', [NewsController::class, 'indexUser'])->name('news.gallery');
 Route::get('/news/{news}', [NewsController::class, 'showUser'])->name('news.gallery.show');
 
