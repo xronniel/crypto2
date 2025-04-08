@@ -115,10 +115,9 @@
                                             alt="arrow">
                                         <select name="min_price" class="price-dropdown form-select">
                                             <option value="" selected>Min. price</option>
-                                            <!-- Default option set to 0 -->
-                                            @for ($price = 500; $price <= 9000; $price += 100)
-                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                            @endfor
+                                            @foreach ($priceRange['steps'] as $price)
+                                                <option value="{{ $price }}">{{ $price }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -130,10 +129,9 @@
                                             alt="arrow">
                                         <select name="max_price" class="price-dropdown form-select">
                                             <option value="" selected>Max. price</option>
-                                            <!-- Default option set to 0 -->
-                                            @for ($price = 500; $price <= 9000; $price += 100)
-                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                            @endfor
+                                            @foreach ($priceRange['steps'] as $price)
+                                                <option value="{{ $price }}">{{ $price }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

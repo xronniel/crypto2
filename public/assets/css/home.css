@@ -251,6 +251,13 @@ input[type="text"] {
     width: 30px;
 }
 
+
+.area-home{
+    display: flex
+    ;
+        gap: 20px;
+}
+
 .Converter-div {
     display: flex;
     justify-content: center;

@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="property-filter-two">
-                        <div class="back-filter-box" onclick="window.location.href='/properties'">
+                        <div class="back-filter-box" onclick="window.location.href='/'">
                             <img class="back-filter-img" src="{{ asset('assets/img/home/return-icon.svg') }}"
                                 alt="arrow">
 
@@ -75,16 +75,16 @@
                         {{-- !-- Area Dropdown --> --}}
                         <div class="dropdown-dialog" id="areaDropdown">
                             <p>Area Size</p>
-
+                  
                             <div class="dropdown-dialog-content">
                                 <div class="black-dropdown black-dropdown-one ">
                                     <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
                                         alt="arrow">
                                     <select name="min_area" class="price-dropdown form-select">
                                         <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
-                                        @for ($price = 500; $price <= 9000; $price += 100)
-                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                        @endfor
+                                        @foreach ($plotAreaRange['steps'] as $step)
+                                            <option value="{{ $step }}">{{ $step }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="black-dropdown black-dropdown-one ">
@@ -92,16 +92,14 @@
                                         alt="arrow">
                                     <select name="max_area" class="price-dropdown form-select">
                                         <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
-                                        @for ($price = 500; $price <= 9000; $price += 100)
-                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                        @endfor
+                                        @foreach ($plotAreaRange['steps'] as $step)
+                                            <option value="{{ $step }}">{{ $step }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <button type="button" class="done-btn hide-mobile"
-                            onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
-                        <button type="submit" class="done-btn show-mobile-two"
-                            onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
+                            <button type="button" class="done-btn"
+                                onclick="closeDropdownArea('areaDropdown')">Done</button>
                         </div>
 
 
@@ -116,10 +114,9 @@
                                             alt="arrow">
                                         <select name="min_price" class="price-dropdown form-select">
                                             <option value="" selected>Min. price</option>
-                                            <!-- Default option set to 0 -->
-                                            @for ($price = 500; $price <= 9000; $price += 100)
-                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                            @endfor
+                                            @foreach ($priceRange['steps'] as $price)
+                                                <option value="{{ $price }}">{{ $price }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -131,27 +128,27 @@
                                             alt="arrow">
                                         <select name="max_price" class="price-dropdown form-select">
                                             <option value="" selected>Max. price</option>
-                                            <!-- Default option set to 0 -->
-                                            @for ($price = 500; $price <= 9000; $price += 100)
-                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                            @endfor
+                                            @foreach ($priceRange['steps'] as $price)
+                                                <option value="{{ $price }}">{{ $price }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
                             <button type="button" class="done-btn"
-                                onclick="closeDropdown('priceDropdown')">Done</button>
+                                onclick="closeDropdowntwo('priceDropdown')">Done</button>
                         </div>
 
 
 
                         <!-- More Filters Dropdown -->
+                        
                         <div class="dropdown-dialog  More-FIlters-div" id="FiltersDropdown">
 
                             <div>
                                 <h1>
-                                    More FIlters f
+                                    More FIlters
                                 </h1>
                             </div>
                             <div style="padding:20px;">
@@ -225,7 +222,9 @@
 
 
 
-                            <button type="button" class="done-btn"
+                            <button type="button" class="done-btn hide-mobile"
+                                onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
+                            <button type="submit" class="done-btn show-mobile-two"
                                 onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
                         </div>
 
@@ -411,15 +410,17 @@
                             <div class="grid-left-side-price-div">
                                 {{-- <p class="grid-left-side-price-div-one">830.22 XRP</p> --}}
                                 @php
-                                function formatNumber($num) {
-                                    if ($num >= 1000000000) {
-                                        return number_format($num / 1000000000, 2) . 'B';
-                                    } elseif ($num >= 1000000) {
-                                        return number_format($num / 1000000, 2) . 'M';
-                                    } elseif ($num >= 1000) {
-                                        return number_format($num / 1000, 2) . 'K';
+                                if (!function_exists('formatNumber')) {
+                                    function formatNumber($num) {
+                                        if ($num >= 1000000000) {
+                                            return number_format($num / 1000000000, 2) . 'B';
+                                        } elseif ($num >= 1000000) {
+                                            return number_format($num / 1000000, 2) . 'M';
+                                        } elseif ($num >= 1000) {
+                                            return number_format($num / 1000, 2) . 'K';
+                                        }
+                                        return number_format($num, 2);
                                     }
-                                    return number_format($num, 2);
                                 }
                             @endphp
                             

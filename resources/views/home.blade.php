@@ -117,7 +117,8 @@
 
                 <form class="mobile-form-home" action="{{ route('properties.index') }}" method="GET">
                     @csrf
-
+                    <input type="hidden" name="min_area" id="selectedMinArea" value="">
+                    <input type="hidden" name="max_area" id="selectedMaxArea" value="">
                     <input type="hidden" name="filter_type" id="filterTypeInputTwo" value="rent"> <!-- Default value -->
                     <input type="hidden" name="no_of_rooms" id="selectedRooms" value=""> <!-- Selected rooms -->
                     <input type="hidden" name="no_of_bathroom" id="selectedBathrooms" value="">
@@ -188,10 +189,10 @@
 
                                     
                                     <p>
-                                        <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
-                                        min_area
+                                        <img src="{{ asset('assets/img/property/green-size.png') }}" alt="size">
+                                        Area Size (Sq.ft)
                                     </p>
-                                    <div>
+                                    <div class="area-home">
                                         <div class="black-dropdown black-dropdown-one ">
                                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
                                                 alt="arrow">
@@ -1232,6 +1233,25 @@ document.addEventListener("DOMContentLoaded", function() {
   
     closeButton.addEventListener("click", function () {
         filterDropdown.classList.remove("active");
+    });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const minAreaSelect = document.querySelector("select[name='min_area']");
+    const maxAreaSelect = document.querySelector("select[name='max_area']");
+    const minAreaInput = document.getElementById("selectedMinArea");
+    const maxAreaInput = document.getElementById("selectedMaxArea");
+
+    // Update the hidden inputs whenever the dropdowns change
+    minAreaSelect.addEventListener("change", function() {
+        minAreaInput.value = this.value;
+ 
+    });
+
+    maxAreaSelect.addEventListener("change", function() {
+        maxAreaInput.value = this.value;
     });
 });
     </script>
