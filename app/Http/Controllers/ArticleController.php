@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleGallery;
+use App\Models\Comment;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Country;
@@ -175,7 +176,12 @@ class ArticleController extends Controller
         $categories = Category::withCount('articles')->get();
         $tags = Tag::all();
         
-        $articlesList = Article::with(['galleries', 'tags'])->latest()->paginate(10);
+        $articlesList = Article::with(['galleries', 'tags', 'comments' => function($query) {
+            return $query->active();
+        }])->latest()->paginate(10)->map(function($article) {
+            $article->comments_count = $article->comments->count();
+            return $article;
+        });
         
         return view('article-gallery', compact('articlesList', 'latestArticles', 'categories', 'tags'));
     }
@@ -190,7 +196,13 @@ class ArticleController extends Controller
         $categories = Category::withCount('articles')->get();
         $tags = Tag::all();
 
-        $article = Article::with(['galleries', 'tags'])->findOrFail($id);
+        $article = Article::with(['galleries', 'tags', 'comments' => function($query) {
+            return $query->active()->with(['user', 'parent', 'children']);
+        }])->findOrFail($id);
+        
+        $article->comments = Comment::getNestedComments($article->comments);
+        $article->comments_count = Comment::getTotalCommentsCount($article->comments);
+        
         return view('article-details', compact('article', 'latestArticles', 'categories', 'tags'));
     }
 }

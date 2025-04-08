@@ -25,6 +25,11 @@ class Article extends Model
         'category_id'
     ];
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->active();
+    }
+
     // Relationship with gallery images
     public function galleries()
     {

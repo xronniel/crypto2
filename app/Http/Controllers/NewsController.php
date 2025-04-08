@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewsRequest;
+use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Emirates;
@@ -186,7 +187,12 @@ class NewsController extends Controller
         $categories = Category::withCount('news')->get();
         $tags = Tag::all();
         
-        $newsList = News::with(['galleries', 'tags'])->latest()->paginate(10);
+        $newsList = News::with(['galleries', 'tags', 'comments' => function($query) {
+            return $query->active();
+        }])->latest()->paginate(10)->map(function($news) {
+            $news->comments_count = $news->comments->count();
+            return $news;
+        });
         
         return view('news-gallery', compact('newsList', 'latestNews', 'categories', 'tags'));
     }
@@ -201,8 +207,13 @@ class NewsController extends Controller
         $categories = Category::withCount('news')->get();
         $tags = Tag::all();
 
-        $news = News::with(['galleries', 'tags'])->findOrFail($id);
+        $news = News::with(['galleries', 'tags', 'comments' => function($query) {
+            return $query->active()->with(['user', 'parent', 'children']);
+        }])->findOrFail($id);
         
+        $news->comments = Comment::getNestedComments($news->comments);
+        $news->comments_count = Comment::getTotalCommentsCount($news->comments);
+
         return view('news-details', compact('news', 'latestNews', 'categories', 'tags'));
     }
 }
