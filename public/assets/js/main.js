@@ -117,13 +117,20 @@
 	$(".xb-nav-mobile").on('click', function () {
 		$(this).toggleClass('active');
 		$('.xb-header-menu').toggleClass('active');
+	
+		if ($('.xb-header-menu').hasClass('active')) {
+			$('.property-filter, .property-filter-img-two').hide();
+		} else {
+			$('.property-filter, .property-filter-img-two').show();
+		}
 	});
-
+	
 	$(".xb-menu-close, .xb-header-menu-backdrop").on('click', function () {
-		$(this).removeClass('active');
+		$('.xb-nav-mobile').removeClass('active');
 		$('.xb-header-menu').removeClass('active');
+		$('.property-filter, .property-filter-img-two').show(); 
 	});
-
+	
 	/*------------------------------------------
 	= data background and bg color
 	-------------------------------------------*/
