@@ -9,20 +9,26 @@
                 </div>
                 <div class="header-logo hide-item-header">
                     <a href="/">
-                        <img src="{{ asset('assets/img/logo/Logo.png') }}" alt="Logo">
+                        <img src="{{ asset('assets/img/logo/Logo-2.png') }}" alt="Logo">
                     </a>
                 </div>
                 <div class="main-menu__wrap ul_li navbar navbar-expand-lg">
                     <nav class="main-menu collapse navbar-collapse">
                         <ul>
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>Buy</span></a>
+                                <a class="scrollspy-btn" href="{{ route('properties.index', ['filter_type' => 'buy']) }}">
+                                    <span>Buy</span>
+                                </a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>Rent</span></a>
+                                <a class="scrollspy-btn" href="{{ route('properties.index', ['filter_type' => 'rent']) }}">
+                                    <span>Rent</span>
+                                </a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>Commercial</span></a>
+                                <a class="scrollspy-btn" href="{{ route('properties.index', ['type' => 'commercial']) }}">
+                                    <span>Commercial</span>
+                                </a>
                             </li>
                             <li>
                                 <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
@@ -48,7 +54,7 @@
                                 <div class="xb-menu-close xb-hide-xl xb-close"></div>
                                 <div class="xb-logo-mobile xb-hide-xl">
                                     <a href="/" rel="home">
-                                        <img src="{{ asset('assets/img/logo/Logo.png') }}" alt="Logo">
+                                        <img src="{{ asset('assets/img/logo/Logo-2.png') }}" alt="Logo">
                                         
                                         </a>
                                 </div>
@@ -61,13 +67,19 @@
                                 <nav class="xb-header-nav">
                                     <ul class="xb-menu-primary clearfix">
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#"><span>Buy</span></a>
+                                            <a class="scrollspy-btn" href="{{ route('properties.index', ['filter_type' => 'buy']) }}">
+                                                <span>Buy</span>
+                                            </a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#"><span>Rent</span></a>
+                                            <a class="scrollspy-btn" href="{{ route('properties.index', ['filter_type' => 'rent']) }}">
+                                                <span>Rent</span>
+                                            </a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#"><span>Commercial</span></a>
+                                            <a class="scrollspy-btn" href="{{ route('properties.index', ['type' => 'commercial']) }}">
+                                                <span>Commercial</span>
+                                            </a>
                                         </li>
                                         <li class="menu-item">
                                             <a class="scrollspy-btn" href="#"><span>New Projects</span></a>

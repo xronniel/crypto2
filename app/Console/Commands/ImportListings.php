@@ -32,6 +32,21 @@ class ImportListings extends Command
             $agentId = $this->updateAgent($listing);
             $communityId = $this->updateCommunity($listing);
 
+            $unitType = (string)$listing->Unit_Type;
+            $commercialTypes = [
+                'Commercial Full Building',
+                'Retail',
+                'Warehouse',
+                'Labour Camp',
+                'Land Commercial',
+                'Factory',
+                'Land Mixed Use',
+                'Commercial Full Floor',
+            ];
+
+            $type = in_array($unitType, $commercialTypes) ? 'Commercial' : 'Residential';
+
+
             $listingData = Listing::updateOrCreate(
                 [
                     'property_ref_no' => (string)$listing->Property_Ref_No,
@@ -82,6 +97,7 @@ class ImportListings extends Command
                     'off_plan' => (int)$listing->off_plan,
                     'permit_number' => (string)$listing->permit_number,
                     'completion_status' => (string)$listing->completion_status,
+                    'type' => $type,
                 ]
             );
 

@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    cursor: pointer;
 }
 
 .page-path-line p {
@@ -123,6 +124,7 @@ position: relative;
     line-height: 48px;
     color: #ffffff80;
     margin: 10px 0;
+    text-align: start;
 }
 .grid-left-side-two {
     font-family: "Manrope", sans-serif;
@@ -130,6 +132,14 @@ position: relative;
     font-size: 40px;
     line-height: 48px;
     color: #ffffff;
+    text-align: start;
+}
+
+.show-mobile {
+    display: none;
+}
+.show-mobile-two {
+    display: none;
 }
 
 .grid-left-side-three {
@@ -139,6 +149,7 @@ position: relative;
     line-height: 24px;
     color: #ffffff80;
     margin: 25px 0;
+    text-align: start;
 }
 
 .grid-left-side-price img {
@@ -574,6 +585,12 @@ padding: 5px 10px;
 border-radius: 5px;
 
 }
+.beds-baths-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 
 
 .Location-img-one {
@@ -989,7 +1006,16 @@ border-radius: 5px;
     transition: border 0.3s ease-in-out;
 }
 @media (max-width: 986px) {
+    .show-mobile {
+        display: flex;
+    }
+    .show-mobile-two {
+        display: block;
+    }
 
+    .hide-mobile {
+        display: none;
+    }
 
 .grid-img-container{
     flex-direction: column;
@@ -1093,4 +1119,68 @@ z-index: 4;
     transition: all 0.3s ease-in-out;
 }
 
+
+
+
+.grid-left-side-two {
+    font-weight: 500;
+    margin: 0 ;
+    font-size: 24px;
 }
+
+
+
+.grid-left-side-one {
+
+font-size: 18px;
+line-height: 32px;
+margin: 0 ;
+
+}
+
+
+
+.Description-second-box-two-one {
+    flex-direction: column;
+}
+.Description-second-box-two-box-one{
+    width: 100%;
+}
+
+.property-details-Description-two {
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+
+}
+
+
+
+
+
+
+
+ @media (max-width: 986px) {
+    .property-filter-header input {
+        width: 100%;
+        background: #0d0d17;
+        border: 1px solid #8fe4f880;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        color: white;
+    }
+    .property-filter-header {
+        position: fixed;
+        top: 12px;
+        z-index: 9;
+        right: 0;
+        left: 0;
+        width: 50%;
+        margin: auto;
+    }
+
+} 

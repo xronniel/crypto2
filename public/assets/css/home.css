@@ -56,7 +56,7 @@
     border-radius: 40px;
     display: flex;
     overflow: hidden;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .first-section-border-first-div span {
@@ -83,7 +83,7 @@
     padding: 15px 40px;
     color: #080b18;
     cursor: pointer;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .submit-button {
@@ -160,7 +160,7 @@ option:hover {
 
 .first-section-border-second-div span:nth-child(1) {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
 }
 
@@ -219,6 +219,7 @@ input[type="text"] {
     color: #000000;
 }
 
+
 .Converter-div input[type="text"] {
     width: 100px;
     height: 20px;
@@ -249,6 +250,13 @@ input[type="text"] {
 
 .WhatsApp-img {
     width: 30px;
+}
+
+
+.area-home{
+    display: flex
+    ;
+        gap: 20px;
 }
 
 .Converter-div {
@@ -758,11 +766,30 @@ input[type="text"] {
     .first-section-border-second-div span:last-child {
         background: #0d0d17;
         border: 1px solid #8fe4f880;
-
         border-radius: 1000px;
         border-width: 1px;
+        width: 100%;
+        padding: 10px 20px 10px 3px;
+        height: 60px;
+    }
+    .first-section-border-second-div {
+        width: 100%;
     }
 
+
+    .search-button-property-two {
+        width: 60px;
+
+        background: #2dd98f;
+        display: flex
+;
+        border-radius: 50% 0 0 50%;
+        justify-content: center;
+        align-items: center;
+        height: 53px;
+        padding: 0;
+
+    }
     .Vector-img {
         filter: brightness(0) invert(1);
     }
@@ -870,4 +897,33 @@ text-transform: capitalize;
     .xb-footer-wrap .xb-item--footer_widget-community {
         max-width: 100%;
     }
+}
+
+
+
+
+@media (max-width: 986px) {
+    .dropdown-dialog-home {
+
+        position: fixed;
+        width: 100%;
+        background: #000;
+        border-radius: 5px;
+        border: 1px solid #c1c7de;
+        padding: 20px;
+        display: none;
+        z-index: 100;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+        top: auto;
+        height: fit-content;
+    }
+
+    .first-section-border-second-div {
+   
+        width: 100%;
+    }
+    
 }

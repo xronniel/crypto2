@@ -11,8 +11,11 @@
             <form action="{{ route('properties.index') }}" method="GET">
                 @csrf
                 <div class="property-filter-box">
-                    <div class="property-filter">
-                        <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                    
+                    <div class="property-filter property-filter-header">
+                        <button type="submit" class="search-button-property">
+                            <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                        </button>
                         <input type="text" placeholder="City, community or building" value="" name="search">
                     </div>
 
@@ -48,15 +51,15 @@
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="priceToggle">Price</button>
-                            <input type="hidden" name="min_price" id="selectedMinPrice" value="">
-                            <input type="hidden" name="max_price" id="selectedMaxPrice" value="">
+                            {{-- <input type="hidden" name="min_price" id="selectedMinPrice" value="">
+                            <input type="hidden" name="max_price" id="selectedMaxPrice" value=""> --}}
                         </div>
                         <!-- Area Filter -->
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="AreaToggle">Area Size</button>
-                            <input type="hidden" name="min_area" id="selectedMinArea" value="">
-                            <input type="hidden" name="max_area" id="selectedMaxArea" value="">
+                            {{-- <input type="hidden" name="min_area" id="selectedMinArea" value="">
+                            <input type="hidden" name="max_area" id="selectedMaxArea" value=""> --}}
                         </div>
 
 
@@ -76,16 +79,16 @@
                         {{-- !-- Area Dropdown --> --}}
                         <div class="dropdown-dialog" id="areaDropdown">
                             <p>Area Size</p>
-
+                  
                             <div class="dropdown-dialog-content">
                                 <div class="black-dropdown black-dropdown-one ">
                                     <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
                                         alt="arrow">
                                     <select name="min_area" class="price-dropdown form-select">
                                         <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
-                                        @for ($price = 500; $price <= 9000; $price += 100)
-                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                        @endfor
+                                        @foreach ($plotAreaRange['steps'] as $step)
+                                            <option value="{{ $step }}">{{ $step }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="black-dropdown black-dropdown-one ">
@@ -93,9 +96,9 @@
                                         alt="arrow">
                                     <select name="max_area" class="price-dropdown form-select">
                                         <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
-                                        @for ($price = 500; $price <= 9000; $price += 100)
-                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                        @endfor
+                                        @foreach ($plotAreaRange['steps'] as $step)
+                                            <option value="{{ $step }}">{{ $step }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -115,10 +118,9 @@
                                             alt="arrow">
                                         <select name="min_price" class="price-dropdown form-select">
                                             <option value="" selected>Min. price</option>
-                                            <!-- Default option set to 0 -->
-                                            @for ($price = 500; $price <= 9000; $price += 100)
-                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                            @endfor
+                                            @foreach ($priceRange['steps'] as $price)
+                                                <option value="{{ $price }}">{{ $price }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -130,22 +132,22 @@
                                             alt="arrow">
                                         <select name="max_price" class="price-dropdown form-select">
                                             <option value="" selected>Max. price</option>
-                                            <!-- Default option set to 0 -->
-                                            @for ($price = 500; $price <= 9000; $price += 100)
-                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                            @endfor
+                                            @foreach ($priceRange['steps'] as $price)
+                                                <option value="{{ $price }}">{{ $price }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
                             <button type="button" class="done-btn"
-                                onclick="closeDropdown('priceDropdown')">Done</button>
+                                onclick="closeDropdowntwo('priceDropdown')">Done</button>
                         </div>
 
 
 
                         <!-- More Filters Dropdown -->
+                        
                         <div class="dropdown-dialog  More-FIlters-div" id="FiltersDropdown">
 
                             <div>
@@ -218,14 +220,16 @@
 
                             <input type="hidden" name="furnishing" id="" value="">
                             <input type="hidden" name="completion" id="" value="">
-                            <input type="hidden" type="checkbox" name="amenities[]" value="">
+                            {{-- <input type="hidden" type="checkbox" name="amenities[]" value=""> --}}
 
 
 
 
 
-                            <button type="button" class="done-btn"
-                                onclick="closeDropdown('FiltersDropdown')">Done</button>
+                            <button type="button" class="done-btn hide-mobile"
+                                onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
+                            <button type="submit" class="done-btn show-mobile-two"
+                                onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
                         </div>
 
                     </div>
@@ -284,9 +288,14 @@
                     </div>
 
                     <div class="page-line-filter-links">
-                        <a class="page-line-filter-links-ctive" href="#">Any</a>
-                        <a href="#">Off-plan</a>
-                        <a href="#">Ready</a>
+                        <a href="{{ route('properties.index', ['completion_status' => '']) }}"
+                           class="{{ request('completion_status') == '' ? 'page-line-filter-links-ctive' : '' }}">Any</a>
+                    
+                        <a href="{{ route('properties.index', ['completion_status' => 'off_plan']) }}"
+                           class="{{ request('completion_status') == 'off_plan' ? 'page-line-filter-links-ctive' : '' }}">Off-plan</a>
+                    
+                        <a href="{{ route('properties.index', ['completion_status' => 'ready']) }}"
+                           class="{{ request('completion_status') == 'ready' ? 'page-line-filter-links-ctive' : '' }}">Ready</a>
                     </div>
 
                 </div>
@@ -448,21 +457,31 @@
                                         <div class="property-two-box-five-two">
                                             <!-- Phone Call -->
                                             <a href="tel:{{ $property->listing_agent_phone }}">
-                                                <img src="assets/img/property/dark-call.png" alt="Call">
-                                                Call
+                                                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
+                                                <span>
+                                                    Call
+                                                </span>
                                             </a>
+                
                                             <!-- Email -->
                                             <a href="mailto:{{ $property->listing_agent_email }}">
-                                                <img src="assets/img/property/dark-mail.png" alt="Email">
+                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
+                                               <span>
                                                 Email
+                                               </span>
                                             </a>
+                
                                             <!-- WhatsApp -->
-                                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
-                                                target="_blank">
-                                                <img src="assets/img/property/dark-WhatsApp.png" alt="WhatsApp">
-                                                WhatsApp
+                                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" target="_blank">
+                                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
+                                          <span>
+                                                    WhatsApp
+                                          </span>
                                             </a>
                                         </div>
+
+
+
                                     </div>
 
 
@@ -484,10 +503,13 @@
                         <div class="widget  widget-one mt-30">
                             <h3 class="widget__title">Nearby Areas</h3>
                             <ul class="widget__category list-unstyled">
-                                <li><a href="#!">Properties for sale in Dubai</a></li>
-                                <li><a href="#!">Properties for sale in Abu Dhabi</a></li>
-                                <li><a href="#!">Properties for sale in Ajman</a></li>
-                                <li><a href="#!">Properties for sale in Sharjah</a></li>
+                                @foreach ($emirates as $emirate)
+                                    <li>
+                                        <a href="javascript:void(0);" onclick="window.location.href='{{ route('properties.index', ['filter_type' => 'sale', 'emirate' => $emirate]) }}'">
+                                            Properties for sale in {{ $emirate }}
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                             <h3 class="widget__title">Popular Searches</h3>
                             <ul class="widget__category list-unstyled">
@@ -508,7 +530,9 @@
 
 
 
-                        <div class="widget widget-two mt-30">
+                        <div 
+                        style="padding: 0;"
+                        class="widget widget-two mt-30">
 
                             <div class="widget-two-one">
                                 <img src="assets/img/property/amar.png" alt="amar">
@@ -523,7 +547,9 @@
 
 
 
-                        <div class="widget widget-three mt-30">
+                        <div 
+                            style="padding: 0;"
+                        class="widget widget-three mt-30">
                             <img src="assets/img/property/marta.gif" alt="amar">
                         </div>
 
@@ -536,149 +562,97 @@
 
 
 
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Show/Hide Price Dropdown
-            document.getElementById("priceToggle").addEventListener("click", function() {
-                document.getElementById("priceDropdown").classList.toggle("active");
-            });
-
-            // Selecting Min Price
-            document.querySelectorAll(".price-option[data-min]").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.querySelectorAll(".price-option[data-min]").forEach(btn => btn
-                        .classList.remove("active"));
-                    this.classList.add("active");
-                    document.getElementById("selectedMinPrice").value = this.getAttribute(
-                        "data-min");
-                });
-            });
-
-            // Selecting Max Price
-            document.querySelectorAll(".price-option[data-max]").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.querySelectorAll(".price-option[data-max]").forEach(btn => btn
-                        .classList.remove("active"));
-                    this.classList.add("active");
-                    document.getElementById("selectedMaxPrice").value = this.getAttribute(
-                        "data-max");
-                });
-            });
-        });
-
-        // Close dropdown
-        function closeDropdown(id) {
-            document.getElementById(id).classList.remove("active");
+    <style>
+        ul {
+        list-style-type: none;  
+        padding: 0;            
+        margin: 0;              
+    }
+    
+    ul li {
+        margin: 0;              
+        padding: 0;            
+    }
+    .beds-baths-options button {
+        flex: 1 1 calc(25% - 10px); 
+        min-width: 120px; 
+        padding: 10px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    .property-filter .search-button-property {
+        position: absolute;
+        left: 4px;
+        top: 0.7px;
+        bottom: 0;
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        background: none;
+        display: flex
+    ;
+        border-radius: 50% 0 0 50%;
+        justify-content: center;
+        align-items: center;
+        height: 43px;
+        padding: 10px 8px;
+        align-content: center;
+    }
+    
+    
+    .widget__title {
+    text-align: start;
+}
+    
+    
+    
+    @media (max-width: 700px) {
+        .property-filter {
+            width: 60%;
         }
-
-
-
-
-
-
-
-
-
-        document.addEventListener("DOMContentLoaded", function() {
-
-            // Show/Hide Area Dropdown
-            document.getElementById("AreaToggle").addEventListener("click", function() {
-                document.getElementById("areaDropdown").classList.toggle("active-Area");
-            });
-
-            // Selecting Min Area
-            document.querySelectorAll("select[name='min_area']").forEach(select => {
-                select.addEventListener("change", function() {
-                    document.getElementById("selectedMinPrice").value = this.value;
-                });
-            });
-
-            // Selecting Max Area
-            document.querySelectorAll("select[name='max_area']").forEach(select => {
-                select.addEventListener("change", function() {
-                    document.getElementById("selectedMaxPrice").value = this.value;
-                });
-            });
-        });
-
-
-
-        // Close dropdown
-        function closeDropdownArea(id) {
-            document.getElementById(id).classList.remove("active-Area");
+    
+        .filter-button {
+            right: 2%;
         }
-
-
-
-        document.addEventListener("DOMContentLoaded", function() {
-            // Show/Hide More Filters Dropdown
-            let filtersToggle = document.getElementById("FiltersToggle");
-            let filtersDropdown = document.getElementById("FiltersDropdown");
-
-            if (filtersToggle && filtersDropdown) {
-                filtersToggle.addEventListener("click", function() {
-                    filtersDropdown.classList.toggle("active");
-                });
-            }
-
-            // Selecting Furnishing
-            document.querySelectorAll(".furnished").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.querySelectorAll(".furnished").forEach(btn => btn.classList.remove(
-                        "active"));
-                    this.classList.add("active");
-                    document.querySelector("input[name='furnishing']").value = this.getAttribute(
-                        "data-value");
-                });
-            });
-
-            // Selecting Completion Status
-            document.querySelectorAll(".Completion").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.querySelectorAll(".Completion").forEach(btn => btn.classList.remove(
-                        "active"));
-                    this.classList.add("active");
-                    document.querySelector("input[name='completion_status']").value = this
-                        .getAttribute(
-                            "data-value");
-                });
-            });
-
-            // Selecting Amenities
-            document.querySelectorAll(".amenities input[type='checkbox']").forEach(checkbox => {
-                checkbox.addEventListener("change", function() {
-                    let selectedAmenities = [];
-                    document.querySelectorAll(".amenities input[type='checkbox']:checked").forEach(
-                        checkedBox => {
-                            selectedAmenities.push(checkedBox.value);
-                        });
-                    document.querySelector("input[name='amenities[]']").value = selectedAmenities
-                        .join(",");
-                });
-            });
-
-        });
-
-        // Close dropdown function
-        function closeDropdown(id) {
-            document.getElementById(id).classList.remove("active");
+    }
+    @media (max-width: 700px) {
+        .property-filter {
+            width: 60%;
         }
-
-
-        document.addEventListener("DOMContentLoaded", function() {
-            // Amenities Search Filtering
-            document.querySelector("input[name='search-filters']").addEventListener("input", function() {
-                let searchValue = this.value.toLowerCase();
-                document.querySelectorAll(".amenities").forEach(label => {
-                    let amenityText = label.textContent.toLowerCase();
-                    if (amenityText.includes(searchValue)) {
-                        label.style.display = "flex";
-                    } else {
-                        label.style.display = "none";
-                    }
-                });
-            });
-        });
-    </script>
+    
+        .filter-button {
+            right: 2%;
+        }
+    
+    
+        .property-filter img {
+            filter: brightness(0) invert(1); 
+        }
+        
+    
+        .property-filter .search-button-property {
+            position: absolute;
+            left: 2px;
+            top: 0.7px;
+            bottom: 0;
+            margin: auto;
+            width: fit-content;
+            height: fit-content;
+            background: #2dd98f;
+            display: flex
+        ;
+            border-radius: 50% 0 0 50%;
+            justify-content: center;
+            align-items: center;
+            height: 43px;
+            padding: 10px 8px;
+            align-content: center;
+        }
+        
+        
+    
+    
+    }
+    
+    </style>
 @endsection

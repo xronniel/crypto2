@@ -10,7 +10,7 @@
             <form action="{{ route('properties.index') }}" method="GET">
                 @csrf
                 <div class="property-filter-box">
-                    <div class="property-filter">
+                    <div class="property-filter property-filter-header">
                         <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
                         <input type="text" placeholder="City, community or building" value="" name="search">
                     </div>
@@ -47,15 +47,15 @@
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="priceToggle">Price</button>
-                            <input type="hidden" name="min_price" id="selectedMinPrice" value="">
-                            <input type="hidden" name="max_price" id="selectedMaxPrice" value="">
+                            {{-- <input type="hidden" name="min_price" id="selectedMinPrice" value="">
+                            <input type="hidden" name="max_price" id="selectedMaxPrice" value=""> --}}
                         </div>
                         <!-- Area Filter -->
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="AreaToggle">Area Size</button>
-                            <input type="hidden" name="min_area" id="selectedMinArea" value="">
-                            <input type="hidden" name="max_area" id="selectedMaxArea" value="">
+                            {{-- <input type="hidden" name="min_area" id="selectedMinArea" value="">
+                            <input type="hidden" name="max_area" id="selectedMaxArea" value=""> --}}
                         </div>
 
 
@@ -75,16 +75,16 @@
                         {{-- !-- Area Dropdown --> --}}
                         <div class="dropdown-dialog" id="areaDropdown">
                             <p>Area Size</p>
-
+                  
                             <div class="dropdown-dialog-content">
                                 <div class="black-dropdown black-dropdown-one ">
                                     <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
                                         alt="arrow">
                                     <select name="min_area" class="price-dropdown form-select">
                                         <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
-                                        @for ($price = 500; $price <= 9000; $price += 100)
-                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                        @endfor
+                                        @foreach ($plotAreaRange['steps'] as $step)
+                                            <option value="{{ $step }}">{{ $step }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="black-dropdown black-dropdown-one ">
@@ -92,9 +92,9 @@
                                         alt="arrow">
                                     <select name="max_area" class="price-dropdown form-select">
                                         <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
-                                        @for ($price = 500; $price <= 9000; $price += 100)
-                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                        @endfor
+                                        @foreach ($plotAreaRange['steps'] as $step)
+                                            <option value="{{ $step }}">{{ $step }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -114,10 +114,9 @@
                                             alt="arrow">
                                         <select name="min_price" class="price-dropdown form-select">
                                             <option value="" selected>Min. price</option>
-                                            <!-- Default option set to 0 -->
-                                            @for ($price = 500; $price <= 9000; $price += 100)
-                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                            @endfor
+                                            @foreach ($priceRange['steps'] as $price)
+                                                <option value="{{ $price }}">{{ $price }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -129,22 +128,22 @@
                                             alt="arrow">
                                         <select name="max_price" class="price-dropdown form-select">
                                             <option value="" selected>Max. price</option>
-                                            <!-- Default option set to 0 -->
-                                            @for ($price = 500; $price <= 9000; $price += 100)
-                                                <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                            @endfor
+                                            @foreach ($priceRange['steps'] as $price)
+                                                <option value="{{ $price }}">{{ $price }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
 
                             <button type="button" class="done-btn"
-                                onclick="closeDropdown('priceDropdown')">Done</button>
+                                onclick="closeDropdowntwo('priceDropdown')">Done</button>
                         </div>
 
 
 
                         <!-- More Filters Dropdown -->
+                        
                         <div class="dropdown-dialog  More-FIlters-div" id="FiltersDropdown">
 
                             <div>
@@ -217,14 +216,16 @@
 
                             <input type="hidden" name="furnishing" id="" value="">
                             <input type="hidden" name="completion" id="" value="">
-                            <input type="hidden" type="checkbox" name="amenities[]" value="">
+                            {{-- <input type="hidden" type="checkbox" name="amenities[]" value=""> --}}
 
 
 
 
 
-                            <button type="button" class="done-btn"
-                                onclick="closeDropdown('FiltersDropdown')">Done</button>
+                            <button type="button" class="done-btn hide-mobile"
+                                onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
+                            <button type="submit" class="done-btn show-mobile-two"
+                                onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
                         </div>
 
                     </div>
@@ -236,7 +237,7 @@
             padding: 1px 0;
             ">
         <div class="container">
-            <div class="page-path-line">
+            <div onclick="window.location.href='/properties'" class="page-path-line">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
                 <p>/ Property Listing</p>
@@ -360,30 +361,66 @@
                 </div>
 
                 <div class="grid-left-side">
-                    <div class="grid-left-side-fisrt-dev">
+                    <div class="grid-left-side-fisrt-dev hide-mobile">
                         <p>{{ $property->ad_type }}</p>
                         {{-- <p>6% OFF</p> --}}
                     </div>
-                    <h3 class="grid-left-side-one">{{ $property->property_title }}</h3>
-                    <h3 class="grid-left-side-two">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
+                    <h3 class="grid-left-side-one hide-mobile">{{ $property->property_title }}</h3>
+                    <h3 class="grid-left-side-two hide-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
                     <h3 class="grid-left-side-three">
-                        {!! $property->web_remarks !!}
+                        @php
+                        $html = $property->web_remarks;
+                    
+                        $dom = new DOMDocument();
+                        libxml_use_internal_errors(true); // Suppress HTML5 warnings
+                        $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+                    
+                        $pTags = $dom->getElementsByTagName('p');
+                        $output = '';
+                    
+                        foreach ($pTags as $p) {
+                            // Remove <strong> and <br> tags
+                            foreach (iterator_to_array($p->getElementsByTagName('*')) as $node) {
+                                if ($node->nodeName === 'strong' || $node->nodeName === 'br') {
+                                    // Replace node with its text content or nothing
+                                    $text = $node->textContent;
+                                    $textNode = $dom->createTextNode($text);
+                                    $node->parentNode->replaceChild($textNode, $node);
+                                }
+                            }
+                    
+                            // Save final <p> tag with cleaned content
+                            $output .= $dom->saveHTML($p);
+                        }
+                    @endphp
+                    
+                    {!! $output !!}
+                    
                     </h3>
+                    <h3 class="grid-left-side-one show-mobile">{{ $property->property_title }}</h3>
+                    <h3 class="grid-left-side-two show-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
+                    
+                    <div class="grid-left-side-fisrt-dev show-mobile">
+                        <p>{{ $property->ad_type }}</p>
+                        {{-- <p>6% OFF</p> --}}
+                    </div>
                     <div class="grid-left-side-price-box">
                         <div class=" grid-left-side-price">
                             <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
                             <div class="grid-left-side-price-div">
                                 {{-- <p class="grid-left-side-price-div-one">830.22 XRP</p> --}}
                                 @php
-                                function formatNumber($num) {
-                                    if ($num >= 1000000000) {
-                                        return number_format($num / 1000000000, 2) . 'B';
-                                    } elseif ($num >= 1000000) {
-                                        return number_format($num / 1000000, 2) . 'M';
-                                    } elseif ($num >= 1000) {
-                                        return number_format($num / 1000, 2) . 'K';
+                                if (!function_exists('formatNumber')) {
+                                    function formatNumber($num) {
+                                        if ($num >= 1000000000) {
+                                            return number_format($num / 1000000000, 2) . 'B';
+                                        } elseif ($num >= 1000000) {
+                                            return number_format($num / 1000000, 2) . 'M';
+                                        } elseif ($num >= 1000) {
+                                            return number_format($num / 1000, 2) . 'K';
+                                        }
+                                        return number_format($num, 2);
                                     }
-                                    return number_format($num, 2);
                                 }
                             @endphp
                             
@@ -438,7 +475,7 @@
                         </div>
 
                     </div>
-                    <div class="Converter-div-box">
+                    <div class="Converter-div-box hide-mobile">
                         <div style="width: 35%;" class="Converter-div-input">
                             <div style="width: 100%;" class="Converter-select-input">
                                 <select style="width: 100%;" name="cars" id="cars">
@@ -505,8 +542,7 @@
                 </div>
                 <div class="Description-second-box">
                     <div class="Description-second-box-one">
-                        {!! $property->web_remarks !!} <!-- Render HTML content -->
-
+                        {!! $property->web_remarks !!} 
                         <div class="custom-list-two">
                             <p><span>Office location :</span> {{ $property->company_name }} - {{ $property->community }},
                                 {{ $property->emirate }}</p>
@@ -1005,152 +1041,107 @@
 
 
 
-
-
-
-
         document.addEventListener("DOMContentLoaded", function() {
-            // Show/Hide Price Dropdown
-            document.getElementById("priceToggle").addEventListener("click", function() {
-                document.getElementById("priceDropdown").classList.toggle("active");
-            });
-
-            // Selecting Min Price
-            document.querySelectorAll(".price-option[data-min]").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.querySelectorAll(".price-option[data-min]").forEach(btn => btn
-                        .classList.remove("active"));
-                    this.classList.add("active");
-                    document.getElementById("selectedMinPrice").value = this.getAttribute(
-                        "data-min");
-                });
-            });
-
-            // Selecting Max Price
-            document.querySelectorAll(".price-option[data-max]").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.querySelectorAll(".price-option[data-max]").forEach(btn => btn
-                        .classList.remove("active"));
-                    this.classList.add("active");
-                    document.getElementById("selectedMaxPrice").value = this.getAttribute(
-                        "data-max");
-                });
-            });
-        });
-
-        // Close dropdown
-        function closeDropdown(id) {
-            document.getElementById(id).classList.remove("active");
-        }
-
-
-
-
-
-
-
-
-
-        document.addEventListener("DOMContentLoaded", function() {
-
-            // Show/Hide Area Dropdown
-            document.getElementById("AreaToggle").addEventListener("click", function() {
-                document.getElementById("areaDropdown").classList.toggle("active-Area");
-            });
-
-            // Selecting Min Area
-            document.querySelectorAll("select[name='min_area']").forEach(select => {
-                select.addEventListener("change", function() {
-                    document.getElementById("selectedMinPrice").value = this.value;
-                });
-            });
-
-            // Selecting Max Area
-            document.querySelectorAll("select[name='max_area']").forEach(select => {
-                select.addEventListener("change", function() {
-                    document.getElementById("selectedMaxPrice").value = this.value;
-                });
-            });
-        });
-
-
-
-        // Close dropdown
-        function closeDropdownArea(id) {
-            document.getElementById(id).classList.remove("active-Area");
-        }
-
-
-
-        document.addEventListener("DOMContentLoaded", function() {
-            // Show/Hide More Filters Dropdown
-            let filtersToggle = document.getElementById("FiltersToggle");
-            let filtersDropdown = document.getElementById("FiltersDropdown");
-
-            if (filtersToggle && filtersDropdown) {
-                filtersToggle.addEventListener("click", function() {
-                    filtersDropdown.classList.toggle("active");
-                });
-            }
-
-            // Selecting Furnishing
-            document.querySelectorAll(".furnished").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.querySelectorAll(".furnished").forEach(btn => btn.classList.remove(
-                        "active"));
-                    this.classList.add("active");
-                    document.querySelector("input[name='furnishing']").value = this.getAttribute(
-                        "data-value");
-                });
-            });
-
-            // Selecting Completion Status
-            document.querySelectorAll(".Completion").forEach(button => {
-                button.addEventListener("click", function() {
-                    document.querySelectorAll(".Completion").forEach(btn => btn.classList.remove(
-                        "active"));
-                    this.classList.add("active");
-                    document.querySelector("input[name='completion_status']").value = this.getAttribute(
-                        "data-value");
-                });
-            });
-
-            // Selecting Amenities
-            document.querySelectorAll(".amenities input[type='checkbox']").forEach(checkbox => {
-                checkbox.addEventListener("change", function() {
-                    let selectedAmenities = [];
-                    document.querySelectorAll(".amenities input[type='checkbox']:checked").forEach(
-                        checkedBox => {
-                            selectedAmenities.push(checkedBox.value);
-                        });
-                    document.querySelector("input[name='amenities[]']").value = selectedAmenities
-                        .join(",");
-                });
-            });
-
-        });
-
-        // Close dropdown function
-        function closeDropdown(id) {
-            document.getElementById(id).classList.remove("active");
-        }
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-    // Amenities Search Filtering
-    document.querySelector("input[name='search-filters']").addEventListener("input", function () {
-        let searchValue = this.value.toLowerCase();
-        document.querySelectorAll(".amenities").forEach(label => {
-            let amenityText = label.textContent.toLowerCase();
-            if (amenityText.includes(searchValue)) {
-                label.style.display = "flex"; 
-            } else {
-                label.style.display = "none"; 
-            }
-        });
-    });
-});
-
+                            
+                                let container = document.querySelector(".Description-second-box-one");
+                        
+                                if (container) {
+                               
+                                    container.querySelectorAll("p").forEach(p => p.remove());
+                                }
+                            });
 
 </script>
+
+<style>
+    ul {
+    list-style-type: none;  
+    padding: 0;            
+    margin: 0;              
+}
+
+ul li {
+    margin: 0;              
+    padding: 0;            
+}
+.beds-baths-options button {
+    flex: 1 1 calc(25% - 10px); 
+    min-width: 120px; 
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+.property-filter .search-button-property {
+    position: absolute;
+    left: 4px;
+    top: 0.7px;
+    bottom: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    background: none;
+    display: flex
+;
+    border-radius: 50% 0 0 50%;
+    justify-content: center;
+    align-items: center;
+    height: 43px;
+    padding: 10px 8px;
+    align-content: center;
+}
+
+
+
+
+
+
+@media (max-width: 700px) {
+    .property-filter {
+        width: 60%;
+    }
+
+    .filter-button {
+        right: 2%;
+    }
+}
+@media (max-width: 700px) {
+    .property-filter {
+        width: 60%;
+    }
+
+    .filter-button {
+        right: 2%;
+    }
+
+
+    .property-filter img {
+        filter: brightness(0) invert(1); 
+    }
+    
+
+    .property-filter .search-button-property {
+        position: absolute;
+        left: 2px;
+        top: 0.7px;
+        bottom: 0;
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        background: #2dd98f;
+        display: flex
+    ;
+        border-radius: 50% 0 0 50%;
+        justify-content: center;
+        align-items: center;
+        height: 43px;
+        padding: 10px 8px;
+        align-content: center;
+    }
+    
+    
+
+
+}
+
+</style>
 @endsection

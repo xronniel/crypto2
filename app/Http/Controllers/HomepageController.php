@@ -50,13 +50,13 @@ class HomepageController extends Controller
        // If no community is provided in the request, use the first community as the default
        $defaultCommunity = $communities->first();
        $community = $request->get('community', $defaultCommunity);
-
+   
        if ($community) {
            $query->where('community', $community);
        }
 
         $featuredListings = $query->latest()->paginate(3);
-        
+ 
         $newsList = News::latest()->take(3)->get();
 
         $faqs = Faq::all();
@@ -65,7 +65,22 @@ class HomepageController extends Controller
         ->distinct()
         ->pluck('name');
         $partners = Partner::all();
-        return view('home', compact('newsList', 'homepageContent', 'propertyTypes', 'unitType', 'noOfRooms', 'noOfBathrooms', 'request', 'featuredListings', 'communities', 'community', 'faqs', 'amenities', 'partners'));
+
+        $min = Listing::whereNotNull('plot_area')->min('plot_area');
+        $max = Listing::whereNotNull('plot_area')->max('plot_area');
+    
+        $minRounded = floor($min / 10000000) * 10000000;
+        $maxRounded = ceil($max / 10000000) * 10000000;
+    
+        $steps = range($minRounded, $maxRounded, 10000000);
+    
+        $plotAreaRange = [
+            'min'   => $minRounded,
+            'max'   => $maxRounded,
+            'steps' => $steps,
+        ];
+
+        return view('home', compact('newsList', 'homepageContent', 'propertyTypes', 'unitType', 'noOfRooms', 'noOfBathrooms', 'request', 'featuredListings', 'communities', 'community', 'faqs', 'amenities', 'partners', 'plotAreaRange'));
     }
 
     public function getFeaturedListingsByCommunity(Request $request)
