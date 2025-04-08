@@ -11,8 +11,11 @@
             <form action="{{ route('properties.index') }}" method="GET">
                 @csrf
                 <div class="property-filter-box">
+                    
                     <div class="property-filter property-filter-header">
-                        <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                        <button type="submit" class="search-button-property">
+                            <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                        </button>
                         <input type="text" placeholder="City, community or building" value="" name="search">
                     </div>
 
@@ -217,7 +220,7 @@
 
                             <input type="hidden" name="furnishing" id="" value="">
                             <input type="hidden" name="completion" id="" value="">
-                            <input type="hidden" type="checkbox" name="amenities[]" value="">
+                            {{-- <input type="hidden" type="checkbox" name="amenities[]" value=""> --}}
 
 
 
@@ -551,22 +554,95 @@
 
 
 
-<style>
-
-    .beds-baths-options button {
-    flex: 1 1 calc(25% - 10px); 
-    min-width: 120px; 
-    padding: 10px;
-    text-align: center;
-    white-space: nowrap;
-}
-
-        .property-two-box-five-two a {
-            border-radius: 3px !important; 
+    <style>
+        ul {
+        list-style-type: none;  
+        padding: 0;            
+        margin: 0;              
     }
-
-
-
-
-</style>
+    
+    ul li {
+        margin: 0;              
+        padding: 0;            
+    }
+    .beds-baths-options button {
+        flex: 1 1 calc(25% - 10px); 
+        min-width: 120px; 
+        padding: 10px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    .property-filter .search-button-property {
+        position: absolute;
+        left: 4px;
+        top: 0.7px;
+        bottom: 0;
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        background: none;
+        display: flex
+    ;
+        border-radius: 50% 0 0 50%;
+        justify-content: center;
+        align-items: center;
+        height: 43px;
+        padding: 10px 8px;
+        align-content: center;
+    }
+    
+    
+    
+    
+    
+    
+    @media (max-width: 700px) {
+        .property-filter {
+            width: 60%;
+        }
+    
+        .filter-button {
+            right: 2%;
+        }
+    }
+    @media (max-width: 700px) {
+        .property-filter {
+            width: 60%;
+        }
+    
+        .filter-button {
+            right: 2%;
+        }
+    
+    
+        .property-filter img {
+            filter: brightness(0) invert(1); 
+        }
+        
+    
+        .property-filter .search-button-property {
+            position: absolute;
+            left: 2px;
+            top: 0.7px;
+            bottom: 0;
+            margin: auto;
+            width: fit-content;
+            height: fit-content;
+            background: #2dd98f;
+            display: flex
+        ;
+            border-radius: 50% 0 0 50%;
+            justify-content: center;
+            align-items: center;
+            height: 43px;
+            padding: 10px 8px;
+            align-content: center;
+        }
+        
+        
+    
+    
+    }
+    
+    </style>
 @endsection

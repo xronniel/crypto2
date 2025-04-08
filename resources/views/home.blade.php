@@ -127,7 +127,9 @@
                         <div class="first-section-border">
                             <div class="first-section-border-second-div">
                                 <span>
-                                    <img class="Vector-img" src="assets/img/home/Vector.png" alt="">
+                                    <button type="submit" class="search-button-property-two">
+                                        <img class="Vector-img" src="assets/img/home/Vector.png" alt="">
+                                    </button>
                                     <input type="text" placeholder="City, community or building" value=""
                                         name="search">
                                 </span>
@@ -268,7 +270,7 @@
 
                                 <input type="hidden" name="furnishing" id="furnishing" value="">
                                 <input type="hidden" name="completion" id="completion" value="">
-                                <input type="hidden" type="checkbox" name="amenities[]" value="">
+                                {{-- <input type="hidden" type="checkbox" name="amenities[]" value=""> --}}
 
 
 
@@ -1254,4 +1256,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
     </script>
+
+
+
+<style>
+    .property-filter img {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+</style>
 @endsection

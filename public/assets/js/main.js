@@ -919,18 +919,41 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // ----- Amenities Checkboxes -----
-    document.querySelectorAll(".amenities input[type='checkbox']").forEach(checkbox => {
-        checkbox.addEventListener("change", function () {
-            let selectedAmenities = [];
-            document.querySelectorAll(".amenities input[type='checkbox']:checked").forEach(checkedBox => {
-                selectedAmenities.push(checkedBox.value);
-            });
-
-            const input = document.querySelector("input[name='amenities[]']");
-            if (input) input.value = selectedAmenities.join(",");
-        });
-    });
+	document.addEventListener("DOMContentLoaded", function () {
+		const form = document.querySelector(".mobile-form-home");
+	
+		// --- Handle Checkbox Selection ---
+		document.querySelectorAll(".amenities input[type='checkbox']").forEach(checkbox => {
+			checkbox.addEventListener("change", function () {
+				let selectedAmenities = [];
+				document.querySelectorAll(".amenities input[type='checkbox']:checked").forEach(checkedBox => {
+					selectedAmenities.push(checkedBox.value);
+				});
+	
+				let hiddenInput = document.getElementById("selectedAmenitiesInput");
+				if (!hiddenInput) {
+					// Create hidden input if it doesn't exist
+					hiddenInput = document.createElement("input");
+					hiddenInput.type = "hidden";
+					hiddenInput.name = "selectedAmenities";
+					hiddenInput.id = "selectedAmenitiesInput";
+					form.appendChild(hiddenInput);
+				}
+	
+				// Assign selected amenities to the hidden input
+				hiddenInput.value = selectedAmenities.join(",");
+	
+				console.log("Selected Amenities:", selectedAmenities); // Debugging log
+			});
+		});
+	
+		// --- Remove Unchecked Checkboxes Before Submission ---
+		form.addEventListener("submit", function (event) {
+			document.querySelectorAll("input[name='amenities[]']").forEach(input => {
+				if (!input.checked) input.remove(); // Cleans up unchecked inputs
+			});
+		});
+	});
 
     // ----- Amenities Search -----
     const searchInput = document.querySelector("input[name='search-filters']");

@@ -304,3 +304,12 @@ margin: 20px 0 0 0;
     margin: 15px 0;
 
 }
+
+
+
+@media (max-width: 986px) {
+    .btc-btn span {
+        display: none;
+    }
+    
+}

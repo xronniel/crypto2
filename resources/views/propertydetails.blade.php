@@ -216,7 +216,7 @@
 
                             <input type="hidden" name="furnishing" id="" value="">
                             <input type="hidden" name="completion" id="" value="">
-                            <input type="hidden" type="checkbox" name="amenities[]" value="">
+                            {{-- <input type="hidden" type="checkbox" name="amenities[]" value=""> --}}
 
 
 
@@ -1071,6 +1071,27 @@ ul li {
     text-align: center;
     white-space: nowrap;
 }
+.property-filter .search-button-property {
+    position: absolute;
+    left: 4px;
+    top: 0.7px;
+    bottom: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    background: none;
+    display: flex
+;
+    border-radius: 50% 0 0 50%;
+    justify-content: center;
+    align-items: center;
+    height: 43px;
+    padding: 10px 8px;
+    align-content: center;
+}
+
+
+
 
 
 
@@ -1091,6 +1112,35 @@ ul li {
     .filter-button {
         right: 2%;
     }
+
+
+    .property-filter img {
+        filter: brightness(0) invert(1); 
+    }
+    
+
+    .property-filter .search-button-property {
+        position: absolute;
+        left: 2px;
+        top: 0.7px;
+        bottom: 0;
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        background: #2dd98f;
+        display: flex
+    ;
+        border-radius: 50% 0 0 50%;
+        justify-content: center;
+        align-items: center;
+        height: 43px;
+        padding: 10px 8px;
+        align-content: center;
+    }
+    
+    
+
+
 }
 
 </style>

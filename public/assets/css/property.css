@@ -156,13 +156,7 @@
     padding: 10px 40px 10px 50px;
 }
 
-.property-filter img {
-    position: absolute;
-    left: 15px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
+
 
 .property-filter-select {
     position: relative;
