@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="property-filter-two">
-                        <div class="back-filter-box" onclick="window.location.href='/'">
+                        <div class="back-filter-box" onclick="window.location.href='/properties'">
                             <img class="back-filter-img" src="{{ asset('assets/img/home/return-icon.svg') }}"
                                 alt="arrow">
 
@@ -236,7 +236,7 @@
             padding: 1px 0;
             ">
         <div class="container">
-            <div class="page-path-line">
+            <div onclick="window.location.href='/properties'" class="page-path-line">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
                 <p>/ Property Listing</p>
@@ -360,15 +360,49 @@
                 </div>
 
                 <div class="grid-left-side">
-                    <div class="grid-left-side-fisrt-dev">
+                    <div class="grid-left-side-fisrt-dev hide-mobile">
                         <p>{{ $property->ad_type }}</p>
                         {{-- <p>6% OFF</p> --}}
                     </div>
-                    <h3 class="grid-left-side-one">{{ $property->property_title }}</h3>
-                    <h3 class="grid-left-side-two">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
+                    <h3 class="grid-left-side-one hide-mobile">{{ $property->property_title }}</h3>
+                    <h3 class="grid-left-side-two hide-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
                     <h3 class="grid-left-side-three">
-                        {!! $property->web_remarks !!}
+                        @php
+                        $html = $property->web_remarks;
+                    
+                        $dom = new DOMDocument();
+                        libxml_use_internal_errors(true); // Suppress HTML5 warnings
+                        $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+                    
+                        $pTags = $dom->getElementsByTagName('p');
+                        $output = '';
+                    
+                        foreach ($pTags as $p) {
+                            // Remove <strong> and <br> tags
+                            foreach (iterator_to_array($p->getElementsByTagName('*')) as $node) {
+                                if ($node->nodeName === 'strong' || $node->nodeName === 'br') {
+                                    // Replace node with its text content or nothing
+                                    $text = $node->textContent;
+                                    $textNode = $dom->createTextNode($text);
+                                    $node->parentNode->replaceChild($textNode, $node);
+                                }
+                            }
+                    
+                            // Save final <p> tag with cleaned content
+                            $output .= $dom->saveHTML($p);
+                        }
+                    @endphp
+                    
+                    {!! $output !!}
+                    
                     </h3>
+                    <h3 class="grid-left-side-one show-mobile">{{ $property->property_title }}</h3>
+                    <h3 class="grid-left-side-two show-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
+                    
+                    <div class="grid-left-side-fisrt-dev show-mobile">
+                        <p>{{ $property->ad_type }}</p>
+                        {{-- <p>6% OFF</p> --}}
+                    </div>
                     <div class="grid-left-side-price-box">
                         <div class=" grid-left-side-price">
                             <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
@@ -438,7 +472,7 @@
                         </div>
 
                     </div>
-                    <div class="Converter-div-box">
+                    <div class="Converter-div-box hide-mobile">
                         <div style="width: 35%;" class="Converter-div-input">
                             <div style="width: 100%;" class="Converter-select-input">
                                 <select style="width: 100%;" name="cars" id="cars">
@@ -505,8 +539,7 @@
                 </div>
                 <div class="Description-second-box">
                     <div class="Description-second-box-one">
-                        {!! $property->web_remarks !!} <!-- Render HTML content -->
-
+                        {!! $property->web_remarks !!} 
                         <div class="custom-list-two">
                             <p><span>Office location :</span> {{ $property->company_name }} - {{ $property->community }},
                                 {{ $property->emirate }}</p>
@@ -1005,7 +1038,29 @@
 
 
 
-
+        document.addEventListener("DOMContentLoaded", function() {
+                            
+                                let container = document.querySelector(".Description-second-box-one");
+                        
+                                if (container) {
+                               
+                                    container.querySelectorAll("p").forEach(p => p.remove());
+                                }
+                            });
 
 </script>
+
+<style>
+    ul {
+    list-style-type: none;  
+    padding: 0;            
+    margin: 0;              
+}
+
+ul li {
+    margin: 0;              
+    padding: 0;            
+}
+
+</style>
 @endsection

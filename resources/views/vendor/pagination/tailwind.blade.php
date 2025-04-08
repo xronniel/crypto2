@@ -1,11 +1,11 @@
 @if ($paginator->hasPages())
 <div class="pagination_wrap pt-50">
-    <ul>
+    <ul id="pagination">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="disabled"></li>
         @else
-            <li><a href="{{ $paginator->previousPageUrl() }}"><i class="far fa-long-arrow-left"></i></a></li>
+            <li><a href="#" data-url="{{ $paginator->previousPageUrl() }}" class="prev-page"><i class="far fa-long-arrow-left"></i></a></li>
         @endif
 
         {{-- Pagination Elements --}}
@@ -32,9 +32,9 @@
                         
                         {{-- Display Page Numbers --}}
                         @if ($page == $paginator->currentPage())
-                            <li><a href="#" class="current_page">{{ $page }}</a></li>
+                            <li><a href="#" class="current_page" data-page="{{ $page }}">{{ $page }}</a></li>
                         @else
-                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                            <li><a href="#" data-url="{{ $url }}" class="page-link" data-page="{{ $page }}">{{ $page }}</a></li>
                         @endif
                         @php $previousPage = $page; @endphp
 
@@ -44,7 +44,7 @@
                             <li><span><i class="fal fa-ellipsis-h"></i></span></li>
                             @php $dotsAdded = true; @endphp
                         @endif
-                        <li><a href="{{ $url }}">{{ $page }}</a></li>
+                        <li><a href="#" data-url="{{ $url }}" class="page-link" data-page="{{ $page }}">{{ $page }}</a></li>
                         @php $previousPage = $page; @endphp
                     @endif
                 @endforeach
@@ -53,10 +53,31 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li><a href="{{ $paginator->nextPageUrl() }}"><i class="far fa-long-arrow-right"></i></a></li>
+            <li><a href="#" data-url="{{ $paginator->nextPageUrl() }}" class="next-page"><i class="far fa-long-arrow-right"></i></a></li>
         @else
             <li class="disabled"></li>
         @endif
     </ul>
 </div>
 @endif
+
+<script>
+    // JavaScript to handle page link clicks
+    document.querySelectorAll('.page-link').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const url = this.getAttribute('data-url');
+            window.location.href = url; // Navigate to the page
+        });
+    });
+
+    // JavaScript to handle previous and next page clicks
+    document.querySelectorAll('.prev-page, .next-page').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const url = this.getAttribute('data-url');
+            window.location.href = url; // Navigate to the page
+        });
+    });
+</script>
+

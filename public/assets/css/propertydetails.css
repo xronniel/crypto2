@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    cursor: pointer;
 }
 
 .page-path-line p {
@@ -123,6 +124,7 @@ position: relative;
     line-height: 48px;
     color: #ffffff80;
     margin: 10px 0;
+    text-align: start;
 }
 .grid-left-side-two {
     font-family: "Manrope", sans-serif;
@@ -130,6 +132,11 @@ position: relative;
     font-size: 40px;
     line-height: 48px;
     color: #ffffff;
+    text-align: start;
+}
+
+.show-mobile {
+    display: none;
 }
 
 .grid-left-side-three {
@@ -139,6 +146,7 @@ position: relative;
     line-height: 24px;
     color: #ffffff80;
     margin: 25px 0;
+    text-align: start;
 }
 
 .grid-left-side-price img {
@@ -1002,7 +1010,13 @@ border-radius: 5px;
     transition: border 0.3s ease-in-out;
 }
 @media (max-width: 986px) {
+    .show-mobile {
+        display: flex;
+    }
 
+    .hide-mobile {
+        display: none;
+    }
 
 .grid-img-container{
     flex-direction: column;
@@ -1105,5 +1119,40 @@ z-index: 4;
     opacity: 1 !important;
     transition: all 0.3s ease-in-out;
 }
+
+
+
+
+.grid-left-side-two {
+    font-weight: 500;
+    margin: 0 ;
+    font-size: 24px;
+}
+
+
+
+.grid-left-side-one {
+
+font-size: 18px;
+line-height: 32px;
+margin: 0 ;
+
+}
+
+
+
+.Description-second-box-two-one {
+    flex-direction: column;
+}
+.Description-second-box-two-box-one{
+    width: 100%;
+}
+
+.property-details-Description-two {
+    width: 100%;
+    justify-content: space-between;
+}
+
+
 
 }

@@ -10456,7 +10456,7 @@ blockquote .quote {
     padding: 60px 70px 70px 70px;
     background-size: cover;
 }
-@media (max-width: 767px) {
+@media (max-width: 986px)  {
     .xb-inner {
         padding: 43px 25px 50px 25px;
         border-radius: 30px;
@@ -10546,7 +10546,7 @@ blockquote .quote {
     margin-left: -1px;
     background-size: cover;
 }
-@media (max-width: 767px) {
+@media (max-width: 986px)  {
     .testimonial-wrap {
         padding: 30px;
         border-radius: 30px;
