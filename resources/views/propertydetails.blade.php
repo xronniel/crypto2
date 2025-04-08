@@ -47,15 +47,15 @@
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="priceToggle">Price</button>
-                            <input type="hidden" name="min_price" id="selectedMinPrice" value="">
-                            <input type="hidden" name="max_price" id="selectedMaxPrice" value="">
+                            {{-- <input type="hidden" name="min_price" id="selectedMinPrice" value="">
+                            <input type="hidden" name="max_price" id="selectedMaxPrice" value=""> --}}
                         </div>
                         <!-- Area Filter -->
                         <div class="property-filter-select">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                             <button class="Price-button" type="button" id="AreaToggle">Area Size</button>
-                            <input type="hidden" name="min_area" id="selectedMinArea" value="">
-                            <input type="hidden" name="max_area" id="selectedMaxArea" value="">
+                            {{-- <input type="hidden" name="min_area" id="selectedMinArea" value="">
+                            <input type="hidden" name="max_area" id="selectedMaxArea" value=""> --}}
                         </div>
 
 

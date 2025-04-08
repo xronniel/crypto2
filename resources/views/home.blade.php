@@ -117,8 +117,7 @@
 
                 <form class="mobile-form-home" action="{{ route('properties.index') }}" method="GET">
                     @csrf
-                    <input type="hidden" name="min_area" id="selectedMinArea" value="">
-                    <input type="hidden" name="max_area" id="selectedMaxArea" value="">
+      
                     <input type="hidden" name="filter_type" id="filterTypeInputTwo" value="rent"> <!-- Default value -->
                     <input type="hidden" name="no_of_rooms" id="selectedRooms" value=""> <!-- Selected rooms -->
                     <input type="hidden" name="no_of_bathroom" id="selectedBathrooms" value="">
