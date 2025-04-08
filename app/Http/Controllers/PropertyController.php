@@ -265,6 +265,35 @@ class PropertyController extends Controller
 
         $faqs = Faq::all();
 
-        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs'));
+
+        $min = Listing::whereNotNull('plot_area')->min('plot_area');
+        $max = Listing::whereNotNull('plot_area')->max('plot_area');
+    
+        $minRounded = floor($min / 10000000) * 10000000;
+        $maxRounded = ceil($max / 10000000) * 10000000;
+    
+        $steps = range($minRounded, $maxRounded, 10000000);
+    
+        $plotAreaRange = [
+            'min'   => $minRounded,
+            'max'   => $maxRounded,
+            'steps' => $steps,
+        ];
+
+        $min = Listing::whereNotNull('price')->min('price');
+        $max = Listing::whereNotNull('price')->max('price');
+    
+        $minRounded = floor($min / 10000000) * 10000000;
+        $maxRounded = ceil($max / 10000000) * 10000000;
+    
+        $steps = range($minRounded, $maxRounded, 10000000);
+    
+        $priceRange = [
+            'min'   => $minRounded,
+            'max'   => $maxRounded,
+            'steps' => $steps,
+        ];
+
+        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs', 'priceRange', 'plotAreaRange'));
     }
 }
