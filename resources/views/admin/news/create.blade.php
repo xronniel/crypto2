@@ -5,9 +5,22 @@
     <h1 class="mb-4">Add New News</h1>
 
     <!-- Form to Create News -->
-    <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data" class="mb-4">
+    <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data" class="mb-4" onsubmit="return document.activeElement.id !== 'news-tags-input';">
         @csrf
-
+        <div class="row">
+            <!-- Category -->
+            <div class="col-md-6 mb-3">
+                <label for="category_id">Category:</label>
+                <select name="category_id" class="form-control" id="category_id" required>
+                    <option value="" disabled selected>Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="row">
             <!-- Title Section -->
             <div class="col-md-12 mb-3">
@@ -79,6 +92,9 @@
             <label for="gallery">Gallery Images:</label>
             <input type="file" name="gallery[]" class="form-control" id="gallery" multiple>
         </div>
+
+        <!-- Tags Section -->
+        <x-tag-input :existing-tags="$existingTags" name="tags" label="Tags" id="news-tags" />
 
         <!-- Buttons Section -->
         <div class="d-flex justify-content-end mt-4">

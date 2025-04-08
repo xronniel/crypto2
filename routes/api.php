@@ -32,4 +32,8 @@ Route::get('/crypto-currencies', [CurrencyController::class, 'getCryptoCurrencie
 
 Route::get('/reviews', [ReviewController::class, 'getAllReviews'])->name('reviews.all');
 
-
+Route::prefix('comments')->group(function () {
+    Route::post('/', [\App\Http\Controllers\Api\CommentController::class, 'store'])->name('comments.store');
+    Route::put('/{comment}/status', [\App\Http\Controllers\Api\CommentController::class, 'updateStatus'])->name('comments.updateStatus');
+    Route::delete('/{comment}', [\App\Http\Controllers\Api\CommentController::class, 'destroy'])->name('comments.destroy');
+});

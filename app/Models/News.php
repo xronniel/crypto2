@@ -23,7 +23,13 @@ class News extends Model
         'date',
         'time',
         'content',
+        'category_id'
     ];
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->active();
+    }
 
     // Relationship with gallery images
     public function galleries()
@@ -31,4 +37,13 @@ class News extends Model
         return $this->hasMany(NewsGallery::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'news_tags');
+    }
 }
