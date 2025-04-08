@@ -9,7 +9,7 @@
                 </div>
                 <div class="header-logo hide-item-header">
                     <a href="/">
-                        <img src="{{ asset('assets/img/logo/Logo.png') }}" alt="Logo">
+                        <img src="{{ asset('assets/img/logo/Logo-2.png') }}" alt="Logo">
                     </a>
                 </div>
                 <div class="main-menu__wrap ul_li navbar navbar-expand-lg">
@@ -54,7 +54,7 @@
                                 <div class="xb-menu-close xb-hide-xl xb-close"></div>
                                 <div class="xb-logo-mobile xb-hide-xl">
                                     <a href="/" rel="home">
-                                        <img src="{{ asset('assets/img/logo/Logo.png') }}" alt="Logo">
+                                        <img src="{{ asset('assets/img/logo/Logo-2.png') }}" alt="Logo">
                                         
                                         </a>
                                 </div>
