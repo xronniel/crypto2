@@ -816,7 +816,7 @@ display: none;
 }
 
 @media (max-width: 986px) {
-    .property-filter {
+    /* .property-filter {
         position: fixed;
         top: 12px;
         z-index: 9;
@@ -824,8 +824,8 @@ display: none;
         left: 0;
         width: 50%;
         margin: auto;
-    }
-    .property-filter input {
+    } */
+    /* .property-filter input {
         width: 100%;
         background: #0d0d17;
         border: 1px solid #8fe4f880;
@@ -833,8 +833,10 @@ display: none;
         font-size: 14px;
         line-height: 24px;
         letter-spacing: 0%;
+    } */
+    .property-filter input {
+width: 100%;
     }
-
     .property-filter-two {
         overflow-y: auto;
         width: 100%;
@@ -926,12 +928,3 @@ width: 120px;
 
 }
 
-@media (max-width: 700px) {
-    .property-filter {
-        width: 60%;
-    }
-
-    .filter-button {
-        right: 2%;
-    }
-}

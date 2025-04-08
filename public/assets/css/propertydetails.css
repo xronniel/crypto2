@@ -138,6 +138,9 @@ position: relative;
 .show-mobile {
     display: none;
 }
+.show-mobile-two {
+    display: none;
+}
 
 .grid-left-side-three {
     font-family: "Manrope", sans-serif;
@@ -1006,6 +1009,9 @@ border-radius: 5px;
     .show-mobile {
         display: flex;
     }
+    .show-mobile-two {
+        display: block;
+    }
 
     .hide-mobile {
         display: none;
@@ -1149,3 +1155,32 @@ margin: 0 ;
 
 
 }
+
+
+
+
+
+
+
+ @media (max-width: 986px) {
+    .property-filter-header input {
+        width: 100%;
+        background: #0d0d17;
+        border: 1px solid #8fe4f880;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        color: white;
+    }
+    .property-filter-header {
+        position: fixed;
+        top: 12px;
+        z-index: 9;
+        right: 0;
+        left: 0;
+        width: 50%;
+        margin: auto;
+    }
+
+} 

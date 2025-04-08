@@ -955,3 +955,20 @@ function closeDropdownArea(id) {
     const el = document.getElementById(id);
     if (el) el.classList.remove("active-Area");
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Amenities Search Filtering
+    document.querySelector("input[name='search-filters']").addEventListener("input", function () {
+        let searchValue = this.value.toLowerCase();
+        document.querySelectorAll(".amenities").forEach(label => {
+            let amenityText = label.textContent.toLowerCase();
+            if (amenityText.includes(searchValue)) {
+                label.style.display = "flex"; 
+            } else {
+                label.style.display = "none"; 
+            }
+        });
+    });
+});

@@ -161,17 +161,26 @@
                                         <img src="{{ asset('assets/img/property/search-icon.svg') }}" alt="search">
                                         Search
                                     </p>
-{{-- 
+
                                     <div class="property-filter">
                                         <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
                                         <input type="text" placeholder="Search : e.g. Villa, Office, etc."
                                             value="" name="search-filters">
-                                    </div> --}}
+                                    </div>
                                 </div>
                                 <div class="filters-secroll-box">
 
 
+                                    <div class="beds-baths-options">
 
+                                        <button type="button" class="filter-btn"  data-value="rent">Rent</button>
+                                        <button type="button" class="filter-btn" data-value="buy">Buy</button>
+                                        <button type="button" class="filter-btn"
+                                        data-value="">New</button>
+                                        <button type="button" class="filter-btn" data-value="new_projects">New projects</button>
+                                        <button type="button" class="filter-btn"  data-value="commercial">Commercial</button>
+
+                                    </div>
                                     <p>
                                         <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
                                         Furnishing
@@ -229,7 +238,7 @@
 
 
 
-                                <button type="button" class="done-btn"
+                                <button type="submit" class="done-btn"
                                     onclick="closeDropdown('FiltersDropdown')">Done</button>
                             </div>
 
@@ -856,24 +865,22 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const buttons = document.querySelectorAll(".filter-btn");
-            const hiddenInput = document.getElementById("filterTypeInput");
+document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".filter-btn"); 
+    const hiddenInput = document.getElementById("filterTypeInput");
 
-            buttons.forEach(button => {
-                button.addEventListener("click", function() {
+    buttons.forEach(button => {
+        button.addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default action (mostly for <button>)
 
-                    buttons.forEach(btn => btn.classList.remove("active-button-home"));
+            buttons.forEach(btn => btn.classList.remove("active-button-home"));
 
+            this.classList.add("active-button-home");
 
-                    this.classList.add("active-button-home");
-
-
-                    hiddenInput.value = this.dataset.value;
-                });
-            });
+            hiddenInput.value = this.dataset.value;
         });
-
+    });
+});
 
 
         document.addEventListener("DOMContentLoaded", function() {

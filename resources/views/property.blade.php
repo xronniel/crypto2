@@ -11,7 +11,7 @@
             <form action="{{ route('properties.index') }}" method="GET">
                 @csrf
                 <div class="property-filter-box">
-                    <div class="property-filter">
+                    <div class="property-filter property-filter-header">
                         <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
                         <input type="text" placeholder="City, community or building" value="" name="search">
                     </div>
@@ -146,6 +146,7 @@
 
 
                         <!-- More Filters Dropdown -->
+                        
                         <div class="dropdown-dialog  More-FIlters-div" id="FiltersDropdown">
 
                             <div>
@@ -224,7 +225,9 @@
 
 
 
-                            <button type="button" class="done-btn"
+                            <button type="button" class="done-btn hide-mobile"
+                                onclick="closeDropdown('FiltersDropdown')">Done</button>
+                            <button type="submit" class="done-btn show-mobile-two"
                                 onclick="closeDropdown('FiltersDropdown')">Done</button>
                         </div>
 
@@ -563,5 +566,9 @@
         .property-two-box-five-two a {
             border-radius: 3px !important; 
     }
+
+
+
+
 </style>
 @endsection
