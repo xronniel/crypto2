@@ -1032,55 +1032,53 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            let currentPage = 1;
-            let totalPages = 1;
+    let currentPage = 1;
+    let totalPages = 1;
 
-            function loadListings(communityName, page = 1) {
-                if (!communityName) {
-                    console.error("Community is undefined or missing.");
+    function loadListings(communityName, page = 1) {
+        if (!communityName) {
+            console.error("Community is undefined or missing.");
+            return;
+        }
+
+        fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}`)
+            .then(response => response.json())
+            .then(responseData => {
+                let propertiesContainer = document.getElementById("featured-properties");
+                propertiesContainer.innerHTML = "";
+
+                let listings = responseData.data?.data || [];
+                console.log("Listings:", listings);
+                totalPages = responseData.data?.last_page || 1;
+                currentPage = responseData.data?.current_page || 1;
+
+                if (listings.length === 0) {
+                    propertiesContainer.innerHTML = "<p>No properties found.</p>";
                     return;
                 }
 
-                fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}`)
-                    .then(response => response.json())
-                    .then(responseData => {
-                        // console.log("API Response:", responseData.data.data[0].images[0].url); 
+                // Ensure default values in case any listing is missing data
+                let listing1 = listings[0] || {};
+                let listing2 = listings[1] || {};
+                let listing3 = listings[2] || {};
 
-                        let propertiesContainer = document.getElementById("featured-properties");
-                        propertiesContainer.innerHTML = "";
+                // Safely check if images exist and fall back to default if not
+                let agentPhoto1 = (listing1.images && Array.isArray(listing1.images) && listing1.images.length > 0) ? listing1.images[0].url : "default-image.jpg";
+                let agentPhoto2 = (listing2.images && Array.isArray(listing2.images) && listing2.images.length > 0) ? listing2.images[0].url : "default-image.jpg";
+                let agentPhoto3 = (listing3.images && Array.isArray(listing3.images) && listing3.images.length > 0) ? listing3.images[0].url : "default-image.jpg";
 
-                        let listings = responseData.data?.data || [];
-                        totalPages = responseData.data?.last_page || 1;
-                        currentPage = responseData.data?.current_page || 1;
+                // Safely check if WhatsApp link exists
+                let whatsappLink1 = listing1.listing_agent_whatsapp ? `href="${listing1.listing_agent_whatsapp}"` : "";
+                let whatsappLink2 = listing2.listing_agent_whatsapp ? `href="${listing2.listing_agent_whatsapp}"` : "";
+                let whatsappLink3 = listing3.listing_agent_whatsapp ? `href="${listing3.listing_agent_whatsapp}"` : "";
 
-                        if (listings.length === 0) {
-                            propertiesContainer.innerHTML = "<p>No properties found.</p>";
-                            return;
-                        }
-
-                        let listing1 = listings[0] || {};
-                        let listing2 = listings[1] || {};
-                        let listing3 = listings[2] || {};
-
-
-                        let agentPhoto1 = listing1.images[0].url || "default-image.jpg";
-                        let agentPhoto2 = listing2.images[0].url || "default-image.jpg";
-                        let agentPhoto3 = listing3.images[0].url || "default-image.jpg";
-
-                        let whatsappLink1 = listing1.listing_agent_whatsapp ?
-                            `href="${listing1.listing_agent_whatsapp} h"` : "";
-                        let whatsappLink2 = listing2.listing_agent_whatsapp ?
-                            `href="${listing2.listing_agent_whatsapp}"` : "";
-                        let whatsappLink3 = listing3.listing_agent_whatsapp ?
-                            `href="${listing3.listing_agent_whatsapp}"` : "";
-
-                        let cardsHTML = `
+                let cardsHTML = `
                     <div class="token-wrap">
                         <div class="row mt-none-30">
                 `;
 
-                        if (listings.length >= 1) {
-                            cardsHTML += `
+                if (listings.length >= 1) {
+                    cardsHTML += `
                         <div class="col-xl-5 col-lg-6 mt-30">
                             <div style="background-image: url('${agentPhoto1}');" class="token-distribut">
                                 <div class="token-distribut-location-div">
@@ -1101,10 +1099,10 @@ document.addEventListener("DOMContentLoaded", function() {
                             </div>
                         </div>
                     `;
-                        }
+                }
 
-                        if (listings.length >= 2) {
-                            cardsHTML += `
+                if (listings.length >= 2) {
+                    cardsHTML += `
                         <div class="col-xl-7 col-lg-6 mt-30">
                             <div style="background-image: url('${agentPhoto2}');" class="token-sale img-cards-Featured">
                                 <div class="token-distribut-location-div">
@@ -1124,96 +1122,84 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </div>
                             </div>
                     `;
-                        }
+                }
 
-                        if (listings.length === 3) {
-                            cardsHTML += `
-                            <div style="background-image: url('${agentPhoto3}');" class="token-sale img-cards-Featured model">
-                                <div class="token-distribut-location-div">
-                                    <h1 class="token-distribut-location-h1">${listing3.community || ""}</h1>
-                                    <div class="token-distribut-location-span">
-                                        <i class="fal fa-map-marker-alt"></i>
-                                        <span>${listing3.location || ""}</span>
-                                    </div>
-                                    <div class="token-distribut-location-span-two">
-                                        <span class="token-distribut-location-span-two-one">Launch price:</span>
-                                        <span class="token-distribut-location-span-two-two">${listing3.price || "N/A"} AED</span>
-                                    </div>
-                                    <a class="token-location-button" ${whatsappLink3}>
-                                        <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
-                                        <span>WhatsApp</span>
-                                    </a>
+                if (listings.length === 3) {
+                    cardsHTML += `
+                        <div style="background-image: url('${agentPhoto3}');" class="token-sale img-cards-Featured model">
+                            <div class="token-distribut-location-div">
+                                <h1 class="token-distribut-location-h1">${listing3.community || ""}</h1>
+                                <div class="token-distribut-location-span">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                    <span>${listing3.location || ""}</span>
                                 </div>
+                                <div class="token-distribut-location-span-two">
+                                    <span class="token-distribut-location-span-two-one">Launch price:</span>
+                                    <span class="token-distribut-location-span-two-two">${listing3.price || "N/A"} AED</span>
+                                </div>
+                                <a class="token-location-button" ${whatsappLink3}>
+                                    <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
+                                    <span>WhatsApp</span>
+                                </a>
                             </div>
                         </div>
                     `;
-                        }
-                        cardsHTML += `
-                            </div>
+                }
+
+                cardsHTML += `
                         </div>
-                        <div class="pagination_wrap pt-50">
-                            <ul>
-                                <li><a href="javascript:void(0);" id="prevPage" ${currentPage === 1 ? "disabled" : ""}><i class="far fa-long-arrow-left"></i></a></li>
-                                <li><a href="javascript:void(0);" class="current_page">${currentPage < 10 ? "0" + currentPage : currentPage}</a></li>
-                                ${currentPage < totalPages - 1 ? `<li><a href="javascript:void(0);">${currentPage + 1}</a></li>` : ""}
-                                ${currentPage < totalPages ? `<li><a href="javascript:void(0);">${totalPages}</a></li>` : ""}
-                                <li><a href="javascript:void(0);" id="nextPage" ${currentPage === totalPages ? "disabled" : ""}><i class="far fa-long-arrow-right"></i></a></li>
-                            </ul>
-                        </div>
-                        `;
+                    </div>
+                    <div class="pagination_wrap pt-50">
+                        <ul>
+                            <li><a href="javascript:void(0);" id="prevPage" ${currentPage === 1 ? "disabled" : ""}><i class="far fa-long-arrow-left"></i></a></li>
+                            <li><a href="javascript:void(0);" class="current_page">${currentPage < 10 ? "0" + currentPage : currentPage}</a></li>
+                            ${currentPage < totalPages - 1 ? `<li><a href="javascript:void(0);">${currentPage + 1}</a></li>` : ""}
+                            ${currentPage < totalPages ? `<li><a href="javascript:void(0);">${totalPages}</a></li>` : ""}
+                            <li><a href="javascript:void(0);" id="nextPage" ${currentPage === totalPages ? "disabled" : ""}><i class="far fa-long-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                `;
 
+                propertiesContainer.innerHTML = cardsHTML;
 
-
-                        document.addEventListener("DOMContentLoaded", function() {
-                            document.querySelectorAll(".pagination_wrap a").forEach(link => {
-                                link.addEventListener("click", function(event) {
-                                    event.preventDefault();
-                                });
-                            });
-                        });
-
-
-
-                        propertiesContainer.innerHTML = cardsHTML;
-
-                        document.getElementById("prevPage").addEventListener("click", function() {
-                            if (currentPage > 1) {
-                                loadListings(communityName, currentPage - 1);
-                            }
-                        });
-
-                        document.getElementById("nextPage").addEventListener("click", function() {
-                            if (currentPage < totalPages) {
-                                loadListings(communityName, currentPage + 1);
-                            }
-                        });
-                    })
-                    .catch(error => console.error("Error fetching data:", error));
-            }
-
-            let defaultTab = document.querySelector(".community-tab.active-filter-link");
-            if (defaultTab) {
-                let defaultCommunity = defaultTab.getAttribute("data-community");
-                loadListings(defaultCommunity);
-            }
-
-            document.querySelectorAll(".community-tab").forEach(tab => {
-                tab.addEventListener("click", function() {
-                    let communityName = this.getAttribute("data-community");
-
-                    if (!communityName) {
-                        console.error("Community is undefined or missing.");
-                        return;
+                document.getElementById("prevPage").addEventListener("click", function() {
+                    if (currentPage > 1) {
+                        loadListings(communityName, currentPage - 1);
                     }
-
-                    document.querySelectorAll(".community-tab").forEach(el => el.classList.remove(
-                        "active-filter-link"));
-                    this.classList.add("active-filter-link");
-
-                    loadListings(communityName);
                 });
-            });
+
+                document.getElementById("nextPage").addEventListener("click", function() {
+                    if (currentPage < totalPages) {
+                        loadListings(communityName, currentPage + 1);
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching data:", error));
+    }
+
+    let defaultTab = document.querySelector(".community-tab.active-filter-link");
+    if (defaultTab) {
+        let defaultCommunity = defaultTab.getAttribute("data-community");
+        loadListings(defaultCommunity);
+    }
+
+    document.querySelectorAll(".community-tab").forEach(tab => {
+        tab.addEventListener("click", function() {
+            let communityName = this.getAttribute("data-community");
+
+            if (!communityName) {
+                console.error("Community is undefined or missing.");
+                return;
+            }
+
+            document.querySelectorAll(".community-tab").forEach(el => el.classList.remove("active-filter-link"));
+            this.classList.add("active-filter-link");
+
+            loadListings(communityName);
         });
+    });
+});
+
 
         document.addEventListener("DOMContentLoaded", function () {
     const filterButton = document.getElementById("More-Filters");
