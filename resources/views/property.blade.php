@@ -551,6 +551,15 @@
 
 
 <style>
+
+    .beds-baths-options button {
+    flex: 1 1 calc(25% - 10px); 
+    min-width: 120px; 
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
         .property-two-box-five-two a {
             border-radius: 3px !important; 
     }

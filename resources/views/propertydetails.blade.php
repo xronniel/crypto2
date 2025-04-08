@@ -1061,6 +1061,12 @@ ul li {
     margin: 0;              
     padding: 0;            
 }
-
+.beds-baths-options button {
+    flex: 1 1 calc(25% - 10px); 
+    min-width: 120px; 
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
 </style>
 @endsection

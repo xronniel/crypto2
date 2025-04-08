@@ -56,7 +56,7 @@
     border-radius: 40px;
     display: flex;
     overflow: hidden;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .first-section-border-first-div span {
@@ -83,7 +83,7 @@
     padding: 15px 40px;
     color: #080b18;
     cursor: pointer;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .submit-button {
