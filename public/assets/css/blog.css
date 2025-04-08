@@ -518,9 +518,17 @@
         margin-bottom: -100px;
     }
 
-    .blog-sidebar-widget,
     .blog-sidebar-widget-tags {
         padding: 40px 30px;
+    }
+
+    .blog-sidebar-widget {
+        padding: 40px 20px;
+    }
+
+    .blog-sidebar-widget a {
+        width: 45px !important;
+        height: 45px !important;
     }
 
     /* -------------------News Details Page-------------------*/
