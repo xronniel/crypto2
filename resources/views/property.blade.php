@@ -288,9 +288,14 @@
                     </div>
 
                     <div class="page-line-filter-links">
-                        <a class="page-line-filter-links-ctive" href="#">Any</a>
-                        <a href="#">Off-plan</a>
-                        <a href="#">Ready</a>
+                        <a href="{{ route('properties.index', ['completion_status' => '']) }}"
+                           class="{{ request('completion_status') == '' ? 'page-line-filter-links-ctive' : '' }}">Any</a>
+                    
+                        <a href="{{ route('properties.index', ['completion_status' => 'off_plan']) }}"
+                           class="{{ request('completion_status') == 'off_plan' ? 'page-line-filter-links-ctive' : '' }}">Off-plan</a>
+                    
+                        <a href="{{ route('properties.index', ['completion_status' => 'ready']) }}"
+                           class="{{ request('completion_status') == 'ready' ? 'page-line-filter-links-ctive' : '' }}">Ready</a>
                     </div>
 
                 </div>
@@ -498,10 +503,13 @@
                         <div class="widget  widget-one mt-30">
                             <h3 class="widget__title">Nearby Areas</h3>
                             <ul class="widget__category list-unstyled">
-                                <li><a href="#!">Properties for sale in Dubai</a></li>
-                                <li><a href="#!">Properties for sale in Abu Dhabi</a></li>
-                                <li><a href="#!">Properties for sale in Ajman</a></li>
-                                <li><a href="#!">Properties for sale in Sharjah</a></li>
+                                @foreach ($emirates as $emirate)
+                                    <li>
+                                        <a href="javascript:void(0);" onclick="window.location.href='{{ route('properties.index', ['filter_type' => 'sale', 'emirate' => $emirate]) }}'">
+                                            Properties for sale in {{ $emirate }}
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                             <h3 class="widget__title">Popular Searches</h3>
                             <ul class="widget__category list-unstyled">
@@ -592,7 +600,9 @@
     }
     
     
-    
+    .widget__title {
+    text-align: start;
+}
     
     
     

@@ -16,13 +16,19 @@
                     <nav class="main-menu collapse navbar-collapse">
                         <ul>
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>Buy</span></a>
+                                <a class="scrollspy-btn" href="{{ route('properties.index', ['filter_type' => 'buy']) }}">
+                                    <span>Buy</span>
+                                </a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>Rent</span></a>
+                                <a class="scrollspy-btn" href="{{ route('properties.index', ['filter_type' => 'rent']) }}">
+                                    <span>Rent</span>
+                                </a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>Commercial</span></a>
+                                <a class="scrollspy-btn" href="{{ route('properties.index', ['type' => 'commercial']) }}">
+                                    <span>Commercial</span>
+                                </a>
                             </li>
                             <li>
                                 <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
@@ -61,13 +67,19 @@
                                 <nav class="xb-header-nav">
                                     <ul class="xb-menu-primary clearfix">
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#"><span>Buy</span></a>
+                                            <a class="scrollspy-btn" href="{{ route('properties.index', ['filter_type' => 'buy']) }}">
+                                                <span>Buy</span>
+                                            </a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#"><span>Rent</span></a>
+                                            <a class="scrollspy-btn" href="{{ route('properties.index', ['filter_type' => 'rent']) }}">
+                                                <span>Rent</span>
+                                            </a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#"><span>Commercial</span></a>
+                                            <a class="scrollspy-btn" href="{{ route('properties.index', ['type' => 'commercial']) }}">
+                                                <span>Commercial</span>
+                                            </a>
                                         </li>
                                         <li class="menu-item">
                                             <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
