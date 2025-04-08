@@ -98,7 +98,29 @@ class PropertyController extends Controller
         });
 
         $query->when(request('completion_status'), function ($q) {
-            $q->where('completion_status', request('completion_status'));
+            if (request('completion_status') === 'ready') {
+                $q->whereIn('completion_status', ['completed_property', 'complete']);
+            } else {
+                $q->where('completion_status', request('completion_status'));
+            }
+        });
+
+        $query->when($request->has('emirate') && $request->emirate != '', function ($q) use ($request) {
+            $q->where('emirate', $request->emirate);
+        });
+
+        $query->when($request->has('type') && $request->type != '', function ($q) use ($request) {
+            $q->where('type', $request->type);
+        });
+
+        $query->when(request()->has('completion_status') && request('completion_status') !== '', function ($q) {
+            $status = request('completion_status');
+       
+            if ($status === 'off_plan') {
+                $q->where('completion_status', 'off_plan');
+            } elseif ($status === 'ready') {
+                $q->whereIn('completion_status', ['completed_property', 'complete']);
+            }
         });
 
         if ($request->has('furnishing') && !empty($request->furnishing)) {
@@ -163,8 +185,26 @@ class PropertyController extends Controller
         $amenities = Facility::where('name', '!=', '')
             ->distinct()
             ->pluck('name');
-   
-        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities'));
+
+        $emirates = Listing::where('emirate', '!=', '')
+            ->distinct()
+            ->pluck('emirate');
+
+            $min = Listing::whereNotNull('plot_area')->min('plot_area');
+            $max = Listing::whereNotNull('plot_area')->max('plot_area');
+        
+            $minRounded = floor($min / 10000000) * 10000000;
+            $maxRounded = ceil($max / 10000000) * 10000000;
+        
+            $steps = range($minRounded, $maxRounded, 10000000);
+        
+            $plotAreaRange = [
+                'min'   => $minRounded,
+                'max'   => $maxRounded,
+                'steps' => $steps,
+            ];
+                  
+        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange'));
     }
 
     public function show($property_ref_no)
@@ -209,8 +249,8 @@ class PropertyController extends Controller
             ->distinct()
             ->pluck('name');
 
-            $faqs = Faq::all();
-          
+        $faqs = Faq::all();
+
         return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs'));
     }
 }
