@@ -7611,6 +7611,20 @@ body[data-aos-easing="ease"] [data-aos] {
         padding-right: 15px;
     }
 }
+@media (max-width: 1196px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl {
+        max-width: 900px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+
+
 .home-three {
     background-color: #020202;
 }
