@@ -5,10 +5,24 @@
     <h1 class="mb-4">Edit News</h1>
 
     <!-- Edit News Form -->
-    <form action="{{ route('admin.news.update', $news) }}" method="POST" enctype="multipart/form-data" class="mb-4">
+    <form action="{{ route('admin.news.update', $news) }}" method="POST" enctype="multipart/form-data" class="mb-4" onsubmit="return document.activeElement.id !== 'news-tags-input';">
         @csrf
         @method('PUT')
-
+        <div class="row">
+            <!-- Category -->
+            <div class="col-md-6 mb-3">
+                <label for="category_id">Category:</label>
+                <select name="category_id" class="form-control" id="category_id" required>
+                    <option value="" disabled selected>Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" 
+                            {{ old('category_id', $news->category_id) == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="row">
             <!-- Title Section -->
             <div class="col-md-12 mb-3">
@@ -24,7 +38,10 @@
                 <select name="state" class="form-control" id="state" required>
                     <option value="" disabled selected>Select Emirates</option>
                     @foreach ($emirates as $emirate)
-                        <option value="{{ $emirate->name }}" {{ old('state') == $emirate->name  ? 'selected' : '' }}>{{ $emirate->name }}</option>
+                        <option value="{{ $emirate->name }}" 
+                            {{ old('state', $news->state) == $emirate->name ? 'selected' : '' }}>
+                            {{ $emirate->name }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -35,7 +52,10 @@
                 <select name="country" class="form-control" id="country" required>
                     <option value="" disabled selected>Select Country</option>
                     @foreach ($countries as $country)
-                        <option value="{{ $country->name }}" {{ old('country') ==  $country->name  ? 'selected' : '' }}>{{ $country->name }}</option>
+                        <option value="{{ $country->name }}" 
+                            {{ old('country', $news->country) == $country->name ? 'selected' : '' }}>
+                            {{ $country->name }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -45,13 +65,23 @@
             <!-- Date -->
             <div class="col-md-6 mb-3">
                 <label for="date">Date:</label>
-                <input type="date" name="date" class="form-control" id="date" value="{{ old('date', $news->date) }}" required>
+                <input type="date" 
+                       name="date" 
+                       class="form-control" 
+                       id="date" 
+                       value="{{ old('date', is_string($news->date) ? $news->date : $news->date->format('Y-m-d')) }}" 
+                       required>
             </div>
 
             <!-- Time -->
             <div class="col-md-6 mb-3">
                 <label for="time">Time:</label>
-                <input type="time" name="time" class="form-control" id="time" value="{{ old('time', $news->time) }}" required>
+                <input type="time" 
+                       name="time" 
+                       class="form-control" 
+                       id="time" 
+                       value="{{ old('time', is_string($news->time) ? $news->time : $news->time->format('H:i')) }}" 
+                       required>
             </div>
         </div>
 
@@ -86,6 +116,9 @@
             <label for="gallery">Gallery Images:</label>
             <input type="file" name="gallery[]" class="form-control" id="gallery" multiple>
         </div>
+
+        <!-- Tags Section -->
+        <x-tag-input :existing-tags="$existingTags" :tags="$news->tags" name="tags" label="Tags" id="news-tags" />
 
         <!-- Buttons Section -->
         <div class="d-flex justify-content-end mt-4">

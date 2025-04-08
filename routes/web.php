@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrencyController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +55,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('faqs', FaqController::class);
     Route::resource('partners', PartnerController::class);
     Route::resource('reviews', ReviewController::class);
+    Route::resource('categories', CategoryController::class);
 });
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
@@ -79,6 +82,9 @@ Route::get('/news/{news}', [NewsController::class, 'showUser'])->name('news.gall
 Route::get('articles', [ArticleController::class, 'indexUser'])->name('articles.gallery');
 Route::get('/articles/{article}', [ArticleController::class, 'showUser'])->name('articles.gallery.show');
 
+// Tag routes
+Route::get('/tags/suggest', [TagController::class, 'suggest'])->name('tags.suggest');
+Route::post('/tags/create', [TagController::class, 'create'])->name('tags.create');
 
 Auth::routes();
 
