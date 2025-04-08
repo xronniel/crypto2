@@ -946,7 +946,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Utility Functions
-function closeDropdown(id) {
+function closeDropdowntwo(id) {
     const el = document.getElementById(id);
     if (el) el.classList.remove("active");
 }

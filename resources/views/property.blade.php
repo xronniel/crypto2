@@ -140,7 +140,7 @@
                             </div>
 
                             <button type="button" class="done-btn"
-                                onclick="closeDropdown('priceDropdown')">Done</button>
+                                onclick="closeDropdowntwo('priceDropdown')">Done</button>
                         </div>
 
 
@@ -226,9 +226,9 @@
 
 
                             <button type="button" class="done-btn hide-mobile"
-                                onclick="closeDropdown('FiltersDropdown')">Done</button>
+                                onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
                             <button type="submit" class="done-btn show-mobile-two"
-                                onclick="closeDropdown('FiltersDropdown')">Done</button>
+                                onclick="closeDropdowntwo('FiltersDropdown')">Done</button>
                         </div>
 
                     </div>

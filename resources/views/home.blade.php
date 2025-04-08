@@ -118,7 +118,7 @@
                 <form class="mobile-form-home" action="{{ route('properties.index') }}" method="GET">
                     @csrf
 
-                    <input type="hidden" name="filter_type" id="filterTypeInput" value="rent"> <!-- Default value -->
+                    <input type="hidden" name="filter_type" id="filterTypeInputTwo" value="rent"> <!-- Default value -->
                     <input type="hidden" name="no_of_rooms" id="selectedRooms" value=""> <!-- Selected rooms -->
                     <input type="hidden" name="no_of_bathroom" id="selectedBathrooms" value="">
                     <!-- Selected bathrooms -->
@@ -181,6 +181,12 @@
                                         <button type="button" class="filter-btn"  data-value="commercial">Commercial</button>
 
                                     </div>
+
+
+
+
+
+                                    
                                     <p>
                                         <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
                                         Furnishing
@@ -272,7 +278,9 @@
                     <div 
                     style="padding-bottom: 20px;"
                     class="hero-token">
-                        <h3 > {!! $homepageContent->calculator_title2 !!}</h3>
+                        <h3 
+                        style="margin: 20px 0 10px 0"
+                        > {!! $homepageContent->calculator_title2 !!}</h3>
 
                         <p class="xb-item--content">
                             {!! $homepageContent->calculator_text !!}
@@ -866,18 +874,26 @@
 
     <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll(".filter-btn"); 
-    const hiddenInput = document.getElementById("filterTypeInput");
+    const buttons = document.querySelectorAll(".filter-btn");  
+    const hiddenInputOne = document.getElementById("filterTypeInput");
+    const hiddenInputTwo = document.getElementById("filterTypeInputTwo");
 
     buttons.forEach(button => {
         button.addEventListener("click", function(event) {
-            event.preventDefault(); // Prevent default action (mostly for <button>)
+            event.preventDefault(); // Prevent default behavior
 
+            // Remove active class from all buttons/spans
             buttons.forEach(btn => btn.classList.remove("active-button-home"));
 
+            // Apply active class to clicked element
             this.classList.add("active-button-home");
 
-            hiddenInput.value = this.dataset.value;
+            // Update both hidden inputs with the selected filter value
+            hiddenInputOne.value = this.dataset.value;
+            hiddenInputTwo.value = this.dataset.value;
+
+            // Debugging: Check if inputs update correctly
+            console.log("Selected filter type:", hiddenInputOne.value, hiddenInputTwo.value);
         });
     });
 });

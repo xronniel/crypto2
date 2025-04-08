@@ -761,6 +761,7 @@ input[type="text"] {
 
         border-radius: 1000px;
         border-width: 1px;
+        width: 100%;
     }
 
     .Vector-img {
@@ -894,5 +895,9 @@ text-transform: capitalize;
         height: fit-content;
     }
 
-
+    .first-section-border-second-div {
+   
+        width: 100%;
+    }
+    
 }
