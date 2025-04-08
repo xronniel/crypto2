@@ -203,8 +203,22 @@ class PropertyController extends Controller
                 'max'   => $maxRounded,
                 'steps' => $steps,
             ];
-                  
-        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange'));
+
+            $min = Listing::whereNotNull('price')->min('price');
+            $max = Listing::whereNotNull('price')->max('price');
+        
+            $minRounded = floor($min / 10000000) * 10000000;
+            $maxRounded = ceil($max / 10000000) * 10000000;
+        
+            $steps = range($minRounded, $maxRounded, 10000000);
+        
+            $priceRange = [
+                'min'   => $minRounded,
+                'max'   => $maxRounded,
+                'steps' => $steps,
+            ];
+
+        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange'));
     }
 
     public function show($property_ref_no)
