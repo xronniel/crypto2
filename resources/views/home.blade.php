@@ -189,6 +189,36 @@
                                     
                                     <p>
                                         <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
+                                        min_area
+                                    </p>
+                                    <div>
+                                        <div class="black-dropdown black-dropdown-one ">
+                                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
+                                                alt="arrow">
+                                            <select name="min_area" class="price-dropdown form-select">
+                                                <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
+                                                @foreach ($plotAreaRange['steps'] as $step)
+                                                    <option value="{{ $step }}">{{ $step }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="black-dropdown black-dropdown-one ">
+                                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
+                                                alt="arrow">
+                                            <select name="max_area" class="price-dropdown form-select">
+                                                <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
+                                                @foreach ($plotAreaRange['steps'] as $step)
+                                                    <option value="{{ $step }}">{{ $step }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <p>
+                                        <img src="{{ asset('assets/img/property/furnishing-icon.svg') }}" alt="search">
                                         Furnishing
                                     </p>
 

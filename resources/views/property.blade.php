@@ -76,16 +76,16 @@
                         {{-- !-- Area Dropdown --> --}}
                         <div class="dropdown-dialog" id="areaDropdown">
                             <p>Area Size</p>
-
+                  
                             <div class="dropdown-dialog-content">
                                 <div class="black-dropdown black-dropdown-one ">
                                     <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
                                         alt="arrow">
                                     <select name="min_area" class="price-dropdown form-select">
                                         <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
-                                        @for ($price = 500; $price <= 9000; $price += 100)
-                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                        @endfor
+                                        @foreach ($plotAreaRange['steps'] as $step)
+                                            <option value="{{ $step }}">{{ $step }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="black-dropdown black-dropdown-one ">
@@ -93,9 +93,9 @@
                                         alt="arrow">
                                     <select name="max_area" class="price-dropdown form-select">
                                         <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
-                                        @for ($price = 500; $price <= 9000; $price += 100)
-                                            <option value="{{ $price }}">{{ number_format($price) }}</option>
-                                        @endfor
+                                        @foreach ($plotAreaRange['steps'] as $step)
+                                            <option value="{{ $step }}">{{ $step }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
