@@ -189,10 +189,7 @@ class NewsController extends Controller
         
         $newsList = News::with(['galleries', 'tags', 'comments' => function($query) {
             return $query->active();
-        }])->latest()->paginate(10)->map(function($news) {
-            $news->comments_count = $news->comments->count();
-            return $news;
-        });
+        }])->latest()->withCount('comments')->paginate(10);
         
         return view('news-gallery', compact('newsList', 'latestNews', 'categories', 'tags'));
     }

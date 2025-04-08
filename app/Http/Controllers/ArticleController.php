@@ -178,10 +178,7 @@ class ArticleController extends Controller
         
         $articlesList = Article::with(['galleries', 'tags', 'comments' => function($query) {
             return $query->active();
-        }])->latest()->paginate(10)->map(function($article) {
-            $article->comments_count = $article->comments->count();
-            return $article;
-        });
+        }])->latest()->withCount('comments')->paginate(10);
         
         return view('article-gallery', compact('articlesList', 'latestArticles', 'categories', 'tags'));
     }
