@@ -829,3 +829,122 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+document.addEventListener("DOMContentLoaded", function () {
+    // ----- Price Dropdown -----
+    const priceToggle = document.getElementById("priceToggle");
+    const priceDropdown = document.getElementById("priceDropdown");
+    const selectedMinPrice = document.getElementById("selectedMinPrice");
+    const selectedMaxPrice = document.getElementById("selectedMaxPrice");
+
+    if (priceToggle && priceDropdown) {
+        priceToggle.addEventListener("click", function () {
+            priceDropdown.classList.toggle("active");
+        });
+    }
+
+    document.querySelectorAll(".price-option[data-min]").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".price-option[data-min]").forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+            if (selectedMinPrice) selectedMinPrice.value = this.getAttribute("data-min");
+        });
+    });
+
+    document.querySelectorAll(".price-option[data-max]").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".price-option[data-max]").forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+            if (selectedMaxPrice) selectedMaxPrice.value = this.getAttribute("data-max");
+        });
+    });
+
+    // ----- Area Dropdown -----
+    const areaToggle = document.getElementById("AreaToggle");
+    const areaDropdown = document.getElementById("areaDropdown");
+
+    if (areaToggle && areaDropdown) {
+        areaToggle.addEventListener("click", function () {
+            areaDropdown.classList.toggle("active-Area");
+        });
+    }
+
+    document.querySelectorAll("select[name='min_area']").forEach(select => {
+        select.addEventListener("change", function () {
+            if (selectedMinPrice) selectedMinPrice.value = this.value;
+        });
+    });
+
+    document.querySelectorAll("select[name='max_area']").forEach(select => {
+        select.addEventListener("change", function () {
+            if (selectedMaxPrice) selectedMaxPrice.value = this.value;
+        });
+    });
+
+    // ----- More Filters Dropdown -----
+    const filtersToggle = document.getElementById("FiltersToggle");
+    const filtersDropdown = document.getElementById("FiltersDropdown");
+
+    if (filtersToggle && filtersDropdown) {
+        filtersToggle.addEventListener("click", function () {
+            filtersDropdown.classList.toggle("active");
+        });
+    }
+
+    // ----- Furnishing -----
+    document.querySelectorAll(".furnished").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".furnished").forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+
+            const input = document.querySelector("input[name='furnishing']");
+            if (input) input.value = this.getAttribute("data-value");
+        });
+    });
+
+    // ----- Completion Status -----
+    document.querySelectorAll(".Completion").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".Completion").forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+
+            const input = document.querySelector("input[name='completion_status']");
+            if (input) input.value = this.getAttribute("data-value");
+        });
+    });
+
+    // ----- Amenities Checkboxes -----
+    document.querySelectorAll(".amenities input[type='checkbox']").forEach(checkbox => {
+        checkbox.addEventListener("change", function () {
+            let selectedAmenities = [];
+            document.querySelectorAll(".amenities input[type='checkbox']:checked").forEach(checkedBox => {
+                selectedAmenities.push(checkedBox.value);
+            });
+
+            const input = document.querySelector("input[name='amenities[]']");
+            if (input) input.value = selectedAmenities.join(",");
+        });
+    });
+
+    // ----- Amenities Search -----
+    const searchInput = document.querySelector("input[name='search-filters']");
+    if (searchInput) {
+        searchInput.addEventListener("input", function () {
+            let searchValue = this.value.toLowerCase();
+            document.querySelectorAll(".amenities label").forEach(label => {
+                let amenityText = label.textContent.toLowerCase();
+                label.style.display = amenityText.includes(searchValue) ? "flex" : "none";
+            });
+        });
+    }
+});
+
+// Utility Functions
+function closeDropdown(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove("active");
+}
+
+function closeDropdownArea(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove("active-Area");
+}

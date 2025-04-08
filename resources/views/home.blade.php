@@ -161,12 +161,12 @@
                                         <img src="{{ asset('assets/img/property/search-icon.svg') }}" alt="search">
                                         Search
                                     </p>
-
+{{-- 
                                     <div class="property-filter">
                                         <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
                                         <input type="text" placeholder="Search : e.g. Villa, Office, etc."
                                             value="" name="search-filters">
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="filters-secroll-box">
 

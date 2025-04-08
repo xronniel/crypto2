@@ -574,6 +574,19 @@ padding: 5px 10px;
 border-radius: 5px;
 
 }
+.beds-baths-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.beds-baths-options button {
+    flex: 1 1 calc(25% - 10px); /* Adjust % depending on how many buttons per row */
+    min-width: 120px; /* Prevent from getting too small on small screens */
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
 
 
 .Location-img-one {
