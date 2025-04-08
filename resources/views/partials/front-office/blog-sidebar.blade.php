@@ -1,5 +1,5 @@
 <div class="sidebar-area mt-none-30">
-    <!-- <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-search">
+    <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-search">
         <h3 class="widget__title blog-sidebar-title">Search</h3>
         <form class="widget__search blog-sidebar-search" action="#!">
             <input type="text" placeholder="Search your keyword">
@@ -53,7 +53,7 @@
             </div>
 
         </div>
-    </div> -->
+    </div>
     <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-recent">
         <h3 class="widget__title blog-sidebar-title">Follow Us</h3>
         <ul class="widget__social ul_li blog-widget-social">
@@ -64,7 +64,7 @@
             <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
         </ul>
     </div>
-    <!-- <div class="widget mt-30 blog-sidebar-widget-tags">
+    <div class="widget mt-30 blog-sidebar-widget-tags">
         <h3 class="widget__title blog-sidebar-title blog-sidebar-title-tags">Tags</h3>
         <div class="tagcloud">
             <a href="#!">Crypto Home</a>
@@ -77,5 +77,5 @@
             <a href="#!">Advisor</a>
             <a href="#!">Investment</a>
         </div>
-    </div> -->
+    </div>
 </div>
