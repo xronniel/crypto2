@@ -50,13 +50,13 @@ class HomepageController extends Controller
        // If no community is provided in the request, use the first community as the default
        $defaultCommunity = $communities->first();
        $community = $request->get('community', $defaultCommunity);
-
+   
        if ($community) {
            $query->where('community', $community);
        }
 
         $featuredListings = $query->latest()->paginate(3);
-        
+ 
         $newsList = News::latest()->take(3)->get();
 
         $faqs = Faq::all();
