@@ -31,6 +31,7 @@ class ArticleRequest extends FormRequest
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg',
             'mobile_thumbnail' => 'nullable|image|mimes:jpeg,png,jpg',
             'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg',
+            'category_id' => 'nullable|exists:categories,id',
         ];
 
         // If it's a create request, make the thumbnail required

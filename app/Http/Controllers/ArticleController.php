@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\ArticleGallery;
+use App\Models\Tag;
+use App\Models\Category;
 use App\Models\Country;
 use App\Models\Emirates;
 use Illuminate\Http\Request;
@@ -21,7 +23,9 @@ class ArticleController extends Controller
     {
         $emirates = Emirates::all();
         $countries = Country::all();
-        return view('admin.articles.create', compact('emirates', 'countries'));
+        $categories = Category::all();
+        $existingTags = Tag::all();
+        return view('admin.articles.create', compact('emirates', 'countries', 'categories', 'existingTags'));
     }
 
     public function store(ArticleRequest $request)
@@ -42,7 +46,16 @@ class ArticleController extends Controller
             'date' => $request->date,
             'time' => $request->time,
             'content' => $request->content,
+            'category_id' => $request->category_id,
         ]);
+
+        // Handle tags
+        if ($request->has('tags')) {
+            foreach ($request->tags as $tagName) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $article->tags()->attach($tag->id);
+            }
+        }
     
         // Upload and attach gallery images if provided
         if ($request->hasFile('gallery')) {
@@ -68,8 +81,10 @@ class ArticleController extends Controller
     {
         $emirates = Emirates::all();
         $countries = Country::all();
-        $article->load('galleries');
-        return view('admin.articles.edit', compact('article', 'emirates', 'countries'));
+        $categories = Category::all();
+        $existingTags = Tag::all();
+        $article->load('tags'); // Eager load tags
+        return view('admin.articles.edit', compact('article', 'emirates', 'countries', 'categories', 'existingTags'));
     }
 
     public function update(ArticleRequest $request, Article $article)
@@ -84,6 +99,22 @@ class ArticleController extends Controller
         }
     
         // Update news fields
+        // Update tags
+        if ($request->has('tags')) {
+            $article->tags()->detach(); // Remove existing tags
+            if (!empty($request->tags)) {
+                $tags = json_decode($request->tags);
+                if (is_array($tags)) {
+                    foreach ($tags as $tagName) {
+                        if (!empty($tagName->value)) {
+                            $tag = Tag::firstOrCreate(['name' => $tagName->value]);
+                            $article->tags()->attach($tag->id);
+                        }
+                    }
+                }
+            }
+        }
+
         $article->update($request->validated());
     
         // Upload and attach new gallery images if provided
@@ -134,15 +165,32 @@ class ArticleController extends Controller
         return redirect()->back()->with('success', 'Gallery image deleted successfully!');
     }
 
-        public function indexUser()
-        {
-            $articlesList = Article::with('galleries')->latest()->paginate(10); // Paginate results
-            return view('article-gallery', compact('articlesList'));
-        }
+    public function indexUser()
+    {
+        $latestArticles = Article::with(['galleries', 'tags'])->latest()->take(3)->get()->map(function($article) {
+            $article->link = route('articles.gallery.show', ['article' => $article->id]);
+            return $article;
+        });
+        
+        $categories = Category::withCount('articles')->get();
+        $tags = Tag::all();
+        
+        $articlesList = Article::with(['galleries', 'tags'])->latest()->paginate(10);
+        
+        return view('article-gallery', compact('articlesList', 'latestArticles', 'categories', 'tags'));
+    }
 
-        public function showUser($id)
-        {
-            $article = Article::with('galleries')->findOrFail($id);
-            return view('article-details', compact('article'));
-        }
+    public function showUser($id)
+    {
+        $latestArticles = Article::with(['galleries', 'tags'])->latest()->take(3)->get()->map(function($article) {
+            $article->link = route('articles.gallery.show', ['article' => $article->id]);
+            return $article;
+        });
+        
+        $categories = Category::withCount('articles')->get();
+        $tags = Tag::all();
+
+        $article = Article::with(['galleries', 'tags'])->findOrFail($id);
+        return view('article-details', compact('article', 'latestArticles', 'categories', 'tags'));
+    }
 }

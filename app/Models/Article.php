@@ -22,11 +22,22 @@ class Article extends Model
         'date',
         'time',
         'content',
+        'category_id'
     ];
 
     // Relationship with gallery images
     public function galleries()
     {
         return $this->hasMany(ArticleGallery::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'article_tags');
     }
 }

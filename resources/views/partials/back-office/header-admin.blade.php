@@ -122,6 +122,12 @@
                         </a>
                     </div>
                     <div class="option2 nav-option">
+                        <a href="{{ route('admin.categories.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="articles">
+                            Categories
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
                         <a href="{{ route('admin.countries.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/values.png') }}" class="nav-img" alt="articles">
                             Countries

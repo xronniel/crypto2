@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewsRequest;
+use App\Models\Category;
 use App\Models\Country;
 use App\Models\Emirates;
 use App\Models\News;
 use App\Models\NewsGallery;
+use App\Models\Tag;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -21,7 +24,9 @@ class NewsController extends Controller
     {
         $emirates = Emirates::all();
         $countries = Country::all();
-        return view('admin.news.create', compact('emirates', 'countries'));
+        $categories = Category::all();
+        $existingTags = Tag::all();
+        return view('admin.news.create', compact('emirates', 'countries', 'categories', 'existingTags'));
     }
 
     public function store(NewsRequest $request)
@@ -42,7 +47,24 @@ class NewsController extends Controller
             'date' => $request->date,
             'time' => $request->time,
             'content' => $request->content,
+            'category_id' => $request->category_id,
         ]);
+
+        // Handle tags
+        if ($request->has('tags')) {
+            $news->tags()->detach(); // Remove existing tags
+            if (!empty($request->tags)) {
+                $tags = json_decode($request->tags);
+                if (is_array($tags)) {
+                    foreach ($tags as $tagName) {
+                        if (!empty($tagName->value)) {
+                            $tag = Tag::firstOrCreate(['name' => $tagName->value]);
+                            $news->tags()->attach($tag->id);
+                        }
+                    }
+                }
+            }
+        }
     
         // Upload and attach gallery images if provided
         if ($request->hasFile('gallery')) {
@@ -68,8 +90,10 @@ class NewsController extends Controller
     {
         $emirates = Emirates::all();
         $countries = Country::all();
-        $news->load('galleries');
-        return view('admin.news.edit', compact('news', 'emirates', 'countries'));
+        $categories = Category::all();
+        $existingTags = Tag::all();
+        $news->load('tags'); // Eager load tags
+        return view('admin.news.edit', compact('news', 'emirates', 'countries', 'categories', 'existingTags'));
     }
 
     public function update(NewsRequest $request, News $news)
@@ -84,6 +108,22 @@ class NewsController extends Controller
         }
     
         // Update news fields
+        // Update tags
+        if ($request->has('tags')) {
+            $news->tags()->detach(); // Remove existing tags
+            if (!empty($request->tags)) {
+                $tags = json_decode($request->tags);
+                if (is_array($tags)) {
+                    foreach ($tags as $tagName) {
+                        if (!empty($tagName->value)) {
+                            $tag = Tag::firstOrCreate(['name' => $tagName->value]);
+                            $news->tags()->attach($tag->id);
+                        }
+                    }
+                }
+            }
+        }
+
         $news->update($request->validated());
     
         // Upload and attach new gallery images if provided
@@ -138,13 +178,31 @@ class NewsController extends Controller
 
     public function indexUser()
     {
-        $newsList = News::with('galleries')->latest()->paginate(10); // Paginate results
-        return view('news-gallery', compact('newsList'));
+        $latestNews = News::with(['galleries', 'tags'])->latest()->take(3)->get()->map(function($news) {
+            $news->link = route('news.gallery.show', ['news' => $news->id]);
+            return $news;
+        });
+        
+        $categories = Category::withCount('news')->get();
+        $tags = Tag::all();
+        
+        $newsList = News::with(['galleries', 'tags'])->latest()->paginate(10);
+        
+        return view('news-gallery', compact('newsList', 'latestNews', 'categories', 'tags'));
     }
 
     public function showUser($id)
     {
-        $news = News::with('galleries')->findOrFail($id);
-        return view('news-details', compact('news'));
+        $latestNews = News::with(['galleries', 'tags'])->latest()->take(3)->get()->map(function($news) {
+            $news->link = route('news.gallery.show', ['news' => $news->id]);
+            return $news;
+        });
+        
+        $categories = Category::withCount('news')->get();
+        $tags = Tag::all();
+
+        $news = News::with(['galleries', 'tags'])->findOrFail($id);
+        
+        return view('news-details', compact('news', 'latestNews', 'categories', 'tags'));
     }
 }
