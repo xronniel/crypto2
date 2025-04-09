@@ -10,6 +10,9 @@
         />
     </section>
     {{-- {{ $property }} --}}
+
+
+
     <section class="breadcrumb bg_img pos-rel section-bg-agent">
         <div class="container-agent">
             <h1>Find Trusted Agents Specializing in
@@ -40,6 +43,14 @@
 
             <div class="col-lg-9 mt-30 ">
                 <div class="agent-right-box">
+                
+
+
+@foreach ($agents as $agent)
+
+{{  $agent}}    
+@endforeach
+                    
                     <div class="agent-right-box-filter">
                         <a class="agent-right-box-filter-link agent-right-box-filter-active" href="#">Dubai</a>
                         <a class="agent-right-box-filter-link" href="#">Abu Dhabi</a>

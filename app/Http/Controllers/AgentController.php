@@ -88,7 +88,7 @@ class AgentController extends Controller
                   'steps' => $steps,
               ];
 
-        return view('agents', compact('agents', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange'));
+        return view('agent-dashboard', compact('agents', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange'));
     }
 
     /**
@@ -221,7 +221,9 @@ class AgentController extends Controller
             'steps' => $steps,
         ];
 
-        return view('agentDetails', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange'));
+        
+
+        return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange'));
     }
 
 
