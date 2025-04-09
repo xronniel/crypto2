@@ -12,6 +12,7 @@
                 <th>Photo</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Super Agent</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,7 +35,9 @@
                     
                     <td>{{ $agent->phone }}</td>
                     <td>{{ $agent->email }}</td>
+                    <td>{{ $agent->superagent ? 'Yes' : 'No' }}</td>
                     <td>
+                        <a href="{{ route('admin.agents.show', $agent->id) }}" class="btn btn-info btn-sm">Show</a>
                         <a href="{{ route('admin.agents.edit', $agent->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('admin.agents.destroy', $agent->id) }}" method="POST" style="display:inline;">
                             @csrf
