@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AgentRequest;
 use App\Models\Agent;
 use App\Models\Facility;
+use App\Models\Faq;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -87,8 +88,8 @@ class AgentController extends Controller
                   'max'   => $maxRounded,
                   'steps' => $steps,
               ];
-
-        return view('agent-dashboard', compact('agents', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange'));
+              $faqs = Faq::all();
+        return view('agent-dashboard', compact('agents', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs'));
     }
 
     /**
