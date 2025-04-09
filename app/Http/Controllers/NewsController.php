@@ -177,7 +177,7 @@ class NewsController extends Controller
         return redirect()->back()->with('success', 'Gallery image deleted successfully!');
     }
 
-    public function indexUser()
+    public function indexUser(Request $request)
     {
         $latestNews = News::with(['galleries', 'tags'])->latest()->take(3)->get()->map(function($news) {
             $news->link = route('news.gallery.show', ['news' => $news->id]);
@@ -187,7 +187,27 @@ class NewsController extends Controller
         $categories = Category::withCount('news')->get();
         $tags = Tag::all();
         
-        $newsList = News::with(['galleries', 'tags', 'comments' => function($query) {
+        $query = News::query();
+        
+        if ($request->has('q')) {
+            $search = $request->input('q');
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                  ->orWhere('content', 'LIKE', "%{$search}%");
+            });
+        }
+        
+        if ($request->has('category_id')) {
+            $query->where('category_id', $request->input('category_id'));
+        }
+        
+        if ($request->has('tag_id')) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('tags.id', $request->input('tag_id'));
+            });
+        }
+        
+        $newsList = $query->with(['galleries', 'tags', 'comments' => function($query) {
             return $query->active();
         }])->latest()->withCount('comments')->paginate(10);
         
