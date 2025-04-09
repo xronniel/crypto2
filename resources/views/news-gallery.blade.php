@@ -46,14 +46,14 @@
             <div class="container">
                 <div class="row mt-none-30">
                     <div class="col-lg-8 mt-30">
-                        @if(request()->has('category'))
+                        @if(request()->has('category_id'))
 
                             @php
                                 $hasNews = false;
                             @endphp
                             <div class="blog-post-wrap mt-none-30">
                                 @foreach($newsList as $newslist)
-                                    @if($newslist->category_id == request()->query('category'))
+                                   
                                         @php
                                             $hasNews = true;
                                         @endphp
@@ -67,9 +67,10 @@
                                             </a>
                                             <div class="blog__inner">
                                                 <ul class="blog__meta ul_li mb-20 blog-meta-data">
-                                                    <li><a href="#!"><i class="far fa-map-marker-alt"></i>{{ $newslist -> state }}, {{ $newslist -> country }}</a></li>
+                                                    <li><a href="https://www.google.com/maps?q={{ urlencode($newslist->state . ' ' . $newslist->country) }}"
+                                                    target="_blank"><i class="far fa-map-marker-alt"></i>{{ $newslist -> state }}, {{ $newslist -> country }}</a></li>
                                                     <li><i class="far fa-clock"></i>{{ \Carbon\Carbon::parse($newslist->date)->format('M d, Y') }}</li>
-                                                    <li><a href="#!"><i class="far fa-comment"></i>(04) Comments</a></li>
+                                                    <li><a><i class="far fa-comment"></i>({{ $newslist -> comments_count }}) Comments</a></li>
                                                 </ul>
                                                 <h2 class="title border_effect"><a href="{{ url('news/' . $newslist -> id) }}">{{ $newslist -> title }}</a></h2>
                                                 <p>{{ \Illuminate\Support\Str::limit($newslist -> content, 210, '...') }}</p>
@@ -87,14 +88,95 @@
                                                 </button>
                                             </div>
                                         </article>
-                                    @endif
+                                    
                                 @endforeach
                             </div>
                             @if(!$hasNews)
-                                <h2>No news available in this category.</h2>
+                                <h2>No articles available in this category.</h2>
+                            @else
+
+                            <div class="pagination_wrap pt-50 blog-pagination-less">
+                                <ul>
+                                    @if($newsList->currentPage() > 1)
+                                        <li>
+                                            <a href="{{ $newsList->previousPageUrl() . (parse_url($newsList->previousPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'category_id=' . request()->get('category_id') }}">
+                                                <i class="far fa-long-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a><i class="far fa-long-arrow-left"></i></a></li>
+                                    @endif
+
+                                    @for($i = 1; $i <= $newsList->lastPage(); $i++)
+                                        @if($i <= 2 || $i == $newsList->lastPage()) <!-- Show first 3 pages and last page -->
+                                            <li>
+                                                @if($i == $newsList->currentPage())
+                                                    <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'category_id=' . request()->get('category_id') }}" class="current_page">
+                                                        {{ $i }}
+                                                    </a>
+                                                @else
+                                                    <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'category_id=' . request()->get('category_id') }}">
+                                                        {{ $i }}
+                                                    </a>
+                                                @endif
+                                            </li>
+                                        @elseif($i == 3 && $newsList->lastPage() > 3)
+                                            <li><a class="ellipsis" id="show-more-pagination"><i class="fal fa-ellipsis-h"></i></a></li>
+                                        @endif
+                                    @endfor
+
+                                    @if($newsList->hasMorePages())
+                                        <li>
+                                            <a href="{{ $newsList->nextPageUrl() . (parse_url($newsList->nextPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'category_id=' . request()->get('category_id') }}">
+                                                <i class="far fa-long-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a><i class="far fa-long-arrow-right"></i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                            <div class="pagination_wrap pt-50 blog-pagination-more">
+                                <ul>
+                                    @if($newsList->currentPage() > 1)
+                                        <li>
+                                            <a href="{{ $newsList->previousPageUrl() . (parse_url($newsList->previousPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'category_id=' . request()->get('category_id') }}">
+                                                <i class="far fa-long-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a><i class="far fa-long-arrow-left"></i></a></li>
+                                    @endif
+
+                                    @for($i = 1; $i <= $newsList->lastPage(); $i++)
+                                        <li>
+                                            @if($i == $newsList->currentPage())
+                                                <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'category_id=' . request()->get('category_id') }}" class="current_page">
+                                                    {{ $i }}
+                                                </a>
+                                            @else
+                                                <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'category_id=' . request()->get('category_id') }}">
+                                                    {{ $i }}
+                                                </a>
+                                            @endif
+                                        </li>
+                                    @endfor
+
+                                    @if($newsList->hasMorePages())
+                                        <li>
+                                            <a href="{{ $newsList->nextPageUrl() . (parse_url($newsList->nextPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'category_id=' . request()->get('category_id') }}">
+                                                <i class="far fa-long-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a><i class="far fa-long-arrow-right"></i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+
                             @endif
 
-                        @elseif(request()->has('tags'))
+                        @elseif(request()->has('tag_id'))
 
                             <div class="blog-post-wrap mt-none-30">
                                 @php
@@ -106,37 +188,28 @@
                                 @endphp
 
                                 @foreach($newsList as $newslist)
-                                    @php
-                                        $matchesTag = false;
-                                        foreach ($newslist->tags as $tag) {
-                                            if (in_array($tag->id, $requestedTags)) {
-                                                $matchesTag = true;
-                                                break;
-                                            }
-                                        }
-                                    @endphp
-
-                                    @if($matchesTag)
+                                    
                                         @php
                                             $hasTags = true;
                                         @endphp
                                         <article class="blog__item mt-30">
-                                            <a class="thumb blog-desktop-thumb" href="{{ url('news/' . $newslist->id) }}">
+                                            <a class="thumb blog-desktop-thumb" href="{{ url('articles/' . $newslist->id) }}">
                                                 <img src="{{ asset('storage/' . $newslist->thumbnail) }}" alt="News Image" class="desktop">
                                                 <img src="{{ asset('storage/' . $newslist->mobile_thumbnail) }}" alt="News Image" class="mobile">
                                                 <h4 class="blog-news-article-title">News Article</h4>
                                             </a>
                                             <div class="blog__inner">
                                                 <ul class="blog__meta ul_li mb-20 blog-meta-data">
-                                                    <li><a href="#!"><i class="far fa-map-marker-alt"></i>{{ $newslist->state }}, {{ $newslist->country }}</a></li>
+                                                    <li><a href="https://www.google.com/maps?q={{ urlencode($newslist->state . ' ' . $newslist->country) }}"
+                                                    target="_blank"><i class="far fa-map-marker-alt"></i>{{ $newslist->state }}, {{ $newslist->country }}</a></li>
                                                     <li><i class="far fa-clock"></i>{{ \Carbon\Carbon::parse($newslist->date)->format('M d, Y') }}</li>
-                                                    <li><a href="#!"><i class="far fa-comment"></i>(04) Comments</a></li>
+                                                    <li><a><i class="far fa-comment"></i>({{ $newslist -> comments_count }}) Comments</a></li>
                                                 </ul>
                                                 <h2 class="title border_effect">
-                                                    <a href="{{ url('news/' . $newslist->id) }}">{{ $newslist->title }}</a>
+                                                    <a href="{{ url('articles/' . $newslist->id) }}">{{ $newslist->title }}</a>
                                                 </h2>
                                                 <p>{{ \Illuminate\Support\Str::limit($newslist->content, 210, '...') }}</p>
-                                                <button class="them-btn blog-find-out-more mt-30" onclick="window.location.href='{{ url('news/' . $newslist->id) }}';">
+                                                <button class="them-btn blog-find-out-more mt-30" onclick="window.location.href='{{ url('articles/' . $newslist->id) }}';">
                                                     <span class="btn_label" data-text="FIND OUT MORE">FIND OUT MORE</span>
                                                     <span class="btn_icon">
                                                         <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,15 +219,98 @@
                                                 </button>
                                             </div>
                                         </article>
-                                    @endif
+                                    
                                 @endforeach
                             </div>
                             @if(!$hasTags)
                                 <h2>No news available in this tag.</h2>
+                            @else
+
+                            <div class="pagination_wrap pt-50 blog-pagination-less">
+                                <ul>
+                                    @if($newsList->currentPage() > 1)
+                                        <li>
+                                            <a href="{{ $newsList->previousPageUrl() . (parse_url($newsList->previousPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'tag_id=' . request()->get('tag_id') }}">
+                                                <i class="far fa-long-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a><i class="far fa-long-arrow-left"></i></a></li>
+                                    @endif
+
+                                    @for($i = 1; $i <= $newsList->lastPage(); $i++)
+                                        @if($i <= 2 || $i == $newsList->lastPage()) <!-- Show first 3 pages and last page -->
+                                            <li>
+                                                @if($i == $newsList->currentPage())
+                                                    <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'tag_id=' . request()->get('tag_id') }}" class="current_page">
+                                                        {{ $i }}
+                                                    </a>
+                                                @else
+                                                    <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'tag_id=' . request()->get('tag_id') }}">
+                                                        {{ $i }}
+                                                    </a>
+                                                @endif
+                                            </li>
+                                        @elseif($i == 3 && $newsList->lastPage() > 3)
+                                            <li><a class="ellipsis" id="show-more-pagination"><i class="fal fa-ellipsis-h"></i></a></li>
+                                        @endif
+                                    @endfor
+
+                                    @if($newsList->hasMorePages())
+                                        <li>
+                                            <a href="{{ $newsList->nextPageUrl() . (parse_url($newsList->nextPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'tag_id=' . request()->get('tag_id') }}">
+                                                <i class="far fa-long-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a><i class="far fa-long-arrow-right"></i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                            <div class="pagination_wrap pt-50 blog-pagination-more">
+                                <ul>
+                                    @if($newsList->currentPage() > 1)
+                                        <li>
+                                            <a href="{{ $newsList->previousPageUrl() . (parse_url($newsList->previousPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'tag_id=' . request()->get('tag_id') }}">
+                                                <i class="far fa-long-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a><i class="far fa-long-arrow-left"></i></a></li>
+                                    @endif
+
+                                    @for($i = 1; $i <= $newsList->lastPage(); $i++)
+                                        <li>
+                                            @if($i == $newsList->currentPage())
+                                                <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'tag_id=' . request()->get('tag_id') }}" class="current_page">
+                                                    {{ $i }}
+                                                </a>
+                                            @else
+                                                <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'tag_id=' . request()->get('tag_id') }}">
+                                                    {{ $i }}
+                                                </a>
+                                            @endif
+                                        </li>
+                                    @endfor
+
+                                    @if($newsList->hasMorePages())
+                                        <li>
+                                            <a href="{{ $newsList->nextPageUrl() . (parse_url($newsList->nextPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'tag_id=' . request()->get('tag_id') }}">
+                                                <i class="far fa-long-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li><a><i class="far fa-long-arrow-right"></i></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+
                             @endif
 
                         @elseif(request()->is('news'))
-
+                            @php
+                                $hasNews = true;
+                            @endphp 
                             <div class="blog-post-wrap mt-none-30">
                                 @forelse($newsList as $newslist)
                                     <article class="blog__item mt-30">
@@ -167,9 +323,10 @@
                                         </a>
                                         <div class="blog__inner">
                                             <ul class="blog__meta ul_li mb-20 blog-meta-data">
-                                                <li><a href="#!"><i class="far fa-map-marker-alt"></i>{{ $newslist -> state }}, {{ $newslist -> country }}</a></li>
+                                                <li><a href="https://www.google.com/maps?q={{ urlencode($newslist->state . ' ' . $newslist->country) }}"
+                                                target="_blank"><i class="far fa-map-marker-alt"></i>{{ $newslist -> state }}, {{ $newslist -> country }}</a></li>
                                                 <li><i class="far fa-clock"></i>{{ \Carbon\Carbon::parse($newslist->date)->format('M d, Y') }}</li>
-                                                <li><a href="#!"><i class="far fa-comment"></i>(04) Comments</a></li>
+                                                <li><a><i class="far fa-comment"></i>({{ $newslist -> comments_count }}) Comments</a></li>
                                             </ul>
                                             <h2 class="title border_effect"><a href="{{ url('news/' . $newslist -> id) }}">{{ $newslist -> title }}</a></h2>
                                             <p>{{ \Illuminate\Support\Str::limit($newslist -> content, 210, '...') }}</p>
@@ -188,63 +345,92 @@
                                         </div>
                                     </article>
                                 @empty
+                                    @php
+                                        $hasNews = false;
+                                    @endphp 
                                     <h2>No news availabe.</h2>
                                 @endforelse
                             </div>
-                            <div class="pagination_wrap pt-50 blog-pagination-less">
-                                <ul>
-                                    @if($newsList->currentPage() > 1)
-                                        <li><a href="{{ $newsList->previousPageUrl() }}"><i class="far fa-long-arrow-left"></i></a></li>
-                                    @else
-                                        <li><a><i class="far fa-long-arrow-left"></i></a></li>
-                                    @endif
-                                    
-                                    @for($i = 1; $i <= $newsList->lastPage(); $i++)
-                                        @if($i <= 2 || $i == $newsList->lastPage()) <!-- Show first 3 pages and last page -->
+                            @if($hasNews)
+                                <div class="pagination_wrap pt-50 blog-pagination-less">
+                                    <ul>
+                                        @if($newsList->currentPage() > 1)
+                                            <li>
+                                                <a href="{{ $newsList->previousPageUrl() . (parse_url($newsList->previousPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'q=' . request()->get('q') }}">
+                                                    <i class="far fa-long-arrow-left"></i>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li><a><i class="far fa-long-arrow-left"></i></a></li>
+                                        @endif
+
+                                        @for($i = 1; $i <= $newsList->lastPage(); $i++)
+                                            @if($i <= 2 || $i == $newsList->lastPage()) <!-- Show first 3 pages and last page -->
+                                                <li>
+                                                    @if($i == $newsList->currentPage())
+                                                        <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'q=' . request()->get('q') }}" class="current_page">
+                                                            {{ $i }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'q=' . request()->get('q') }}">
+                                                            {{ $i }}
+                                                        </a>
+                                                    @endif
+                                                </li>
+                                            @elseif($i == 3 && $newsList->lastPage() > 3)
+                                                <li><a class="ellipsis" id="show-more-pagination"><i class="fal fa-ellipsis-h"></i></a></li>
+                                            @endif
+                                        @endfor
+
+                                        @if($newsList->hasMorePages())
+                                            <li>
+                                                <a href="{{ $newsList->nextPageUrl() . (parse_url($newsList->nextPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'q=' . request()->get('q') }}">
+                                                    <i class="far fa-long-arrow-right"></i>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li><a><i class="far fa-long-arrow-right"></i></a></li>
+                                        @endif
+                                    </ul>
+                                </div>
+                                <div class="pagination_wrap pt-50 blog-pagination-more">
+                                    <ul>
+                                        @if($newsList->currentPage() > 1)
+                                            <li>
+                                                <a href="{{ $newsList->previousPageUrl() . (parse_url($newsList->previousPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'q=' . request()->get('q') }}">
+                                                    <i class="far fa-long-arrow-left"></i>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li><a><i class="far fa-long-arrow-left"></i></a></li>
+                                        @endif
+
+                                        @for($i = 1; $i <= $newsList->lastPage(); $i++)
                                             <li>
                                                 @if($i == $newsList->currentPage())
-                                                    <a href="{{ $newsList->url($i) }}" class="current_page">{{ $i }}</a>
+                                                    <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'q=' . request()->get('q') }}" class="current_page">
+                                                        {{ $i }}
+                                                    </a>
                                                 @else
-                                                    <a href="{{ $newsList->url($i) }}">{{ $i }}</a>
+                                                    <a href="{{ $newsList->url($i) . (parse_url($newsList->url($i), PHP_URL_QUERY) ? '&' : '?') . 'q=' . request()->get('q') }}">
+                                                        {{ $i }}
+                                                    </a>
                                                 @endif
                                             </li>
-                                        @elseif($i == 3 && $newsList->lastPage() > 3)
-                                            <li><a href="javascript:void(0);" class="ellipsis" id="show-more-pagination"><i class="fal fa-ellipsis-h"></i></a></li>
-                                        @endif
-                                    @endfor
+                                        @endfor
 
-                                    @if($newsList->hasMorePages())
-                                        <li><a href="{{ $newsList->nextPageUrl() }}"><i class="far fa-long-arrow-right"></i></a></li>
-                                    @else
-                                        <li><a><i class="far fa-long-arrow-right"></i></a></li>
-                                    @endif
-                                </ul>
-                            </div>
-                            <div class="pagination_wrap pt-50 blog-pagination-more">
-                                <ul>
-                                    @if($newsList->currentPage() > 1)
-                                        <li><a href="{{ $newsList->previousPageUrl() }}"><i class="far fa-long-arrow-left"></i></a></li>
-                                    @else
-                                        <li><a><i class="far fa-long-arrow-left"></i></a></li>
-                                    @endif
-                                    
-                                    @for($i = 1; $i <= $newsList->lastPage(); $i++)
-                                        <li>
-                                            @if($i == $newsList->currentPage())
-                                                <a href="{{ $newsList->url($i) }}" class="current_page">{{ $i }}</a>
-                                            @else
-                                                <a href="{{ $newsList->url($i) }}">{{ $i }}</a>
-                                            @endif
-                                        </li>
-                                    @endfor
-                                    
-                                    @if($newsList->hasMorePages())
-                                        <li><a href="{{ $newsList->nextPageUrl() }}"><i class="far fa-long-arrow-right"></i></a></li>
-                                    @else
-                                        <li><a><i class="far fa-long-arrow-right"></i></a></li>
-                                    @endif
-                                </ul>
-                            </div>
+                                        @if($newsList->hasMorePages())
+                                            <li>
+                                                <a href="{{ $newsList->nextPageUrl() . (parse_url($newsList->nextPageUrl(), PHP_URL_QUERY) ? '&' : '?') . 'q=' . request()->get('q') }}">
+                                                    <i class="far fa-long-arrow-right"></i>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li><a><i class="far fa-long-arrow-right"></i></a></li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            @endif
 
                         @endif
                     </div>
