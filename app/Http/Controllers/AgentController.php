@@ -17,6 +17,14 @@ class AgentController extends Controller
         return view('admin.agents.index', compact('agents'));
     }
 
+    public function userIndex()
+    {
+        // Get all agents, with optional pagination
+        $agents = Agent::paginate(10);  // You can adjust the pagination limit
+
+        return view('agents', compact('agents'));
+    }
+
     /**
      * Show the form for creating a new agent.
      */
@@ -32,6 +40,8 @@ class AgentController extends Controller
     {
         $data = $request->validated();
     
+        $validated['superagent'] = $request->has('superagent');
+
         // Handle photo upload
         if ($request->hasFile('photo')) {
             $data['photo'] = $request->file('photo')->store('agents', 'public');
@@ -57,6 +67,8 @@ class AgentController extends Controller
     {
         $data = $request->validated();
     
+        $validated['superagent'] = $request->has('superagent');
+
         // Handle photo update
         if ($request->hasFile('photo')) {
             $data['photo'] = $request->file('photo')->store('agents', 'public');
@@ -66,6 +78,21 @@ class AgentController extends Controller
         return redirect()->route('admin.agents.index')->with('success', 'Agent updated successfully.');
     }
     
+    public function show(Agent $agent)
+    {
+        $agent->load(['saleListings', 'rentListings']);
+
+        return view('admin.agents.show', compact('agent'));
+    }
+
+    public function userShow(Agent $agent)
+    {
+        // Load related listings (both sale and rent)
+        $agent->load(['saleListings', 'rentListings']);
+
+        return view('agentDetails', compact('agent'));
+    }
+
 
     /**
      * Remove the specified agent.
