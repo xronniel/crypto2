@@ -47,11 +47,18 @@
 
 
 
-                    
-                    <div class="agent-right-box-filter">
-                        <a class="agent-right-box-filter-link agent-right-box-filter-active" href="#">Dubai</a>
-                        <a class="agent-right-box-filter-link" href="#">Abu Dhabi</a>
+                    <div id="communities-span" class="agent-right-box-filter">
+                        @foreach ($communities as $com)
+                            <a class="agent-right-box-filter-link {{ $community == $com ? 'agent-right-box-filter-active' : '' }}"
+                               href="/agents?community={{ urlencode($com) }}">
+                                {{ $com }}
+                            </a>
+                        @endforeach
                     </div>
+                    
+                    
+                
+                    
                     <div class="agent-card-wrapper">
                         @foreach ($agents as $agent)
                             <div 
@@ -63,8 +70,8 @@
                                 <div class="agent-right-box-card-left">
                                     <div class="agent-right-box-card-left-one">
                                         <div class="agent-right-box-card-left-one-p">
-                                            <p>{{ $agent['sales'] ?? '0' }} Sale</p>
-                                            <p>{{ $agent['rent'] ?? '0' }} Rent</p>
+                                            <p>{{ $agent->saleListings->count()  ?? '0' }} Sale</p>
+                                            <p>{{  $agent->rentListings->count() ?? '0' }} Rent</p>
                                         </div>
                                         <img src="{{ asset('assets/img/agent/agent-logo.jpeg') }}" alt="logo">
                                     </div>
@@ -266,15 +273,71 @@
 
         .agent-right-box-filter {
             border-radius: 5px;
-            border-width: 1px;
-            display: flex;
-            padding: 5px;
-            background: #000000;
-            border: 1px solid #FFFFFF1A;
-            gap: 8px;
-            padding: 6px;
-            width: fit-content;
+    border-width: 1px;
+    display: flex
+;
+    padding: 5px;
+    background: #000000;
+    border: 1px solid #FFFFFF1A;
+    gap: 8px;
+    padding: 6px;
+    overflow-x: scroll;
+
+            
+
+
+
+    border-radius: 5px;
+    border: 1px solid #FFFFFF1A;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    overflow-x: auto; /* still allow scroll but hide bar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE/Edge */
+    cursor: grab;
+    user-select: none;
+    width: 500px;
+    height: 80px;
+
+
+
+
+
+    
         }
+
+
+
+
+
+.agent-right-box-filter::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.agent-right-box-filter.dragging {
+    cursor: grabbing;
+}
+.agent-right-box-filter-link {
+    flex-shrink: 0;
+    white-space: nowrap;
+    width: 200px;
+    padding: 8px 40px;
+    border-radius: 6px;
+    border: 1px solid #FFFFFF1A;
+    font-family: "Outfit", sans-serif;
+    font-size: 16px;
+    color: #767676;
+    text-align: center;
+    width: fit-content;
+}
+
+
+
+
+
+
 
         .agent-right-box-filter-link {
             border: 1px solid #FFFFFF1A;
@@ -514,4 +577,42 @@
 
         
     </style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const locationFilter = document.getElementById("communities-span");
+
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+
+    locationFilter.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        locationFilter.classList.add("dragging");
+        startX = e.pageX - locationFilter.offsetLeft;
+        scrollLeft = locationFilter.scrollLeft;
+    });
+
+    locationFilter.addEventListener("mouseleave", () => {
+        isDragging = false;
+        locationFilter.classList.remove("dragging");
+    });
+
+    locationFilter.addEventListener("mouseup", () => {
+        isDragging = false;
+        locationFilter.classList.remove("dragging");
+    });
+
+    locationFilter.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - locationFilter.offsetLeft;
+        const walk = (x - startX) * 2; // adjust scroll speed
+        locationFilter.scrollLeft = scrollLeft - walk;
+    });
+});
+
+
+</script>
 @endsection

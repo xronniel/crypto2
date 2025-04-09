@@ -130,10 +130,19 @@
 
             <div class="row mt-none-30">
                 <div class=" mt-30">
-            
+                    <div 
+                    style="margin: 0 0 40px 0"
+                    class=" property-details-Description">
+                        <span class="active-filter-link">My Properties</span>
+                    </div>
+
+                    <div class="agent-count-properties">
+                        <p><span>200</span> properties available</p>
+                    </div>
+                
                     @foreach ($agent->listings as $property)
                         <div onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
-                            style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap mt-none-30">
+                            style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap">
                             <article class="blog__item mt-30 blog__item-property">
                                 <div class="blog__item-property-one swiper">
                                     <img class="Favorite-green" src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
@@ -613,7 +622,16 @@ color: #FFFFFF;
     width: fit-content;
 }
 
-
+.agent-count-properties{
+    font-family: "Open Sans";
+font-weight: 400;
+font-size: 16px;
+line-height: 28px;
+letter-spacing: 0%;
+vertical-align: middle;
+color: #767676;
+margin: 0 0 20px 0;
+}
 
 
 </style>
