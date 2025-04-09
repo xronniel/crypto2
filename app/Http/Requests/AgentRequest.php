@@ -21,6 +21,7 @@ class AgentRequest extends FormRequest
      */
     public function rules(): array
     {
+
         $agentId = $this->route('agent') ? $this->route('agent')->id : null;
 
         return [
@@ -30,8 +31,26 @@ class AgentRequest extends FormRequest
             'permit' => 'nullable|string|max:255',
             'email' => 'required|email|unique:agents,email,' . $agentId,
             'whatsapp' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'nationality' => 'nullable|string|max:255',
+            'language' => 'nullable|string|max:255',
+            'experience' => 'nullable|integer|min:0|max:100',
+            'BRN' => 'nullable|string|max:50',
+            'about' => 'nullable|string',
+            'position' => 'nullable|string|max:255',
+            'superagent' => 'nullable|boolean',
         ];
 
+    }
+
+    protected function prepareForValidation()
+    {
+        // Convert superagent checkbox to true/false
+        if ($this->has('superagent')) {
+            $this->merge(['superagent' => true]);
+        } else {
+            $this->merge(['superagent' => false]);
+        }
     }
 
     public function messages()

@@ -32,19 +32,23 @@ class ImportListings extends Command
             $agentId = $this->updateAgent($listing);
             $communityId = $this->updateCommunity($listing);
 
-            $unitType = (string)$listing->Unit_Type;
-            $commercialTypes = [
-                'Commercial Full Building',
-                'Retail',
-                'Warehouse',
-                'Labour Camp',
-                'Land Commercial',
-                'Factory',
-                'Land Mixed Use',
-                'Commercial Full Floor',
+            $agentName = strtolower((string)$listing->Listing_Agent);
+            $commercialAgents = [
+                'belindi mearini',
+                'bee mearini',
+                'jake jones',
+                'ashley scott',
             ];
-
-            $type = in_array($unitType, $commercialTypes) ? 'Commercial' : 'Residential';
+            
+            $isCommercial = false;
+            foreach ($commercialAgents as $name) {
+                if (str_contains($agentName, strtolower($name))) {
+                    $isCommercial = true;
+                    break;
+                }
+            }
+            
+            $type = $isCommercial ? 'Commercial' : 'Residential';
 
 
             $listingData = Listing::updateOrCreate(
