@@ -140,11 +140,13 @@
                                                 Tags:
                                             </h5>
                                             <div class="tagcloud">
-                                                <a href="#!">ICO</a>
-                                                <a href="#!">Blockchain</a>
-                                                <a href="#!">Investment</a>
+                                                @forelse ($article -> tags as $tag)
+                                                    <a href="{{ url('articles') . '?tags=' . urlencode($tag->id) }}">{{ $tag -> name }}</a>
+                                                @empty
+                                                    <a>No available tag</a>
+                                                @endforelse
                                             </div>
-                                        </div>
+                                        </div>  
                                         <div class="d-flex align-items-center">
                                             <h5 class="blog-details-tags-share">
                                                 Share:

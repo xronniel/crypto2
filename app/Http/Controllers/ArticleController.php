@@ -166,7 +166,7 @@ class ArticleController extends Controller
         return redirect()->back()->with('success', 'Gallery image deleted successfully!');
     }
 
-    public function indexUser()
+    public function indexUser(Request $request)
     {
         $latestArticles = Article::with(['galleries', 'tags'])->latest()->take(3)->get()->map(function($article) {
             $article->link = route('articles.gallery.show', ['article' => $article->id]);
@@ -176,7 +176,27 @@ class ArticleController extends Controller
         $categories = Category::withCount('articles')->get();
         $tags = Tag::all();
         
-        $articlesList = Article::with(['galleries', 'tags', 'comments' => function($query) {
+        $query = Article::query();
+        
+        if ($request->has('q')) {
+            $search = $request->input('q');
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                  ->orWhere('content', 'LIKE', "%{$search}%");
+            });
+        }
+        
+        if ($request->has('category_id')) {
+            $query->where('category_id', $request->input('category_id'));
+        }
+        
+        if ($request->has('tag_id')) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('tags.id', $request->input('tag_id'));
+            });
+        }
+        
+        $articlesList = $query->with(['galleries', 'tags', 'comments' => function($query) {
             return $query->active();
         }])->latest()->withCount('comments')->paginate(10);
         
@@ -194,7 +214,7 @@ class ArticleController extends Controller
         $tags = Tag::all();
 
         $article = Article::with(['galleries', 'tags', 'comments' => function($query) {
-            return $query->active()->with(['user', 'parent', 'children']);
+            return $query->active()->with(['parent', 'children']);
         }])->findOrFail($id);
         
         $article->comments = Comment::getNestedComments($article->comments);

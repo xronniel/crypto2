@@ -6,9 +6,9 @@
 <div class="sidebar-area mt-none-30">
     <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-search">
         <h3 class="widget__title blog-sidebar-title">Search</h3>
-        <form class="widget__search blog-sidebar-search" action="#!">
-            <input type="text" placeholder="Search your keyword">
-            <button><i class="far fa-search"></i></button>
+        <form class="widget__search blog-sidebar-search" action="{{ url('news') }}" method="GET">
+            <input type="text" name="q" placeholder="Search your keyword" value="{{ request('q') }}">
+            <button type="submit"><i class="far fa-search"></i></button>
         </form>
     </div>
     @if(Str::contains($currentUrl, 'news'))
@@ -17,7 +17,7 @@
             <ul class="widget__category">
                 @forelse($categories as $category)
                     <li class="blog-sidebar-categories-content {{ !$loop->last ? 'pb-15' : '' }}">
-                        <a href="{{ url('news') . '?category=' . urlencode($category->id) }}">
+                        <a href="{{ url('news') . '?category_id=' . urlencode($category->id) }}">
                             {{ $category->name }} <span>{{ $category->news_count }}</span>
                         </a>
                     </li>
@@ -55,7 +55,7 @@
             <ul class="widget__category">
                 @forelse($categories as $category)
                     <li class="blog-sidebar-categories-content {{ !$loop->last ? 'pb-15' : '' }}">
-                        <a href="{{ url('articles') . '?category=' . urlencode($category->id) }}">
+                        <a href="{{ url('articles') . '?category_id=' . urlencode($category->id) }}">
                             {{ $category->name }} <span>{{ $category->articles_count }}</span>
                     </li>
                 @empty
@@ -104,7 +104,7 @@
             <h3 class="widget__title blog-sidebar-title blog-sidebar-title-tags">Tags</h3>
             <div class="tagcloud">
                 @forelse($tags as $tag)
-                    <a href="#!">{{ $tag->name }}</a>
+                    <a href="{{ url('news') . '?tag_id=' . urlencode($tag->id) }}">{{ $tag->name }}</a>
                 @empty
                     <p>No tags availabe.</p>
                 @endforelse
@@ -115,10 +115,11 @@
             <h3 class="widget__title blog-sidebar-title blog-sidebar-title-tags">Tags</h3>
             <div class="tagcloud">
                 @forelse($tags as $tag)
-                    <a href="#!">{{ $tag->name }}</a>
+                    <a href="{{ url('articles') . '?tag_id=' . urlencode($tag->id) }}">{{ $tag->name }}</a>
                 @empty
                     <p>No tags availabe.</p>
                 @endforelse
             </div>
         </div>
     @endif
+</div>

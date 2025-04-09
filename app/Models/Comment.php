@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 use Illuminate\Support\Collection;
 
 class Comment extends Model
@@ -12,7 +11,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'name',
         'commentable_id',
         'commentable_type',
         'parent_id',
@@ -33,11 +32,6 @@ class Comment extends Model
     public function children()
     {
         return $this->hasMany(Comment::class, 'parent_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     // Scope to get active comments

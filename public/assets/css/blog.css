@@ -224,6 +224,15 @@
     padding: 30px 50px;
 }
 
+.blog-sub-reply {
+    width: 90%;
+    margin: auto;
+}
+
+.blog-details-comment.sub-comment-inner {
+    padding: 30px 100px;
+}
+
 .blog-details-comment {
     display: flex;
     align-items: flex-start;
@@ -251,6 +260,7 @@
     letter-spacing: 0;
     padding-bottom: 8px;
     margin-bottom: 0;
+    text-align: left;
 }
 
 .blog-details-comment-details h5 {
@@ -276,6 +286,10 @@
     margin-bottom: 10px;
 }
 
+.blog-details-comment-container {
+    width: 100%;
+}
+
 .blog-details-comment-container>p {
     font-family: "Outfit", sans-serif;
     font-weight: 400;
@@ -284,6 +298,7 @@
     letter-spacing: 0;
     color: #C1C7DE;
     padding-top: 15px;
+    width: 100%;
 }
 
 .blog-details-post-comment {
@@ -325,10 +340,16 @@
     position: absolute;
     left: 0;
     top: 0;
+    height: 19px;
+    width: 19px;
+    object-fit: contain;
+    object-position: center;
 }
 
-.blog-details-form textarea {
+.blog-details-form textarea, .blog-details-form input[type="text"] {
+    width: 100%;
     background: transparent;
+    border: 0;
     border-bottom: 2px solid #2C398C;
     height: 43px;
     padding: 0 0 0 30px;
@@ -337,6 +358,11 @@
     font-size: 16px;
     line-height: 28px;
     letter-spacing: 0;
+    color: rgba(255, 255, 255, 0.5);
+    resize: none;
+}
+
+.blog-details-form textarea::placeholder, .blog-details-form input[type="text"]::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 
@@ -456,6 +482,28 @@
     row-gap: 10px;
 }
 
+.blog-reply-comment {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    padding: 0 55px;
+}
+
+.blog-reply-comment > h3 {
+    padding-top: 40px;
+}
+
+.blog-reply-comment > form {
+    padding-bottom: 30px;
+}
+
+.blog-reply-comment.active {
+    max-height: 500px; /* adjust based on expected height */
+    opacity: 1;
+}
+
+
 /* Responsiveness */
 @media (max-width: 1560px) {
 
@@ -554,8 +602,20 @@
         padding: 30px 20px;
     }
 
+    .blog-details-comment.sub-comment-inner {
+        padding: 30px 40px;
+    }
+
     .blog-details-post-comment {
         padding: 50px 30px 30px;
+    }
+
+    .blog-reply-comment {
+        padding: 0 30px;
+    }
+    
+    .blog-reply-comment > h3 {
+        padding-top: 30px;
     }
 
     .blog-details-comment-section {
