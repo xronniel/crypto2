@@ -137,10 +137,10 @@
                     </div>
 
                     <div class="agent-count-properties">
-                        <p><span>200</span> properties available</p>
+                        <p><span>{{$agentListings->total()}}</span> properties available</p>
                     </div>
                 
-                    @foreach ($agent->listings as $property)
+                    @foreach ($agentListings as $property)
                         <div onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
                             style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap">
                             <article class="blog__item mt-30 blog__item-property">
@@ -267,7 +267,7 @@
                         </div>
                     @endforeach
             
-                    {{-- {{ $$agent->listings->links() }} --}}
+                    {{ $agentListings->links() }}
                 </div>
             </div>
             
