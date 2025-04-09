@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AgentRequest;
 use App\Models\Agent;
+use App\Models\Facility;
+use App\Models\Listing;
 use Illuminate\Http\Request;
 
 class AgentController extends Controller
@@ -80,6 +82,7 @@ class AgentController extends Controller
     
     public function show(Agent $agent)
     {
+
         $agent->load(['saleListings', 'rentListings']);
 
         return view('admin.agents.show', compact('agent'));
@@ -87,10 +90,46 @@ class AgentController extends Controller
 
     public function userShow(Agent $agent)
     {
+
+         // Get unique unit_type and unit_model
+         $unitTypesAndModels = Listing::select('unit_type', 'unit_model')
+             ->whereNotNull('unit_type')
+             ->whereNotNull('unit_model')
+             ->distinct()
+             ->get();
+ 
+         // Get unique ad_types for filter
+         $adTypes = Listing::select('ad_type')
+             ->whereNotNull('ad_type')
+             ->distinct()
+             ->pluck('ad_type');
+ 
+         // Get unique property types (unit_type)
+         $propertyTypes = Listing::select('unit_type')
+             ->whereNotNull('unit_type')
+             ->distinct()
+             ->pluck('unit_type');
+ 
+      
+         $noOfRooms = Listing::where('no_of_rooms', '!=', '')
+             ->distinct()
+             ->pluck('no_of_rooms');
+ 
+         $noOfBathrooms = Listing::where('no_of_bathroom', '!=', '')
+             ->distinct()
+             ->pluck('no_of_bathroom');
+ 
+         $completionStatus = Listing::where('completion_status', '!=', '')
+             ->distinct()
+             ->pluck('completion_status');
+ 
+         $amenities = Facility::where('name', '!=', '')
+             ->distinct()
+             ->pluck('name');
         // Load related listings (both sale and rent)
         $agent->load(['saleListings', 'rentListings']);
 
-        return view('agentDetails', compact('agent'));
+        return view('agentDetails', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities'));
     }
 
 
