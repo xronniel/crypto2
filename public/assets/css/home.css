@@ -218,7 +218,9 @@ input[type="text"] {
     letter-spacing: 0%;
     color: #000000;
 }
-
+input[name="search"] {
+    background: none !important;
+}
 
 .Converter-div input[type="text"] {
     width: 100px;
