@@ -1,14 +1,14 @@
 @extends('layouts.front-office.app')
 @section('content')
     {{-- {{ $property }} --}}
-    {{-- <section style="background: #080B18;" class="blog pt-50 pb-50">
+    <section style="background: #080B18;" class="blog pt-50 pb-50">
         <x-property-filter 
             :propertyTypes="$propertyTypes" 
             :plotAreaRange="$plotAreaRange" 
             :priceRange="$priceRange" 
             :amenities="$amenities" 
         />
-    </section> --}}
+    </section>
     {{-- {{ $property }} --}}
     <section class="breadcrumb bg_img pos-rel section-bg-agent">
         <div class="container-agent">
