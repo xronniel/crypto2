@@ -205,7 +205,7 @@ class NewsController extends Controller
         $tags = Tag::all();
 
         $news = News::with(['galleries', 'tags', 'comments' => function($query) {
-            return $query->active()->with(['user', 'parent', 'children']);
+            return $query->active()->with(['parent', 'children']);
         }])->findOrFail($id);
         
         $news->comments = Comment::getNestedComments($news->comments);

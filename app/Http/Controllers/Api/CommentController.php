@@ -33,16 +33,16 @@ class CommentController extends Controller
         
         // Create the comment
         $comment = new Comment([
+            'name' => $validated['name'],
             'content' => $validated['content'],
-            'parent_id' => $validated['parent_id'] ?? null,
-            'user_id' => auth()->id()
+            'parent_id' => $validated['parent_id'] ?? null
         ]);
         
         // Attach the comment to the commentable model
         $commentable->comments()->save($comment);
         
         // Load relationships for the response
-        $comment->load(['user', 'parent', 'children']);
+        $comment->load(['parent', 'children']);
         
         return response()->json([
             'success' => true,

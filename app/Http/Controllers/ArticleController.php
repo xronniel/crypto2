@@ -194,7 +194,7 @@ class ArticleController extends Controller
         $tags = Tag::all();
 
         $article = Article::with(['galleries', 'tags', 'comments' => function($query) {
-            return $query->active()->with(['user', 'parent', 'children']);
+            return $query->active()->with(['parent', 'children']);
         }])->findOrFail($id);
         
         $article->comments = Comment::getNestedComments($article->comments);

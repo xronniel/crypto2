@@ -26,6 +26,7 @@ class CommentRequest extends FormRequest
             'commentable_type' => 'required|in:App\\Models\\News,App\\Models\\Article',
             'parent_id' => 'nullable|integer|exists:comments,id',
             'content' => 'required|string|max:1000',
+            'name' => 'required|string|max:255'
         ];
     }
 }
