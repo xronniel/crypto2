@@ -60,7 +60,35 @@ class AgentController extends Controller
               ->distinct()
               ->pluck('name');
 
-        return view('agents', compact('agents', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities'));
+              $min = Listing::whereNotNull('plot_area')->min('plot_area');
+              $max = Listing::whereNotNull('plot_area')->max('plot_area');
+          
+              $minRounded = floor($min / 10000000) * 10000000;
+              $maxRounded = ceil($max / 10000000) * 10000000;
+          
+              $steps = range($minRounded, $maxRounded, 10000000);
+          
+              $plotAreaRange = [
+                  'min'   => $minRounded,
+                  'max'   => $maxRounded,
+                  'steps' => $steps,
+              ];
+  
+              $min = Listing::whereNotNull('price')->min('price');
+              $max = Listing::whereNotNull('price')->max('price');
+          
+              $minRounded = floor($min / 10000000) * 10000000;
+              $maxRounded = ceil($max / 10000000) * 10000000;
+          
+              $steps = range($minRounded, $maxRounded, 10000000);
+          
+              $priceRange = [
+                  'min'   => $minRounded,
+                  'max'   => $maxRounded,
+                  'steps' => $steps,
+              ];
+
+        return view('agents', compact('agents', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange'));
     }
 
     /**
@@ -165,7 +193,35 @@ class AgentController extends Controller
         // Load related listings (both sale and rent)
         $agent->load(['saleListings', 'rentListings']);
 
-        return view('agentDetails', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities'));
+        $min = Listing::whereNotNull('plot_area')->min('plot_area');
+        $max = Listing::whereNotNull('plot_area')->max('plot_area');
+    
+        $minRounded = floor($min / 10000000) * 10000000;
+        $maxRounded = ceil($max / 10000000) * 10000000;
+    
+        $steps = range($minRounded, $maxRounded, 10000000);
+    
+        $plotAreaRange = [
+            'min'   => $minRounded,
+            'max'   => $maxRounded,
+            'steps' => $steps,
+        ];
+
+        $min = Listing::whereNotNull('price')->min('price');
+        $max = Listing::whereNotNull('price')->max('price');
+    
+        $minRounded = floor($min / 10000000) * 10000000;
+        $maxRounded = ceil($max / 10000000) * 10000000;
+    
+        $steps = range($minRounded, $maxRounded, 10000000);
+    
+        $priceRange = [
+            'min'   => $minRounded,
+            'max'   => $maxRounded,
+            'steps' => $steps,
+        ];
+
+        return view('agentDetails', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange'));
     }
 
 
