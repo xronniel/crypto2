@@ -104,7 +104,7 @@
             <h3 class="widget__title blog-sidebar-title blog-sidebar-title-tags">Tags</h3>
             <div class="tagcloud">
                 @forelse($tags as $tag)
-                    <a href="#!">{{ $tag->name }}</a>
+                    <a href="{{ url('news') . '?tags=' . urlencode($tag->id) }}">{{ $tag->name }}</a>
                 @empty
                     <p>No tags availabe.</p>
                 @endforelse
@@ -115,7 +115,7 @@
             <h3 class="widget__title blog-sidebar-title blog-sidebar-title-tags">Tags</h3>
             <div class="tagcloud">
                 @forelse($tags as $tag)
-                    <a href="#!">{{ $tag->name }}</a>
+                    <a href="{{ url('articles') . '?tags=' . urlencode($tag->id) }}">{{ $tag->name }}</a>
                 @empty
                     <p>No tags availabe.</p>
                 @endforelse

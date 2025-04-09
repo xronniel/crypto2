@@ -325,10 +325,16 @@
     position: absolute;
     left: 0;
     top: 0;
+    height: 19px;
+    width: 19px;
+    object-fit: contain;
+    object-position: center;
 }
 
-.blog-details-form textarea {
+.blog-details-form textarea, .blog-details-form input[type="text"] {
+    width: 100%;
     background: transparent;
+    border: 0;
     border-bottom: 2px solid #2C398C;
     height: 43px;
     padding: 0 0 0 30px;
@@ -337,6 +343,11 @@
     font-size: 16px;
     line-height: 28px;
     letter-spacing: 0;
+    color: rgba(255, 255, 255, 0.5);
+    resize: none;
+}
+
+.blog-details-form textarea::placeholder, .blog-details-form input[type="text"]::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 

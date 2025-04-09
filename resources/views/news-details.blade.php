@@ -2,6 +2,10 @@
 
 @section('content')
 
+    <pre>
+                    {{ json_encode($news, JSON_PRETTY_PRINT) }}
+                </pre>
+
     <!-- main area start  -->
     <main>
 
@@ -76,60 +80,60 @@
                                         @endforeach
                                     </div>
                                     <!-- <div class="blog-details-quote-container">
-                                        <div class="blog-details-quote">
-                                            <img src="{{ asset('/assets/img/blog/quote.png') }}" alt="Quote Icon">
-                                        </div>
-                                        <h3>
-                                            "Creativity is allowing yourself to make mistakes. You only have to do a few
-                                            things right in your life so long as you don't do too many things."
-                                        </h3>
-                                        <h4>
-                                            Cameron Williamson
-                                        </h4>
-                                    </div>
-                                    <p>
-                                        With expert guidance and practical tips, you'll develop the skills and knowledge
-                                        necessary to navigate the
-                                        ever-evolving landscape of CryptoHome investing. From deciphering white papers to
-                                        evaluating community engagement, each aspect of the CryptoHome evaluation process is
-                                        dissected to empower you with the tools needed to make informed investment
-                                        decisions.Join us on this transformative journey as we unveil the secrets to finding
-                                        promising CryptoHome projects.
-                                        <br><br>
-                                        Visa consultants provide continuous support, helping you navigate any additional
-                                        requests from
-                                        immigration authorities and addressing any concerns that may arise during the
-                                        processing period.
-                                    </p>
-                                    <div class="row mb-30">
-                                        <div class="col-lg-6 mt-30">
-                                            <img src="{{ asset('/assets/img/blog/post_m.jpg') }}" alt="Blog Content Image">
-                                        </div>
-                                        <div class="col-lg-6 mt-30">
-                                            <ul>
-                                                <li class="mb-15 blog-list-inside">Identifying promising Crypto Currency.
-                                                </li>
-                                                <li class="mb-15 blog-list-inside">Research and due diligence.</li>
-                                                <li class="mb-15 blog-list-inside">Evaluating team, tokenomics.</li>
-                                                <li class="mb-15 blog-list-inside">Understanding market trends.</li>
-                                                <li class="mb-15 blog-list-inside">Confidently navigating CryptoHome.</li>
-                                                <li class="mb-15 blog-list-inside">Empowering informed decisions.</li>
-                                                <li class="blog-list-inside">Achieving Success</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h3 class="mb-20 blog-details-sub-title">
-                                        3 Reasons to investing at this moment
-                                    </h3>
-                                    <p>
-                                        This comprehensive guide equips both novice and seasoned investors with the tools
-                                        needed to navigate the
-                                        dynamic CryptoHome landscape. From conducting meticulous research and due diligence
-                                        to deciphering the
-                                        intricacies of tokenomics and evaluating the project's team, technology, and market
-                                        potential, you'll gain
-                                        valuable identifying hidden gems poised for success.
-                                    </p> -->
+                                                        <div class="blog-details-quote">
+                                                            <img src="{{ asset('/assets/img/blog/quote.png') }}" alt="Quote Icon">
+                                                        </div>
+                                                        <h3>
+                                                            "Creativity is allowing yourself to make mistakes. You only have to do a few
+                                                            things right in your life so long as you don't do too many things."
+                                                        </h3>
+                                                        <h4>
+                                                            Cameron Williamson
+                                                        </h4>
+                                                    </div>
+                                                    <p>
+                                                        With expert guidance and practical tips, you'll develop the skills and knowledge
+                                                        necessary to navigate the
+                                                        ever-evolving landscape of CryptoHome investing. From deciphering white papers to
+                                                        evaluating community engagement, each aspect of the CryptoHome evaluation process is
+                                                        dissected to empower you with the tools needed to make informed investment
+                                                        decisions.Join us on this transformative journey as we unveil the secrets to finding
+                                                        promising CryptoHome projects.
+                                                        <br><br>
+                                                        Visa consultants provide continuous support, helping you navigate any additional
+                                                        requests from
+                                                        immigration authorities and addressing any concerns that may arise during the
+                                                        processing period.
+                                                    </p>
+                                                    <div class="row mb-30">
+                                                        <div class="col-lg-6 mt-30">
+                                                            <img src="{{ asset('/assets/img/blog/post_m.jpg') }}" alt="Blog Content Image">
+                                                        </div>
+                                                        <div class="col-lg-6 mt-30">
+                                                            <ul>
+                                                                <li class="mb-15 blog-list-inside">Identifying promising Crypto Currency.
+                                                                </li>
+                                                                <li class="mb-15 blog-list-inside">Research and due diligence.</li>
+                                                                <li class="mb-15 blog-list-inside">Evaluating team, tokenomics.</li>
+                                                                <li class="mb-15 blog-list-inside">Understanding market trends.</li>
+                                                                <li class="mb-15 blog-list-inside">Confidently navigating CryptoHome.</li>
+                                                                <li class="mb-15 blog-list-inside">Empowering informed decisions.</li>
+                                                                <li class="blog-list-inside">Achieving Success</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="mb-20 blog-details-sub-title">
+                                                        3 Reasons to investing at this moment
+                                                    </h3>
+                                                    <p>
+                                                        This comprehensive guide equips both novice and seasoned investors with the tools
+                                                        needed to navigate the
+                                                        dynamic CryptoHome landscape. From conducting meticulous research and due diligence
+                                                        to deciphering the
+                                                        intricacies of tokenomics and evaluating the project's team, technology, and market
+                                                        potential, you'll gain
+                                                        valuable identifying hidden gems poised for success.
+                                                    </p> -->
                                     <div
                                         class="d-flex flex-column flex-lg-row justify-content-lg-between mt-50 mb-40 row-gap-3">
                                         <div class="d-flex align-items-center">
@@ -137,9 +141,12 @@
                                                 Tags:
                                             </h5>
                                             <div class="tagcloud">
-                                                <a href="#!">ICO</a>
-                                                <a href="#!">Blockchain</a>
-                                                <a href="#!">Investment</a>
+                                                @forelse ($news->tags as $tag)
+                                                    <a
+                                                        href="{{ url('news') . '?tags=' . urlencode($tag->id) }}">{{ $tag->name }}</a>
+                                                @empty
+                                                    <a>No available tag</a>
+                                                @endforelse
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -159,7 +166,7 @@
                                     </div>
                                     <div class="blog-details-comment-section">
                                         <h4 class="blog-details-comment-title">
-                                            03 Comments
+                                            {{ $news->comments_count }} Comments
                                         </h4>
                                         <div class="blog-details-comment">
                                             <img src="{{ asset('/assets/img/blog/post_m.jpg') }}" alt="Author Image">
@@ -265,15 +272,24 @@
                                         <p>
                                             Your email address will not be published. Required fields are marked *
                                         </p>
-                                        <form action="/" class="blog-details-form">
+                                        <form id="comment-form" method="POST" class="blog-details-form">
+                                            @csrf
+
+                                            <input type="hidden" name="commentable_id" value="{{ $news->id }}">
+                                            <input type="hidden" name="commentable_type" value="App\Models\News">
+
                                             <div>
+                                                <div class="blog-detatils-textarea-container mb-20">
+                                                    <img src="{{ asset('/assets/img/blog/user.png') }}" alt="Person Icon">
+                                                    <input name="name" type="text" placeholder="Enter your Name">
+                                                </div>
                                                 <div class="blog-detatils-textarea-container">
                                                     <img src="{{ asset('/assets/img/blog/message.png') }}"
                                                         alt="Message Icon">
-                                                    <textarea name="comment" placeholder="Write your Comment"></textarea>
+                                                    <textarea name="content" placeholder="Write your Comment"></textarea>
                                                 </div>
                                                 <div class="blog-form-checkbox-container">
-                                                    <input type="checkbox" id="save" name="save" value="Boat">
+                                                    <input type="checkbox" id="save" name="save">
                                                     <label for="save">Save my name, email, and website in this browser for
                                                         the next time I comment.</label>
                                                 </div>
@@ -317,5 +333,55 @@
 
         const inShare = document.querySelector('.in-share');
         if (inShare) inShare.href = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('comment-form');
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch('/api/comments', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    });
+
+                    // Check if the response is not okay
+                    if (!response.ok) {
+                        const errorData = await response.json();
+
+                        // Log error to inspect
+                        console.error('Error response:', errorData);
+
+                        // Check if the errorData has validation errors
+                        if (errorData.errors) {
+                            console.error('Validation errors:', errorData.errors);
+                            alert('Failed to submit comment:\n' + JSON.stringify(errorData.errors, null, 2));
+                        } else {
+                            // If no validation errors, it might be some unexpected error
+                            alert('Failed to submit comment. Unexpected error occurred.');
+                        }
+                        return;
+                    }
+
+                    // Handle successful response
+                    const data = await response.json();
+                    console.log('Success:', data);
+                    alert('Comment posted successfully!');
+                    form.reset();
+                } catch (error) {
+                    // Catch any unexpected errors during the fetch process
+                    console.error('Request error:', error);
+                    alert('Something went wrong. Please try again.');
+                }
+            });
+        });
     </script>
 @endsection
