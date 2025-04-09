@@ -46,100 +46,48 @@
                 
 
 
-@foreach ($agents as $agent)
 
-{{  $agent}}    
-@endforeach
                     
                     <div class="agent-right-box-filter">
                         <a class="agent-right-box-filter-link agent-right-box-filter-active" href="#">Dubai</a>
                         <a class="agent-right-box-filter-link" href="#">Abu Dhabi</a>
                     </div>
                     <div class="agent-card-wrapper">
-                        <div class="agent-right-box-card">
-                            <div class="agent-right-box-card-right">
-                                <img src="{{ asset('assets/img/agent/agent-1.jpeg') }}" alt="home">
-                            </div>
-                            <div class="agent-right-box-card-left">
-                                <div class="agent-right-box-card-left-one">
-                                    <div class="agent-right-box-card-left-one-p">
-                                        <p>9 Sale</p>
-                                        <p>1 rent</p>
+                        @foreach ($agents as $agent)
+                            <div 
+                            onclick="window.location.href='/agents/{{ $agent['id'] }}'"
+                            class="agent-right-box-card">
+                                <div class="agent-right-box-card-right">
+                                    <img src="{{ Str::startsWith($agent['photo'], 'http') ? $agent['photo'] : asset('storage/' . $agent['photo']) }}" alt="agent-photo">
+                                </div>
+                                <div class="agent-right-box-card-left">
+                                    <div class="agent-right-box-card-left-one">
+                                        <div class="agent-right-box-card-left-one-p">
+                                            <p>{{ $agent['sales'] ?? '0' }} Sale</p>
+                                            <p>{{ $agent['rent'] ?? '0' }} Rent</p>
+                                        </div>
+                                        <img src="{{ asset('assets/img/agent/agent-logo.jpeg') }}" alt="logo">
                                     </div>
-                                    <img src="{{ asset('assets/img/agent/agent-logo.jpeg') }}" alt="#">
-                                </div>
-                                <h3 class="agent-right-box-card-left-h3">Meerim Shekeeva</h3>
-
-                                <div>
-                                    <p class="agent-right-box-card-left-p">Nationality: <span>Iran</span></p>
-                                    <p class="agent-right-box-card-left-p">Language: <span>English, Spanish</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="agent-right-box-card">
-                            <div class="agent-right-box-card-right">
-                                <img src="{{ asset('assets/img/agent/agent-1.jpeg') }}" alt="home">
-                            </div>
-                            <div class="agent-right-box-card-left">
-                                <div class="agent-right-box-card-left-one">
-                                    <div class="agent-right-box-card-left-one-p">
-                                        <p>9 Sale</p>
-                                        <p>1 rent</p>
+                                    <h3 class="agent-right-box-card-left-h3">{{ $agent['name'] }}</h3>
+                    
+                                    <div>
+                                        <p class="agent-right-box-card-left-p">
+                                            
+                                            Nationality: <span>{{ $agent['nationality'] ?? 'N/A' }}</span>
+                                        </p>
+                                        <p class="agent-right-box-card-left-p">
+                                            Language: <span>{{ $agent['language'] ?? 'N/A' }}</span>
+                                        </p>
                                     </div>
-                                    <img src="{{ asset('assets/img/agent/agent-logo.jpeg') }}" alt="#">
-                                </div>
-                                <h3 class="agent-right-box-card-left-h3">Meerim Shekeeva</h3>
-
-                                <div>
-                                    <p class="agent-right-box-card-left-p">Nationality: <span>Iran</span></p>
-                                    <p class="agent-right-box-card-left-p">Language: <span>English, Spanish</span></p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="agent-right-box-card">
-                            <div class="agent-right-box-card-right">
-                                <img src="{{ asset('assets/img/agent/agent-1.jpeg') }}" alt="home">
-                            </div>
-                            <div class="agent-right-box-card-left">
-                                <div class="agent-right-box-card-left-one">
-                                    <div class="agent-right-box-card-left-one-p">
-                                        <p>9 Sale</p>
-                                        <p>1 rent</p>
-                                    </div>
-                                    <img src="{{ asset('assets/img/agent/agent-logo.jpeg') }}" alt="#">
-                                </div>
-                                <h3 class="agent-right-box-card-left-h3">Meerim Shekeeva</h3>
-
-                                <div>
-                                    <p class="agent-right-box-card-left-p">Nationality: <span>Iran</span></p>
-                                    <p class="agent-right-box-card-left-p">Language: <span>English, Spanish</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="agent-right-box-card">
-                            <div class="agent-right-box-card-right">
-                                <img src="{{ asset('assets/img/agent/agent-1.jpeg') }}" alt="home">
-                            </div>
-                            <div class="agent-right-box-card-left">
-                                <div class="agent-right-box-card-left-one">
-                                    <div class="agent-right-box-card-left-one-p">
-                                        <p>9 Sale</p>
-                                        <p>1 rent</p>
-                                    </div>
-                                    <img src="{{ asset('assets/img/agent/agent-logo.jpeg') }}" alt="#">
-                                </div>
-                                <h3 class="agent-right-box-card-left-h3">Meerim Shekeeva</h3>
-
-                                <div>
-                                    <p class="agent-right-box-card-left-p">Nationality: <span>Iran</span></p>
-                                    <p class="agent-right-box-card-left-p">Language: <span>English, Spanish</span></p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <a class="agent-right-box-button them-btn" href="#"> 
+                    
+                    <a id="toggleAgentBtn" class="agent-right-box-button them-btn" href="javascript:void(0)"> 
                         <span class="btn_label" data-text="View All Agents">View All Agents</span>
-                        </a>
+                    </a>
+                    
                 </div>
             </div>
 
@@ -149,19 +97,19 @@
 
                 <div class="agent-left-big-box">
                     <div class="agent-left-box">
-                        <img src="{{ asset('assets/img/agent/fea-1.svg.png') }}" alt="propertydetails">
+                        <img src="{{ asset('assets/img/agent/fea-1.gif') }}" alt="propertydetails">
                         <h2>Crypto Gurus</h2>
                         <p>Our agents speak fluent Bitcoin, Ethereum, and more. They know the ins and outs of digital currencies
                             and can guide you through seamless transactions.</p>
                     </div>
                     <div class="agent-left-box">
-                        <img src="{{ asset('assets/img/agent/fea-2.svg.png') }}" alt="propertydetails">
+                        <img src="{{ asset('assets/img/agent/fea-2.gif') }}" alt="propertydetails">
                         <h2>Crypto Gurus</h2>
                         <p>Our agents speak fluent Bitcoin, Ethereum, and more. They know the ins and outs of digital currencies
                             and can guide you through seamless transactions.</p>
                     </div>
                     <div class="agent-left-box">
-                        <img src="{{ asset('assets/img/agent/fea-3.svg.png') }}" alt="propertydetails">
+                        <img src="{{ asset('assets/img/agent/fea-3.gif') }}" alt="propertydetails">
                         <h2>Crypto Gurus</h2>
                         <p>Our agents speak fluent Bitcoin, Ethereum, and more. They know the ins and outs of digital currencies
                             and can guide you through seamless transactions.</p>
@@ -198,18 +146,49 @@
 
 
 
-
-
-
-
-
-
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.agent-right-box-card');
+            const toggleBtn = document.getElementById('toggleAgentBtn');
+            const maxVisible = 6;
+            let expanded = false;
+    
+            function updateCards() {
+                cards.forEach((card, index) => {
+                    if (expanded || index < maxVisible) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+    
+                const label = toggleBtn.querySelector('.btn_label');
+                const text = expanded ? 'Show Less' : 'View All Agents';
+                label.textContent = text;
+                label.setAttribute('data-text', text);
+            }
+    
+            updateCards();
+    
+            toggleBtn.addEventListener('click', function () {
+                expanded = !expanded;
+                updateCards();
+            });
+        });
+    </script>
+    
+    
 
 
 
 
     <style>
+
+.agent-right-box-card {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
         .section-bg-agent {
             background-image: url('{{ asset('assets/img/bg/agent-dashboard-img.jpeg') }}');
             background-position: center 40%;
@@ -321,6 +300,7 @@
             padding: 20;
             justify-content: space-around;
             padding: 10px;
+            width: 60% ;
         }
 
 
@@ -343,7 +323,7 @@
 
 
         .agent-right-box-card-right {
-            width: 171.568359375px;
+            width: 40%;
             height: 194px;
         }
 
@@ -401,6 +381,7 @@
             vertical-align: middle;
             color: #FFFFFF;
             margin: 0;
+            text-align: start;
         }
 
         .agent-right-box-card-left-p {
