@@ -89,3 +89,6 @@ Route::post('/tags/create', [TagController::class, 'create'])->name('tags.create
 Auth::routes();
 
 Route::post('/currency/select', [CurrencyController::class, 'selectCurrency'])->name('currency.select');
+
+Route::get('/agents', [AgentController::class, 'userIndex'])->name('agents.index');
+Route::get('/agents/{agent}', [AgentController::class, 'userShow'])->name('agents.show');

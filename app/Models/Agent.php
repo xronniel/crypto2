@@ -16,10 +16,29 @@ class Agent extends Model
         'permit',
         'email',
         'whatsapp',
+        'address',
+        'nationality',
+        'language',
+        'experience',
+        'BRN',
+        'about',
+        'position',
+        'superagent',
     ];
 
     public function listings()
     {
         return $this->hasMany(Listing::class);
     }
+
+    public function saleListings()
+    {
+        return $this->hasMany(Listing::class)->where('ad_type', 'sale');
+    }
+
+    public function rentListings()
+    {
+        return $this->hasMany(Listing::class)->where('ad_type', 'rent');
+    }
+
 }

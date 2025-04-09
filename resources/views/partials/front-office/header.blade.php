@@ -34,7 +34,7 @@
                                 <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>Find Agent</span></a>
+                                <a class="scrollspy-btn" href="{{route('agents.index')}}"><span>Find Agent</span></a>
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="/"><span>Explore</span></a>
@@ -85,7 +85,7 @@
                                             <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#"><span>Find Agent</span></a>
+                                            <a class="scrollspy-btn" href="{{route('agents.index')}}"><span>Find Agent</span></a>
                                         </li>
                                         <li class="menu-item menu-item-has-children">
                                             <a href="/"><span>Explore</span></a>
