@@ -237,7 +237,9 @@ class AgentController extends Controller
 
         $faqs = Faq::all();
 
-        return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs'));
+        $agentListings = $agent->listings()->with(['images', 'facilities'])->latest()->paginate(10);
+ 
+        return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'agentListings'));
     }
 
 
