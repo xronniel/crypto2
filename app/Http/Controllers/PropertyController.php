@@ -6,6 +6,7 @@ use App\Models\Facility;
 use App\Models\Faq;
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
@@ -23,7 +24,8 @@ class PropertyController extends Controller
                 $q->where('emirate', 'LIKE', "%{$search}%")
                   ->orWhere('community', 'LIKE', "%{$search}%")
                   ->orWhere('property_name', 'LIKE', "%{$search}%")
-                  ->orWhere('property_title', 'LIKE', "%{$search}%");;
+                  ->orWhere('property_title', 'LIKE', "%{$search}%")
+                  ->orWhere('unit_type', 'LIKE', "%{$search}%");
             });
         }
 
@@ -40,16 +42,7 @@ class PropertyController extends Controller
         });
         
         $query->when(request('filter_type') == 'commercial', function ($q) {
-            $q->whereIn('unit_type', [
-                'Commercial Full Building',
-                'Retail',
-                'Warehouse',
-                'Labour Camp',
-                'Land Commercial',
-                'Factory',
-                'Land Mixed Use',
-                'Commercial Full Floor',
-            ]);
+            $q->where('type', 'Commercial');
         });
 
         $query->when(request()->has('new') && request('new') == 1, function ($q) {
@@ -58,16 +51,7 @@ class PropertyController extends Controller
 
         // Filter by `commercial` if it's present and equals 1
         $query->when(request()->has('commercial') && request('commercial') == 1, function ($q) {
-            $q->whereIn('unit_type', [
-                'Commercial Full Building',
-                'Retail',
-                'Warehouse',
-                'Labour Camp',
-                'Land Commercial',
-                'Factory',
-                'Land Mixed Use',
-                'Commercial Full Floor',
-            ]);
+            $q->where('type', 'Commercial');
         });
 
         $query->when(request()->has('no_of_rooms') && request('no_of_rooms') != '', function ($q) {
@@ -218,6 +202,36 @@ class PropertyController extends Controller
                 'steps' => $steps,
             ];
 
+            $topListings = DB::table('listings')
+                ->select('community', 'property_title', 'ad_type', 'unit_type')
+                ->orderByDesc('visit_count')
+                ->limit(10)
+                ->get();
+
+            $recentSearches = [
+                'community' => $topListings->map(fn($item) => [
+                    'name' => $item->community,
+                    'ad_type' => $item->ad_type,
+                ])->unique()->values()->all(),
+
+                'property_title' => collect($topListings)
+                ->flatMap(function ($item) {
+                    $titles = preg_split('/\s*[|\/]\s*/', $item->property_title);
+                    return collect($titles)->map(fn($title) => [
+                        'title' => trim($title),
+                        'ad_type' => $item->ad_type,
+                    ]);
+                })
+                ->unique(fn($item) => $item['title']) // optional: remove duplicate titles
+                ->values()
+                ->all(),
+
+                'unit_type' => $topListings->map(fn($item) => [
+                    'name' => $item->unit_type,
+                    'ad_type' => $item->ad_type,
+                ])->unique()->values()->all(),
+            ];
+   
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange'));
     }
 
@@ -226,6 +240,9 @@ class PropertyController extends Controller
         $property = Listing::with(['images', 'facilities'])
         ->where('property_ref_no', $property_ref_no)
         ->firstOrFail();
+
+        // Increment visit_count
+        $property->increment('visit_count');
 
         // Get unique unit_type and unit_model
         $unitTypesAndModels = Listing::select('unit_type', 'unit_model')

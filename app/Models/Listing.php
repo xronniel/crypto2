@@ -70,6 +70,7 @@ class Listing extends Model
         'district_id',
         'agent_id',
         'community_id',
+        'visit_count',
     ];
 
 
