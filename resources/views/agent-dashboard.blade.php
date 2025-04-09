@@ -25,7 +25,7 @@
     <section class="section-bg-blue-shadow"></section>
 
     <div class="container">
-        <div onclick="window.location.href='/properties'" class="page-path-line">
+        <div onclick="window.location.href='/'" class="page-path-line">
             <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
             <p>Home</p>
             <p class="active-path-line">/ Find agents</p>
@@ -83,7 +83,7 @@
                             </div>
                         @endforeach
                     </div>
-                    
+
                     <a id="toggleAgentBtn" class="agent-right-box-button them-btn" href="javascript:void(0)"> 
                         <span class="btn_label" data-text="View All Agents">View All Agents</span>
                     </a>

@@ -7,119 +7,283 @@
             display: flex;
             ">
         <div class="container">
-            <div onclick="window.location.href='/properties'" class="page-path-line">
+            <div onclick="window.location.href='/'" class="page-path-line">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
-                <p>/ Property Listing</p>
-                <p class="active-path-line">/ Bespoke Upgrades | Extended | Vacant</p>
+                <p    onclick="window.location.href='/agents'">/ Find Agent</p>
+                <p class="active-path-line">/ {{ $agent->name ?? 'Agent' }}</p>
             </div>
 
             <div class="grid-img-container">
-               
-                    <div class="main-image">
-         
-
-                       <img src="{{ asset('assets/img/agent/agent-1.jpeg') }}" alt="agent">
-
-             
-                    </div>
-                    <div class="grid-left-side">
-
-
-                        <div class="grid-left-side-one">
-
-                            <div class="agent-flex ">
-                                <div class="agent-flex">
-                                    <span>10</span>
-                                    <p>Properties for Sale</p>
-                                </div>
-                                <div class="agent-flex">
-                                    <span>10</span>
-                                    <p>Properties for Sale</p>
-                                </div>
-                            </div>
-                                <h2 class="grid-left-side-title">
-                                    Meerim Shekeeva
-                                </h2>
-                                <p class="grid-left-side-title-p">Associate Director</p>
-                        </div>
-
-
-                        <div class="agent-flex-links">
-                            <a href="#">
-                                    <img src="{{ asset('assets/img/agent/Call.png') }}" alt="agent">
-                                +971 4 987 6543</a>
-                            <a href="#">
-                                    <img src="{{ asset('assets/img/agent/Email.png') }}" alt="agent">
-                                meerim.shekeeva@cryptohomes.com</a>
-                            <a href="#">
-                                    <img src="{{ asset('assets/img/agent/Location.png') }}" alt="agent">
-                                Suite 205, Marina Plaza, Dubai Marina, Dubai, UAE</a>
-                        </div>
-
-                        <a class="agent-flex-link-two" href="#">
-                            Send Message
-                            <img src="{{ asset('assets/img/agent/arrow.png') }}" alt="agent">
-                    </a>
-
-
-
-                    </div>
-
-                    <div class="agent-logo-container">
-                        <h4>
-                            Brokerage
-                        </h4>
-                        <img src="{{ asset('assets/img/agent/agent-logo.jpeg') }}" alt="#">
-                        <p>
-                            Espace Real Estate
+                <div class="main-image">
+                    <img 
+                        src="{{ Str::startsWith($agent->photo, 'http') ? $agent->photo : asset('storage/' . $agent->photo) }}" 
+                        onerror="this.onerror=null;this.src='{{ asset('assets/img/agent/agent-1.jpeg') }}';"
+                        alt="{{ $agent->name ?? 'Agent' }}"
+                    >
+                </div>
+            
+                <div class="grid-left-side">
+                    <div class="grid-left-side-one">
+                        @if ($agent->superagent == 1)
+                        <p class="  SuperAgent-div">
+                            <img class="" src="{{ asset('assets/img/property/SuperAgent-img.png')}}"
+                                alt="location">
+                            SuperAgent
                         </p>
+                    @endif
+                        <div class="agent-flex-one">
+
+
+                         
+                            <div class="agent-flex">
+                                <span>{{ $agent->saleListings->count() ?? '0' }}</span>
+                                <p>Properties for Sale</p>
+                            </div>
+                            <div class="agent-flex">
+                                <span>{{  $agent->rentListings->count()?? '0' }}</span>
+                                <p>Properties for Rent</p>
+                            </div>
+                        </div>
+            
+                        <h2 class="grid-left-side-title">{{ $agent->name }}</h2>
+                        <p class="grid-left-side-title-p">{{ $agent->position ?? 'Associate Director' }}</p>
                     </div>
+            
+                    <div class="agent-flex-links">
+                        @if($agent->phone)
+                            <a href="tel:{{ $agent->phone }}">
+                                <img src="{{ asset('assets/img/agent/Call.png') }}" alt="Call Icon">
+                                +971 {{ $agent->phone }}
+                            </a>
+                        @endif
+            
+                        @if($agent->email)
+                            <a href="mailto:{{ $agent->email }}">
+                                <img src="{{ asset('assets/img/agent/Email.png') }}" alt="Email Icon">
+                                {{ $agent->email }}
+                            </a>
+                        @endif
+            
+                        @if($agent->address)
+                            <a href="#">
+                                <img src="{{ asset('assets/img/agent/Location.png') }}" alt="Location Icon">
+                                {{ $agent->address }}
+                            </a>
+                        @endif
+                    </div>
+            
+                    <a class="agent-flex-link-two" href="mailto:{{ $agent->email ?? '#' }}">
+                        Send Message
+                        <img src="{{ asset('assets/img/agent/arrow.png') }}" alt="arrow">
+                    </a>
+                </div>
+            
+                <div class="agent-logo-container">
+                    <h4>Brokerage</h4>
+                    <img src="{{ asset('assets/img/agent/agent-logo.jpeg') }}" alt="Logo">
+                    <p>Espace Real Estate</p>
+                </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
+            
             <div class="Description-big-box">
                 <div class="property-details-Description">
                     <span class="active-filter-link">Description</span>
                 </div>
+            
                 <div class="Description-second-box">
+                    {{-- Agent Info --}}
                     <div class="Description-second-box-one">
-                        <div>
-                            <h4 class="agent-right-box-card-left-p">Nationality: <span>Iran</span></h4>
-                            <h4 class="agent-right-box-card-left-p">Language: <span>English, Spanish</span></h4>
-                            <h4 class="agent-right-box-card-left-p">Experience: <span>English, Spanish</span></h4>
-                            <h4 class="agent-right-box-card-left-p">Dubai Broker License (BRN): <span>English, Spanish</span></h4>
+                        <div class="agent-info-right-box">
+                            <h4 class="agent-right-box-card-left-p">
+                                Nationality: <span>{{ $agent->nationality ?? 'N/A' }}</span>
+                            </h4>
+                            <h4 class="agent-right-box-card-left-p">
+                                Language: <span>{{ $agent->language ?? 'N/A' }}</span>
+                            </h4>
+                            <h4 class="agent-right-box-card-left-p">
+                                Experience: <span>{{ $agent->experience ?? 'N/A' }}</span>
+                            </h4>
+                            <h4 class="agent-right-box-card-left-p">
+                                Dubai Broker License (BRN): <span>{{ $agent->BRN ?? 'N/A' }}</span>
+                            </h4>
                         </div>
                     </div>
+            
+                    {{-- About Me --}}
                     <div class="Description-second-box-two">
                         <h4>About Me</h4>
-                 <p>
-                    Originally from the UK, Meerim Shekeeva embarked on a journey to Dubai to seize greater career opportunities and immerse himself in the city's dynamic real estate market. With over seven years of experience in high-performance sales  environments, Jack has honed his skills in customer service and relationship-building across various sectors, including telecommunications and premium automotive brands like Mercedes-Benz and Volkswagen. 
-
-While advancing his professional career, Meerim pursued academic excellence, earning a Bachelor’s Degree in Accounting and Business Management from Keele University. This academic achievement underscores his commitment to personal and professional growth.
-
-In 2024, Meerim joined Espace Properties, focusing on becoming a specialist in one of Dubai’s most iconic areas—Palm Jumeirah. His goal is to build lasting client relationships while delivering exceptional service and results. 
-
-Beyond his professional endeavors, Meerim is passionate about entrepreneurship and is actively involved in scaling a concierge business with a close friend. He also enjoys training at the gym, watching football, and spending quality time with friends. 
-                 </p>
-
+                        <p>
+                            {{ $agent->about ?? 'No biography available for this agent at the moment.' }}
+                        </p>
                     </div>
                 </div>
             </div>
+            
+
+
+
+
+
+
+
+
+            <div class="row mt-none-30">
+                <div class=" mt-30">
+            
+                    @foreach ($agent->listings as $property)
+                        <div onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
+                            style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap mt-none-30">
+                            <article class="blog__item mt-30 blog__item-property">
+                                <div class="blog__item-property-one swiper">
+                                    <img class="Favorite-green" src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
+                                    <img class="location-green" src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
+            
+                                    <div class="img-slider-count">
+                                        <img src="{{ asset('assets/img/property/cam.png') }}" alt="cam">
+                                        <p>{{ $property->images->count() ?? 0 }}</p>
+                                    </div>
+            
+                                    <div class="budge-three-div">
+                                        @if ($property->verified == 1)
+                                            <p>
+                                                <img src="{{ asset('assets/img/property/Verified-img.png') }}" alt="Verified">
+                                                Verified
+                                            </p>
+                                        @endif
+            
+                                        @if ($property->superagent == 1)
+                                            <p>
+                                                <img src="{{ asset('assets/img/property/SuperAgent-img.png') }}" alt="SuperAgent">
+                                                SuperAgent
+                                            </p>
+                                        @endif
+            
+                                        @if ($property->new == 1)
+                                            <p>New</p>
+                                        @endif
+                                    </div>
+            
+                                    <div class="swiper-wrapper">
+                                        @foreach ($property->images as $image)
+                                            <div class="swiper-slide">
+                                                <img class="blog__item-property-one-img-slide"
+                                                    src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}"
+                                                    alt="Property Image">
+                                            </div>
+                                        @endforeach
+                                    </div>
+            
+                                    <div class="swiper-pagination"></div>
+                                </div>
+            
+                                <div style="background-image: url({{ asset('assets/img/bg/tm_bg.png') }}); background-size: cover;" class="blog__item-property-two">
+                                    <div class="blog__item-property-two-box">
+                                        <h1 class="blog__item-property-two-title">{{ $property->unit_type }}</h1>
+                                        <p>Premium</p>
+                                    </div>
+            
+                                    <div class="blog__item-property-two-box-two">
+                                        <div class="blog__item-property-two-box-one">
+                                            <p class="box-two-p-one">
+                                                {{ $property->getConvertedPrice()['converted_price'] ?? '' }} ({{ $property->getConvertedPrice()['currency_code'] ?? '' }})
+                                            </p>
+                                            <p class="box-two-p-two">
+                                                {{ $property->price }} AED
+                                            </p>
+                                        </div>
+                                        <div class="blog__item-property-two-img">
+                                            <img src="{{ asset('assets/img/property/state-logo.jpeg') }}" alt="logo">
+                                        </div>
+                                    </div>
+            
+                                    <div class="blog__item-property-two-box-three">
+                                        <p>{{ $property->property_title }}</p>
+                                    </div>
+            
+                                    <div class="location-property-two-box-three">
+                                        <img src="{{ asset('assets/img/property/green-location.png') }}" alt="location">
+                                        <p>{{ $property->community ?? 'Dubai' }}</p>
+                                    </div>
+            
+                                    <div class="property-two-box-four">
+                                        @if (!empty($property->no_of_rooms))
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-bed.png') }}" alt="bed">
+                                            <p>{{ $property->no_of_rooms }}</p>
+                                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                        @endif
+            
+                                        @if (!empty($property->no_of_bathroom))
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-bath.png') }}" alt="bath">
+                                            <p>{{ $property->no_of_bathroom }}</p>
+                                            <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                        @endif
+            
+                                        @if (!empty($property->unit_builtup_area))
+                                            <img class="img-four" src="{{ asset('assets/img/property/green-size.png') }}" alt="size">
+                                            <p>{{ $property->unit_builtup_area }} {{ $property->unit_measure }}</p>
+                                        @endif
+                                    </div>
+            
+                                    <div class="property-two-box-five">
+                                        <div class="property-two-box-five-one">
+                                            <div class="property-two-box-five-one-img">
+                                                <img src="{{ $property->listing_agent_photo }}" alt="person">
+                                            </div>
+                                            <div class="property-two-box-five-one-name">
+                                                <p>{{ $property->listing_agent }}</p>
+                                                <h4>Real Estate Agent</h4>
+                                            </div>
+                                        </div>
+            
+                                        <div class="property-two-box-five-two">
+                                            <a href="tel:{{ $property->listing_agent_phone }}">
+                                                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
+                                                <span>Call</span>
+                                            </a>
+                                            <a href="mailto:{{ $property->listing_agent_email }}">
+                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
+                                                <span>Email</span>
+                                            </a>
+                                            @if ($property->listing_agent_whatsapp)
+                                                <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" target="_blank">
+                                                    <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
+                                                    <span>WhatsApp</span>
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    @endforeach
+            
+                    {{-- {{ $$agent->listings->links() }} --}}
+                </div>
+            </div>
+            
 
 
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div style="background: #0B0F28;
     padding: 1px 0;
@@ -169,10 +333,17 @@ Beyond his professional endeavors, Meerim is passionate about entrepreneurship a
 
 
 <style>
+    .agent-flex-one {
+    display: flex
+;
+    gap: 20px;
+}
 .agent-flex {
     display: flex
 ;
     gap: 5px;
+    align-items: center;
+
 }
 
 .agent-flex-links {
@@ -283,6 +454,18 @@ height: 474.8800048828125px;
 }
 
 
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+}
+
+
+
+
+
+
 
 .grid-left-side{
     display: flex
@@ -389,7 +572,7 @@ line-height: 28px;
 letter-spacing: 0%;
 vertical-align: middle;
 color: #2DD98F;
-
+margin: 0 0 10px 0;
 }
 .Description-second-box-two p {
     font-family: "Manrope", sans-serif;
@@ -404,6 +587,31 @@ color: #FFFFFF;
 
 
 
+.agent-info-right-box{
+    display: flex
+;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.SuperAgent-div{
+    background: #3A307F;
+    font-family: "Open Sans";
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+}
 
 
 
