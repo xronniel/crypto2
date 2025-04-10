@@ -169,7 +169,7 @@ class AgentController extends Controller
         return view('admin.agents.show', compact('agent'));
     }
 
-    public function userShow(Agent $agent)
+    public function userShow(Agent $agent, Request $request)
     {
 
          // Get unique unit_type and unit_model
@@ -270,7 +270,7 @@ class AgentController extends Controller
         $agentListings = $agentListingsQuery->paginate(10);
 
  
-        return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'agentListings'));
+        return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'agentListings', 'request'));
     }
 
 
