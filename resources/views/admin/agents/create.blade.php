@@ -47,12 +47,21 @@
             <input type="text" name="whatsapp" class="form-control">
         </div>
 
+        <div class="mb-3">
+            <label>Company</label>
+            <select name="company_id" class="form-control">
+                <option value="">-- Select Company --</option>
+                @foreach($companies as $company)
+                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
         {{-- New Fields --}}
         <div class="mb-3">
             <label>Address</label>
             <input type="text" name="address" class="form-control">
         </div>
-
         <div class="mb-3">
             <label>Nationality</label>
             <input type="text" name="nationality" class="form-control">

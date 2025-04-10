@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Agent;
 use App\Models\Facility;
 use App\Models\Image;
 use Illuminate\Console\Command;
@@ -205,18 +206,34 @@ class ImportListings extends Command
             return null;
         }
 
+        $companyName = (string)$listing->company_name;
+        $companyLogo = (string)$listing->company_logo;
+
+        $company = null;
+        if (!empty($companyName)) {
+            $company = \App\Models\Company::updateOrCreate(
+                ['name' => $companyName],
+                ['icon' => $companyLogo]
+            );
+        }
+
         // Check if agent with the same email exists
-        $agent = \App\Models\Agent::where('email', $agentEmail)->first();
+        $agent =Agent::where('email', $agentEmail)->first();
 
         // If the agent does not exist, create a new agent
         if (!$agent) {
-            $agent = \App\Models\Agent::create([
+            $agent = Agent::create([
                 'name' => (string)$listing->Listing_Agent,
                 'photo' => (string)$listing->Listing_Agent_Photo,
                 'phone' => (string)$listing->Listing_Agent_Phone,
                 'permit' => (string)$listing->Listing_Agent_Permit,
                 'email' => $agentEmail,
+                'company_id' => $company?->id,
             ]);
+        }elseif ($company && $agent->company_id !== $company->id) {
+            // ✅ Optional: update agent's company if it has changed
+            $agent->company_id = $company->id;
+            $agent->save();
         }
 
         return $agent->id;

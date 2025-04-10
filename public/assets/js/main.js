@@ -828,14 +828,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
- 
     const currentPath = window.location.pathname;
-    if (currentPath.startsWith("/properties")) {
+
+    const isPropertiesPage = currentPath.startsWith("/properties");
+    const isAgentDetailsPage = currentPath.startsWith("/agents/") && currentPath !== "/agents";
+
+    if (isPropertiesPage || isAgentDetailsPage) {
         if (upImg) {
             upImg.style.display = "none";
         }
     }
 });
+
 document.addEventListener("DOMContentLoaded", function () {
     // ----- Price Dropdown -----
     const priceToggle = document.getElementById("priceToggle");

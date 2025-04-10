@@ -89,14 +89,20 @@
                             Create alert</a>
                     </div>
 
-                    <div class="page-line-filter-links-two">
-                        <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
-                        <label for="#">Sort by:</label>
-
-                        <select name="#" id="#">
-                            <option value="volvo">1</option>
-                        </select>
-                    </div>
+                    <form action="{{ route('properties.index') }}" method="GET">
+                        <div class="page-line-filter-links-two">
+                            <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
+                            <label for="sort-options">Sort by:</label>
+                    
+                            <select name="sort" id="sort-options" onchange="this.form.submit()">
+                                <option value="">Select an option</option>
+                                <option value="featured">Featured</option>
+                                <option value="newest">Newest</option>
+                                <option value="from_lowest_price">From Lowest Price</option>
+                                <option value="from_highest_price">From Highest Price</option>
+                            </select>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -269,8 +275,6 @@
                     @endforeach
                     {{-- end card   --}}
                     {{ $properties->links() }}
-
-
                 </div>
                 <div class="col-lg-3 mt-30">
                     <div class="sidebar-area mt-none-30">
@@ -288,19 +292,36 @@
                             </ul>
                             <h3 class="widget__title">Popular Searches</h3>
                             <ul class="widget__category list-unstyled">
-                                <li><a href="#!">Properties for sale in Dubai</a></li>
-                                <li><a href="#!">Properties for sale in Abu Dhabi</a></li>
-                                <li><a href="#!">Properties for sale in Ajman</a></li>
-                                <li><a href="#!">Properties for sale in Sharjah</a></li>
-                                <li><a href="#!">Properties for sale in Dubai</a></li>
-                                <li><a href="#!">Properties for sale in Abu Dhabi</a></li>
-                                <li><a href="#!">Properties for sale in Ajman</a></li>
-                                <li><a href="#!">Properties for sale in Sharjah</a></li>
-                                <li><a href="#!">Properties for sale in Dubai</a></li>
-                                <li><a href="#!">Properties for sale in Abu Dhabi</a></li>
-                                <li><a href="#!">Properties for sale in Ajman</a></li>
-                                <li><a href="#!">Properties for sale in Sharjah</a></li>
+                                @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                         onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
+                                        >
+                                            {{ $recent['name'] }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                                @foreach ($recentSearches['community'] as $recent)
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                        onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
+                                        >
+                                            {{ $recent['name'] }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                                @foreach ($recentSearches['property_title'] as $recent)
+                                    <li>
+                                        <a 
+                                          onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['title']]) }}'"
+                                        href="javascript:void(0);">
+                                            {{ $recent['title'] }}
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
+
+                        
                         </div>
 
 

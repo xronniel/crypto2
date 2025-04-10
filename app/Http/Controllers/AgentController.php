@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AgentRequest;
 use App\Models\Agent;
+use App\Models\Company;
 use App\Models\Facility;
 use App\Models\Faq;
 use App\Models\Listing;
@@ -108,7 +109,8 @@ class AgentController extends Controller
      */
     public function create()
     {
-        return view('admin.agents.create');
+        $companies = Company::all();
+        return view('admin.agents.create', compact('companies'));
     }
 
     /**
@@ -135,7 +137,8 @@ class AgentController extends Controller
      */
     public function edit(Agent $agent)
     {
-        return view('admin.agents.edit', compact('agent'));
+        $companies = Company::all();
+        return view('admin.agents.edit', compact('agent', 'companies'));
     }
 
     /**
@@ -166,7 +169,7 @@ class AgentController extends Controller
         return view('admin.agents.show', compact('agent'));
     }
 
-    public function userShow(Agent $agent)
+    public function userShow(Agent $agent, Request $request)
     {
 
          // Get unique unit_type and unit_model
@@ -237,9 +240,37 @@ class AgentController extends Controller
 
         $faqs = Faq::all();
 
-        $agentListings = $agent->listings()->with(['images', 'facilities'])->latest()->paginate(10);
+        $agentListingsQuery = $agent->listings()->with(['images', 'facilities'])->latest();
+
+        if (request()->has('ad_type')) {
+            $agentListingsQuery->where('ad_type', request('ad_type'));
+        }
+
+        $sortBy = request('sort_by');
+
+        switch ($sortBy) {
+            case 'featured':
+                $agentListingsQuery->where('featured', 1);
+                break;
+            case 'from_highest_price':
+                $agentListingsQuery->orderByDesc('price');
+                break;
+            case 'from_lowest_price':
+                $agentListingsQuery->orderBy('price');
+                break;
+            case 'newest':
+                $agentListingsQuery->orderByDesc('listing_date');
+                break;
+            default:
+                $agentListingsQuery->latest(); // Default fallback: order by created_at descending
+                break;
+        }
+        
+
+        $agentListings = $agentListingsQuery->paginate(10);
+
  
-        return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'agentListings'));
+        return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'agentListings', 'request'));
     }
 
 

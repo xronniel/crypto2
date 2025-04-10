@@ -24,6 +24,7 @@ class Agent extends Model
         'about',
         'position',
         'superagent',
+        'company_id',
     ];
 
     public function listings()
@@ -41,4 +42,8 @@ class Agent extends Model
         return $this->hasMany(Listing::class)->where('ad_type', 'rent');
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }
