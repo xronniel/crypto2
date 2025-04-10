@@ -26,8 +26,17 @@
         <div class="mb-3">
             <label>Photo</label>
             <input type="file" name="photo" class="form-control">
+            
             @if($agent->photo)
-                <img src="{{ asset('storage/'.$agent->photo) }}" alt="{{ $agent->name }}" width="50">
+                @php
+                    $isUrl = filter_var($agent->photo, FILTER_VALIDATE_URL);
+                @endphp
+        
+                @if($isUrl)
+                    <img src="{{ $agent->photo }}" alt="{{ $agent->name }}" width="50">
+                @else
+                    <img src="{{ asset('storage/' . $agent->photo) }}" alt="{{ $agent->name }}" width="50">
+                @endif
             @endif
         </div>
 
