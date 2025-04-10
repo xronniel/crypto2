@@ -45,8 +45,12 @@ class PropertyController extends Controller
                     // Sort listings by price in descending order (highest to lowest)
                     $query->orderBy('price', 'desc');
                     break;
+                case 'newest':
+                    // Sort listings by listing_date in descending order (newest first)
+                    $query->orderBy('listing_date', 'desc');
+                    break;
                 default:
-                    // You can add a default sorting option here if necessary
+                    $query->latest();
                     break;
             }
         }
@@ -253,7 +257,7 @@ class PropertyController extends Controller
                     'ad_type' => $item->ad_type,
                 ])->unique()->values()->all(),
             ];
-            // dd($recentSearches);
+         
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches'));
     }
 

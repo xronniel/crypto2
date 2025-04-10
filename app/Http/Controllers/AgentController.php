@@ -240,7 +240,35 @@ class AgentController extends Controller
 
         $faqs = Faq::all();
 
-        $agentListings = $agent->listings()->with(['images', 'facilities'])->latest()->paginate(10);
+        $agentListingsQuery = $agent->listings()->with(['images', 'facilities'])->latest();
+
+        if (request()->has('ad_type')) {
+            $agentListingsQuery->where('ad_type', request('ad_type'));
+        }
+
+        $sortBy = request('sort_by');
+
+        switch ($sortBy) {
+            case 'featured':
+                $agentListingsQuery->where('featured', 1);
+                break;
+            case 'from_highest_price':
+                $agentListingsQuery->orderByDesc('price');
+                break;
+            case 'from_lowest_price':
+                $agentListingsQuery->orderBy('price');
+                break;
+            case 'newest':
+                $agentListingsQuery->orderByDesc('listing_date');
+                break;
+            default:
+                $agentListingsQuery->latest(); // Default fallback: order by created_at descending
+                break;
+        }
+        
+
+        $agentListings = $agentListingsQuery->paginate(10);
+
  
         return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'agentListings'));
     }
