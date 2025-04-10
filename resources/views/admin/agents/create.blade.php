@@ -62,7 +62,6 @@
             <label>Address</label>
             <input type="text" name="address" class="form-control">
         </div>
-
         <div class="mb-3">
             <label>Nationality</label>
             <input type="text" name="nationality" class="form-control">

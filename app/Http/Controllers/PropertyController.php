@@ -253,8 +253,8 @@ class PropertyController extends Controller
                     'ad_type' => $item->ad_type,
                 ])->unique()->values()->all(),
             ];
-   
-        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange'));
+            // dd($recentSearches);
+        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches'));
     }
 
     public function show($property_ref_no)
