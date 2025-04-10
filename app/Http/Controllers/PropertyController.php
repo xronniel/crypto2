@@ -16,6 +16,7 @@ class PropertyController extends Controller
         $adType = $request->input('ad_type');
         $propertyType = $request->input('property_type');
         $unitType = $request->input('unit_type');
+        $sortBy = $request->input('sort_by');
 
         $query = Listing::query();
 
@@ -27,6 +28,27 @@ class PropertyController extends Controller
                   ->orWhere('property_title', 'LIKE', "%{$search}%")
                   ->orWhere('unit_type', 'LIKE', "%{$search}%");
             });
+        }
+
+        // Apply the sort_by functionality
+        if ($sortBy) {
+            switch ($sortBy) {
+                case 'featured':
+                    // Filter listings where featured is 1
+                    $query->where('featured', 1);
+                    break;
+                case 'from_lowest_price':
+                    // Sort listings by price in ascending order (lowest to highest)
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'from_highest_price':
+                    // Sort listings by price in descending order (highest to lowest)
+                    $query->orderBy('price', 'desc');
+                    break;
+                default:
+                    // You can add a default sorting option here if necessary
+                    break;
+            }
         }
 
         $query->when(request('filter_type') == 'rent', function ($q) {
