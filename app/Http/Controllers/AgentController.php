@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AgentRequest;
 use App\Models\Agent;
+use App\Models\Company;
 use App\Models\Facility;
 use App\Models\Faq;
 use App\Models\Listing;
@@ -108,7 +109,8 @@ class AgentController extends Controller
      */
     public function create()
     {
-        return view('admin.agents.create');
+        $companies = Company::all();
+        return view('admin.agents.create', compact('companies'));
     }
 
     /**
@@ -135,7 +137,8 @@ class AgentController extends Controller
      */
     public function edit(Agent $agent)
     {
-        return view('admin.agents.edit', compact('agent'));
+        $companies = Company::all();
+        return view('admin.agents.edit', compact('agent', 'companies'));
     }
 
     /**
