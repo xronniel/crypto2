@@ -1,83 +1,96 @@
 @if ($paginator->hasPages())
-<div class="pagination_wrap pt-50">
-    <ul id="pagination">
-        {{-- Previous Page Link --}}
-        @if ($paginator->onFirstPage())
-            <li class="disabled"></li>
-        @else
-            <li><a href="#" data-url="{{ $paginator->previousPageUrl() }}" class="prev-page"><i class="far fa-long-arrow-left"></i></a></li>
-        @endif
-
-        {{-- Pagination Elements --}}
-        @php
-            $previousPage = null; // Track last displayed page
-            $dotsAdded = false; // Ensure dots appear only once
-        @endphp
-        @foreach ($elements as $element)
-            {{-- "Three Dots" Separator --}}
-            @if (is_string($element) && !$dotsAdded)
-                <li><span><i class="fal fa-ellipsis-h"></i></span></li>
-                @php $dotsAdded = true; @endphp
+    <div class="pagination_wrap pb-50 pt-50">
+        <ul id="pagination">
+            {{-- Previous Page Link --}}
+            @if ($paginator->onFirstPage())
+                <li class="disabled"></li>
+            @else
+                <li><a href="#" data-url="{{ $paginator->previousPageUrl() }}" class="prev-page"><i class="far fa-long-arrow-left"></i></a></li>
             @endif
+            @php
+                $current = $paginator->currentPage();
+                $last = $paginator->lastPage();
+                $pagesToShow = [];
 
-            {{-- Array Of Links --}}
-            @if (is_array($element))
-                @foreach ($element as $page => $url)
-                    @if (
-                        $page == $paginator->currentPage() || 
-                        $page >= $paginator->currentPage() - 3 && $page <= $paginator->currentPage() + 3
-                    )
-                        {{-- Reset dots flag when inside visible range --}}
-                        @php $dotsAdded = false; @endphp
-                        
-                        {{-- Display Page Numbers --}}
-                        @if ($page == $paginator->currentPage())
-                            <li><a href="#" class="current_page" data-page="{{ $page }}">{{ $page }}</a></li>
-                        @else
-                            <li><a href="#" data-url="{{ $url }}" class="page-link" data-page="{{ $page }}">{{ $page }}</a></li>
-                        @endif
-                        @php $previousPage = $page; @endphp
+                // Add previous page only if it's directly before current
+                if ($current > 1) {
+                    $pagesToShow[] = $current - 1;
+                }
 
-                    @elseif ($page == 1 || $page == $paginator->lastPage())
-                        {{-- Always Show First & Last Page --}}
-                        @if ($previousPage && $page > $previousPage + 1 && !$dotsAdded)
-                            <li><span><i class="fal fa-ellipsis-h"></i></span></li>
-                            @php $dotsAdded = true; @endphp
-                        @endif
-                        <li><a href="#" data-url="{{ $url }}" class="page-link" data-page="{{ $page }}">{{ $page }}</a></li>
-                        @php $previousPage = $page; @endphp
+                // Always show current page
+                $pagesToShow[] = $current;
+
+                // Add next 3 pages if available
+                for ($i = 1; $i <= 3; $i++) {
+                    if ($current + $i <= $last) {
+                        $pagesToShow[] = $current + $i;
+                    }
+                }
+            @endphp
+
+            {{-- Render Pages --}}
+            @foreach ($pagesToShow as $page)
+                <li class="{{ $page > $current + 1 ? 'hide-on-mobile' : '' }}">
+                    @if ($page == $current)
+                        <a href="#" class="current_page" data-page="{{ $page }}">{{ $page }}</a>
+                    @else
+                        <a href="#" data-url="{{ $paginator->url($page) }}" class="page-link" data-page="{{ $page }}">{{ $page }}</a>
                     @endif
-                @endforeach
-            @endif
-        @endforeach
+                </li>
+            @endforeach
 
-        {{-- Next Page Link --}}
-        @if ($paginator->hasMorePages())
-            <li><a href="#" data-url="{{ $paginator->nextPageUrl() }}" class="next-page"><i class="far fa-long-arrow-right"></i></a></li>
-        @else
-            <li class="disabled"></li>
-        @endif
-    </ul>
-</div>
+            {{-- Next Page Link --}}
+            @if ($paginator->hasMorePages())
+                <li><a href="#" data-url="{{ $paginator->nextPageUrl() }}" class="next-page"><i class="far fa-long-arrow-right"></i></a></li>
+            @else
+                <li class="disabled"></li>
+            @endif
+        </ul>
+    </div>
+
+    <script>
+        document.querySelectorAll('.page-link, .prev-page, .next-page').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const url = this.getAttribute('data-url');
+                if (url) window.location.href = url;
+            });
+        });
+    </script>
 @endif
 
-<script>
-    // JavaScript to handle page link clicks
-    document.querySelectorAll('.page-link').forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const url = this.getAttribute('data-url');
-            window.location.href = url; // Navigate to the page
-        });
-    });
 
-    // JavaScript to handle previous and next page clicks
-    document.querySelectorAll('.prev-page, .next-page').forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const url = this.getAttribute('data-url');
-            window.location.href = url; // Navigate to the page
-        });
-    });
-</script>
+<style>
+    .pagination_wrap ul li a {
+    height: 70px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-white);
+    border: 1px solid #282842;
+    transition: all 0.3s ease-out;
+    border-radius: 50%;
+    overflow: hidden;
+}
 
+.pagination_wrap ul li a.current_page {
+    background-color: #282842;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .pagination_wrap ul li.hide-on-mobile {
+        display: none !important;
+    }
+
+    .pagination_wrap ul li a {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+    }
+}
+
+</style>

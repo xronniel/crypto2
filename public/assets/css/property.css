@@ -105,6 +105,16 @@
     margin: 0 5px 0 0;
 }
 
+
+
+.page-line-filter-links-two  select option{
+background: black !important;
+
+}
+
+
+
+
 .page-line-filter-links-two select {
     font-family: "Open Sans";
     font-weight: 600;
@@ -119,6 +129,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: none;
 }
 
 .page-line-filter-links-two label {
@@ -799,9 +810,7 @@ display: none;
         flex-wrap: wrap;
     }
 
-    .blog__item-property {
-        flex-direction: column;
-    }
+
 
     .blog__item-property-one,
     .blog__item-property-two {
@@ -916,6 +925,40 @@ width: 120px;
     width: 100px;
     display: flex;
 }
+
+.blog__item-property {
+    flex-direction: column;
+}
+
+
+
+
+.box-two-p-one{
+
+font-weight: 500;
+font-size: 18px;
+line-height: 32px;
+letter-spacing: 0%;
+vertical-align: middle;
+
+}
+
+
+
+.blog__item-property-two-box-three {
+
+font-weight: 500;
+font-size: 18px;
+line-height: 32px;
+letter-spacing: 0%;
+vertical-align: middle;
+
+}
+
+
+
+
+
 
 
 

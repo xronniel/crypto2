@@ -332,19 +332,21 @@
     });
 });
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const hideItems = document.querySelectorAll(".hide-item-header");
     const currentPath = window.location.pathname;
 
+    // Apply styles for /properties/ and subpages, but only apply for exact "/agents"
     if (currentPath.startsWith("/properties/")) {
+        hideItems.forEach(item => {
+            item.style.display = "none";
+        });
+    } else if (currentPath === "/agents") {
         hideItems.forEach(item => {
             item.style.display = "none";
         });
     }
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
     function adjustStyles() {
@@ -353,7 +355,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const spaceHeaders = document.querySelectorAll(".space-header");
         const hideItems = document.querySelectorAll(".hide-item-header");
 
-        if (currentPath.startsWith("/properties") && window.innerWidth <= 1000) {
+        // Apply styles for /properties/* and /agents, but only exact "/agents"
+        if ((currentPath.startsWith("/properties") || currentPath === "/agents") && window.innerWidth <= 1000) {
             hideItems.forEach(item => {
                 item.style.display = "none";
             });
@@ -376,5 +379,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Apply styles on window resize
     window.addEventListener("resize", adjustStyles);
 });
+
 
 </script>

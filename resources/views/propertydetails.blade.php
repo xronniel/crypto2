@@ -866,7 +866,12 @@ ul li {
 
 
 
+@media (max-width: 986px) {
 
+    .page-path-line{
+    display: none;
+}
+}
 
 
 @media (max-width: 700px) {
