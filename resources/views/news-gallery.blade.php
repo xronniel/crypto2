@@ -193,7 +193,7 @@
                                             $hasTags = true;
                                         @endphp
                                         <article class="blog__item mt-30">
-                                            <a class="thumb blog-desktop-thumb" href="{{ url('articles/' . $newslist->id) }}">
+                                            <a class="thumb blog-desktop-thumb" href="{{ url('news/' . $newslist->id) }}">
                                                 <img src="{{ asset('storage/' . $newslist->thumbnail) }}" alt="News Image" class="desktop">
                                                 <img src="{{ asset('storage/' . $newslist->mobile_thumbnail) }}" alt="News Image" class="mobile">
                                                 <h4 class="blog-news-article-title">News Article</h4>
@@ -206,10 +206,10 @@
                                                     <li><a><i class="far fa-comment"></i>({{ $newslist -> comments_count }}) Comments</a></li>
                                                 </ul>
                                                 <h2 class="title border_effect">
-                                                    <a href="{{ url('articles/' . $newslist->id) }}">{{ $newslist->title }}</a>
+                                                    <a href="{{ url('news/' . $newslist->id) }}">{{ $newslist->title }}</a>
                                                 </h2>
                                                 <p>{{ \Illuminate\Support\Str::limit($newslist->content, 210, '...') }}</p>
-                                                <button class="them-btn blog-find-out-more mt-30" onclick="window.location.href='{{ url('articles/' . $newslist->id) }}';">
+                                                <button class="them-btn blog-find-out-more mt-30" onclick="window.location.href='{{ url('news/' . $newslist->id) }}';">
                                                     <span class="btn_label" data-text="FIND OUT MORE">FIND OUT MORE</span>
                                                     <span class="btn_icon">
                                                         <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">

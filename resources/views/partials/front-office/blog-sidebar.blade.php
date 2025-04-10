@@ -6,10 +6,17 @@
 <div class="sidebar-area mt-none-30">
     <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-search">
         <h3 class="widget__title blog-sidebar-title">Search</h3>
-        <form class="widget__search blog-sidebar-search" action="{{ url('news') }}" method="GET">
-            <input type="text" name="q" placeholder="Search your keyword" value="{{ request('q') }}">
-            <button type="submit"><i class="far fa-search"></i></button>
-        </form>
+        @if(Str::contains($currentUrl, 'news'))
+            <form class="widget__search blog-sidebar-search" action="{{ url('news') }}" method="GET">
+                <input type="text" name="q" placeholder="Search your keyword" value="{{ request('q') }}">
+                <button type="submit"><i class="far fa-search"></i></button>
+            </form>
+        @elseif(Str::contains($currentUrl, 'articles'))
+            <form class="widget__search blog-sidebar-search" action="{{ url('articles') }}" method="GET">
+                <input type="text" name="q" placeholder="Search your keyword" value="{{ request('q') }}">
+                <button type="submit"><i class="far fa-search"></i></button>
+            </form>
+        @endif
     </div>
     @if(Str::contains($currentUrl, 'news'))
         <div class="widget mt-30 blog-sidebar-widget blog-sidebar-widget-categories">
