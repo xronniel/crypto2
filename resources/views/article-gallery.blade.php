@@ -62,7 +62,7 @@
                                                     <img src="{{ asset('storage/' . $articleslist->thumbnail) }}" alt="Articles Image" class="desktop">
                                                     <img src="{{ asset('storage/' . $articleslist->mobile_thumbnail) }}" alt="Articles Image" class="mobile">
                                                     <h4 class="blog-news-article-title">
-                                                        Articles Gallery
+                                                        News Article
                                                     </h4>
                                                 </a>
                                                 <div class="blog__inner">
@@ -319,7 +319,7 @@
                                             <img src="{{ asset('storage/' . $articleslist->thumbnail) }}" alt="Articles Image" class="desktop">
                                             <img src="{{ asset('storage/' . $articleslist->mobile_thumbnail) }}" alt="Articles Image" class="mobile">
                                             <h4 class="blog-news-article-title">
-                                                Articles Gallery
+                                                News Article
                                             </h4>
                                         </a>
                                         <div class="blog__inner">

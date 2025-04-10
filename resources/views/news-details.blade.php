@@ -64,7 +64,7 @@
                                         <li><i
                                                 class="far fa-clock"></i>{{ \Carbon\Carbon::parse($news->date)->format('M d, Y') }}
                                         </li>
-                                        <li><a href="#!"><i class="far fa-comment"></i>(04) Comments</a></li>
+                                        <li><a><i class="far fa-comment"></i>({{ $news -> comments_count }}) Comments</a></li>
                                     </ul>
                                     <h2 class="title border_effect"><a href="blog-single.html">{{ $news->title }}</a></h2>
                                     <p>
@@ -380,6 +380,10 @@
         </section>
         <!-- blog end -->
 
+        <div id="toast" class="toast hidden">
+            <span>✅ Comment posted successfully!</span>
+        </div>
+
     </main>
     <!-- main area end  -->
 
@@ -396,7 +400,6 @@
 
         const inShare = document.querySelector('.in-share');
         if (inShare) inShare.href = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
-
 
         // This script handles the form submission for posting comments
         document.addEventListener('DOMContentLoaded', function () {
@@ -431,9 +434,7 @@
                         }
 
                         const data = await response.json();
-                        console.log('Success:', data);
-                        alert('Comment posted successfully!');
-                        location.reload();
+                        showToastAndReload();
                     } catch (error) {
                         console.error('Request error:', error);
                         alert('Something went wrong. Please try again.');
@@ -460,5 +461,20 @@
                 });
             });
         });
+
+        function showToastAndReload() {
+        const toast = document.getElementById('toast');
+        toast.classList.remove('hidden');
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+            toast.classList.add('hidden');
+            location.reload(); // reload after toast disappears
+            }, 300);
+        }, 2000); // toast visible for 2 seconds
+        }
+
     </script>
 @endsection
