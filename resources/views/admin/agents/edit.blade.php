@@ -60,6 +60,19 @@
             <input type="text" name="whatsapp" class="form-control" value="{{ $agent->whatsapp }}">
         </div>
 
+        <div class="mb-3">
+            <label>Company</label>
+            <select name="company_id" class="form-control">
+                <option value="">-- Select Company --</option>
+                @foreach($companies as $company)
+                    <option value="{{ $company->id }}" 
+                        {{ old('company_id', $agent->company_id) == $company->id ? 'selected' : '' }}>
+                        {{ $company->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         {{-- New Fields --}}
         <div class="mb-3">
             <label>Address</label>

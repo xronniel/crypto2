@@ -12,6 +12,7 @@
                 <th>Photo</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Company</th> {{-- New --}}
                 <th>Super Agent</th>
                 <th>Actions</th>
             </tr>
@@ -23,7 +24,6 @@
                     <td>
                         @if($agent->photo)
                             @php
-                                // Check if the agent photo is a URL or stored in storage
                                 $isUrl = filter_var($agent->photo, FILTER_VALIDATE_URL);
                             @endphp
                             <img src="{{ $isUrl ? $agent->photo : asset('storage/' . $agent->photo) }}" 
@@ -32,9 +32,9 @@
                             No Image
                         @endif
                     </td>
-                    
                     <td>{{ $agent->phone }}</td>
                     <td>{{ $agent->email }}</td>
+                    <td>{{ $agent->company?->name ?? 'N/A' }}</td> {{-- New --}}
                     <td>{{ $agent->superagent ? 'Yes' : 'No' }}</td>
                     <td>
                         <a href="{{ route('admin.agents.show', $agent->id) }}" class="btn btn-info btn-sm">Show</a>
