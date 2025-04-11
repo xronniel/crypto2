@@ -237,7 +237,8 @@ class HolidayPropertyController extends Controller
         $amenities = HolidayPropertyAmenity::all();
         $plotAreaRange = [];
 
-        $holidayPropertiesSameArea = HolidayProperty::where('community', $holidayProperty->community)
+        $holidayPropertiesSameArea = HolidayProperty::with('holidayPhotos')
+            ->where('community', $holidayProperty->community)
             ->where('id', '!=', $holidayProperty->id)
             ->latest()
             ->take(5)
