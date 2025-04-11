@@ -40,6 +40,7 @@ class HolidayProperty extends Model
         'latitude',
         'longitude',
         'last_update',
+        'new',
     ];
 
     protected $casts = [
