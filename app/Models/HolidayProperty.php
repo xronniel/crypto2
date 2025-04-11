@@ -54,7 +54,7 @@ class HolidayProperty extends Model
         return $this->hasMany(HolidayPropertyPhoto::class);
     }
 
-    public function amenities()
+    public function holidayAmenities()
     {
         return $this->belongsToMany(HolidayPropertyAmenity::class, 'holiday_property_amenity');
     }

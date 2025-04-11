@@ -243,7 +243,7 @@ class HolidayPropertyController extends Controller
             ->latest()
             ->take(5)
             ->get();
-
+        dd($holidayProperty->holidayAmenities);
         return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange', 'holidayPropertiesSameArea'));
     }
 
