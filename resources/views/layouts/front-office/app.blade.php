@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/property.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/propertydetails.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/blog.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/agent.css') }}">
 </head>
 <body>
     @include('partials.front-office.header')

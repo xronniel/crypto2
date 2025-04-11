@@ -603,6 +603,7 @@
 
     <div style="background: #0B0F28;
     padding: 1px 0;
+        background-position: center;
     " class="bg_img top-center pos-rel pb-145"
       data-background="{{ asset('assets/img/bg/team-bg.png') }}">
         <div class="container">
