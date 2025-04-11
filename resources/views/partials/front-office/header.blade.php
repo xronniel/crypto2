@@ -345,6 +345,10 @@ document.addEventListener("DOMContentLoaded", function () {
         hideItems.forEach(item => {
             item.style.display = "none";
         });
+    }else if (currentPath.startsWith("/holiday-properties/")) {
+        hideItems.forEach(item => {
+            item.style.display = "none";
+        });
     }
 });
 
@@ -355,8 +359,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const spaceHeaders = document.querySelectorAll(".space-header");
         const hideItems = document.querySelectorAll(".hide-item-header");
 
-        // Apply styles for /properties/* and /agents, but only exact "/agents"
-        if ((currentPath.startsWith("/properties") || currentPath === "/agents") && window.innerWidth <= 1000) {
+  
+        if ((currentPath.startsWith("/properties") || currentPath.startsWith("/holiday-properties") || currentPath === "/agents") && window.innerWidth <= 1000) {
             hideItems.forEach(item => {
                 item.style.display = "none";
             });
@@ -373,10 +377,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Run adjustments once on page load
+
     adjustStyles();
 
-    // Apply styles on window resize
+
     window.addEventListener("resize", adjustStyles);
 });
 

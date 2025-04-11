@@ -1,13 +1,15 @@
 @extends('layouts.front-office.app')
 @section('content')
-    <section class="blog pt-50 pb-50">
-        <x-property-filter 
-            :propertyTypes="$propertyTypes" 
-            :plotAreaRange="$plotAreaRange" 
-            :priceRange="$priceRange" 
-            :amenities="$amenities" 
-        />
-    </section>
+<section class="blog pt-50 pb-50">
+    <x-property-filter-two
+        :propertyTypes="$propertyTypes" 
+        :priceRange="$priceRange" 
+        :noOfRooms="$noOfRooms"
+        :noOfBathrooms="$noOfBathrooms"
+    />
+</section>
+
+
 
 
     {{-- {{$holidayProperties}}  --}}
@@ -377,13 +379,7 @@
             padding: 0;
         }
 
-        .beds-baths-options button {
-            flex: 1 1 calc(25% - 10px);
-            min-width: 120px;
-            padding: 10px;
-            text-align: center;
-            white-space: nowrap;
-        }
+ 
 
         .property-filter .search-button-property {
             position: absolute;

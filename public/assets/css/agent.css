@@ -541,14 +541,5 @@ margin: 10px 0 0 0;
 }
 
 
-@media (min-width: 951px) {
-.property-details-Description.mobile-show,
-.mobile-show-one,
-.agent-logo-container-show,
-.property-two-box-five-box
-{
-display: none !important;
-}
-}
 
 
