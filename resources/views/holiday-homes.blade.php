@@ -1,13 +1,13 @@
 @extends('layouts.front-office.app')
 @section('content')
-    {{-- <section class="blog pt-50 pb-50">
+    <section class="blog pt-50 pb-50">
         <x-property-filter 
             :propertyTypes="$propertyTypes" 
             :plotAreaRange="$plotAreaRange" 
             :priceRange="$priceRange" 
             :amenities="$amenities" 
         />
-    </section> --}}
+    </section>
 
 
     {{-- {{$holidayProperties}}  --}}

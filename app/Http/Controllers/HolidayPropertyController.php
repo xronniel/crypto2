@@ -230,7 +230,7 @@ class HolidayPropertyController extends Controller
             ->orderBy('bathroom', 'asc')
             ->pluck('bathroom');
 
-        return view('holiday-properties.show', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms'));
+        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms'));
     }
 
     public function edit(HolidayProperty $holidayProperty)
