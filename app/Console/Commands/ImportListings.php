@@ -240,21 +240,21 @@ class ImportListings extends Command
     }
 
     private function updateCommunity($listing)
-{
-    $communityName = (string)$listing->Community;
+    {
+        $communityName = (string)$listing->Community;
 
-    // Skip if the community name is empty
-    if (empty($communityName)) {
-        return null;
+        // Skip if the community name is empty
+        if (empty($communityName)) {
+            return null;
+        }
+
+        // Check if the community exists, if not create it
+        $community = \App\Models\Community::firstOrCreate(
+            ['name' => $communityName],
+            ['image' => null, 'emirates_id' => null]
+        );
+
+        return $community->id;
     }
-
-    // Check if the community exists, if not create it
-    $community = \App\Models\Community::firstOrCreate(
-        ['name' => $communityName],
-        ['image' => null, 'emirates_id' => null]
-    );
-
-    return $community->id;
-}
 }
 

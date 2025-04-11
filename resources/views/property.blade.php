@@ -1,17 +1,11 @@
 @extends('layouts.front-office.app')
 @section('content')
-
     {{-- {{ $property }} --}}
     <section class="blog pt-50 pb-50">
-        <x-property-filter 
-            :propertyTypes="$propertyTypes" 
-            :plotAreaRange="$plotAreaRange" 
-            :priceRange="$priceRange" 
-            :amenities="$amenities" 
-        />
+        <x-property-filter :propertyTypes="$propertyTypes" :plotAreaRange="$plotAreaRange" :priceRange="$priceRange" :amenities="$amenities" />
     </section>
     {{-- {{ $property }} --}}
-    
+
     <!-- breadcrumb start -->
     <section class="breadcrumb bg_img pos-rel" data-background="assets/img/bg/breadcrumb.jpg">
         <div class="container">
@@ -64,13 +58,13 @@
 
                     <div class="page-line-filter-links">
                         <a href="{{ route('properties.index', ['completion_status' => '']) }}"
-                           class="{{ request('completion_status') == '' ? 'page-line-filter-links-ctive' : '' }}">Any</a>
-                    
+                            class="{{ request('completion_status') == '' ? 'page-line-filter-links-ctive' : '' }}">Any</a>
+
                         <a href="{{ route('properties.index', ['completion_status' => 'off_plan']) }}"
-                           class="{{ request('completion_status') == 'off_plan' ? 'page-line-filter-links-ctive' : '' }}">Off-plan</a>
-                    
+                            class="{{ request('completion_status') == 'off_plan' ? 'page-line-filter-links-ctive' : '' }}">Off-plan</a>
+
                         <a href="{{ route('properties.index', ['completion_status' => 'ready']) }}"
-                           class="{{ request('completion_status') == 'ready' ? 'page-line-filter-links-ctive' : '' }}">Ready</a>
+                            class="{{ request('completion_status') == 'ready' ? 'page-line-filter-links-ctive' : '' }}">Ready</a>
                     </div>
 
                 </div>
@@ -93,7 +87,7 @@
                         <div class="page-line-filter-links-two">
                             <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
                             <label for="sort-options">Sort by:</label>
-                    
+
                             <select name="sort" id="sort-options" onchange="this.form.submit()">
                                 <option value="">Select an option</option>
                                 <option value="featured">Featured</option>
@@ -118,10 +112,8 @@
                             style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap mt-none-30">
                             <article class="blog__item mt-30 blog__item-property">
                                 <div class="blog__item-property-one swiper">
-                                    <img class="Favorite-green" src="assets/img/property/green-Favorite.png"
-                                        alt="Favorite">
-                                    <img class="location-green" src="assets/img/property/location-green.png"
-                                        alt="location">
+                                    <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite">
+                                    <img class="location-green" src="assets/img/property/location-green.png" alt="location">
                                     <!-- Image Slider Count -->
                                     <div class="img-slider-count">
                                         <img class="" src="assets/img/property/cam.png" alt="location">
@@ -238,26 +230,30 @@
                                         <div class="property-two-box-five-two">
                                             <!-- Phone Call -->
                                             <a href="tel:{{ $property->listing_agent_phone }}">
-                                                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
+                                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                    alt="Call">
                                                 <span>
                                                     Call
                                                 </span>
                                             </a>
-                
+
                                             <!-- Email -->
                                             <a href="mailto:{{ $property->listing_agent_email }}">
-                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
-                                               <span>
-                                                Email
-                                               </span>
+                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                    alt="Email">
+                                                <span>
+                                                    Email
+                                                </span>
                                             </a>
-                
+
                                             <!-- WhatsApp -->
-                                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" target="_blank">
-                                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
-                                          <span>
+                                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+                                                target="_blank">
+                                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                    alt="WhatsApp">
+                                                <span>
                                                     WhatsApp
-                                          </span>
+                                                </span>
                                             </a>
                                         </div>
 
@@ -284,7 +280,8 @@
                             <ul class="widget__category list-unstyled">
                                 @foreach ($emirates as $emirate)
                                     <li>
-                                        <a href="javascript:void(0);" onclick="window.location.href='{{ route('properties.index', ['filter_type' => 'sale', 'emirate' => $emirate]) }}'">
+                                        <a href="javascript:void(0);"
+                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => 'sale', 'emirate' => $emirate]) }}'">
                                             Properties for sale in {{ $emirate }}
                                         </a>
                                     </li>
@@ -295,8 +292,7 @@
                                 @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                         onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
-                                        >
+                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['name']]) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
@@ -304,31 +300,27 @@
                                 @foreach ($recentSearches['community'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                        onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
-                                        >
+                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['name']]) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
                                 @endforeach
                                 @foreach ($recentSearches['property_title'] as $recent)
                                     <li>
-                                        <a 
-                                          onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['title']]) }}'"
-                                        href="javascript:void(0);">
+                                        <a onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['title']]) }}'"
+                                            href="javascript:void(0);">
                                             {{ $recent['title'] }}
                                         </a>
                                     </li>
                                 @endforeach
                             </ul>
 
-                        
+
                         </div>
 
 
 
-                        <div 
-                        style="padding: 0;"
-                        class="widget widget-two mt-30">
+                        <div style="padding: 0;" class="widget widget-two mt-30">
 
                             <div class="widget-two-one">
                                 <img src="assets/img/property/amar.png" alt="amar">
@@ -343,9 +335,7 @@
 
 
 
-                        <div 
-                            style="padding: 0;"
-                        class="widget widget-three mt-30">
+                        <div style="padding: 0;" class="widget widget-three mt-30">
                             <img src="assets/img/property/marta.gif" alt="amar">
                         </div>
 
@@ -360,83 +350,34 @@
 
     <style>
         ul {
-        list-style-type: none;  
-        padding: 0;            
-        margin: 0;              
-    }
-    
-    ul li {
-        margin: 0;              
-        padding: 0;            
-    }
-    .beds-baths-options button {
-        flex: 1 1 calc(25% - 10px); 
-        min-width: 120px; 
-        padding: 10px;
-        text-align: center;
-        white-space: nowrap;
-    }
-    .property-filter .search-button-property {
-        position: absolute;
-        left: 4px;
-        top: 0.7px;
-        bottom: 0;
-        margin: auto;
-        width: fit-content;
-        height: fit-content;
-        background: none;
-        display: flex
-    ;
-        border-radius: 50% 0 0 50%;
-        justify-content: center;
-        align-items: center;
-        height: 43px;
-        padding: 10px 8px;
-        align-content: center;
-    }
-    
-    
-    .widget__title {
-    text-align: start;
-}
-    
-    
-    
-    @media (max-width: 700px) {
-        .property-filter {
-            width: 60%;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
-    
-        .filter-button {
-            right: 2%;
+
+        ul li {
+            margin: 0;
+            padding: 0;
         }
-    }
-    @media (max-width: 700px) {
-        .property-filter {
-            width: 60%;
+
+        .beds-baths-options button {
+            flex: 1 1 calc(25% - 10px);
+            min-width: 120px;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
         }
-    
-        .filter-button {
-            right: 2%;
-        }
-    
-    
-        .property-filter img {
-            filter: brightness(0) invert(1); 
-        }
-        
-    
+
         .property-filter .search-button-property {
             position: absolute;
-            left: 2px;
+            left: 4px;
             top: 0.7px;
             bottom: 0;
             margin: auto;
             width: fit-content;
             height: fit-content;
-            background: #2dd98f;
-            display: flex
-        ;
+            background: none;
+            display: flex;
             border-radius: 50% 0 0 50%;
             justify-content: center;
             align-items: center;
@@ -444,11 +385,60 @@
             padding: 10px 8px;
             align-content: center;
         }
-        
-        
-    
-    
-    }
-    
+
+
+        .widget__title {
+            text-align: start;
+        }
+
+
+
+        @media (max-width: 700px) {
+            .property-filter {
+                width: 60%;
+            }
+
+            .filter-button {
+                right: 2%;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .property-filter {
+                width: 60%;
+            }
+
+            .filter-button {
+                right: 2%;
+            }
+
+
+            .property-filter img {
+                filter: brightness(0) invert(1);
+            }
+
+
+            .property-filter .search-button-property {
+                position: absolute;
+                left: 2px;
+                top: 0.7px;
+                bottom: 0;
+                margin: auto;
+                width: fit-content;
+                height: fit-content;
+                background: #2dd98f;
+                display: flex;
+                border-radius: 50% 0 0 50%;
+                justify-content: center;
+                align-items: center;
+                height: 43px;
+                padding: 10px 8px;
+                align-content: center;
+            }
+
+
+
+
+        }
     </style>
 @endsection

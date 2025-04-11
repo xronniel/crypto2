@@ -11,6 +11,7 @@ use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\EmiratesController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\HolidayPropertyController;
 use App\Http\Controllers\HomepageContentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ListingController;
@@ -56,6 +57,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('partners', PartnerController::class);
     Route::resource('reviews', ReviewController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('holiday-properties', HolidayPropertyController::class);
 });
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
@@ -68,6 +70,9 @@ Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
 
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
+
+Route::get('/holiday-properties', [HolidayPropertyController::class, 'userIndex'])->name('holiday-properties.index');
+Route::get('/holiday-properties/{holidayProperty}', [HolidayPropertyController::class, 'userShow'])->name('holiday-properties.show');
 
 Route::get('/contact-us', function () {
     return view('contact');

@@ -82,33 +82,33 @@
                     </div>
                 </div>
 
-<div class="properties-swiper-mobile swiper">
-    <div
-    
-    class="swiper-wrapper">
-        {{-- Main Image --}}
-        @if ($property->images->isNotEmpty())
-            <div class="swiper-slide">
-                <img class="main-image-img" alt="Property Image" 
-                     src="{{ $property->xml ? $property->images->first()->url : asset('storage/' . $property->images->first()->url) }}">
-            </div>
-        @endif
+                <div class="properties-swiper-mobile swiper">
+                    <div
+                    
+                    class="swiper-wrapper">
+                        {{-- Main Image --}}
+                        @if ($property->images->isNotEmpty())
+                            <div class="swiper-slide">
+                                <img class="main-image-img" alt="Property Image" 
+                                    src="{{ $property->xml ? $property->images->first()->url : asset('storage/' . $property->images->first()->url) }}">
+                            </div>
+                        @endif
 
-        {{-- Small Images --}}
-        @foreach ($property->images->take(3) as $image)
-            <div class="swiper-slide">
-                <img class="small-images-img"  
-                     src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}" 
-                     alt="home">
-            </div>
-        @endforeach
-    </div>
+                        {{-- Small Images --}}
+                        @foreach ($property->images->take(3) as $image)
+                            <div class="swiper-slide">
+                                <img class="small-images-img"  
+                                    src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}" 
+                                    alt="home">
+                            </div>
+                        @endforeach
+                    </div>
 
-    <!-- Pagination & Navigation -->
-    <div class="swiper-pagination"></div>
-    {{-- <div class="swiper-button-prev"></div> --}}
-    {{-- <div class="swiper-button-next"></div> --}}
-</div>
+                    <!-- Pagination & Navigation -->
+                    <div class="swiper-pagination"></div>
+                    {{-- <div class="swiper-button-prev"></div> --}}
+                    {{-- <div class="swiper-button-next"></div> --}}
+                </div>
 
 
 
@@ -603,6 +603,7 @@
 
     <div style="background: #0B0F28;
     padding: 1px 0;
+        background-position: center;
     " class="bg_img top-center pos-rel pb-145"
       data-background="{{ asset('assets/img/bg/team-bg.png') }}">
         <div class="container">
