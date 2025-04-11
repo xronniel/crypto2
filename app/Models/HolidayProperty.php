@@ -49,8 +49,13 @@ class HolidayProperty extends Model
         'last_update' => 'datetime',
     ];
 
-    public function photos()
+    public function holidayPhotos()
     {
         return $this->hasMany(HolidayPropertyPhoto::class);
+    }
+
+    public function amenities()
+    {
+        return $this->belongsToMany(HolidayPropertyAmenity::class, 'holiday_property_amenities', 'holiday_property_id', 'amenity_id');
     }
 }

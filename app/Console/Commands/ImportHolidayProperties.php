@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Agent;
 use App\Models\HolidayProperty;
+use App\Models\HolidayPropertyAmenity;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use SimpleXMLElement;
@@ -79,6 +80,22 @@ class ImportHolidayProperties extends Command
                         $photos[] = ['url' => (string) $photoUrl, 'holiday_property_id' => $holidayProperty->id];
                     }
                     $holidayProperty->photos()->createMany($photos);
+
+                    $amenityCodes = explode(',', (string)$property->amenities);
+                    $amenityIds = [];
+                    foreach ($amenityCodes as $code) {
+                        $code = trim($code); // Trim whitespace
+                        if (!empty($code)) {
+                            // Check if the amenity already exists, or create it
+                            $amenity = HolidayPropertyAmenity::firstOrCreate(
+                                ['code' => $code],
+                                ['name' => $code] // Use the code as the name if no name is provided
+                            );
+                            $amenityIds[] = $amenity->id; // Collect the amenity ID
+                        }
+                    }
+                    
+                    $holidayProperty->amenities()->sync($amenityIds);
                     
                     $count++;
                 }
