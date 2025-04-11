@@ -19,7 +19,8 @@ class HolidayPropertyController extends Controller
 
     public function userIndex(Request $request)
     {
-        $holidayProperties = HolidayProperty::latest()->paginate(10);
+        $holidayProperties = HolidayProperty::with('photos')->latest()->paginate(10);
+
         return view('holiday-properties.index', compact('holidayProperties'));
     }
     
@@ -62,6 +63,8 @@ class HolidayPropertyController extends Controller
 
     public function userShow(HolidayProperty $holidayProperty)
     {
+        $holidayProperty->load('photos');
+
         return view('holiday-properties.show', compact('holidayProperty'));
     }
 
