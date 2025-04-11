@@ -159,8 +159,9 @@ class HolidayPropertyController extends Controller
             ->pluck('bathroom');
         $faqs = Faq::all();
         $amenities = HolidayPropertyAmenity::all();
+        $plotAreaRange = [];
         //$holidayProperties = HolidayProperty::with('photos')->latest()->paginate(10);
-        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings'));
+        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings', 'plotAreaRange'));
     }
     
     /**
@@ -234,7 +235,8 @@ class HolidayPropertyController extends Controller
             ->pluck('bathroom');
         $faqs = Faq::all();
         $amenities = HolidayPropertyAmenity::all();
-        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities'));
+        $plotAreaRange = [];
+        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange'));
     }
 
     public function edit(HolidayProperty $holidayProperty)
