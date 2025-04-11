@@ -97,7 +97,7 @@ class HolidayPropertyController extends Controller
             $query->where('property_type', $propertyType);
         }
 
-        $holidayProperties = $query->with(['photos'])->latest()->paginate(10);
+        $holidayProperties = $query->with(['holidayPhotos'])->latest()->paginate(10);
 
         $propertyTypes = HolidayProperty::select('property_type')
             ->whereNotNull('property_type')
@@ -201,7 +201,7 @@ class HolidayPropertyController extends Controller
     public function userShow(HolidayProperty $holidayProperty)
     {
         $holidayProperty->increment('visit_count');
-        $holidayProperty->load('photos');
+        $holidayProperty->load('holidayPhotos');
 
         $propertyTypes = HolidayProperty::select('property_type')
             ->whereNotNull('property_type')
