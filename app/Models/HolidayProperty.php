@@ -56,6 +56,7 @@ class HolidayProperty extends Model
 
     public function amenities()
     {
-        return $this->belongsToMany(HolidayPropertyAmenity::class, 'holiday_property_amenities', 'holiday_property_id', 'amenity_id');
+        return $this->belongsToMany(HolidayPropertyAmenity::class, 'holiday_property_amenity');
     }
+    
 }

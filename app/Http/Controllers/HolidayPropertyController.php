@@ -236,7 +236,14 @@ class HolidayPropertyController extends Controller
         $faqs = Faq::all();
         $amenities = HolidayPropertyAmenity::all();
         $plotAreaRange = [];
-        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange'));
+
+        $holidayPropertiesSameArea = HolidayProperty::where('community', $holidayProperty->community)
+            ->where('id', '!=', $holidayProperty->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange', 'holidayPropertiesSameArea'));
     }
 
     public function edit(HolidayProperty $holidayProperty)

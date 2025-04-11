@@ -74,12 +74,12 @@ class ImportHolidayProperties extends Command
                     );
 
                     // Save photos
-                    $holidayProperty->photos()->delete(); // Clear existing photos
+                    $holidayProperty->holidayPhotos()->delete(); // Clear existing photos
                     $photos = [];
                     foreach ($property->photo->url as $photoUrl) {
-                        $photos[] = ['url' => (string) $photoUrl, 'holiday_property_id' => $holidayProperty->id];
+                        $photos[] = ['url' => (string) $photoUrl];
                     }
-                    $holidayProperty->photos()->createMany($photos);
+                    $holidayProperty->holidayPhotos()->createMany($photos);
 
                     $amenityCodes = explode(',', (string)$property->amenities);
                     $amenityIds = [];
@@ -88,13 +88,13 @@ class ImportHolidayProperties extends Command
                         if (!empty($code)) {
                             // Check if the amenity already exists, or create it
                             $amenity = HolidayPropertyAmenity::firstOrCreate(
-                                ['code' => $code],
-                                ['name' => $code] // Use the code as the name if no name is provided
+                                ['code' => $code], // Check by code
+                                ['name' => $code]  // Use the code as the name if no name is provided
                             );
                             $amenityIds[] = $amenity->id; // Collect the amenity ID
                         }
                     }
-                    
+
                     $holidayProperty->amenities()->sync($amenityIds);
                     
                     $count++;
