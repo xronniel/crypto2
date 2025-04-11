@@ -231,7 +231,8 @@ class HolidayPropertyController extends Controller
             ->orderBy('bathroom', 'asc')
             ->pluck('bathroom');
         $faqs = Faq::all();
-        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs'));
+        $amenities = $holidayProperty->amenities()->get();
+        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities'));
     }
 
     public function edit(HolidayProperty $holidayProperty)
