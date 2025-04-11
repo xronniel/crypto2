@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\HolidayPropertyRequest;
+use App\Models\Faq;
 use App\Models\HolidayProperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -155,9 +156,9 @@ class HolidayPropertyController extends Controller
             ->distinct()
             ->orderBy('bathroom', 'asc')
             ->pluck('bathroom');
-   
+        $faqs = Faq::all();
         //$holidayProperties = HolidayProperty::with('photos')->latest()->paginate(10);
-        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms'));
+        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs'));
     }
     
     /**
@@ -229,8 +230,8 @@ class HolidayPropertyController extends Controller
             ->distinct()
             ->orderBy('bathroom', 'asc')
             ->pluck('bathroom');
-
-        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms'));
+        $faqs = Faq::all();
+        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs'));
     }
 
     public function edit(HolidayProperty $holidayProperty)
