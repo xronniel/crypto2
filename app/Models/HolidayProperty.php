@@ -9,6 +9,8 @@ class HolidayProperty extends Model
 {
     use HasFactory;
 
+    protected $table = 'holiday_properties';
+
     protected $fillable = [
         'reference_number',
         'offering_type',
@@ -19,17 +21,31 @@ class HolidayProperty extends Model
         'city',
         'community',
         'sub_community',
+        'property_name',
         'title_en',
         'description_en',
         'amenities',
         'size',
         'bedroom',
         'bathroom',
-        'parking',
+        'agent_id',
         'agent_name',
         'agent_email',
         'agent_phone',
+        'agent_license',
         'agent_photo',
+        'parking',
+        'furnished',
+        'photos',
+        'latitude',
+        'longitude',
+        'last_update',
+    ];
+
+    protected $casts = [
+        'price_on_application' => 'boolean',
+        'furnished' => 'boolean',
+        'last_update' => 'datetime',
     ];
 
     public function photos()
