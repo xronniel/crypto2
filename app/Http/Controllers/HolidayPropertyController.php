@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\HolidayPropertyRequest;
 use App\Models\Faq;
 use App\Models\HolidayProperty;
+use App\Models\HolidayPropertyAmenity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -157,8 +158,9 @@ class HolidayPropertyController extends Controller
             ->orderBy('bathroom', 'asc')
             ->pluck('bathroom');
         $faqs = Faq::all();
+        $amenities = HolidayPropertyAmenity::all();
         //$holidayProperties = HolidayProperty::with('photos')->latest()->paginate(10);
-        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs'));
+        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings'));
     }
     
     /**
@@ -231,7 +233,7 @@ class HolidayPropertyController extends Controller
             ->orderBy('bathroom', 'asc')
             ->pluck('bathroom');
         $faqs = Faq::all();
-        $amenities = $holidayProperty->amenities()->get();
+        $amenities = HolidayPropertyAmenity::all();
         return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities'));
     }
 
