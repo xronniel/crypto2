@@ -59,4 +59,8 @@ class HolidayProperty extends Model
         return $this->belongsToMany(HolidayPropertyAmenity::class, 'holiday_property_amenity');
     }
     
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class, 'agent_id');
+    }
 }
