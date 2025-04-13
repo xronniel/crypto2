@@ -21,7 +21,6 @@
             <p><strong>Description:</strong> {{ $holidayProperty->description_en }}</p>
 
             {{-- Amenities --}}
-            <p><strong>Amenities (Raw):</strong> {{ $holidayProperty->amenities }}</p>
             <p><strong>Amenities (From Relationship):</strong>
                 @forelse($holidayProperty->holidayAmenities as $amenity)
                     <span class="badge bg-info text-dark">{{ $amenity->name }}</span>
@@ -61,7 +60,7 @@
                     @if(filter_var($photo->url, FILTER_VALIDATE_URL))
                         <img src="{{ $photo->url }}" alt="Photo" width="100" class="mt-2 me-2">
                     @else
-                        <img src="{{ asset('storage/' . $photo) }}" alt="Photo" width="100" class="mt-2 me-2">
+                        <img src="{{ asset('storage/' . $photo->url) }}" alt="Photo" width="100" class="mt-2 me-2">
                     @endif
                 @endforeach
             @else

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\HolidayPropertyRequest;
+use App\Models\Agent;
 use App\Models\Faq;
 use App\Models\HolidayProperty;
 use App\Models\HolidayPropertyAmenity;
@@ -169,28 +170,58 @@ class HolidayPropertyController extends Controller
      */
     public function create()
     {
-        return view('admin.holiday-properties.create');
+        $amenities = HolidayPropertyAmenity::all();
+        $propertyTypes = HolidayProperty::select('property_type')
+            ->whereNotNull('property_type')
+            ->distinct()
+            ->pluck('property_type');
+        $agents = Agent::all();
+        return view('admin.holiday-properties.create', compact('amenities', 'propertyTypes', 'agents'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(HolidayPropertyRequest $request)
     {
         $validated = $request->validated();
-
-        // Handle photos upload
+    
+        $validated['amenities'] = is_array($request->input('amenities'))
+            ? implode(',', $request->input('amenities'))
+            : null;
+    
+        // Get the agent by ID
+        $agent = Agent::findOrFail($validated['agent_id']);
+    
+        // Add agent fields to validated data
+        $validated['agent_name'] = $agent->name;
+        $validated['agent_email'] = $agent->email;
+        $validated['agent_phone'] = $agent->phone;
+        $validated['agent_license'] = $agent->license ?? null;
+        $validated['agent_photo'] = $agent->photo ?? null;
+        $validated['new'] = $validated['new'] ?? 0; // Set new to 1 for new properties
+        // Remove photos before creating property
+        unset($validated['photos']);
+        
+        $validated['xml'] = 0; // Set xml to 1 for new properties
+        // Create the property
+        $holidayProperty = HolidayProperty::create($validated);
+    
+        // Store photos in holiday_property_photos table
         if ($request->hasFile('photos')) {
-            $photos = [];
             foreach ($request->file('photos') as $photo) {
-                $photos[] = $photo->store('holiday-properties/photos', 'public');
+                $path = $photo->store('holiday-properties/photos', 'public');
+                $holidayProperty->holidayPhotos()->create(['url' => $path]);
             }
-            $validated['photos'] = json_encode($photos);
         }
-
-        HolidayProperty::create($validated);
-
-        return redirect()->route('admin.holiday-properties.index')->with('success', 'Holiday Property created successfully!');
+    
+        // Sync amenities
+        if ($request->has('amenities')) {
+            $holidayProperty->holidayAmenities()->sync($request->input('amenities'));
+        }
+    
+        return redirect()->route('admin.holiday-properties.index')
+            ->with('success', 'Holiday Property created successfully!');
     }
 
     /**
@@ -243,31 +274,78 @@ class HolidayPropertyController extends Controller
             ->latest()
             ->take(5)
             ->get();
-        dd($holidayProperty->holidayAmenities);
         return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange', 'holidayPropertiesSameArea'));
     }
 
     public function edit(HolidayProperty $holidayProperty)
     {
-        return view('admin.holiday-properties.edit', compact('holidayProperty'));
+        $amenities = HolidayPropertyAmenity::all();
+        $propertyTypes = HolidayProperty::select('property_type')
+            ->whereNotNull('property_type')
+            ->distinct()
+            ->pluck('property_type');
+        $agents = Agent::all();
+        return view('admin.holiday-properties.edit', compact('holidayProperty', 'amenities', 'propertyTypes', 'agents'));
     }
 
-    public function update(HolidayPropertyRequest $request, HolidayProperty $holidayProperty)
+    public function update(HolidayPropertyRequest $request, $id)
     {
+        // Find the holiday property by ID
+        $holidayProperty = HolidayProperty::findOrFail($id);
+    
+        // Validate the request data
         $validated = $request->validated();
-
-        // Handle photos upload
-        if ($request->hasFile('photos')) {
-            $photos = [];
-            foreach ($request->file('photos') as $photo) {
-                $photos[] = $photo->store('holiday-properties/photos', 'public');
-            }
-            $validated['photos'] = json_encode($photos);
-        }
-
+    
+        // Handle amenities input
+        $validated['amenities'] = is_array($request->input('amenities'))
+            ? implode(',', $request->input('amenities'))
+            : null;
+    
+        // Get the agent by ID
+        $agent = Agent::findOrFail($validated['agent_id']);
+    
+        // Add agent fields to validated data
+        $validated['agent_name'] = $agent->name;
+        $validated['agent_email'] = $agent->email;
+        $validated['agent_phone'] = $agent->phone;
+        $validated['agent_license'] = $agent->license ?? null;
+        $validated['agent_photo'] = $agent->photo ?? null;
+        
+        // If 'new' is not set in request, set it to 0
+        $validated['new'] = $validated['new'] ?? 0;
+        
+        // If 'xml' is not set, set it to 0 (or handle it based on your logic)
+        $validated['xml'] = $validated['xml'] ?? 0;
+    
+        // Remove photos from validated data before updating property
+        unset($validated['photos']);
+        
+        // Update the holiday property with validated data
         $holidayProperty->update($validated);
-
-        return redirect()->route('admin.holiday-properties.index')->with('success', 'Holiday Property updated successfully!');
+    
+        // Handle photo updates
+        if ($request->hasFile('photos')) {
+            // Delete old photos
+            foreach ($holidayProperty->holidayPhotos as $photo) {
+                // You can optionally delete the old photo from storage here, e.g.:
+                // Storage::delete($photo->url);
+                $photo->delete();
+            }
+    
+            // Store new photos in holiday_property_photos table
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('holiday-properties/photos', 'public');
+                $holidayProperty->holidayPhotos()->create(['url' => $path]);
+            }
+        }
+    
+        // Sync amenities
+        if ($request->has('amenities')) {
+            $holidayProperty->holidayAmenities()->sync($request->input('amenities'));
+        }
+    
+        return redirect()->route('admin.holiday-properties.index')
+            ->with('success', 'Holiday Property updated successfully!');
     }
 
     public function destroy(HolidayProperty $holidayProperty)
