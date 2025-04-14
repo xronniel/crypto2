@@ -632,6 +632,7 @@ input[type="text"] {
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
+    cursor: pointer;
 }
 
 .login-mobile-button {

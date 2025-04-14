@@ -135,7 +135,7 @@
         fetch("api/reviews")
             .then(response => response.json())
             .then(response => {
-                console.log("Response Data:", response);
+                // console.log("Response Data:", response);
 
                 const container = document.querySelector(".testimonial-slider .swiper-wrapper");
                 const reviews = response.data || [];

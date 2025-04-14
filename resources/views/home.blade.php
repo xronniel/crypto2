@@ -117,7 +117,7 @@
 
                 <form class="mobile-form-home" action="{{ route('properties.index') }}" method="GET">
                     @csrf
-      
+
                     <input type="hidden" name="filter_type" id="filterTypeInputTwo" value="rent"> <!-- Default value -->
                     <input type="hidden" name="no_of_rooms" id="selectedRooms" value=""> <!-- Selected rooms -->
                     <input type="hidden" name="no_of_bathroom" id="selectedBathrooms" value="">
@@ -175,12 +175,13 @@
 
                                     <div class="beds-baths-options">
 
-                                        <button type="button" class="filter-btn"  data-value="rent">Rent</button>
+                                        <button type="button" class="filter-btn" data-value="rent">Rent</button>
                                         <button type="button" class="filter-btn" data-value="buy">Buy</button>
+                                        <button type="button" class="filter-btn" data-value="">New</button>
+                                        <button type="button" class="filter-btn" data-value="new_projects">New
+                                            projects</button>
                                         <button type="button" class="filter-btn"
-                                        data-value="">New</button>
-                                        <button type="button" class="filter-btn" data-value="new_projects">New projects</button>
-                                        <button type="button" class="filter-btn"  data-value="commercial">Commercial</button>
+                                            data-value="commercial">Commercial</button>
 
                                     </div>
 
@@ -188,27 +189,29 @@
 
 
 
-                                    
+
                                     <p>
                                         <img src="{{ asset('assets/img/property/green-size.png') }}" alt="size">
                                         Area Size (Sq.ft)
                                     </p>
                                     <div class="area-home">
                                         <div class="black-dropdown black-dropdown-one ">
-                                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
-                                                alt="arrow">
+                                            <img class="property-filter-img"
+                                                src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                                             <select name="min_area" class="price-dropdown form-select">
-                                                <option value="" selected>Min. Area</option> <!-- Default option set to 0 -->
+                                                <option value="" selected>Min. Area</option>
+                                                <!-- Default option set to 0 -->
                                                 @foreach ($plotAreaRange['steps'] as $step)
                                                     <option value="{{ $step }}">{{ $step }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="black-dropdown black-dropdown-one ">
-                                            <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
-                                                alt="arrow">
+                                            <img class="property-filter-img"
+                                                src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
                                             <select name="max_area" class="price-dropdown form-select">
-                                                <option value="" selected>Max. Area</option> <!-- Default option set to 0 -->
+                                                <option value="" selected>Max. Area</option>
+                                                <!-- Default option set to 0 -->
                                                 @foreach ($plotAreaRange['steps'] as $step)
                                                     <option value="{{ $step }}">{{ $step }}</option>
                                                 @endforeach
@@ -307,12 +310,8 @@
             <div class="token-structure mt-145 wow fadeInUp" data-wow-duration=".7s" data-wow-delay="450ms">
                 <div class="row row-mobile">
 
-                    <div 
-                    style="padding-bottom: 20px;"
-                    class="hero-token">
-                        <h3 
-                        style="margin: 20px 0 10px 0"
-                        > {!! $homepageContent->calculator_title2 !!}</h3>
+                    <div style="padding-bottom: 20px;" class="hero-token">
+                        <h3 style="margin: 20px 0 10px 0"> {!! $homepageContent->calculator_title2 !!}</h3>
 
                         <p class="xb-item--content">
                             {!! $homepageContent->calculator_text !!}
@@ -380,22 +379,21 @@
             <span><img src="assets/img/partner/partner_07.png" alt=""> our top partners <img
                     src="assets/img/partner/partner_08.png" alt=""></span>
         </div>
-   
+
         <div class="partner-active partner-slider ul_li">
             <div class="swiper-wrapper">
                 @foreach ($partners as $partner)
-               
-                <div class="swiper-slide">
-                    <div class="xb-item--brand">
-                        <div class="xb-item--brand_logo">
-                            <img src="{{ asset('storage/' . $partner->image ) }}" alt="">
+                    <div class="swiper-slide">
+                        <div class="xb-item--brand">
+                            <div class="xb-item--brand_logo">
+                                <img src="{{ asset('storage/' . $partner->image) }}" alt="">
+                            </div>
+                            <span> {{ $partner->name }}</span>
                         </div>
-                        <span> {{ $partner->name }}</span>
                     </div>
-                </div>
-            @endforeach
-              
-           
+                @endforeach
+
+
             </div>
         </div>
     </section>
@@ -731,9 +729,7 @@
                                             fill="#080B18"></path>
                                     </svg> Integration with third-party payment wallets or services</li>
                             </ul>
-                            <div
-                            style="flex-wrap: nowrap;"
-                            class="xb-item--crypto-btn">
+                            <div style="flex-wrap: nowrap;" class="xb-item--crypto-btn">
                                 <a class="them-btn crp-btn" href="#!">
                                     <span class="btn_icon">
                                         <i class="fab fa-apple"></i>
@@ -905,30 +901,31 @@
     </div>
 
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll(".filter-btn");  
-    const hiddenInputOne = document.getElementById("filterTypeInput");
-    const hiddenInputTwo = document.getElementById("filterTypeInputTwo");
+        document.addEventListener("DOMContentLoaded", function() {
+            const buttons = document.querySelectorAll(".filter-btn");
+            const hiddenInputOne = document.getElementById("filterTypeInput");
+            const hiddenInputTwo = document.getElementById("filterTypeInputTwo");
 
-    buttons.forEach(button => {
-        button.addEventListener("click", function(event) {
-            event.preventDefault(); // Prevent default behavior
+            buttons.forEach(button => {
+                button.addEventListener("click", function(event) {
+                    event.preventDefault(); // Prevent default behavior
 
-            // Remove active class from all buttons/spans
-            buttons.forEach(btn => btn.classList.remove("active-button-home"));
+                    // Remove active class from all buttons/spans
+                    buttons.forEach(btn => btn.classList.remove("active-button-home"));
 
-            // Apply active class to clicked element
-            this.classList.add("active-button-home");
+                    // Apply active class to clicked element
+                    this.classList.add("active-button-home");
 
-            // Update both hidden inputs with the selected filter value
-            hiddenInputOne.value = this.dataset.value;
-            hiddenInputTwo.value = this.dataset.value;
+                    // Update both hidden inputs with the selected filter value
+                    hiddenInputOne.value = this.dataset.value;
+                    hiddenInputTwo.value = this.dataset.value;
 
-            // Debugging: Check if inputs update correctly
-            console.log("Selected filter type:", hiddenInputOne.value, hiddenInputTwo.value);
+                    // Debugging: Check if inputs update correctly
+                    console.log("Selected filter type:", hiddenInputOne.value, hiddenInputTwo
+                    .value);
+                });
+            });
         });
-    });
-});
 
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -1032,79 +1029,92 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-    let currentPage = 1;
-    let totalPages = 1;
+            let currentPage = 1;
+            let totalPages = 1;
 
-    function loadListings(communityName, page = 1) {
-        if (!communityName) {
-            console.error("Community is undefined or missing.");
-            return;
-        }
-
-        fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}`)
-            .then(response => response.json())
-            .then(responseData => {
-                let propertiesContainer = document.getElementById("featured-properties");
-                propertiesContainer.innerHTML = "";
-
-                let listings = responseData.data?.data || [];
-                console.log("Listings:", listings);
-                totalPages = responseData.data?.last_page || 1;
-                currentPage = responseData.data?.current_page || 1;
-
-                if (listings.length === 0) {
-                    propertiesContainer.innerHTML = "<p>No properties found.</p>";
+            function loadListings(communityName, page = 1) {
+                if (!communityName) {
+                    console.error("Community is undefined or missing.");
                     return;
                 }
 
-                // Ensure default values in case any listing is missing data
-                let listing1 = listings[0] || {};
-                let listing2 = listings[1] || {};
-                let listing3 = listings[2] || {};
+                fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}`)
+                    .then(response => response.json())
+                    .then(responseData => {
+                        let propertiesContainer = document.getElementById("featured-properties");
+                        propertiesContainer.innerHTML = "";
 
-                // Safely check if images exist and fall back to default if not
-                let agentPhoto1 = (listing1.images && Array.isArray(listing1.images) && listing1.images.length > 0) ? listing1.images[0].url : "default-image.jpg";
-                let agentPhoto2 = (listing2.images && Array.isArray(listing2.images) && listing2.images.length > 0) ? listing2.images[0].url : "default-image.jpg";
-                let agentPhoto3 = (listing3.images && Array.isArray(listing3.images) && listing3.images.length > 0) ? listing3.images[0].url : "default-image.jpg";
+                        let listings = responseData.data?.data || [];
+                        // console.log("Listings:", listings);
+                        totalPages = responseData.data?.last_page || 1;
+                        currentPage = responseData.data?.current_page || 1;
 
-                // Safely check if WhatsApp link exists
-                let whatsappLink1 = listing1.listing_agent_whatsapp ? `href="${listing1.listing_agent_whatsapp}"` : "";
-                let whatsappLink2 = listing2.listing_agent_whatsapp ? `href="${listing2.listing_agent_whatsapp}"` : "";
-                let whatsappLink3 = listing3.listing_agent_whatsapp ? `href="${listing3.listing_agent_whatsapp}"` : "";
+                        if (listings.length === 0) {
+                            propertiesContainer.innerHTML = "<p>No properties found.</p>";
+                            return;
+                        }
 
-                let cardsHTML = `
+                        // Ensure default values in case any listing is missing data
+                        let listing1 = listings[0] || {};
+                        let listing2 = listings[1] || {};
+                        let listing3 = listings[2] || {};
+
+                        // Safely check if images exist and fall back to default if not
+                        let agentPhoto1 = (listing1.images && Array.isArray(listing1.images) && listing1.images
+                            .length > 0) ? listing1.images[0].url : "default-image.jpg";
+                        let agentPhoto2 = (listing2.images && Array.isArray(listing2.images) && listing2.images
+                            .length > 0) ? listing2.images[0].url : "default-image.jpg";
+                        let agentPhoto3 = (listing3.images && Array.isArray(listing3.images) && listing3.images
+                            .length > 0) ? listing3.images[0].url : "default-image.jpg";
+
+                        // Safely check if WhatsApp link exists
+                        let whatsappLink1 = listing1.listing_agent_whatsapp ?
+                            `href="${listing1.listing_agent_whatsapp}"` : "";
+                        let whatsappLink2 = listing2.listing_agent_whatsapp ?
+                            `href="${listing2.listing_agent_whatsapp}"` : "";
+                        let whatsappLink3 = listing3.listing_agent_whatsapp ?
+                            `href="${listing3.listing_agent_whatsapp}"` : "";
+
+                        let cardsHTML = `
                     <div class="token-wrap">
                         <div class="row mt-none-30">
                 `;
 
-                if (listings.length >= 1) {
-                    cardsHTML += `
-                        <div class="col-xl-5 col-lg-6 mt-30">
-                            <div style="background-image: url('${agentPhoto1}');" class="token-distribut">
-                                <div class="token-distribut-location-div">
-                                    <h1 class="token-distribut-location-h1">${listing1.community || ""}</h1>
-                                    <div class="token-distribut-location-span">
-                                        <i class="fal fa-map-marker-alt"></i>
-                                        <span>${listing1.location || ""}</span>
-                                    </div>
-                                    <div class="token-distribut-location-span-two">
-                                        <span class="token-distribut-location-span-two-one">Launch price:</span>
-                                        <span class="token-distribut-location-span-two-two">${listing1.price || "N/A"} AED</span>
-                                    </div>
-                                    <a class="token-location-button" ${whatsappLink1}>
-                                        <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
-                                        <span>WhatsApp</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }
+                        if (listings.length >= 1) {
+                            cardsHTML += `
+    <div class="col-xl-5 col-lg-6 mt-30">
+        <div style="
+        cursor: pointer;
+        background-image: url('${agentPhoto1}');" class="token-distribut" 
+            onclick="window.location.href='/properties/${listing1.property_ref_no}'">
+            <div class="token-distribut-location-div">
+                <h1 class="token-distribut-location-h1">${listing1.community || ""}</h1>
+                <div class="token-distribut-location-span">
+                    <i class="fal fa-map-marker-alt"></i>
+                    <span>${listing1.location || ""}</span>
+                </div>
+                <div class="token-distribut-location-span-two">
+                    <span class="token-distribut-location-span-two-one">Launch price:</span>
+                    <span class="token-distribut-location-span-two-two">${listing1.price || "N/A"} AED</span>
+                </div>
+                <a class="token-location-button" ${whatsappLink1}>
+                    <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+`;
+                        }
 
-                if (listings.length >= 2) {
-                    cardsHTML += `
+                        if (listings.length >= 2) {
+                            cardsHTML += `
                         <div class="col-xl-7 col-lg-6 mt-30">
-                            <div style="background-image: url('${agentPhoto2}');" class="token-sale img-cards-Featured">
+                            <div 
+                            onclick="window.location.href='/properties/${listing1.property_ref_no}'"
+                            style="
+                            cursor: pointer;
+                            background-image: url('${agentPhoto2}');" class="token-sale img-cards-Featured">
                                 <div class="token-distribut-location-div">
                                     <h1 class="token-distribut-location-h1">${listing2.community || ""}</h1>
                                     <div class="token-distribut-location-span">
@@ -1122,11 +1132,15 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </div>
                             </div>
                     `;
-                }
+                        }
 
-                if (listings.length === 3) {
-                    cardsHTML += `
-                        <div style="background-image: url('${agentPhoto3}');" class="token-sale img-cards-Featured model">
+                        if (listings.length === 3) {
+                            cardsHTML += `
+                        <div
+                          onclick="window.location.href='/properties/${listing1.property_ref_no}'"
+                        style="
+                        cursor: pointer;
+                        background-image: url('${agentPhoto3}');" class="token-sale img-cards-Featured model">
                             <div class="token-distribut-location-div">
                                 <h1 class="token-distribut-location-h1">${listing3.community || ""}</h1>
                                 <div class="token-distribut-location-span">
@@ -1144,9 +1158,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             </div>
                         </div>
                     `;
-                }
+                        }
 
-                cardsHTML += `
+                        cardsHTML += `
                         </div>
                     </div>
                     <div class="pagination_wrap pt-50">
@@ -1160,98 +1174,99 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                 `;
 
-                propertiesContainer.innerHTML = cardsHTML;
+                        propertiesContainer.innerHTML = cardsHTML;
 
-                document.getElementById("prevPage").addEventListener("click", function() {
-                    if (currentPage > 1) {
-                        loadListings(communityName, currentPage - 1);
-                    }
-                });
+                        document.getElementById("prevPage").addEventListener("click", function() {
+                            if (currentPage > 1) {
+                                loadListings(communityName, currentPage - 1);
+                            }
+                        });
 
-                document.getElementById("nextPage").addEventListener("click", function() {
-                    if (currentPage < totalPages) {
-                        loadListings(communityName, currentPage + 1);
-                    }
-                });
-            })
-            .catch(error => console.error("Error fetching data:", error));
-    }
-
-    let defaultTab = document.querySelector(".community-tab.active-filter-link");
-    if (defaultTab) {
-        let defaultCommunity = defaultTab.getAttribute("data-community");
-        loadListings(defaultCommunity);
-    }
-
-    document.querySelectorAll(".community-tab").forEach(tab => {
-        tab.addEventListener("click", function() {
-            let communityName = this.getAttribute("data-community");
-
-            if (!communityName) {
-                console.error("Community is undefined or missing.");
-                return;
+                        document.getElementById("nextPage").addEventListener("click", function() {
+                            if (currentPage < totalPages) {
+                                loadListings(communityName, currentPage + 1);
+                            }
+                        });
+                    })
+                    .catch(error => console.error("Error fetching data:", error));
             }
 
-            document.querySelectorAll(".community-tab").forEach(el => el.classList.remove("active-filter-link"));
-            this.classList.add("active-filter-link");
+            let defaultTab = document.querySelector(".community-tab.active-filter-link");
+            if (defaultTab) {
+                let defaultCommunity = defaultTab.getAttribute("data-community");
+                loadListings(defaultCommunity);
+            }
 
-            loadListings(communityName);
+            document.querySelectorAll(".community-tab").forEach(tab => {
+                tab.addEventListener("click", function() {
+                    let communityName = this.getAttribute("data-community");
+
+                    if (!communityName) {
+                        console.error("Community is undefined or missing.");
+                        return;
+                    }
+
+                    document.querySelectorAll(".community-tab").forEach(el => el.classList.remove(
+                        "active-filter-link"));
+                    this.classList.add("active-filter-link");
+
+                    loadListings(communityName);
+                });
+            });
         });
-    });
-});
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-    const filterButton = document.getElementById("More-Filters");
-    const filterDropdown = document.getElementById("Filters-Dropdown");
-    const doneButton = document.querySelector(".done-btn");
-    const closeButton = document.querySelector(".Filters-close-button-home");
+        document.addEventListener("DOMContentLoaded", function() {
+            const filterButton = document.getElementById("More-Filters");
+            const filterDropdown = document.getElementById("Filters-Dropdown");
+            const doneButton = document.querySelector(".done-btn");
+            const closeButton = document.querySelector(".Filters-close-button-home");
 
 
-    filterButton.addEventListener("click", function () {
-        filterDropdown.classList.toggle("active");
-    });
+            filterButton.addEventListener("click", function() {
+                filterDropdown.classList.toggle("active");
+            });
 
 
-    doneButton.addEventListener("click", function () {
-        filterDropdown.classList.remove("active");
-    });
+            doneButton.addEventListener("click", function() {
+                filterDropdown.classList.remove("active");
+            });
 
-  
-    closeButton.addEventListener("click", function () {
-        filterDropdown.classList.remove("active");
-    });
-});
+
+            closeButton.addEventListener("click", function() {
+                filterDropdown.classList.remove("active");
+            });
+        });
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const minAreaSelect = document.querySelector("select[name='min_area']");
-    const maxAreaSelect = document.querySelector("select[name='max_area']");
-    const minAreaInput = document.getElementById("selectedMinArea");
-    const maxAreaInput = document.getElementById("selectedMaxArea");
+        document.addEventListener("DOMContentLoaded", function() {
+            const minAreaSelect = document.querySelector("select[name='min_area']");
+            const maxAreaSelect = document.querySelector("select[name='max_area']");
+            const minAreaInput = document.getElementById("selectedMinArea");
+            const maxAreaInput = document.getElementById("selectedMaxArea");
 
-    // Update the hidden inputs whenever the dropdowns change
-    minAreaSelect.addEventListener("change", function() {
-        minAreaInput.value = this.value;
- 
-    });
+            // Update the hidden inputs whenever the dropdowns change
+            minAreaSelect.addEventListener("change", function() {
+                minAreaInput.value = this.value;
 
-    maxAreaSelect.addEventListener("change", function() {
-        maxAreaInput.value = this.value;
-    });
-});
+            });
+
+            maxAreaSelect.addEventListener("change", function() {
+                maxAreaInput.value = this.value;
+            });
+        });
     </script>
 
 
 
-<style>
-    .property-filter img {
-    position: absolute;
-    left: 15px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
-</style>
+    <style>
+        .property-filter img {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    </style>
 @endsection
