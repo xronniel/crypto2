@@ -95,40 +95,50 @@
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const navButtons = document.querySelectorAll(".nav-button");
-            const mainSections = document.querySelectorAll(".main");
-            const breadcrumbTitles = document.querySelectorAll(".breadcrumb__title");
-    
-            navButtons.forEach(button => {
-                button.addEventListener("click", () => {
-                    // Get id without whitespace (in case of typo)
-                    const id = button.id.trim();
-    
-                    // Toggle main content
-                    mainSections.forEach(section => {
-                        section.style.display = section.classList.contains(id) ? 'flex' : 'none';
-                    });
-    
-                    // Toggle breadcrumb titles
-                    breadcrumbTitles.forEach(title => {
-                        title.style.display = title.classList.contains(id) ? 'block' : 'none';
-                    });
-                });
-            });
-    
-            // Optional: Set initial visible section
+document.addEventListener("DOMContentLoaded", function () {
+    const navButtons = document.querySelectorAll(".nav-button");
+    const mainSections = document.querySelectorAll(".main");
+    const breadcrumbTitles = document.querySelectorAll(".breadcrumb__title");
+
+    navButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const id = button.id.trim();
+
+            // Toggle main content
             mainSections.forEach(section => {
-                section.style.display = section.classList.contains("my-account") ? 'flex' : 'none';
+                section.style.display = section.classList.contains(id) ? 'flex' : 'none';
             });
+
+            // Toggle breadcrumb titles
             breadcrumbTitles.forEach(title => {
-                title.style.display = title.classList.contains("my-account") ? 'block' : 'none';
+                title.style.display = title.classList.contains(id) ? 'block' : 'none';
             });
+
+            // Toggle active class for buttons
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
         });
+    });
+
+    // Optional: Set initial visible section and active button
+    mainSections.forEach(section => {
+        section.style.display = section.classList.contains("my-account") ? 'flex' : 'none';
+    });
+    breadcrumbTitles.forEach(title => {
+        title.style.display = title.classList.contains("my-account") ? 'block' : 'none';
+    });
+    // Add active class to initial button
+    const defaultBtn = document.getElementById("my-account");
+    if (defaultBtn) defaultBtn.classList.add("active");
+});
+
     </script>
     
 
     <style>
+.nav-button.active {
+    background: #0D1226;
+}
 
 
        .container-user {
@@ -249,12 +259,12 @@ vertical-align: middle;
 
         }
 
-        input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"],
-form select,
-textarea {
+        .form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
     width: 100%;
     height: 67px;
     padding: 22px 20px 5px 20px;
@@ -262,30 +272,27 @@ textarea {
     border: 1px solid #333;
     background-color: #0f172a;
     color: #fff;
-    font-size: 16px;
-    box-sizing: border-box;
+    font-size: 18px;
     font-family: "Manrope", sans-serif;
     font-weight: 400;
-    font-size: 18px;
     line-height: 100%;
     letter-spacing: 0%;
     vertical-align: middle;
     transition: border 0.3s ease;
 }
 
-/* Add this */
-input[type="text"]:hover,
-input[type="password"]:hover,
-input[type="email"]:hover,
-input[type="tel"]:hover,
-form select:hover,
-textarea:hover,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-form select:focus,
-textarea:focus {
+.form-group input[type="text"]:hover,
+.form-group input[type="password"]:hover,
+.form-group input[type="email"]:hover,
+.form-group input[type="tel"]:hover,
+.form-group select:hover,
+.form-group textarea:hover,
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     border: 2px solid #2DD98F;
     outline: none;
 }
@@ -309,7 +316,8 @@ textarea:focus {
         .button {
             width: 100%;
             height: 67px;
-            background-color: #0f172a;
+       
+            background: #080B18;
             border-radius: 6px;
             border: 1px solid #333;
             font-size: 16px;
