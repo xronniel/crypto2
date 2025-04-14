@@ -184,8 +184,8 @@ class NewsController extends Controller
             return $news;
         });
         
-        $categories = Category::withCount('news')->get();
-        $tags = Tag::all();
+        $categories = Category::whereHas('news')->withCount('news')->get();
+        $tags = Tag::whereHas('news')->get();
         
         $query = News::query();
         
@@ -221,12 +221,27 @@ class NewsController extends Controller
             return $news;
         });
         
-        $categories = Category::withCount('news')->get();
-        $tags = Tag::all();
+        $categories = Category::whereHas('news')->withCount('news')->get();
+        $tags = Tag::whereHas('news')->get();
 
         $news = News::with(['galleries', 'tags', 'comments' => function($query) {
             return $query->active()->with(['parent', 'children']);
         }])->findOrFail($id);
+        
+        $categories = Category::where('id', $news->category_id)
+            ->orWhereHas('news', function($query) use ($news) {
+                $query->where('news.id', '!=', $news->id);
+            })
+            ->withCount('news')
+            ->get();
+            
+        $tagIds = $news->tags->pluck('id')->toArray();
+        
+        $tags = Tag::whereIn('id', $tagIds)
+            ->orWhereHas('news', function($query) use ($news) {
+                $query->where('news.id', '!=', $news->id);
+            })
+            ->get();
         
         $news->comments = Comment::getNestedComments($news->comments);
         $news->comments_count = Comment::getTotalCommentsCount($news->comments);

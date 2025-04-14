@@ -52,9 +52,17 @@ class ArticleController extends Controller
 
         // Handle tags
         if ($request->has('tags')) {
-            foreach ($request->tags as $tagName) {
-                $tag = Tag::firstOrCreate(['name' => $tagName]);
-                $article->tags()->attach($tag->id);
+            $article->tags()->detach();
+            if (!empty($request->tags)) {
+                $tags = json_decode($request->tags);
+                if (is_array($tags)) {
+                    foreach ($tags as $tagName) {
+                        if (!empty($tagName->value)) {
+                            $tag = Tag::firstOrCreate(['name' => $tagName->value]);
+                            $article->tags()->attach($tag->id);
+                        }
+                    }
+                }
             }
         }
     
@@ -173,8 +181,9 @@ class ArticleController extends Controller
             return $article;
         });
         
-        $categories = Category::withCount('articles')->get();
-        $tags = Tag::all();
+        $categories = Category::whereHas('articles')->withCount('articles')->get();
+
+        $tags = Tag::whereHas('articles')->get();
         
         $query = Article::query();
         
@@ -210,12 +219,28 @@ class ArticleController extends Controller
             return $article;
         });
         
-        $categories = Category::withCount('articles')->get();
-        $tags = Tag::all();
+        $categories = Category::whereHas('articles')->withCount('articles')->get();
+        
+        $tags = Tag::whereHas('articles')->get();
 
         $article = Article::with(['galleries', 'tags', 'comments' => function($query) {
             return $query->active()->with(['parent', 'children']);
         }])->findOrFail($id);
+        
+        $categories = Category::where('id', $article->category_id)
+            ->orWhereHas('articles', function($query) use ($article) {
+                $query->where('articles.id', '!=', $article->id);
+            })
+            ->withCount('articles')
+            ->get();
+            
+        $tagIds = $article->tags->pluck('id')->toArray();
+
+        $tags = Tag::whereIn('id', $tagIds)
+            ->orWhereHas('articles', function($query) use ($article) {
+                $query->where('articles.id', '!=', $article->id);
+            })
+            ->get();
         
         $article->comments = Comment::getNestedComments($article->comments);
         $article->comments_count = Comment::getTotalCommentsCount($article->comments);

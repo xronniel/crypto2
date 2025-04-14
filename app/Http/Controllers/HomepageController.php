@@ -40,9 +40,9 @@ class HomepageController extends Controller
             ->take(3)
             ->get();
 
-        $communities = Listing::where('community', '!=', '')
+        $communities = Listing::where('emirate', '!=', '')
             ->distinct()
-            ->pluck('community');
+            ->pluck('emirate');
 
         $query = Listing::with(['images', 'facilities'])
             ->where('featured', 1);
@@ -52,7 +52,7 @@ class HomepageController extends Controller
        $community = $request->get('community', $defaultCommunity);
    
        if ($community) {
-           $query->where('community', $community);
+           $query->where('emirate', $community);
        }
 
         $featuredListings = $query->latest()->paginate(3);
@@ -86,9 +86,9 @@ class HomepageController extends Controller
     public function getFeaturedListingsByCommunity(Request $request)
     {
         // Fetch distinct communities
-        $communities = Listing::where('community', '!=', '')
+        $communities = Listing::where('emirate', '!=', '')
              ->distinct()
-             ->pluck('community');
+             ->pluck('emirate');
 
         $query = Listing::with(['images', 'facilities'])
              ->where('featured', 1);
@@ -98,7 +98,7 @@ class HomepageController extends Controller
         $community = $request->get('community', $defaultCommunity);
 
         if ($community) {
-            $query->where('community', $community);
+            $query->where('emirate', $community);
         }
 
         $featuredListings = $query->latest()->paginate(3);
