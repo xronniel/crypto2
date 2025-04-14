@@ -136,4 +136,9 @@ class Listing extends Model
         ];
     }
 
+    public function savedByUsers()
+    {
+        return $this->morphMany(UserSavedProperty::class, 'propertyable');
+    }
+
 }

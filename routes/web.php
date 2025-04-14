@@ -19,6 +19,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SavePropertyController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Auth;
@@ -74,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/remove-saved-property', [UserPageController::class, 'removeSavedProperty'])->name('user.remove-saved-property');
 
     Route::post('/user/account/update', [UserPageController::class, 'update'])->name('user.account.update');
+
+    Route::get('/saved-properties', [SavePropertyController::class, 'index']);
 });
 
 // Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
