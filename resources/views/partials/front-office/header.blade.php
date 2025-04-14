@@ -37,18 +37,23 @@
                                 </a>
                             </li>
                             <li>
+                                <a class="scrollspy-btn" href="#">
+                                    <span>Vacations</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
                             </li>
                             <li>
                                 <a class="scrollspy-btn" href="{{route('agents.index')}}"><span>Find Agent</span></a>
                             </li>
-                            <li class="menu-item-has-children">
+                            {{-- <li class="menu-item-has-children">
                                 <a href="/"><span>Explore</span></a>
                                 <ul class="submenu">
                                     <li><a href="index.html"><span>ICO Explore</span></a></li>
                                     <li><a href="home-2.html"><span>Crypto Explore</span></a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a class="scrollspy-btn" href="#"><span>Mortgages</span></a>
                             </li>
@@ -88,12 +93,17 @@
                                             </a>
                                         </li>
                                         <li class="menu-item">
+                                            <a class="scrollspy-btn" href="#">
+                                                <span>Vacations</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
                                             <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
                                         </li>
                                         <li class="menu-item">
                                             <a class="scrollspy-btn" href="{{route('agents.index')}}"><span>Find Agent</span></a>
                                         </li>
-                                        <li class="menu-item menu-item-has-children">
+                                        {{-- <li class="menu-item menu-item-has-children">
                                             <a href="/"><span>Explore</span></a>
                                             <ul class="sub-menu">
                                                 <li class="menu-item"><a href="index.html"><span>ICO Explore</span></a>
@@ -101,7 +111,7 @@
                                                 <li class="menu-item"><a href="home-2.html"><span>Crypto
                                                             Explore</span></a></li>
                                             </ul>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </nav>
                             </div>
