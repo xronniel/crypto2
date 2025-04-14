@@ -72,6 +72,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/user/save-property', [UserPageController::class, 'saveProperty'])->name('user.save-property');
     Route::post('/user/remove-saved-property', [UserPageController::class, 'removeSavedProperty'])->name('user.remove-saved-property');
+
+    Route::post('/user/account/update', [UserPageController::class, 'update'])->name('user.account.update');
 });
 
 // Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
