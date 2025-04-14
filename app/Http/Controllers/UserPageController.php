@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhoneCode;
+use App\Models\UserSavedProperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserPageController extends Controller
@@ -12,8 +14,55 @@ class UserPageController extends Controller
     {
         $user = auth()->user();
         $phonecodes = PhoneCode::select('name', 'phonecode')->get();
+        $user = auth()->user();
 
-        return view('user.user-account', compact('user', 'phonecodes'));
+        // Retrieve saved properties for the authenticated user
+        // $savedProperties = UserSavedProperty::with([
+        //     'propertyable' => function ($query) {
+        //         if ($query->getModel() instanceof \App\Models\Listing) {
+        //             $query->with('images'); // Load images for Listing model
+        //         } elseif ($query->getModel() instanceof \App\Models\HolidayProperty) {
+        //             $query->with('holidayPhotos'); // Load holidayPhotos for HolidayProperty model
+        //         }
+        //     }
+        // ])->where('user_id', $user->id)->get();
+
+        // foreach ($savedProperties as $savedProperty) {
+        //     if ($savedProperty->propertyable instanceof \App\Models\Listing) {
+        //         dd($savedProperty->propertyable->relationLoaded('images')); // Should return true
+        //     } elseif ($savedProperty->propertyable instanceof \App\Models\HolidayProperty) {
+        //         dd($savedProperty->propertyable->relationLoaded('holidayPhotos')); // Should return true
+        //     }
+        // }
+        $savedProperties = UserSavedProperty::with([
+            'propertyable' => function ($query) {
+                // Eager loading relationships dynamically based on the model
+                $query->when(
+                    $query->getModel() instanceof \App\Models\Listing,
+                    function ($q) {
+                        $q->with('images'); // For Listing model
+                    }
+                )->when(
+                    $query->getModel() instanceof \App\Models\HolidayProperty,
+                    function ($q) {
+                        $q->with('holidayPhotos'); // For HolidayProperty model
+                    }
+                );
+            }
+        ])->where('user_id', $user->id)->get();
+
+        foreach ($savedProperties as $savedProperty) {
+            $images = [];
+            
+            if ($savedProperty->propertyable instanceof \App\Models\Listing) {
+                $images = $savedProperty->propertyable->images; // Fetch images from Listing
+            } elseif ($savedProperty->propertyable instanceof \App\Models\HolidayProperty) {
+                $images = $savedProperty->propertyable->holidayPhotos; // Fetch photos from HolidayProperty
+            }
+            
+        }
+
+        return view('user.user-account', compact('user', 'phonecodes', 'savedProperties'));
     }
 
     public function userSavedProperties()

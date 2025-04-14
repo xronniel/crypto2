@@ -79,6 +79,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/saved-properties', [SavePropertyController::class, 'index']);
 
     Route::post('/saved-properties', [SavePropertyController::class, 'store']);
+
+    Route::post('/saved-properties/remove', [SavePropertyController::class, 'destroy'])->name('saved-properties.destroy');
 });
 
 // Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');

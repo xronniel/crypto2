@@ -10,19 +10,14 @@ class SavePropertyController extends Controller
 {
     public function index()
     {
-        
         // Ensure the user is authenticated
         $user = auth()->user();
-
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'You must be logged in to view your saved properties.');
-        }
 
         // Retrieve saved properties for the authenticated user
         $savedProperties = UserSavedProperty::with(['propertyable'])
             ->where('user_id', $user->id)
             ->get();
-
+ 
         return view('user.user-account.blade', compact('savedProperties'));
     }
 
@@ -53,5 +48,42 @@ class SavePropertyController extends Controller
         return redirect()
             ->back()
             ->with('success', 'Property saved successfully.');
+    }
+
+    public function destroy(Request $request)
+    {
+        $user = auth()->user();
+
+        // Validate the request
+        $validated = $request->validate([
+            'propertyable_id' => 'required|integer',
+            'propertyable_type' => 'required|string|in:commercial,holiday',
+        ]);
+
+        // Determine the propertyable type
+        $propertyableType = match ($validated['propertyable_type']) {
+            'commercial' => \App\Models\Listing::class,
+            'holiday' => \App\Models\HolidayProperty::class,
+            default => null,
+        };
+
+        // Find the saved property
+        $savedProperty = UserSavedProperty::where('user_id', $user->id)
+            ->where('propertyable_id', $validated['propertyable_id'])
+            ->where('propertyable_type', $propertyableType)
+            ->first();
+
+        if (!$savedProperty) {
+            return redirect()
+                ->back()
+                ->with('error', 'Property not found in your saved list.');
+        }
+
+        // Delete the saved property
+        $savedProperty->delete();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Property removed successfully.');
     }
 }
