@@ -123,6 +123,19 @@
                 <span>Saved Properties</span>
                 <div></div>
             </div>
+
+            @foreach ($savedProperties as $savedProperty)
+            @if ($savedProperty->propertyable instanceof \App\Models\Listing)
+                <p>{{$savedProperty->property_ref_no}}<p>
+            @elseif ($savedProperty->propertyable instanceof \App\Models\HolidayProperty)
+                <p>{{$savedProperty->reference_number}}<p>
+            @endif
+        @endforeach
+
+
+
+
+
             <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
             <p class="saved-properties-one">No Saved Properties</p>
             <p class="saved-properties-two">​To save a property to your favorites, click the <span>heart icon</span> on any
