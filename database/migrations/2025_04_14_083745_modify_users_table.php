@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-    // Step 1: Rename the column
-    Schema::table('users', function (Blueprint $table) {
-        $table->renameColumn('name', 'first_name');
-    });
+        // Step 1: Rename the column
+        Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('name', 'first_name');
+        });
 
-    // Step 2: Add new columns
-    Schema::table('users', function (Blueprint $table) {
-        $table->string('last_name')->nullable()->after('first_name');
-        $table->string('country_code', 10)->nullable()->after('email');
-        $table->string('mobile_number')->nullable()->after('country_code');
-    });
+        // Step 2: Add new columns
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('last_name')->nullable()->after('first_name');
+            $table->string('country_code', 10)->nullable()->after('email');
+            $table->string('mobile_number')->nullable()->after('country_code');
+        });
     }
 
     /**
