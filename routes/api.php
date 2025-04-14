@@ -25,9 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/saved-properties', [SavePropertyController::class, 'store']);
-
-
 Route::get('/coinlayer/live', [CoinLayerController::class, 'getLiveRates']);
 Route::get('/coinlayer/historical', [CoinLayerController::class, 'getHistoricalRates']);
 Route::get('/coinlayer/list', [CoinLayerController::class, 'getCryptoList']);

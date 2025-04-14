@@ -28,33 +28,30 @@ class SavePropertyController extends Controller
 
     public function store(Request $request)
     {
+        $user = auth()->user();
         $validated = $request->validate([
-            'user_id' => 'required|integer|exists:users,id',
             'propertyable_id' => 'required|integer',
             'propertyable_type' => 'required|string|in:commercial,holiday',
             'property_ref_no' => 'nullable|string|max:255',
         ]);
-
-
+    
         $propertyableType = match ($validated['propertyable_type']) {
             'commercial' => \App\Models\Listing::class,
             'holiday' => \App\Models\HolidayProperty::class,
             default => null,
         };
-
+    
         $validated['propertyable_type'] = $propertyableType;
-
+    
         $savedProperty = UserSavedProperty::create([
-            'user_id' => $validated['user_id'],
+            'user_id' =>$user->id,
             'propertyable_id' => $validated['propertyable_id'],
             'propertyable_type' => $validated['propertyable_type'],
             'property_ref_no' => $validated['property_ref_no'],
         ]);
     
-        return response()->json([
-            'success' => true,
-            'message' => 'Property saved successfully.',
-            'data' => $savedProperty,
-        ]);
+        return redirect()
+            ->back()
+            ->with('success', 'Property saved successfully.');
     }
 }
