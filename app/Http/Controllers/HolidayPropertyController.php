@@ -7,7 +7,9 @@ use App\Models\Agent;
 use App\Models\Faq;
 use App\Models\HolidayProperty;
 use App\Models\HolidayPropertyAmenity;
+use App\Models\UserSavedProperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HolidayPropertyController extends Controller
@@ -100,6 +102,19 @@ class HolidayPropertyController extends Controller
         }
 
         $holidayProperties = $query->with(['holidayPhotos'])->latest()->paginate(10);
+
+        $user = Auth::user();
+        if ($user) {
+            $savedProperties = UserSavedProperty::where('user_id', $user->id)
+                ->where('propertyable_type', HolidayProperty::class)
+                ->pluck('propertyable_id')
+                ->toArray();
+
+            $holidayProperties->getCollection()->transform(function ($property) use ($savedProperties) {
+                $property->favorite = in_array($property->id, $savedProperties);
+                return $property;
+            });
+        }
 
         $propertyTypes = HolidayProperty::select('property_type')
             ->whereNotNull('property_type')

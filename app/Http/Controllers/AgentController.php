@@ -8,7 +8,9 @@ use App\Models\Company;
 use App\Models\Facility;
 use App\Models\Faq;
 use App\Models\Listing;
+use App\Models\UserSavedProperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AgentController extends Controller
 {
@@ -268,8 +270,19 @@ class AgentController extends Controller
         
 
         $agentListings = $agentListingsQuery->paginate(10);
+        $user = Auth::user();
+        if ($user) {
+            $savedProperties = UserSavedProperty::where('user_id', $user->id)
+                ->where('propertyable_type', Listing::class)
+                ->pluck('propertyable_id')
+                ->toArray();
 
- 
+            $agentListings->getCollection()->transform(function ($property) use ($savedProperties) {
+                $property->favorite = in_array($property->id, $savedProperties);
+                return $property;
+            });
+        }
+        dd($agentListings);
         return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'agentListings', 'request'));
     }
 
