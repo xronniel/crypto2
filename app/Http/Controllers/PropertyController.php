@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Facility;
 use App\Models\Faq;
 use App\Models\Listing;
+use App\Models\UserSavedProperty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
@@ -159,6 +161,20 @@ class PropertyController extends Controller
         }
         // Get paginated properties with filters applied
         $properties = $query->with(['images', 'facilities'])->latest()->paginate(10);
+
+            // Add `favorite` boolean to each property
+        $user = Auth::user();
+        if ($user) {
+            $savedProperties = UserSavedProperty::where('user_id', $user->id)
+                ->where('propertyable_type', Listing::class)
+                ->pluck('propertyable_id')
+                ->toArray();
+
+            $properties->getCollection()->transform(function ($property) use ($savedProperties) {
+                $property->favorite = in_array($property->id, $savedProperties);
+                return $property;
+            });
+        }
 
         // Get unique unit_type and unit_model
         $unitTypesAndModels = Listing::select('unit_type', 'unit_model')
