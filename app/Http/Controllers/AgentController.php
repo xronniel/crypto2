@@ -282,7 +282,7 @@ class AgentController extends Controller
                 return $property;
             });
         }
-        dd($agentListings);
+      
         return view('agent-detials', compact('agent', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'agentListings', 'request'));
     }
 
