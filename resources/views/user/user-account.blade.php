@@ -3,10 +3,13 @@
     <!-- breadcrumb start -->
     <section class="breadcrumb bg_img pos-rel" data-background="{{ asset('/assets/img/bg/breadcrumb.jpg') }}">
         <div class="container">
-            <div class="breadcrumb__content">
+            <div class="breadcrumb__content desk-user">
                 <h2 class="breadcrumb__title my-account">Account</h2>
                 <h2 class="breadcrumb__title saved-properties"> Saved Properties</h2>
                 <h2 class="breadcrumb__title contacted-properties"> Contacted Properties</h2>
+            </div>
+            <div style="        justify-content: center;" class="breadcrumb__content mobile-user-two">
+                <h2 class="breadcrumb__title">Account.</h2>
             </div>
         </div>
         <div class="breadcrumb__icon">
@@ -27,45 +30,59 @@
     </section>
     <!-- breadcrumb end -->
 
-    <div 
-
-    class="container container-user">
+    <div class="container container-user">
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>My Account</h2>
-            <button id='my-account' class="nav-button desk-user">
-                <img style="    width: 35px;" src="{{ asset('/assets/img/user/use-one.png') }}" alt="">
-                Account</button>
-    
-            <button id=' saved-properties' class="nav-button">
+            <button class="nav-button button-my-account desk-user">
+                <img style="width: 35px;" src="{{ asset('/assets/img/user/use-one.png') }}" alt="">
+                Account
+            </button>
+            <button class="nav-button button-my-account mobile-user">
+                <img style="width: 40px;" src="{{ asset('/assets/img/user/user-man-green.png') }}" alt="">
+                {{ $user->email }}
+                <img style="width: 20px;" src="{{ asset('/assets/img/user/chevron.png') }}" alt="">
+
+            </button>
+            <button class="nav-button button-saved-properties">
                 <img src="{{ asset('/assets/img/user/user-two.png') }}" alt="">
-                Saved Properties</button>
-            <button id='contacted-properties' class="nav-button">
+                Saved Properties
+            </button>
+
+            <button class="nav-button button-contacted-properties">
                 <img src="{{ asset('/assets/img/user/user-three.png') }}" alt="">
-                Contacted Properties</button>
+                Contacted Properties
+            </button>
         </div>
 
 
 
-   
+
+
 
         <!-- Main Content -->
         <div class="main my-account">
             <div class="form-wrapper">
-                <h3>Personal Information</h3>
+                <div class="go-backto-sidebar mobile-user-two">
+                    <img src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
+                    <span>Personal Information</span>
+                    <div></div>
+                </div>
+                <h3 class="desk-user">Personal Information</h3>
                 <form method="POST" action="{{ route('user.account.update') }}">
                     @csrf
-    
+
                     <div class="form-group">
                         <label class="form-label">Email</label>
                         <input type="email" class="form-input" name="email" value="{{ $user->email }}" required>
                     </div>
-    
+
                     <div class="form-group">
                         <label class="form-label">First Name</label>
-                        <input type="text" class="form-input" name="first_name" value="{{ $user->first_name }}" required>
+                        <input type="text" class="form-input" name="first_name" value="{{ $user->first_name }}"
+                            required>
                     </div>
-    
+
                     <div class="form-group">
                         <label class="form-label">Last Name</label>
                         <input type="text" class="form-input" name="last_name" value="{{ $user->last_name }}" required>
@@ -81,32 +98,43 @@
                                 @endforeach
                             </select>
                         </div>
-    
+
                         <div class="form-group">
                             <label class="form-label">Mobile Number</label>
-                            <input type="text" class="form-input" name="mobile_number" value="{{ $user->mobile_number }}"
-                                required>
+                            <input type="text" class="form-input" name="mobile_number"
+                                value="{{ $user->mobile_number }}" required>
                         </div>
                     </div>
-    
+
                     <button type="submit" class="button">Update</button>
-    
+
                 </form>
                 <form class="log-out-form" action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="button">Log Out</button>
                 </form>
             </div>
-            
+
         </div>
 
         <div class="main saved-properties">
+            <div class="go-backto-sidebar mobile-user-two">
+                <img src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
+                <span>Saved Properties</span>
+                <div></div>
+            </div>
             <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
             <p class="saved-properties-one">No Saved Properties</p>
             <p class="saved-properties-two">​To save a property to your favorites, click the <span>heart icon</span> on any
                 listing. All your saved properties will be conveniently accessible here for easy viewing and management.</p>
         </div>
         <div class="main contacted-properties">
+
+            <div class="go-backto-sidebar mobile-user-two">
+                <img src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
+                <span>Contacted Properties</span>
+                <div></div>
+            </div>
             <img src="{{ asset('/assets/img/user/contact-animated.png') }}" alt="">
             <p class="saved-properties-one">No Contacted Properties</p>
             <p class="saved-properties-two">You haven't reached out to any properties yet. To inquire about a property,
@@ -117,44 +145,105 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const navButtons = document.querySelectorAll(".nav-button");
-            const mainSections = document.querySelectorAll(".main");
-            const breadcrumbTitles = document.querySelectorAll(".breadcrumb__title");
+            const navButtons1 = document.querySelectorAll(".button-contacted-properties");
+            const navButtons2 = document.querySelectorAll(".button-saved-properties");
+            const navButtons3 = document.querySelectorAll(".button-my-account");
 
-            navButtons.forEach(button => {
-                button.addEventListener("click", () => {
-                    const id = button.id.trim();
+            const breadcrumb1 = document.querySelectorAll(".saved-properties");
+            const breadcrumb2 = document.querySelectorAll(".my-account");
+            const breadcrumb3 = document.querySelectorAll(".contacted-properties");
 
-                    // Toggle main content
-                    mainSections.forEach(section => {
-                        section.style.display = section.classList.contains(id) ? 'flex' :
-                            'none';
+            const sidebar = document.querySelectorAll(".sidebar");
+            const goBacktoSidebar = document.querySelectorAll(".go-backto-sidebar");
+
+            // Function to handle button clicks
+            function handleButtonClick(button, breadcrumbToShow, breadcrumbToHide1, breadcrumbToHide2) {
+                button.forEach(btn => {
+                    btn.addEventListener("click", function() {
+                        // Show the relevant breadcrumb
+                        breadcrumbToShow.forEach(breadcrumb => {
+                            breadcrumb.style.display = "flex"; // Show the active breadcrumb
+                        });
+
+                        // Hide the other breadcrumbs
+                        breadcrumbToHide1.forEach(breadcrumb => {
+                            breadcrumb.style.display = "none"; // Hide this breadcrumb
+                        });
+                        breadcrumbToHide2.forEach(breadcrumb => {
+                            breadcrumb.style.display = "none"; // Hide this breadcrumb
+                        });
+
+                        // On mobile, hide the sidebar when a breadcrumb is shown
+                        if (window.innerWidth <= 900) {
+                            sidebar.forEach(side => {
+                                side.style.display = "none"; // Hide sidebar on mobile
+                            });
+                        }
                     });
-
-                    // Toggle breadcrumb titles
-                    breadcrumbTitles.forEach(title => {
-                        title.style.display = title.classList.contains(id) ? 'block' :
-                            'none';
-                    });
-
-                    // Toggle active class for buttons
-                    navButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
                 });
-            });
+            }
 
-            // Optional: Set initial visible section and active button
-            mainSections.forEach(section => {
-                section.style.display = section.classList.contains("my-account") ? 'flex' : 'none';
-            });
-            breadcrumbTitles.forEach(title => {
-                title.style.display = title.classList.contains("my-account") ? 'block' : 'none';
-            });
-            // Add active class to initial button
-            const defaultBtn = document.getElementById("my-account");
-            if (defaultBtn) defaultBtn.classList.add("active");
+            // Mobile screen logic
+            if (window.innerWidth <= 900) {
+                // Initially hide all breadcrumbs and show the sidebar
+                breadcrumb1.forEach(breadcrumb => {
+                    breadcrumb.style.display = "none";
+                });
+                breadcrumb2.forEach(breadcrumb => {
+                    breadcrumb.style.display = "none";
+                });
+                breadcrumb3.forEach(breadcrumb => {
+                    breadcrumb.style.display = "none";
+                });
+
+                sidebar.forEach(side => {
+                    side.style.display = "flex"; // Show sidebar initially
+                });
+
+                // When goBacktoSidebar is clicked, show sidebar and hide breadcrumbs
+                goBacktoSidebar.forEach(goBackBtn => {
+                    goBackBtn.addEventListener("click", function() {
+                        sidebar.forEach(side => {
+                            side.style.display = "flex"; // Show sidebar
+                        });
+
+                        breadcrumb1.forEach(breadcrumb => {
+                            breadcrumb.style.display = "none"; // Hide all breadcrumbs
+                        });
+                        breadcrumb2.forEach(breadcrumb => {
+                            breadcrumb.style.display = "none";
+                        });
+                        breadcrumb3.forEach(breadcrumb => {
+                            breadcrumb.style.display = "none";
+                        });
+                    });
+                });
+            }
+
+            // Handle clicks for each button
+            handleButtonClick(navButtons3, breadcrumb2, breadcrumb1, breadcrumb3); // Show 'my-account' breadcrumb
+            handleButtonClick(navButtons2, breadcrumb1, breadcrumb2,
+                breadcrumb3); // Show 'saved-properties' breadcrumb
+            handleButtonClick(navButtons1, breadcrumb3, breadcrumb1,
+                breadcrumb2); // Show 'contacted-properties' breadcrumb
+
+            // Set default active section to 'my-account' for larger screens
+            if (window.innerWidth > 900) {
+                breadcrumb2.forEach(breadcrumb => {
+                    breadcrumb.style.display = "flex"; // Show the 'my-account' breadcrumb by default
+                });
+                breadcrumb1.forEach(breadcrumb => {
+                    breadcrumb.style.display = "none"; // Hide the 'saved-properties' breadcrumb by default
+                });
+                breadcrumb3.forEach(breadcrumb => {
+                    breadcrumb.style.display =
+                        "none"; // Hide the 'contacted-properties' breadcrumb by default
+                });
+            }
         });
     </script>
+
+
 
 
     <style>
@@ -162,6 +251,10 @@
             background: #0D1226;
         }
 
+        .breadcrumb__title {
+            text-align: center;
+            justify-content: center;
+        }
 
         .phone-div {
             display: flex;
@@ -171,7 +264,6 @@
         .container-user {
             display: flex;
             flex-direction: row;
-            min-height: 100vh;
         }
 
         .sidebar {
@@ -183,6 +275,7 @@
             flex-direction: column;
             align-items: center;
         }
+
         .sidebar h2 {
 
             font-family: "Manrope", sans-serif;
@@ -239,7 +332,7 @@
             align-items: center;
 
             /*
-        gap: 36px; */
+                gap: 36px; */
             align-content: center;
             align-items: center;
 
@@ -248,7 +341,7 @@
 
         .contacted-properties,
         .saved-properties {
-        gap: 36px;
+            gap: 36px;
         }
 
         .main h3 {
@@ -289,18 +382,29 @@
 
         }
 
-.go-backto-sidebar {
-    display: flex
-;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
+        .go-backto-sidebar {
+            display: flex;
+            align-content: center;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 0 60px 0;
+        }
 
-.go-backto-sidebar img{
-    width: 40px;
-}
+        .go-backto-sidebar span {
+
+            font-family: "Manrope", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+            letter-spacing: 0%;
+            vertical-align: middle;
+
+        }
+
+        .go-backto-sidebar img {
+            width: 50px !important;
+        }
+
         .form-group input[type="text"],
         .form-group input[type="password"],
         .form-group input[type="email"],
@@ -420,14 +524,16 @@
 
 
         .mobile-user {
-    border: 1px solid #FFFFFF1A;
-    background-color: black;
-    justify-content: space-between;
-    display: none;
+            border: 1px solid #FFFFFF1A;
+            background-color: black;
+            justify-content: space-between;
+            display: none;
 
-}
+        }
 
-
+        .mobile-user-two {
+            display: none;
+        }
 
 
 
@@ -437,27 +543,42 @@
 
 
         @media (max-width: 900px) {
-          .mobile-user{
+            .mobile-user {
                 display: flex;
             }
-            .container-user {
-                flex-direction: column;
+
+
+            .mobile-user-two {
+                display: flex;
+                width: 100%;
+
             }
 
-            .sidebar,
-            .main {
+            .container-user {
+                flex-direction: column;
+                min-height: fit-content;
+            }
+
+            .sidebar {
                 width: 100%;
                 padding: 20px;
                 align-items: stretch;
+            }
+
+            .main {
+                width: 100%;
+                padding: 20px;
             }
 
             .main form,
             .nav-button {
                 max-width: 100%;
             }
+
             .nav-button {
-    padding: 10px 20px;
+                padding: 10px 20px;
             }
+
             .form-input,
             .button {
                 width: 100%;
@@ -472,18 +593,20 @@
             }
 
 
-            .sidebar{
+            .sidebar {
                 border-right: 0px;
             }
-            .desk-user{
-    display: none;
-}
+
+            .desk-user {
+                display: none;
+            }
+
             .nav-button {
-font-weight: 400;
-font-size: 18px;
-line-height: 28px;
-letter-spacing: 0%;
-vertical-align: middle;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 28px;
+                letter-spacing: 0%;
+                vertical-align: middle;
 
             }
         }
