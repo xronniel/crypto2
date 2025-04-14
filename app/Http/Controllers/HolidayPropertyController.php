@@ -232,10 +232,14 @@ class HolidayPropertyController extends Controller
         return view('admin.holiday-properties.show', compact('holidayProperty'));
     }
 
-    public function userShow(HolidayProperty $holidayProperty)
+    public function userShow($reference_no)
     {
+        $holidayProperty = HolidayProperty::with('holidayPhotos')
+            ->where('reference_number', $reference_no)
+            ->firstOrFail();
+
         $holidayProperty->increment('visit_count');
-        $holidayProperty->load('holidayPhotos');
+
 
         $propertyTypes = HolidayProperty::select('property_type')
             ->whereNotNull('property_type')
