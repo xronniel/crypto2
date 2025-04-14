@@ -4,9 +4,15 @@
         <div class="container">
             <div class="header__wrap ul_li_between">
                 <div class="header-bar-mobile side-menu d-lg-none hide-item-header">
-                    <a class="login-mobile-button login-btn" href="javascript:void(0);"><i 
-                        class="fas fa-user"></i></a>
+                    <a class="login-mobile-button login-btn"
+                       href="javascript:void(0);"
+                       data-logged-in="{{ auth()->check() ? 'true' : 'false' }}">
+                       <i class="fas fa-user"></i>
+                    </a>
                 </div>
+                
+
+                
                 <div class="header-logo hide-item-header">
                     <a href="/">
                         <img src="{{ asset('assets/img/logo/Logo-2.png') }}" alt="Logo">
@@ -131,11 +137,26 @@
                     </form> --}}
 
                     <div class="header-btn ul_li">
-                        <a class="login-btn" href="#!"><i class="fas fa-user"></i>
-                            <span>
-                                Login
-                            </span>
-                        </a>
+
+                        <div class="login-btn-div">
+                            <a class="login-btn" href="#!" data-logged-in="{{ auth()->check() ? 'true' : 'false' }}">
+                                <i class="fas fa-user"></i>
+                                <span>
+                                    {{ auth()->check() ? auth()->user()->first_name : 'Login' }}
+                                </span>
+                            </a>
+                            {{-- logout model   --}}
+                            <div class="logout-modal">
+                                <ul>
+                                    <li onclick="window.location.href='{{ route('user.account') }}'">Profile</li>
+                                    <li onclick="document.getElementById('logout-form').submit();">Logout</li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </div>
+                            
+                        </div>
                         <div class="header-bar-mobile side-menu d-lg-none ">
                             <a class="xb-nav-mobile" href="javascript:void(0);"><i class="far fa-bars"></i></a>
                         </div>
@@ -146,6 +167,8 @@
             </div>
         </div>
     </div>
+
+
 
 <!-- Login Modal -->
 <div class="login-modal">
@@ -281,11 +304,9 @@
     });
 
 
-
-
-
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
     const loginBtns = document.querySelectorAll(".login-btn");
+    const logoutModal = document.querySelector(".logout-modal");
     const loginModal = document.querySelector(".login-modal");
     const closeModal = document.querySelector(".login-modal-close");
     const closeModalTwo = document.querySelector(".login-modal-close-two");
@@ -295,15 +316,27 @@
     document.body.appendChild(modalOverlay);
 
     loginBtns.forEach(btn => {
-        btn.addEventListener("click", function() {
-            loginModal.classList.add("active");
-            modalOverlay.style.display = "block";
+        btn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const isLoggedIn = btn.getAttribute("data-logged-in") === "true";
+
+            if (isLoggedIn) {
+                // Check if mobile (width < 992)
+                if (window.innerWidth < 992) {
+                    // On mobile: go directly to profile page
+                    window.location.href = "/user/account"; // use correct route if needed
+                } else {
+                    // On desktop: toggle logout dropdown
+                    logoutModal.style.display = logoutModal.style.display === "block" ? "none" : "block";
+                }
+            } else {
+                // Show login modal
+                loginModal.classList.add("active");
+                modalOverlay.style.display = "block";
+            }
         });
     });
-
-    modalOverlay.addEventListener("click", closeLoginModal);
-    closeModal.addEventListener("click", closeLoginModal);
-    closeModalTwo.addEventListener("click", closeLoginModal);
 
     function closeLoginModal() {
         loginModal.classList.remove("active");
@@ -311,7 +344,25 @@
             modalOverlay.style.display = "none";
         }, 500);
     }
+
+    // Close modal when overlay or close button is clicked
+    modalOverlay.addEventListener("click", closeLoginModal);
+    if (closeModal) closeModal.addEventListener("click", closeLoginModal);
+    if (closeModalTwo) closeModalTwo.addEventListener("click", closeLoginModal);
+
+    // Hide logout dropdown when clicking outside
+    document.addEventListener("click", function (event) {
+        const isClickInsideBtn = event.target.closest('.login-btn');
+        const isClickInsideModal = event.target.closest('.logout-modal');
+        if (!isClickInsideBtn && !isClickInsideModal) {
+            logoutModal.style.display = "none";
+        }
+    });
 });
+
+
+
+
 
     document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.getElementById("loginForm");

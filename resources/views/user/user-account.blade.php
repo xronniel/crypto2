@@ -2,7 +2,7 @@
 @section('content')
 
     <!-- breadcrumb start -->
-    <section class="breadcrumb bg_img pos-rel" data-background="assets/img/bg/breadcrumb.jpg">
+    <section class="breadcrumb bg_img pos-rel" data-background="{{ asset('/assets/img/bg/breadcrumb.jpg') }}">
         <div class="container">
             <div class="breadcrumb__content">
                 <h2 class="breadcrumb__title my-account">Account</h2>
@@ -12,16 +12,16 @@
         </div>
         <div class="breadcrumb__icon">
             <div class="icon icon--1">
-                <img class="leftToRight" src="{{ asset('assets/img/icon/bi_01.png') }}" alt="">
+                <img class="leftToRight" src="{{ asset('/assets/img/icon/bi_01.png') }}" alt="">
             </div>
             <div class="icon icon--2">
-                <img class="topToBottom" src="{{ asset('assets/img/icon/bi_02.png') }}" alt="">
+                <img class="topToBottom" src="{{ asset('/assets/img/icon/bi_02.png') }}" alt="">
             </div>
             <div class="icon icon--3">
-                <img class="topToBottom" src="{{ asset('assets/img/icon/bi_03.png') }}" alt="">
+                <img class="topToBottom" src="{{ asset('/assets/img/icon/bi_03.png') }}" alt="">
             </div>
             <div class="icon icon--4">
-                <img class="leftToRight" src="{{ asset('assets/img/icon/bi_04.png') }}" alt="">
+                <img class="leftToRight" src="{{ asset('/assets/img/icon/bi_04.png') }}" alt="">
             </div>
         </div>
 
@@ -35,13 +35,13 @@
             <button id='my-account' class="nav-button">
                       <img 
                       style="    width: 35px;"
-                      src="{{ asset('assets/img/user/use-one.png') }}" alt="">
+                      src="{{ asset('/assets/img/user/use-one.png') }}" alt="">
                 Account</button>
             <button id=' saved-properties' class="nav-button">
-                      <img src="{{ asset('assets/img/user/user-two.png') }}" alt="">
+                      <img src="{{ asset('/assets/img/user/user-two.png') }}" alt="">
                 Saved Properties</button>
             <button id='contacted-properties' class="nav-button">
-                      <img src="{{ asset('assets/img/user/user-three.png') }}" alt="">
+                      <img src="{{ asset('/assets/img/user/user-three.png') }}" alt="">
                 Contacted Properties</button>
         </div>
 
@@ -84,12 +84,12 @@
 
 
         <div class="main saved-properties">
-            <img src="{{ asset('assets/img/user/no-saved-property.png') }}" alt="">
+            <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
             <p class="saved-properties-one">No Saved Properties</p>
             <p  class="saved-properties-two">​To save a property to your favorites, click the <span>heart icon</span> on any listing. All your saved properties will be conveniently accessible here for easy viewing and management.</p>
         </div>
         <div class="main contacted-properties">
-            <img src="{{ asset('assets/img/user/contact-animated.png') }}" alt="">
+            <img src="{{ asset('/assets/img/user/contact-animated.png') }}" alt="">
             <p class="saved-properties-one">No Contacted Properties</p>
             <p  class="saved-properties-two">You haven't reached out to any properties yet. To inquire about a property, click the <span>"Send Message"</span>  button or any of the contact links like Whatsapp, Email, or Telephone on any listing. All your contacted properties will be conveniently accessible here for easy reference and follow-up.</p>
         </div>
