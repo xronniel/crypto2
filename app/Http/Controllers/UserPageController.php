@@ -9,7 +9,7 @@ class UserPageController extends Controller
     public function account()
     {
         $user = auth()->user();
-        return view('user.account', compact('user'));
+        return view('user.user-account', compact('user'));
     }
 
     public function userSavedProperties()

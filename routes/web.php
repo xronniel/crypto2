@@ -20,6 +20,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -60,7 +61,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('holiday-properties', HolidayPropertyController::class);
 });
 
+
+
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/account', [UserPageController::class, 'account'])->name('user.account');
+    Route::get('/user/saved-properties', [UserPageController::class, 'userSavedProperties'])->name('user.saved-properties');
+    Route::get('/user/contacted-properties', [UserPageController::class, 'userContactedProperties'])->name('user.contacted-properties');
+
+    Route::post('/user/save-property', [UserPageController::class, 'saveProperty'])->name('user.save-property');
+    Route::post('/user/remove-saved-property', [UserPageController::class, 'removeSavedProperty'])->name('user.remove-saved-property');
+});
 
 // Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
 // Route::get('/news/{news}', [NewsController::class, 'userShow'])->name('news.show');
