@@ -156,36 +156,36 @@
             const sidebar = document.querySelectorAll(".sidebar");
             const goBacktoSidebar = document.querySelectorAll(".go-backto-sidebar");
 
-            // Function to handle button clicks
+            
             function handleButtonClick(button, breadcrumbToShow, breadcrumbToHide1, breadcrumbToHide2) {
                 button.forEach(btn => {
                     btn.addEventListener("click", function() {
-                        // Show the relevant breadcrumb
+                       
                         breadcrumbToShow.forEach(breadcrumb => {
-                            breadcrumb.style.display = "flex"; // Show the active breadcrumb
+                            breadcrumb.style.display = "flex"; 
                         });
 
-                        // Hide the other breadcrumbs
+                      
                         breadcrumbToHide1.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none"; // Hide this breadcrumb
+                            breadcrumb.style.display = "none"; 
                         });
                         breadcrumbToHide2.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none"; // Hide this breadcrumb
+                            breadcrumb.style.display = "none"; 
                         });
 
-                        // On mobile, hide the sidebar when a breadcrumb is shown
+                        
                         if (window.innerWidth <= 900) {
                             sidebar.forEach(side => {
-                                side.style.display = "none"; // Hide sidebar on mobile
+                                side.style.display = "none"; 
                             });
                         }
                     });
                 });
             }
 
-            // Mobile screen logic
+        
             if (window.innerWidth <= 900) {
-                // Initially hide all breadcrumbs and show the sidebar
+
                 breadcrumb1.forEach(breadcrumb => {
                     breadcrumb.style.display = "none";
                 });
@@ -197,18 +197,18 @@
                 });
 
                 sidebar.forEach(side => {
-                    side.style.display = "flex"; // Show sidebar initially
+                    side.style.display = "flex"; 
                 });
 
-                // When goBacktoSidebar is clicked, show sidebar and hide breadcrumbs
+
                 goBacktoSidebar.forEach(goBackBtn => {
                     goBackBtn.addEventListener("click", function() {
                         sidebar.forEach(side => {
-                            side.style.display = "flex"; // Show sidebar
+                            side.style.display = "flex"; 
                         });
 
                         breadcrumb1.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none"; // Hide all breadcrumbs
+                            breadcrumb.style.display = "none"; 
                         });
                         breadcrumb2.forEach(breadcrumb => {
                             breadcrumb.style.display = "none";
@@ -220,24 +220,24 @@
                 });
             }
 
-            // Handle clicks for each button
-            handleButtonClick(navButtons3, breadcrumb2, breadcrumb1, breadcrumb3); // Show 'my-account' breadcrumb
+           
+            handleButtonClick(navButtons3, breadcrumb2, breadcrumb1, breadcrumb3); 
             handleButtonClick(navButtons2, breadcrumb1, breadcrumb2,
-                breadcrumb3); // Show 'saved-properties' breadcrumb
+                breadcrumb3); 
             handleButtonClick(navButtons1, breadcrumb3, breadcrumb1,
-                breadcrumb2); // Show 'contacted-properties' breadcrumb
+                breadcrumb2); 
 
-            // Set default active section to 'my-account' for larger screens
+           
             if (window.innerWidth > 900) {
                 breadcrumb2.forEach(breadcrumb => {
-                    breadcrumb.style.display = "flex"; // Show the 'my-account' breadcrumb by default
+                    breadcrumb.style.display = "flex"; 
                 });
                 breadcrumb1.forEach(breadcrumb => {
-                    breadcrumb.style.display = "none"; // Hide the 'saved-properties' breadcrumb by default
+                    breadcrumb.style.display = "none"; 
                 });
                 breadcrumb3.forEach(breadcrumb => {
                     breadcrumb.style.display =
-                        "none"; // Hide the 'contacted-properties' breadcrumb by default
+                        "none";
                 });
             }
         });
