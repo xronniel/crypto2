@@ -119,7 +119,7 @@
 
 
                     @foreach ($holidayProperties as $holiday)
-                        <div onclick="window.location.href='{{ route('holiday-properties.show', ['holidayProperty' => $holiday->id]) }}'"
+                        <div onclick="window.location.href='{{ route('holiday-properties.show', ['holidayProperty' => $holiday->reference_number]) }}'"
                             style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap mt-none-30">
                             <article class="blog__item mt-30 blog__item-property">
                                 <div class="blog__item-property-one swiper">

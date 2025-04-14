@@ -264,8 +264,8 @@ class PropertyController extends Controller
     public function show($property_ref_no)
     {
         $property = Listing::with(['images', 'facilities'])
-        ->where('property_ref_no', $property_ref_no)
-        ->firstOrFail();
+            ->where('property_ref_no', $property_ref_no)
+            ->firstOrFail();
 
         // Increment visit_count
         $property->increment('visit_count');
