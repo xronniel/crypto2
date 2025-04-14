@@ -77,6 +77,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/account/update', [UserPageController::class, 'update'])->name('user.account.update');
 
     Route::get('/saved-properties', [SavePropertyController::class, 'index']);
+
+    Route::post('/saved-properties', [SavePropertyController::class, 'store']);
 });
 
 // Route::get('/news', [NewsController::class, 'userIndex'])->name('news.index');
