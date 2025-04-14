@@ -7,6 +7,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\PropertyLeadController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SavePropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ use App\Http\Controllers\ReviewController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('/saved-properties', [SavePropertyController::class, 'store']);
+
 
 Route::get('/coinlayer/live', [CoinLayerController::class, 'getLiveRates']);
 Route::get('/coinlayer/historical', [CoinLayerController::class, 'getHistoricalRates']);
