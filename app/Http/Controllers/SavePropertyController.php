@@ -23,7 +23,7 @@ class SavePropertyController extends Controller
             ->where('user_id', $user->id)
             ->get();
 
-        return view('saved_properties.index', compact('savedProperties'));
+        return view('user.user-account.blade', compact('savedProperties'));
     }
 
     public function store(Request $request)
