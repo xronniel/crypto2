@@ -57,5 +57,9 @@
     <script src="{{ asset('assets/js/countdown.js') }}"></script>
     <script src="{{ asset('assets/js/parallax-scroll.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    @if(config('services.jivochat.widget_id'))
+        <script src="//code.jivosite.com/widget/{{ config('services.jivochat.widget_id') }}" async></script>
+    @endif
+
 </body>
 </html>

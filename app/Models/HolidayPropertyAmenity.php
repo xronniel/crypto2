@@ -15,8 +15,8 @@ class HolidayPropertyAmenity extends Model
         'image',
     ];
 
-    public function holidayProperties()
+    public function properties()
     {
-        return $this->belongsToMany(HolidayProperty::class, 'holiday_property_amenity', 'amenity_id', 'holiday_property_id');
-    }
+        return $this->belongsToMany(HolidayProperty::class, 'holiday_property_amenity');
+    }    
 }

@@ -74,28 +74,30 @@ class ImportHolidayProperties extends Command
                     );
 
                     // Save photos
-                    $holidayProperty->photos()->delete(); // Clear existing photos
+                    $holidayProperty->holidayPhotos()->delete(); // Clear existing photos
                     $photos = [];
                     foreach ($property->photo->url as $photoUrl) {
-                        $photos[] = ['url' => (string) $photoUrl, 'holiday_property_id' => $holidayProperty->id];
+                        $photos[] = ['url' => (string) $photoUrl];
                     }
-                    $holidayProperty->photos()->createMany($photos);
+                    $holidayProperty->holidayPhotos()->createMany($photos);
 
                     $amenityCodes = explode(',', (string)$property->amenities);
                     $amenityIds = [];
                     foreach ($amenityCodes as $code) {
                         $code = trim($code); // Trim whitespace
                         if (!empty($code)) {
+
+                            $name = $this->amenityMapping[$code] ?? $code;
                             // Check if the amenity already exists, or create it
-                            $amenity = HolidayPropertyAmenity::firstOrCreate(
+                            $amenity = HolidayPropertyAmenity::updateOrCreate(
                                 ['code' => $code],
-                                ['name' => $code] // Use the code as the name if no name is provided
+                                ['name' => $name]
                             );
                             $amenityIds[] = $amenity->id; // Collect the amenity ID
                         }
                     }
-                    
-                    $holidayProperty->amenities()->sync($amenityIds);
+
+                    $holidayProperty->holidayAmenities()->sync($amenityIds);
                     
                     $count++;
                 }
@@ -137,4 +139,57 @@ class ImportHolidayProperties extends Command
         
         return $agent->id;
     }
+
+    private $amenityMapping = [
+        'AC' => 'Air Conditioning',
+        'AN' => 'Annex or Annex Unit',
+        'AP' => 'Appliances',
+        'BA' => 'Balcony',
+        'BB' => 'Barbecue Area',
+        'BC' => 'Beach Access',
+        'BK' => 'Breakfast Kitchen',
+        'BP' => 'Backup Power',
+        'BT' => 'Bathtub',
+        'BW' => 'Built-in Wardrobes',
+        'CA' => 'Central Air Conditioning',
+        'CP' => 'Car Parking',
+        'CS' => 'Concierge Service',
+        'CV' => 'Covered Parking',
+        'CW' => 'Cold Water',
+        'FF' => 'Fully Furnished',
+        'GA' => 'Gated Access',
+        'GR' => 'Gym Room / Gymnasium',
+        'HF' => 'High Floor',
+        'HO' => 'Home Office',
+        'IS' => 'Internet Service',
+        'MB' => 'Master Bedroom',
+        'MF' => 'Modern Finish',
+        'ML' => 'Marble Flooring',
+        'MO' => 'Mosque Nearby',
+        'MR' => 'Maid\'s Room',
+        'MS' => 'Maid Service',
+        'MT' => 'Maintenance',
+        'NG' => 'Natural Gas',
+        'NM' => 'Near Metro',
+        'NS' => 'Nursery',
+        'PA' => 'Private Access / Patio',
+        'PG' => 'Playground',
+        'PJ' => 'Private Jacuzzi',
+        'PK' => 'Parking',
+        'PP' => 'Private Pool',
+        'PT' => 'Pet-Friendly',
+        'PY' => 'Play Yard',
+        'RT' => 'Rooftop Terrace',
+        'SE' => 'Security',
+        'SM' => 'Smart Home',
+        'SP' => 'Swimming Pool',
+        'SS' => 'Shared Spa / Sauna',
+        'ST' => 'Storage',
+        'SY' => 'System (Security/Sound etc.)',
+        'TR' => 'Tennis Room / Court',
+        'UI' => 'Utilities Included',
+        'VT' => 'View of Trees / Garden View',
+        'VW' => 'View of Water / Waterfront View',
+        'WC' => 'Water Cooler / Water Connection',
+    ];
 }
