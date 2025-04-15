@@ -7,7 +7,29 @@
             <div id="question-form-footer" class="xb-contact">
                 <div class="row g-0 mt-none-30">
                     <div class="col-lg-7 mt-30">
-                        <div class="xb-inner bg_img" data-background="{{ asset('assets/img/bg/form_bg.png') }}">
+                        <div 
+                        
+                        @auth
+                            @php
+                                $path = request()->path(); // e.g. "holiday-properties/elt-5586719"
+                                $segments = explode('/', $path);
+                                $propertyRef = '';
+
+                                // Check only for the desired prefixes
+                                if (Str::startsWith($path, 'holiday-properties/') || Str::startsWith($path, 'properties/')) {
+                                    $propertyRef = end($segments); // Get the last segment
+                                }
+                            @endphp
+
+                            @if ($propertyRef)
+                                data-user-id="{{ auth()->user()->id }}"
+                                data-property-ref="{{ $propertyRef }}"
+                                data-url="{{ url()->current() }}"
+                            @endif
+                        @endauth
+
+
+                        class="xb-inner bg_img" data-background="{{ asset('assets/img/bg/form_bg.png') }}">
                             <h2 class="xb-item--title">if you have question, feel free to contact us</h2>
                             <form class="xb-item--form" id="propertyLeadForm">
                                 @csrf
@@ -127,12 +149,16 @@
     </div>
 </footer>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("propertyLeadForm").addEventListener("submit", function (event) {
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("propertyLeadForm");
+
+    form.addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent traditional form submission
 
-        let formData = new FormData(this);
+        let formData = new FormData(form);
 
+        // 1️⃣ Send the main form data
         fetch("{{ route('property.leads.store') }}", {
             method: "POST",
             headers: {
@@ -144,7 +170,34 @@
         .then(data => {
             if (data.message) {
                 alert("Thank you! Your message has been sent.");
-                this.reset(); // Clear form fields on success
+                form.reset(); // Clear form fields
+
+                // 2️⃣ After success, send the second AJAX call
+                const container = form.closest('.bg_img');
+
+                const user_id = container.dataset.userId;
+                const property_ref_no = container.dataset.propertyRef;
+                const url = container.dataset.url;
+
+
+                $.ajax({
+                    url: '/api/user-contacted-properties',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        property_ref_no: property_ref_no,
+                        contacted_through: 'Lead Email',
+                        url: url,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function (response) {
+                        console.log('Form contact recorded successfully:', response);
+                    },
+                    error: function (xhr) {
+                        console.error('Error logging form contact:', xhr.responseText);
+                    }
+                });
+
             } else {
                 alert("There was an error. Please try again.");
             }
@@ -152,6 +205,13 @@
         .catch(error => console.error("Error:", error));
     });
 });
+
+
+
+
+
+
+
     document.addEventListener("DOMContentLoaded", function() {
         fetch("/api/reviews")
             .then(response => response.json())
@@ -223,3 +283,7 @@
     object-fit: cover;
     }
 </style>
+<script>
+   
+    </script>
+    
