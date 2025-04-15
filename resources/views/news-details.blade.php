@@ -64,7 +64,8 @@
                                         <li><i
                                                 class="far fa-clock"></i>{{ \Carbon\Carbon::parse($news->date)->format('M d, Y') }}
                                         </li>
-                                        <li><a><i class="far fa-comment"></i>({{ $news -> comments_count }}) Comments</a></li>
+                                        <li><a><i class="far fa-comment"></i>({{ $news->comments_count }}) Comments</a>
+                                        </li>
                                     </ul>
                                     <h2 class="title border_effect"><a href="blog-single.html">{{ $news->title }}</a></h2>
                                     <p>
@@ -76,60 +77,60 @@
                                         @endforeach
                                     </div>
                                     <!-- <div class="blog-details-quote-container">
-                                            <div class="blog-details-quote">
-                                                <img src="{{ asset('/assets/img/blog/quote.png') }}" alt="Quote Icon">
-                                            </div>
-                                            <h3>
-                                                "Creativity is allowing yourself to make mistakes. You only have to do a few
-                                                things right in your life so long as you don't do too many things."
-                                            </h3>
-                                            <h4>
-                                                Cameron Williamson
-                                            </h4>
-                                        </div>
-                                        <p>
-                                            With expert guidance and practical tips, you'll develop the skills and knowledge
-                                            necessary to navigate the
-                                            ever-evolving landscape of CryptoHome investing. From deciphering white papers to
-                                            evaluating community engagement, each aspect of the CryptoHome evaluation process is
-                                            dissected to empower you with the tools needed to make informed investment
-                                            decisions.Join us on this transformative journey as we unveil the secrets to finding
-                                            promising CryptoHome projects.
-                                            <br><br>
-                                            Visa consultants provide continuous support, helping you navigate any additional
-                                            requests from
-                                            immigration authorities and addressing any concerns that may arise during the
-                                            processing period.
-                                        </p>
-                                        <div class="row mb-30">
-                                            <div class="col-lg-6 mt-30">
-                                                <img src="{{ asset('/assets/img/blog/post_m.jpg') }}" alt="Blog Content Image">
-                                            </div>
-                                            <div class="col-lg-6 mt-30">
-                                                <ul>
-                                                    <li class="mb-15 blog-list-inside">Identifying promising Crypto Currency.
-                                                    </li>
-                                                    <li class="mb-15 blog-list-inside">Research and due diligence.</li>
-                                                    <li class="mb-15 blog-list-inside">Evaluating team, tokenomics.</li>
-                                                    <li class="mb-15 blog-list-inside">Understanding market trends.</li>
-                                                    <li class="mb-15 blog-list-inside">Confidently navigating CryptoHome.</li>
-                                                    <li class="mb-15 blog-list-inside">Empowering informed decisions.</li>
-                                                    <li class="blog-list-inside">Achieving Success</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <h3 class="mb-20 blog-details-sub-title">
-                                            3 Reasons to investing at this moment
-                                        </h3>
-                                        <p>
-                                            This comprehensive guide equips both novice and seasoned investors with the tools
-                                            needed to navigate the
-                                            dynamic CryptoHome landscape. From conducting meticulous research and due diligence
-                                            to deciphering the
-                                            intricacies of tokenomics and evaluating the project's team, technology, and market
-                                            potential, you'll gain
-                                            valuable identifying hidden gems poised for success.
-                                        </p> -->
+                                                    <div class="blog-details-quote">
+                                                        <img src="{{ asset('/assets/img/blog/quote.png') }}" alt="Quote Icon">
+                                                    </div>
+                                                    <h3>
+                                                        "Creativity is allowing yourself to make mistakes. You only have to do a few
+                                                        things right in your life so long as you don't do too many things."
+                                                    </h3>
+                                                    <h4>
+                                                        Cameron Williamson
+                                                    </h4>
+                                                </div>
+                                                <p>
+                                                    With expert guidance and practical tips, you'll develop the skills and knowledge
+                                                    necessary to navigate the
+                                                    ever-evolving landscape of CryptoHome investing. From deciphering white papers to
+                                                    evaluating community engagement, each aspect of the CryptoHome evaluation process is
+                                                    dissected to empower you with the tools needed to make informed investment
+                                                    decisions.Join us on this transformative journey as we unveil the secrets to finding
+                                                    promising CryptoHome projects.
+                                                    <br><br>
+                                                    Visa consultants provide continuous support, helping you navigate any additional
+                                                    requests from
+                                                    immigration authorities and addressing any concerns that may arise during the
+                                                    processing period.
+                                                </p>
+                                                <div class="row mb-30">
+                                                    <div class="col-lg-6 mt-30">
+                                                        <img src="{{ asset('/assets/img/blog/post_m.jpg') }}" alt="Blog Content Image">
+                                                    </div>
+                                                    <div class="col-lg-6 mt-30">
+                                                        <ul>
+                                                            <li class="mb-15 blog-list-inside">Identifying promising Crypto Currency.
+                                                            </li>
+                                                            <li class="mb-15 blog-list-inside">Research and due diligence.</li>
+                                                            <li class="mb-15 blog-list-inside">Evaluating team, tokenomics.</li>
+                                                            <li class="mb-15 blog-list-inside">Understanding market trends.</li>
+                                                            <li class="mb-15 blog-list-inside">Confidently navigating CryptoHome.</li>
+                                                            <li class="mb-15 blog-list-inside">Empowering informed decisions.</li>
+                                                            <li class="blog-list-inside">Achieving Success</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <h3 class="mb-20 blog-details-sub-title">
+                                                    3 Reasons to investing at this moment
+                                                </h3>
+                                                <p>
+                                                    This comprehensive guide equips both novice and seasoned investors with the tools
+                                                    needed to navigate the
+                                                    dynamic CryptoHome landscape. From conducting meticulous research and due diligence
+                                                    to deciphering the
+                                                    intricacies of tokenomics and evaluating the project's team, technology, and market
+                                                    potential, you'll gain
+                                                    valuable identifying hidden gems poised for success.
+                                                </p> -->
                                     <div
                                         class="d-flex flex-column flex-lg-row justify-content-lg-between mt-50 mb-40 row-gap-3">
                                         <div class="d-flex align-items-center">
@@ -213,8 +214,9 @@
                                                                 placeholder="Write your Comment"></textarea>
                                                         </div>
                                                         <div class="blog-form-checkbox-container">
-                                                            <input type="checkbox" id="{{ $comment -> id }}" name="save">
-                                                            <label for="{{ $comment -> id }}">Save my name, email, and website in this
+                                                            <input type="checkbox" id="{{ $comment->id }}" name="save">
+                                                            <label for="{{ $comment->id }}">Save my name, email, and website
+                                                                in this
                                                                 browser
                                                                 for
                                                                 the next time I comment.</label>
@@ -282,8 +284,8 @@
                                                                     placeholder="Write your Comment"></textarea>
                                                             </div>
                                                             <div class="blog-form-checkbox-container">
-                                                                <input type="checkbox" id="{{ $reply -> id }}" name="save">
-                                                                <label for="{{ $reply -> id }}">Save my name, email, and website
+                                                                <input type="checkbox" id="{{ $reply->id }}" name="save">
+                                                                <label for="{{ $reply->id }}">Save my name, email, and website
                                                                     in this
                                                                     browser
                                                                     for
@@ -403,6 +405,24 @@
 
         // This script handles the form submission for posting comments
         document.addEventListener('DOMContentLoaded', function () {
+            // Check if there's a saved name in localStorage and set it to the input fields
+            const savedName = localStorage.getItem('commentName');
+
+            if (savedName) {
+                const nameInputs = document.querySelectorAll('input[name="name"]');
+
+                nameInputs.forEach(input => {
+                    input.value = savedName;
+                });
+
+                // Optionally check the "save" checkbox too
+                const saveCheckboxes = document.querySelectorAll('input[name="save"]');
+                saveCheckboxes.forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+            }
+
+            // Attach event listeners to all forms with the class "comment-form"
             const forms = document.querySelectorAll('.comment-form');
 
             forms.forEach(form => {
@@ -410,6 +430,8 @@
                     e.preventDefault();
 
                     const formData = new FormData(form);
+                    const saveCheckbox = form.querySelector('input[name="save"]');
+                    const nameInput = form.querySelector('input[name="name"]');
 
                     try {
                         const response = await fetch('/api/comments', {
@@ -431,6 +453,13 @@
                                 alert('Failed to submit comment. Unexpected error occurred.');
                             }
                             return;
+                        }
+
+                        // ✅ Save name to localStorage if checkbox is checked
+                        if (saveCheckbox && saveCheckbox.checked) {
+                            localStorage.setItem('commentName', nameInput.value);
+                        } else {
+                            localStorage.removeItem('commentName');
                         }
 
                         const data = await response.json();
@@ -463,17 +492,17 @@
         });
 
         function showToastAndReload() {
-        const toast = document.getElementById('toast');
-        toast.classList.remove('hidden');
-        toast.classList.add('show');
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            toast.classList.add('show');
 
-        setTimeout(() => {
-            toast.classList.remove('show');
             setTimeout(() => {
-            toast.classList.add('hidden');
-            location.reload(); // reload after toast disappears
-            }, 300);
-        }, 2000); // toast visible for 2 seconds
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                    location.reload(); // reload after toast disappears
+                }, 300);
+            }, 2000); // toast visible for 2 seconds
         }
 
     </script>
