@@ -32,7 +32,7 @@ class ListingController extends Controller
         $adTypes = Listing::distinct()->pluck('ad_type');
         $unitTypes = Listing::distinct()->pluck('unit_type');
   
-        return view('admin.listings.create', compact('facilities', 'districts', 'developers', 'agents', 'communities', 'emirates', 'adTypes', 'unitTypes'));
+        return view('admin.listings.create', compact('facilities', 'districts', 'developers', 'agents', 'communities', 'emirates', 'adTypes', 'unitTypes'))->with('listing', null);
     }
 
     public function store(ListingRequest $request)

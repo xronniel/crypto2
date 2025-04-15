@@ -21,10 +21,7 @@
     @endif
     <input type="file" id="trust_section_image" name="trust_section_image" class="form-control mb-2">
 
-    <!-- Step Section Title -->
-    <label for="step_section_title" class="form-label">Step Section Title</label>
-    <input type="text" id="step_section_title" name="step_section_title" value="{{ old('step_section_title', $page->step_section_title ?? '') }}" placeholder="Step Section Title" class="form-control mb-4">
-
+    <!-- Trust Items -->
     <h5>Trust Items</h5>
     <div id="trust-items-wrapper">
         @if(isset($page))
@@ -57,10 +54,49 @@
             @endforeach
         @endif
     </div>
-
-    <!-- Add Trust Item Button -->
     <button type="button" id="add-trust-item" class="btn btn-outline-primary btn-sm mt-2">
         <i class="bi bi-plus-circle me-1"></i> Add Trust Item
+    </button>
+
+        <!-- Step Section Title -->
+        <label for="step_section_title" class="form-label">Step Section Title</label>
+        <input type="text" id="step_section_title" name="step_section_title" value="{{ old('step_section_title', $page->step_section_title ?? '') }}" placeholder="Step Section Title" class="form-control mb-4">
+
+    <!-- Step Items -->
+    <h5 class="mt-4">Step Items</h5>
+    <div id="step-items-wrapper">
+        @if(isset($page))
+            @foreach($page->stepItems as $item)
+                <div class="step-item-row mb-3 border p-2 rounded">
+                    <input type="hidden" name="step_items[{{ $loop->index }}][id]" value="{{ $item->id }}">
+
+                    <!-- Icon Preview -->
+                    @if($item->icon)
+                        <label class="form-label d-block">Current Icon</label>
+                        <div class="mb-2">
+                            <img src="{{ asset('storage/' . $item->icon) }}" width="50" alt="Icon">
+                        </div>
+                    @endif
+
+                    <!-- Icon Upload -->
+                    <label class="form-label">Upload Icon</label>
+                    <input type="file" name="step_items[{{ $loop->index }}][icon]" class="form-control mb-2">
+
+                    <!-- Title -->
+                    <label class="form-label">Title</label>
+                    <input type="text" name="step_items[{{ $loop->index }}][title]" value="{{ $item->title }}" placeholder="Title" class="form-control mb-2">
+
+                    <!-- Description -->
+                    <label class="form-label">Description</label>
+                    <input type="text" name="step_items[{{ $loop->index }}][description]" value="{{ $item->description }}" placeholder="Description" class="form-control mb-2">
+
+                    <button type="button" class="btn btn-danger btn-sm remove-step-item">X</button>
+                </div>
+            @endforeach
+        @endif
+    </div>
+    <button type="button" id="add-step-item" class="btn btn-outline-primary btn-sm mt-2">
+        <i class="bi bi-plus-circle me-1"></i> Add Step Item
     </button>
 
     <!-- Submit Button -->
@@ -73,6 +109,9 @@
 
 <script>
     let trustItemIndex = {{ isset($page) ? $page->trustItems->count() : 0 }};
+    let stepItemIndex = {{ isset($page) ? $page->stepItems->count() : 0 }};
+
+    // Add Trust Item
     document.getElementById('add-trust-item').addEventListener('click', function () {
         const wrapper = document.getElementById('trust-items-wrapper');
         const html = `
@@ -93,9 +132,38 @@
         trustItemIndex++;
     });
 
+    // Add Step Item
+    document.getElementById('add-step-item').addEventListener('click', function () {
+        const wrapper = document.getElementById('step-items-wrapper');
+        const html = `
+            <div class="step-item-row mb-3 border p-2 rounded">
+                <label class="form-label">Upload Icon</label>
+                <input type="file" name="step_items[${stepItemIndex}][icon]" class="form-control mb-2">
+                
+                <label class="form-label">Title</label>
+                <input type="text" name="step_items[${stepItemIndex}][title]" placeholder="Title" class="form-control mb-2">
+                
+                <label class="form-label">Description</label>
+                <input type="text" name="step_items[${stepItemIndex}][description]" placeholder="Description" class="form-control mb-2">
+                
+                <button type="button" class="btn btn-danger btn-sm remove-step-item">X</button>
+            </div>
+        `;
+        wrapper.insertAdjacentHTML('beforeend', html);
+        stepItemIndex++;
+    });
+
+    // Remove Trust Item
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('remove-trust-item')) {
             e.target.closest('.trust-item-row').remove();
+        }
+    });
+
+    // Remove Step Item
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-step-item')) {
+            e.target.closest('.step-item-row').remove();
         }
     });
 </script>
