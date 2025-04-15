@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoinLayerController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\PropertyLeadController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SavePropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::get('/coinlayer/live', [CoinLayerController::class, 'getLiveRates']);
 Route::get('/coinlayer/historical', [CoinLayerController::class, 'getHistoricalRates']);
 Route::get('/coinlayer/list', [CoinLayerController::class, 'getCryptoList']);
@@ -36,4 +39,8 @@ Route::prefix('comments')->group(function () {
     Route::post('/', [\App\Http\Controllers\Api\CommentController::class, 'store'])->name('comments.store');
     Route::put('/{comment}/status', [\App\Http\Controllers\Api\CommentController::class, 'updateStatus'])->name('comments.updateStatus');
     Route::delete('/{comment}', [\App\Http\Controllers\Api\CommentController::class, 'destroy'])->name('comments.destroy');
+});
+
+Route::prefix('property-leads')->group(function () {
+    Route::post('/', [PropertyLeadController::class, 'store'])->name('property.leads.store');
 });
