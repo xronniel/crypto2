@@ -1016,7 +1016,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+document.addEventListener('DOMContentLoaded', function () {
+	const scrollLink = document.querySelector('.agent-flex-link-two');
+	
+	scrollLink.addEventListener('click', function (e) {
+		e.preventDefault();  // Prevent default anchor behavior
+		const target = document.querySelector('#question-form-footer');
+		
+		// Scroll to the target element smoothly
+		target.scrollIntoView({
+			behavior: 'smooth'
+		});
+	});
+});
 
 
 

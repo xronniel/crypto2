@@ -286,11 +286,13 @@
 
                                         <div class="property-two-box-five-two" 
                                             
-                                        data-user-id="{{ auth()->user()->id }}"
-                                        data-property-id="{{ $property->id }}"
-                                        data-property-ref="{{ $property->property_ref_no }}"
-                                        data-url="{{ url()->current() }}"
-                                          data-property-type="listing"
+                             @auth
+                             data-user-id="{{ auth()->user()->id }}"
+                             data-property-id="{{ $property->id }}"
+                             data-property-ref="{{ $property->property_ref_no }}"
+                             data-url="{{ url()->current() }}"
+                               data-property-type="listing"
+                             @endauth
                                         >
 
                                         <!-- Phone Call -->
@@ -502,11 +504,13 @@
 
                                         <div class="property-two-box-five-two" 
                                             
-                                        data-user-id="{{ auth()->user()->id }}"
-                                        data-property-id="{{ $property->id }}"
-                                        data-property-ref="{{ $property->reference_number }}"
-                                        data-url="{{ url()->current() }}"  
-                                        data-property-type="holiday"
+                                   @auth
+                                   data-user-id="{{ auth()->user()->id }}"
+                                   data-property-id="{{ $property->id }}"
+                                   data-property-ref="{{ $property->reference_number }}"
+                                   data-url="{{ url()->current() }}"  
+                                   data-property-type="holiday"
+                                   @endauth
                                         >
 
                                         <!-- Phone Call -->

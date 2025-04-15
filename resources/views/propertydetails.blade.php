@@ -289,10 +289,14 @@
                         </div>
                         <div class="property-two-box-five-two" 
                                             
-                        data-user-id="{{ auth()->user()->id }}"
-                        data-property-id="{{ $property->id }}"
-                        data-property-ref="{{ $property->property_ref_no }}"
-                        data-url="{{ url()->current() }}">
+                   @auth
+                   data-user-id="{{ auth()->user()->id }}"
+                   data-property-id="{{ $property->id }}"
+                   data-property-ref="{{ $property->property_ref_no }}"
+                   data-url="{{ url()->current() }}"
+                   @endauth
+                        
+                        >
 
                         <!-- Phone Call -->
                         <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"

@@ -4,7 +4,7 @@
     <div class="bg_img top-center pos-rel pb-5" data-background="{{ asset('assets/img/bg/team-bg.png') }}">
 
         <div class="container pt-110">
-            <div class="xb-contact">
+            <div id="question-form-footer" class="xb-contact">
                 <div class="row g-0 mt-none-30">
                     <div class="col-lg-7 mt-30">
                         <div class="xb-inner bg_img" data-background="{{ asset('assets/img/bg/form_bg.png') }}">

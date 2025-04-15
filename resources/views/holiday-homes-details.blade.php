@@ -238,11 +238,13 @@
 
                         <div class="property-two-box-five-two" 
                                             
-                        data-user-id="{{ auth()->user()->id }}"
-                        data-property-id="{{ $holidayProperty->id }}"
-                        data-property-ref="{{ $holidayProperty->reference_number }}"
-                        data-url="{{ url()->current() }}"  
-                        data-property-type="holiday"
+                  @auth
+                  data-user-id="{{ auth()->user()->id }}"
+                  data-property-id="{{ $holidayProperty->id }}"
+                  data-property-ref="{{ $holidayProperty->reference_number }}"
+                  data-url="{{ url()->current() }}"  
+                  data-property-type="holiday"
+                  @endauth
                         >
 
                         <!-- Phone Call -->
