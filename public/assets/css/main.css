@@ -3922,7 +3922,46 @@ body[data-aos-easing="ease"] [data-aos] {
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
+
 }
+
+.login-btn-div {
+    position: relative;
+}
+
+.logout-modal {
+    position: absolute;
+    background: black;
+    border-radius: 5px;
+    top: 55px;
+    right: 2px;
+    display: none; 
+    z-index: 1000; 
+}
+
+.logout-modal ul {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.logout-modal ul li {
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease;
+    padding: 5px 20px;
+    border-radius: 3px;
+}
+
+.logout-modal ul li:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+
+
 @media (max-width: 1250px) {
     .header-btn .login-btn {
         display: none;

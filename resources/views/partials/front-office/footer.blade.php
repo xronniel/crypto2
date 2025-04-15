@@ -9,47 +9,43 @@
                     <div class="col-lg-7 mt-30">
                         <div class="xb-inner bg_img" data-background="{{ asset('assets/img/bg/form_bg.png') }}">
                             <h2 class="xb-item--title">if you have question, feel free to contact us</h2>
-                            <form class="xb-item--form" action="#!">
+                            <form class="xb-item--form" id="propertyLeadForm">
+                                @csrf
+                                <input type="hidden" name="url" value="{{ url()->current() }}"> <!-- Hidden input to pass current page URL -->
+                            
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="xb-item--field">
-                                            <span><img src="{{ asset('assets/img/footer/contact-user.svg') }}"
-                                                    alt="User Icon"></span>
-                                            <input type="text" placeholder="Full Name">
+                                            <span><img src="{{ asset('assets/img/footer/contact-user.svg') }}" alt="User Icon"></span>
+                                            <input type="text" name="full_name" placeholder="Full Name" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="xb-item--field">
-                                            <span><img src="{{ asset('assets/img/footer/contact-email.svg') }}"
-                                                    alt="Email Icon"></span>
-                                            <input type="email" placeholder="Email">
+                                            <span><img src="{{ asset('assets/img/footer/contact-email.svg') }}" alt="Email Icon"></span>
+                                            <input type="email" name="email" placeholder="Email" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="xb-item--field">
-                                            <span><img src="{{ asset('assets/img/footer/contact-massage.svg') }}"
-                                                    alt="Message Icon"></span>
-                                            <input type="text" placeholder="Type Your Message">
+                                            <span><img src="{{ asset('assets/img/footer/contact-massage.svg') }}" alt="Message Icon"></span>
+                                            <input type="text" name="message" placeholder="Type Your Message" required>
                                         </div>
                                     </div>
-
+                            
                                     <div class="col-lg-12 form-check xb-item--checkbox">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" required>
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            By sending this form i confirm that i have read and accept the <br><a
-                                                href="#!">privacy policy</a>
+                                            By sending this form I confirm that I have read and accept the <br><a href="#!">privacy policy</a>
                                         </label>
                                     </div>
+                            
                                     <div class="col-lg-12 xb-item--contact-btn">
                                         <button class="them-btn" type="submit">
                                             <span class="btn_label" data-text="Send Message">Send Message</span>
                                             <span class="btn_icon">
-                                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z"
-                                                        fill="white"></path>
+                                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
                                                 </svg>
                                             </span>
                                         </button>
@@ -131,8 +127,33 @@
     </div>
 </footer>
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("propertyLeadForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent traditional form submission
+
+        let formData = new FormData(this);
+
+        fetch("{{ route('property.leads.store') }}", {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert("Thank you! Your message has been sent.");
+                this.reset(); // Clear form fields on success
+            } else {
+                alert("There was an error. Please try again.");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+});
     document.addEventListener("DOMContentLoaded", function() {
-        fetch("api/reviews")
+        fetch("/api/reviews")
             .then(response => response.json())
             .then(response => {
                 // console.log("Response Data:", response);
@@ -152,11 +173,11 @@
                         <div class="xb-testimonial">
                             <div class="xb-item--avater ul_li">
                                 <div class="xb-item--img review-img-div">
-                                    <img src="storage/${review.image}" alt="Testimonial Image">
+                                    <img src="/storage/${review.image}" alt="Testimonial Image">
                                 </div>
                                 <div class="xb-item--holder">
                                     <div class="xb-item--nationality ul_li">
-                                        <img class='review-img-two' src="storage/${review.country_image}" alt="Flag Image">
+                                        <img class='review-img-two' src="/storage/${review.country_image}" alt="Flag Image">
                                         <span>${review.country_name}</span>
                                     </div>
                                     <h2 class="xb-item--title">${review.reviewer_name}</h2>

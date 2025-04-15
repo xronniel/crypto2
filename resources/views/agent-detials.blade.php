@@ -392,8 +392,17 @@
                             style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap">
                             <article class="blog__item mt-30 blog__item-property">
                                 <div class="blog__item-property-one swiper">
-                                    <img class="Favorite-green"
-                                        src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
+                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form" style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="propertyable_id" value="{{ $property->id }}">
+                                        <input type="hidden" name="propertyable_type" value="commercial">
+                                        <input type="hidden" name="property_ref_no" value="{{ $property->property_ref_no }}">
+                                        
+                                        <button  class="Favorite-green" type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                            <img class="Favorite-green" src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
+                                            {{-- <img class="Favorite-green" src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite"> --}}
+                                        </button>
+                                    </form>
                                     <img class="location-green"
                                         src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
 
