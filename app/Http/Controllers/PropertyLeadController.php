@@ -92,4 +92,31 @@ class PropertyLeadController extends Controller
             'data' => $lead
         ], 201);
     }
+
+    public function index()
+    {
+        // Retrieve all property leads, optionally with pagination
+        $leads = PropertyLead::latest()->paginate(10);
+
+        // Return a view for the admin to display the leads
+        return view('admin.property-leads.index', compact('leads'));
+    }
+    
+    public function show(PropertyLead $lead)
+    {
+        $property = null;
+        $type = null;
+
+        // Determine the property type based on the source page or property_ref_no
+        if (str_contains($lead->source_page, 'Holiday')) {
+            $property = \App\Models\HolidayProperty::where('reference_number', $lead->property_ref_no)->first();
+            $type = 'holiday';
+        } else {
+            $property = \App\Models\Listing::where('property_ref_no', $lead->property_ref_no)->first();
+            $type = 'listing';
+        }
+        // dd($lead, $property, $type);
+        return view('admin.property-leads.show', compact('lead', 'property', 'type'));
+    }
+
 }

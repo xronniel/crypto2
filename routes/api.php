@@ -8,6 +8,7 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\PropertyLeadController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SavePropertyController;
+use App\Http\Controllers\UserContactedPropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,5 @@ Route::prefix('comments')->group(function () {
 Route::prefix('property-leads')->group(function () {
     Route::post('/', [PropertyLeadController::class, 'store'])->name('property.leads.store');
 });
+
+Route::post('/user-contacted-properties', [UserContactedPropertyController::class, 'store']);

@@ -67,10 +67,11 @@
                         @endif
                     </div>
 
-                    <a class="agent-flex-link-two" href="mailto:{{ $agent->email ?? '#' }}">
+                    <a class="agent-flex-link-two" href="#question-form-footer">
                         Send Message
                         <img src="{{ asset('assets/img/agent/arrow.png') }}" alt="arrow">
                     </a>
+                    
                 </div>
 
                 <div class="agent-logo-container  agent-logo-container-hide">
@@ -262,26 +263,42 @@
                                             </div>
                                         </div>
 
-                                        <div class="property-two-box-five-two">
-                                            <a href="tel:{{ $property->listing_agent_phone }}">
-                                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
-                                                    alt="Call">
-                                                <span>Call</span>
-                                            </a>
-                                            <a href="mailto:{{ $property->listing_agent_email }}">
-                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
-                                                    alt="Email">
-                                                <span>Email</span>
-                                            </a>
-                                            @if ($property->listing_agent_whatsapp)
-                                                <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
-                                                    target="_blank">
-                                                    <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
-                                                        alt="WhatsApp">
-                                                    <span>WhatsApp</span>
-                                                </a>
-                                            @endif
-                                        </div>
+                                        <div class="property-two-box-five-two" 
+                                        @auth
+                                        data-user-id="{{ auth()->user()->id }}"
+                                        data-property-id="{{ $property->id }}"
+                                        data-property-ref="{{ $property->property_ref_no }}"
+                                        data-url="{{ url()->current() }}"
+                                    @endauth
+                         
+                                        
+                                        
+                                        >
+
+                                        <!-- Phone Call -->
+                                        <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
+                                            data-method="Call">
+                                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                alt="Call">
+                                            <span>Call</span>
+                                        </a>
+
+                                        <!-- Email -->
+                                        <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+                                            data-method="Email">
+                                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                alt="Email">
+                                            <span>Email</span>
+                                        </a>
+
+                                        <!-- WhatsApp -->
+                                        <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+                                            class="contact-btn" data-method="WhatsApp" target="_blank">
+                                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                alt="WhatsApp">
+                                            <span>WhatsApp</span>
+                                        </a>
+                                    </div>
                                     </div>
                                 </div>
                             </article>
@@ -510,26 +527,49 @@
                                             </div>
                                         </div>
 
-                                        <div class="property-two-box-five-two">
-                                            <a href="tel:{{ $property->listing_agent_phone }}">
-                                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
-                                                    alt="Call">
-                                                <span>Call</span>
-                                            </a>
-                                            <a href="mailto:{{ $property->listing_agent_email }}">
-                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
-                                                    alt="Email">
-                                                <span>Email</span>
-                                            </a>
-                                            @if ($property->listing_agent_whatsapp)
-                                                <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
-                                                    target="_blank">
-                                                    <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
-                                                        alt="WhatsApp">
-                                                    <span>WhatsApp</span>
-                                                </a>
-                                            @endif
-                                        </div>
+                             
+
+
+
+
+
+                                        <div class="property-two-box-five-two" 
+                                            
+                               @auth
+                                    data-user-id="{{ auth()->user()->id }}"
+                                    data-property-id="{{ $property->id }}"
+                                    data-property-ref="{{ $property->property_ref_no }}"
+                                    data-url="{{ url()->current() }}">
+                               @endauth
+
+                                        <!-- Phone Call -->
+                                        <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
+                                            data-method="Call">
+                                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                alt="Call">
+                                            <span>Call</span>
+                                        </a>
+
+                                        <!-- Email -->
+                                        <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+                                            data-method="Email">
+                                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                alt="Email">
+                                            <span>Email</span>
+                                        </a>
+
+                                        <!-- WhatsApp -->
+                                        <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+                                            class="contact-btn" data-method="WhatsApp" target="_blank">
+                                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                alt="WhatsApp">
+                                            <span>WhatsApp</span>
+                                        </a>
+                                    </div>
+
+
+
+
                                     </div>
                                 </div>
                             </article>
@@ -608,7 +648,7 @@
         </div>
     </div>
 
-    <div class="property-two-box-five-box">
+    <div class="property-two-box-five-box mobile-hide-agent">
         <div class="property-two-box-five-one">
             <div class="property-two-box-five-one-img">
                 <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
@@ -618,31 +658,47 @@
                 <h4>Real Estate Agent</h4>
             </div>
         </div>
-        <div class="property-two-box-five-two">
-            <!-- Phone Call -->
-            <a href="tel:{{ $property->listing_agent_phone }}">
-                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
-                <span>
-                    Call
-                </span>
-            </a>
 
-            <!-- Email -->
-            <a href="mailto:{{ $property->listing_agent_email }}">
-                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
-               <span>
-                Email
-               </span>
-            </a>
 
-            <!-- WhatsApp -->
-            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" target="_blank">
-                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
-          <span>
-                    WhatsApp
-          </span>
-            </a>
-        </div>
+        <div class="property-two-box-five-two" 
+                                            
+            @auth
+            data-user-id="{{ auth()->user()->id }}"
+            data-property-id="{{ $property->id }}"
+            data-property-ref="{{ $property->property_ref_no }}"
+            data-url="{{ url()->current() }}"
+            @endauth
+                    
+        >
+
+        <!-- Phone Call -->
+        <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
+            data-method="Call">
+            <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                alt="Call">
+            <span>Call</span>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+            data-method="Email">
+            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                alt="Email">
+            <span>Email</span>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+            class="contact-btn" data-method="WhatsApp" target="_blank">
+            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                alt="WhatsApp">
+            <span>WhatsApp</span>
+        </a>
+    </div>
+
+
+
+
     </div>
 
 <style>
@@ -704,6 +760,20 @@
     }
 
 }
+
+
+
+@media (min-width: 986px) {
+    .mobile-hide-agent{
+        display: none !important;
+    }
+}
+
+
+
+
+
+
 </style>
 
 

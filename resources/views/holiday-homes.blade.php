@@ -191,7 +191,22 @@
                                 <div style="background-image: url(assets/img/bg/tm_bg.png); background-size: cover;"
                                     class="blog__item-property-two">
                                     <div class="blog__item-property-two-box">
-                                        <h1 class="blog__item-property-two-title">{{ $holiday->property_type }}</h1>
+                                        @php
+                                        $propertyTypeMap = [
+                                            'AP' => ['Apartment', 'apartment.png'],
+                                            'VH' => ['Villa', 'villa.png'],
+                                            'OF' => ['Office', 'office.png'],
+                                            'ST' => ['Studio', 'studio.png'],
+                                            // Add more if needed
+                                        ];
+                                    
+                                        $propertyTypeCode = $holiday->property_type;
+                                        $propertyType = $propertyTypeMap[$propertyTypeCode] ?? ['Unknown', 'default.png'];
+                                    @endphp
+                                    
+                                    <h1 class="blog__item-property-two-title">
+                                        {{ $propertyType[0] }}
+                                    </h1>
                                         <p>Premium</p>
                                     </div>
                                     <div class="blog__item-property-two-box-two">
@@ -252,32 +267,45 @@
                                                 <h4>Real Estate Agent</h4>
                                             </div>
                                         </div>
-                                        <div class="property-two-box-five-two">
-                                            @if (!empty($holiday->agent_phone))
-                                                <a href="tel:{{ $holiday->agent_phone }}">
-                                                    <img src="{{ asset('assets/img/property/dark-call.png') }}"
-                                                        alt="Call">
-                                                    <span>Call</span>
-                                                </a>
-                                            @endif
 
-                                            @if (!empty($holiday->agent_email))
-                                                <a href="mailto:{{ $holiday->agent_email }}">
-                                                    <img src="{{ asset('assets/img/property/dark-mail.png') }}"
-                                                        alt="Email">
-                                                    <span>Email</span>
-                                                </a>
-                                            @endif
+                                        <div class="property-two-box-five-two" 
+                                            
+                                     @auth
+                                     data-user-id="{{ auth()->user()->id }}"
+                                     data-property-id="{{ $holiday->id }}"
+                                     data-property-ref="{{ $holiday->reference_number }}"
+                                     data-url="{{ url()->current() }}"  
+                                     data-property-type="holiday"
+                                     @endauth
+                                        >
 
-                                            @if (!empty($holiday->agent_phone))
-                                                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $holiday->agent_phone) }}"
-                                                    target="_blank">
-                                                    <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
-                                                        alt="WhatsApp">
-                                                    <span>WhatsApp</span>
-                                                </a>
-                                            @endif
-                                        </div>
+                                        <!-- Phone Call -->
+                                        <a href="tel:{{ $holiday->listing_agent_phone }}" class="contact-btn"
+                                            data-method="Call">
+                                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                alt="Call">
+                                            <span>Call</span>
+                                        </a>
+
+                                        <!-- Email -->
+                                        <a href="mailto:{{ $holiday->listing_agent_email }}" class="contact-btn"
+                                            data-method="Email">
+                                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                alt="Email">
+                                            <span>Email</span>
+                                        </a>
+
+                                        <!-- WhatsApp -->
+                                        <a href="https://wa.me/{{ $holiday->listing_agent_whatsapp }}"
+                                            class="contact-btn" data-method="WhatsApp" target="_blank">
+                                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                alt="WhatsApp">
+                                            <span>WhatsApp</span>
+                                        </a>
+                                    </div>
+
+
+                                    
                                     </div>
 
                                 </div>

@@ -747,12 +747,24 @@
 		speed: 400,
 		slidesPerView: 1,
 		pagination: {
-			el: ".swiper-pagination",
-			clickable: true,
+		  el: ".swiper-pagination",
+		  clickable: true,
+		  renderBullet: function (index, className) {
+			// Maximum 5 bullets
+			const totalSlides = this.slides.length;
+			const totalVisible = 5;
+	  
+			// Only render a limited number of bullets (5 max)
+			if (index < totalVisible) {
+			  return '<span class="' + className + '"></span>';
+			} else {
+			  return ''; // Don't render bullets beyond 5
+			}
+		  }
 		},
-		navigation: false, 
-	});
-
+		navigation: false,
+	  });
+	  
 
 
 
@@ -832,8 +844,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const isPropertiesPage = currentPath.startsWith("/properties");
     const isAgentDetailsPage = currentPath.startsWith("/agents/") && currentPath !== "/agents";
+    const isHolidayPage = currentPath.startsWith("/holiday-properties/") && currentPath !== "/holiday-properties";
 
-    if (isPropertiesPage || isAgentDetailsPage) {
+    if (isPropertiesPage || isAgentDetailsPage || isHolidayPage) {
         if (upImg) {
             upImg.style.display = "none";
         }
@@ -998,4 +1011,58 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+	const scrollLink = document.querySelector('.agent-flex-link-two');
+	
+	scrollLink.addEventListener('click', function (e) {
+		e.preventDefault();  // Prevent default anchor behavior
+		const target = document.querySelector('#question-form-footer');
+		
+		// Scroll to the target element smoothly
+		target.scrollIntoView({
+			behavior: 'smooth'
+		});
+	});
+});
+
+
+
+
+/// social media buttons 
+document.addEventListener('DOMContentLoaded', function () {
+	$('.contact-btn').on('click', function () {
+		const method = $(this).data('method');
+		const container = $(this).closest('.property-two-box-five-two');
+
+		const user_id = container.data('user-id');
+		const propertyable_id = container.data('property-id');
+		const property_ref_no = container.data('property-ref');
+		const url = container.data('url');
+		const property_type = container.data('property-type');  
+
+		$.ajax({
+			url: '/api/user-contacted-properties',
+			type: 'POST',
+			data: {
+				user_id: user_id,
+				propertyable_id: propertyable_id,
+				property_ref_no: property_ref_no,
+				contacted_through: method,
+				url: url,
+				property_type: property_type, 
+				_token: '{{ csrf_token() }}'
+			},
+			success: function (response) {
+				console.log('Contact recorded successfully:', response);
+			},
+			error: function (xhr) {
+				console.error('Error logging contact:', xhr.responseText);
+			}
+		});
+	});
 });

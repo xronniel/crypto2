@@ -13,7 +13,20 @@
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
                 <p>/ Property Listing</p>
-                <p class="active-path-line">/ {{ $holidayProperty->property_type }}</p>
+                @php
+                $propertyTypeMap = [
+                    'AP' => 'Apartment',
+                    'VH' => 'Villa',
+                    'OF' => 'Office',
+                    'ST' => 'Studio',
+                    // Add more as needed
+                ];
+            
+                $propertyTypeLabel = $propertyTypeMap[$holidayProperty->property_type] ?? $holidayProperty->property_type;
+            @endphp
+            
+            <p class="active-path-line">/ {{ $propertyTypeLabel }}</p>
+            
             </div>
             <div class="grid-img-container">
                 <div class="grid-container">
@@ -105,7 +118,21 @@
                         <p>{{ $holidayProperty->offering_type }}</p>
                     </div>
                     <h3 class="grid-left-side-one hide-mobile">{{ $holidayProperty->title_en }}</h3>
-                    <h3 class="grid-left-side-two hide-mobile">{{ $holidayProperty->property_type }} | Furnished</h3>
+                    @php
+                    $propertyTypeMap = [
+                        'AP' => 'Apartment',
+                        'VH' => 'Villa',
+                        'OF' => 'Office',
+                        'ST' => 'Studio',
+                        // Add more as needed
+                    ];
+                
+                    $propertyTypeLabel = $propertyTypeMap[$holidayProperty->property_type] ?? $holidayProperty->property_type;
+                @endphp
+                
+                <h3 class="grid-left-side-two hide-mobile">{{ $propertyTypeLabel }} | {{ $holidayProperty->furnished == 1 ? 'Furnished' : 'Unfurnished' }}
+                </h3>
+                
                     <h3 class="grid-left-side-three">
                         {!! nl2br(e($holidayProperty->description_en)) !!}
                     </h3>
@@ -207,25 +234,49 @@
                                 <h4>Real Estate Agent</h4>
                             </div>
                         </div>
-                        <div class="property-two-box-five-two">
-                            <!-- Phone Call -->
-                            <a href="tel:{{ $holidayProperty->agent_phone }}">
-                                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
-                                <span>Call</span>
-                            </a>
-                
-                            <!-- Email -->
-                            <a href="mailto:{{ $holidayProperty->agent_email }}">
-                                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
-                                <span>Email</span>
-                            </a>
-                
-                            <!-- WhatsApp -->
-                            <a href="https://wa.me/{{ preg_replace('/\D/', '', $holidayProperty->agent_phone) }}" target="_blank">
-                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
-                                <span>WhatsApp</span>
-                            </a>
-                        </div>
+
+
+                        <div class="property-two-box-five-two" 
+                                            
+                  @auth
+                  data-user-id="{{ auth()->user()->id }}"
+                  data-property-id="{{ $holidayProperty->id }}"
+                  data-property-ref="{{ $holidayProperty->reference_number }}"
+                  data-url="{{ url()->current() }}"  
+                  data-property-type="holiday"
+                  @endauth
+                        >
+
+                        <!-- Phone Call -->
+                        <a href="tel:{{ $holidayProperty->listing_agent_phone }}" class="contact-btn"
+                            data-method="Call">
+                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                alt="Call">
+                            <span>Call</span>
+                        </a>
+
+                        <!-- Email -->
+                        <a href="mailto:{{ $holidayProperty->listing_agent_email }}" class="contact-btn"
+                            data-method="Email">
+                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                alt="Email">
+                            <span>Email</span>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/{{ $holidayProperty->listing_agent_whatsapp }}"
+                            class="contact-btn" data-method="WhatsApp" target="_blank">
+                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                alt="WhatsApp">
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+
+
+
+
+
+
                     </div>
                 </div>
     
@@ -258,7 +309,20 @@
                                             alt="Property">
                                         Property
                                     </p>
-                                    <span>{{ $holidayProperty->property_type == 'AP' ? 'Apartment' : $holidayProperty->property_type }}</span>
+                                    @php
+                                    $propertyTypeMap = [
+                                        'AP' => 'Apartment',
+                                        'VH' => 'Villa',
+                                        'OF' => 'Office',
+                                        'ST' => 'Studio',
+                                        // Add more as needed
+                                    ];
+                                
+                                    $propertyTypeLabel = $propertyTypeMap[$holidayProperty->property_type] ?? $holidayProperty->property_type;
+                                @endphp
+                                
+                                <span>{{ $propertyTypeLabel }}</span>
+                                
                                 </div>
             
                                 <div class="property-details-Description-two">
