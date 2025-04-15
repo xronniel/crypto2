@@ -49,6 +49,11 @@ class UserContactedPropertyController extends Controller
                 }
                 break;
 
+            case 'user':
+                $sourcePage = 'User Account Page';
+                $propertyableType = $request->property_type === 'holiday' ? 'holiday' : 'commercial';
+                break;
+
             case 'holiday-properties':
                 if ($segments->count() === 2) {
                     $sourcePage = 'Holiday Property Details Page';
