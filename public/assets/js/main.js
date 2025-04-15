@@ -1011,3 +1011,45 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+	$('.contact-btn').on('click', function () {
+		const method = $(this).data('method');
+		const container = $(this).closest('.property-two-box-five-two');
+
+		const user_id = container.data('user-id');
+		const propertyable_id = container.data('property-id');
+		const property_ref_no = container.data('property-ref');
+		const url = container.data('url');
+
+		$.ajax({
+			url: '/api/user-contacted-properties',
+			type: 'POST',
+			data: {
+				user_id: user_id,
+				propertyable_id: propertyable_id,
+				property_ref_no: property_ref_no,
+				contacted_through: method,
+				url: url,
+				_token: '{{ csrf_token() }}'
+			},
+			success: function (response) {
+				console.log('Contact recorded successfully:', response);
+			},
+			error: function (xhr) {
+				console.error('Error logging contact:', xhr.responseText);
+			}
+		});
+	});
+});

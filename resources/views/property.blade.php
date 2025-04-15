@@ -113,19 +113,25 @@
                             <article class="blog__item mt-30 blog__item-property">
                                 <div class="blog__item-property-one swiper">
                                     {{-- <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite"> --}}
-                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form" style="display:inline;">
+                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form"
+                                        style="display:inline;">
                                         @csrf
                                         <input type="hidden" name="propertyable_id" value="{{ $property->id }}">
                                         <input type="hidden" name="propertyable_type" value="commercial">
-                                        <input type="hidden" name="property_ref_no" value="{{ $property->property_ref_no }}">
-                                        
-                                        <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-                                            <img class="Favorite-green" src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
-                                            <img class="Favorite-green" src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                        <input type="hidden" name="property_ref_no"
+                                            value="{{ $property->property_ref_no }}">
+
+                                        <button class="Favorite-green" type="submit"
+                                            style="background: none; border: none; padding: 0; cursor: pointer;">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
                                         </button>
                                     </form>
-                                    
-                                    <img class="location-green" src="assets/img/property/location-green.png" alt="location">
+
+                                    <img class="location-green" src="assets/img/property/location-green.png"
+                                        alt="location">
                                     <!-- Image Slider Count -->
                                     <div class="img-slider-count">
                                         <img class="" src="assets/img/property/cam.png" alt="location">
@@ -239,33 +245,35 @@
                                         </div>
 
 
-                                        <div class="property-two-box-five-two">
+                                        <div class="property-two-box-five-two" 
+                                            
+                                            data-user-id="{{ auth()->user()->id }}"
+                                            data-property-id="{{ $property->id }}"
+                                            data-property-ref="{{ $property->property_ref_no }}"
+                                            data-url="{{ url()->current() }}">
+
                                             <!-- Phone Call -->
-                                            <a href="tel:{{ $property->listing_agent_phone }}">
+                                            <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
+                                                data-method="Call">
                                                 <img src="{{ asset('assets/img/property/dark-call.png') }}"
                                                     alt="Call">
-                                                <span>
-                                                    Call
-                                                </span>
+                                                <span>Call</span>
                                             </a>
 
                                             <!-- Email -->
-                                            <a href="mailto:{{ $property->listing_agent_email }}">
+                                            <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+                                                data-method="Email">
                                                 <img src="{{ asset('assets/img/property/dark-mail.png') }}"
                                                     alt="Email">
-                                                <span>
-                                                    Email
-                                                </span>
+                                                <span>Email</span>
                                             </a>
 
                                             <!-- WhatsApp -->
                                             <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
-                                                target="_blank">
+                                                class="contact-btn" data-method="WhatsApp" target="_blank">
                                                 <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
                                                     alt="WhatsApp">
-                                                <span>
-                                                    WhatsApp
-                                                </span>
+                                                <span>WhatsApp</span>
                                             </a>
                                         </div>
 
@@ -453,4 +461,11 @@
 
         }
     </style>
+
+
+
+<script>
+
+</script>
+
 @endsection
