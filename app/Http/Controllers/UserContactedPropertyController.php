@@ -38,6 +38,17 @@ class UserContactedPropertyController extends Controller
                 }
                 break;
 
+            case 'agents':
+                if ($segments->count() === 2) {
+                    $sourcePage = 'Agent Details Page';
+                    $propertyableType = 'commercial';
+                }
+                else {
+                    $sourcePage = 'Agents Page';
+                    $propertyableType = 'commercial';
+                }
+                break;
+
             case 'holiday-properties':
                 if ($segments->count() === 2) {
                     $sourcePage = 'Holiday Property Details Page';
