@@ -648,7 +648,7 @@
         </div>
     </div>
 
-    <div class="property-two-box-five-box">
+    <div class="property-two-box-five-box mobile-hide-agent">
         <div class="property-two-box-five-one">
             <div class="property-two-box-five-one-img">
                 <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
@@ -760,6 +760,20 @@
     }
 
 }
+
+
+
+@media (min-width: 986px) {
+    .mobile-hide-agent{
+        display: none !important;
+    }
+}
+
+
+
+
+
+
 </style>
 
 
