@@ -22,6 +22,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SavePropertyController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('reviews', ReviewController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('holiday-properties', HolidayPropertyController::class);
+    Route::resource('comments', CommentController::class)->except(['create', 'store']);
 });
 
 
@@ -118,3 +120,5 @@ Route::post('/currency/select', [CurrencyController::class, 'selectCurrency'])->
 
 Route::get('/agents', [AgentController::class, 'userIndex'])->name('agents.index');
 Route::get('/agents/{agent}', [AgentController::class, 'userShow'])->name('agents.show');
+
+

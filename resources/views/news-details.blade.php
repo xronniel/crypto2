@@ -215,8 +215,7 @@
                                                         </div>
                                                         <div class="blog-form-checkbox-container">
                                                             <input type="checkbox" id="{{ $comment->id }}" name="save">
-                                                            <label for="{{ $comment->id }}">Save my name, email, and website
-                                                                in this
+                                                            <label for="{{ $comment->id }}">Save my name in this
                                                                 browser
                                                                 for
                                                                 the next time I comment.</label>
@@ -285,8 +284,7 @@
                                                             </div>
                                                             <div class="blog-form-checkbox-container">
                                                                 <input type="checkbox" id="{{ $reply->id }}" name="save">
-                                                                <label for="{{ $reply->id }}">Save my name, email, and website
-                                                                    in this
+                                                                <label for="{{ $reply->id }}">Save my name in this
                                                                     browser
                                                                     for
                                                                     the next time I comment.</label>
@@ -353,7 +351,7 @@
                                                 </div>
                                                 <div class="blog-form-checkbox-container">
                                                     <input type="checkbox" id="save" name="save">
-                                                    <label for="save">Save my name, email, and website in this browser for
+                                                    <label for="save">Save my name in this browser for
                                                         the next time I comment.</label>
                                                 </div>
                                             </div>
