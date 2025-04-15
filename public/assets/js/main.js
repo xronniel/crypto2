@@ -747,12 +747,24 @@
 		speed: 400,
 		slidesPerView: 1,
 		pagination: {
-			el: ".swiper-pagination",
-			clickable: true,
+		  el: ".swiper-pagination",
+		  clickable: true,
+		  renderBullet: function (index, className) {
+			// Maximum 5 bullets
+			const totalSlides = this.slides.length;
+			const totalVisible = 5;
+	  
+			// Only render a limited number of bullets (5 max)
+			if (index < totalVisible) {
+			  return '<span class="' + className + '"></span>';
+			} else {
+			  return ''; // Don't render bullets beyond 5
+			}
+		  }
 		},
-		navigation: false, 
-	});
-
+		navigation: false,
+	  });
+	  
 
 
 

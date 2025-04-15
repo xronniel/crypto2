@@ -990,6 +990,7 @@
 
         .property-two-box-five {
             margin: 30px 0 0 0;
+            width: 100%;
 
         }
 
