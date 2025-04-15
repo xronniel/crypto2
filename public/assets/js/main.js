@@ -1020,9 +1020,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
+/// social media buttons 
 document.addEventListener('DOMContentLoaded', function () {
 	$('.contact-btn').on('click', function () {
 		const method = $(this).data('method');
@@ -1032,6 +1030,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const propertyable_id = container.data('property-id');
 		const property_ref_no = container.data('property-ref');
 		const url = container.data('url');
+		const property_type = container.data('property-type');  
 
 		$.ajax({
 			url: '/api/user-contacted-properties',
@@ -1042,6 +1041,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				property_ref_no: property_ref_no,
 				contacted_through: method,
 				url: url,
+				property_type: property_type, 
 				_token: '{{ csrf_token() }}'
 			},
 			success: function (response) {
