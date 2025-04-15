@@ -66,7 +66,7 @@ class PropertyController extends Controller
         });
         
         $query->when(request('filter_type') == 'new_projects', function ($q) {
-            $q->where('new', 1);
+            $q->where('off_plan', 1);
         });
         
         $query->when(request('filter_type') == 'commercial', function ($q) {
