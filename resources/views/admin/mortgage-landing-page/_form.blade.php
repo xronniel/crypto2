@@ -44,6 +44,10 @@
                     <label class="form-label">Upload Icon</label>
                     <input type="file" name="trust_items[{{ $loop->index }}][icon]" class="form-control mb-2">
 
+                    <!-- Title -->
+                    <label class="form-label">Title</label>
+                    <input type="text" name="trust_items[{{ $loop->index }}][title]" value="{{ $item->title }}" placeholder="Title" class="form-control mb-2">
+
                     <!-- Description -->
                     <label class="form-label">Description</label>
                     <input type="text" name="trust_items[{{ $loop->index }}][description]" value="{{ $item->description }}" placeholder="Description" class="form-control mb-2">
@@ -75,6 +79,9 @@
             <div class="trust-item-row mb-3 border p-2 rounded">
                 <label class="form-label">Upload Icon</label>
                 <input type="file" name="trust_items[${trustItemIndex}][icon]" class="form-control mb-2">
+                
+                <label class="form-label">Title</label>
+                <input type="text" name="trust_items[${trustItemIndex}][title]" placeholder="Title" class="form-control mb-2">
                 
                 <label class="form-label">Description</label>
                 <input type="text" name="trust_items[${trustItemIndex}][description]" placeholder="Description" class="form-control mb-2">

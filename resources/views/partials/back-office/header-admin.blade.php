@@ -97,6 +97,13 @@
                             <h3 style="margin: 0; font-size: 18px;"> Homepage CMS</h3>
                         </a>
                     </div>
+                    <div class="nav-option-home option1">
+                        <a href="{{ route('admin.mortgage-landing-page.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/dashboard.png') }}" class="nav-img"
+                                alt="dashboard">
+                            <h3 style="margin: 0; font-size: 18px;"> Mortgage Calculator Page CMS</h3>
+                        </a>
+                    </div>
                     <div class="option2 nav-option">
                         <a href="{{ route('admin.agents.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">

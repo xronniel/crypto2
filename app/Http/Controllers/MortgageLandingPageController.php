@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class MortgageLandingPageController extends Controller
 {
+    public function userIndex()
+    {
+        $page = MortgageLandingPage::with('trustItems')->first();
+
+        return view('mortgage', compact('page'));
+    }
+
     public function index()
     {
         $page = MortgageLandingPage::first();
@@ -28,7 +35,9 @@ class MortgageLandingPageController extends Controller
             'trust_section_title' => 'nullable|string|max:255',
             'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'step_section_title' => 'nullable|string|max:255',
-            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // ✅ UPDATED
+            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp', // ✅ UPDATED
+            'trust_items.*.title' => 'nullable|string|max:255', // Validate title
+            'trust_items.*.description' => 'nullable|string', // Validate description
         ]);
 
         $data = $request->only(['hero_title', 'trust_section_title', 'step_section_title']);
@@ -50,6 +59,7 @@ class MortgageLandingPageController extends Controller
 
                 $page->trustItems()->create([
                     'icon' => $iconPath,
+                    'title' => $item['title'] ?? null, // Save title
                     'description' => $item['description'],
                 ]);
             }
@@ -71,6 +81,8 @@ class MortgageLandingPageController extends Controller
             'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'step_section_title' => 'nullable|string|max:255',
             'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // ✅ UPDATED
+            'trust_items.*.title' => 'nullable|string|max:255', // Validate title
+            'trust_items.*.description' => 'nullable|string|max:255', // Validate description
         ]);
 
         $data = $request->only(['hero_title', 'trust_section_title', 'step_section_title']);
@@ -97,6 +109,7 @@ class MortgageLandingPageController extends Controller
                     if ($trustItem) {
                         $trustItem->update([
                             'icon' => $iconPath ?? $trustItem->icon, // Keep old if not updated
+                            'title' => $item['title'] ?? $trustItem->title, // Update title
                             'description' => $item['description'],
                         ]);
                         $existingIds[] = $trustItem->id;
@@ -104,6 +117,7 @@ class MortgageLandingPageController extends Controller
                 } else {
                     $newItem = $page->trustItems()->create([
                         'icon' => $iconPath,
+                        'title' => $item['title'] ?? null,
                         'description' => $item['description'],
                     ]);
                     $existingIds[] = $newItem->id;
