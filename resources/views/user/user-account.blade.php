@@ -140,7 +140,28 @@
             <p class="saved-properties-one">No Saved Properties</p>
             <p class="saved-properties-two">​To save a property to your favorites, click the <span>heart icon</span> on any
                 listing. All your saved properties will be conveniently accessible here for easy viewing and management.</p>
+
+                @if ($savedProperties && $savedProperties->isNotEmpty())
+                @foreach ($savedProperties as $savedProperty)
+                    @if ($savedProperty->propertyable instanceof \App\Models\Listing)
+                        <p>{{ $savedProperty->property_ref_no }}</p>
+                        <p>For images:</p>
+                        @foreach ($savedProperty->propertyable->images as $image)
+                            <p>{{ $image->url }}</p>
+                        @endforeach
+                    @elseif ($savedProperty->propertyable instanceof \App\Models\HolidayProperty)
+                        <p>{{ $savedProperty->propertyable->reference_number }}</p>
+                        <p>For holiday images:</p>
+                        @foreach ($savedProperty->propertyable->holidayPhotos as $photo)
+                            <p>{{ $photo->url }}</p>
+                        @endforeach
+                    @endif
+                @endforeach
+            @else
+                <p>No saved properties found.</p>
+            @endif
         </div>
+   
         <div class="main contacted-properties">
 
             <div class="go-backto-sidebar mobile-user-two">

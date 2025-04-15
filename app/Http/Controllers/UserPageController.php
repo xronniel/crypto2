@@ -62,6 +62,13 @@ class UserPageController extends Controller
             
         }
 
+        foreach ($savedProperties as $savedProperty) {
+            if ($savedProperty->propertyable instanceof \App\Models\Listing) {
+                $savedProperty->propertyable->load('images');
+            } elseif ($savedProperty->propertyable instanceof \App\Models\HolidayProperty) {
+                $savedProperty->propertyable->load('holidayPhotos');
+            }
+        }
         return view('user.user-account', compact('user', 'phonecodes', 'savedProperties'));
     }
 
