@@ -844,8 +844,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const isPropertiesPage = currentPath.startsWith("/properties");
     const isAgentDetailsPage = currentPath.startsWith("/agents/") && currentPath !== "/agents";
+    const isHolidayPage = currentPath.startsWith("/holiday-properties/") && currentPath !== "/holiday-properties";
 
-    if (isPropertiesPage || isAgentDetailsPage) {
+    if (isPropertiesPage || isAgentDetailsPage || isHolidayPage) {
         if (upImg) {
             upImg.style.display = "none";
         }

@@ -234,25 +234,47 @@
                                 <h4>Real Estate Agent</h4>
                             </div>
                         </div>
-                        <div class="property-two-box-five-two">
-                            <!-- Phone Call -->
-                            <a href="tel:{{ $holidayProperty->agent_phone }}">
-                                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
-                                <span>Call</span>
-                            </a>
-                
-                            <!-- Email -->
-                            <a href="mailto:{{ $holidayProperty->agent_email }}">
-                                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
-                                <span>Email</span>
-                            </a>
-                
-                            <!-- WhatsApp -->
-                            <a href="https://wa.me/{{ preg_replace('/\D/', '', $holidayProperty->agent_phone) }}" target="_blank">
-                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
-                                <span>WhatsApp</span>
-                            </a>
-                        </div>
+
+
+                        <div class="property-two-box-five-two" 
+                                            
+                        data-user-id="{{ auth()->user()->id }}"
+                        data-property-id="{{ $holidayProperty->id }}"
+                        data-property-ref="{{ $holidayProperty->reference_number }}"
+                        data-url="{{ url()->current() }}"  
+                        data-property-type="holiday"
+                        >
+
+                        <!-- Phone Call -->
+                        <a href="tel:{{ $holidayProperty->listing_agent_phone }}" class="contact-btn"
+                            data-method="Call">
+                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                alt="Call">
+                            <span>Call</span>
+                        </a>
+
+                        <!-- Email -->
+                        <a href="mailto:{{ $holidayProperty->listing_agent_email }}" class="contact-btn"
+                            data-method="Email">
+                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                alt="Email">
+                            <span>Email</span>
+                        </a>
+
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/{{ $holidayProperty->listing_agent_whatsapp }}"
+                            class="contact-btn" data-method="WhatsApp" target="_blank">
+                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                alt="WhatsApp">
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+
+
+
+
+
+
                     </div>
                 </div>
     
