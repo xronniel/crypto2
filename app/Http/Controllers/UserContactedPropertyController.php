@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HolidayProperty;
+use App\Models\Listing;
 use App\Models\UserContactedProperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +14,6 @@ class UserContactedPropertyController extends Controller
     {
         $request->validate([
             'user_id' => 'required|integer|exists:users,id',
-            'propertyable_id' => 'required|integer',
             'property_ref_no' => 'nullable|string',
             'contacted_through' => 'nullable|string',
             'url' => 'nullable|url',
@@ -21,6 +22,7 @@ class UserContactedPropertyController extends Controller
         $url = $request->input('url');
         $sourcePage = 'Unknown Page';
         $propertyableType = null;
+        $propertyableId = null;
 
         $parsedUrl = parse_url($url, PHP_URL_PATH);
         $segments = collect(explode('/', trim($parsedUrl, '/')));
@@ -31,6 +33,8 @@ class UserContactedPropertyController extends Controller
                 if ($segments->count() === 2) {
                     $sourcePage = 'Property Details Page';
                     $propertyableType = 'commercial';
+                    $property = Listing::where('property_ref_no', $request->property_ref_no)->first();
+                    $propertyableId = $property->id ?? null;
                 }
                 else {
                     $sourcePage = 'Properties Page';
@@ -58,6 +62,8 @@ class UserContactedPropertyController extends Controller
                 if ($segments->count() === 2) {
                     $sourcePage = 'Holiday Property Details Page';
                     $propertyableType = 'holiday';
+                    $property = HolidayProperty::where('reference_number', $request->property_ref_no)->first();
+                    $propertyableId = $property->id ?? null;
                 }else {
                     $sourcePage = 'Holiday Properties Page';
                     $propertyableType = 'holiday';
@@ -99,7 +105,7 @@ class UserContactedPropertyController extends Controller
         $contact = UserContactedProperty::create([
             'user_id' => $request->user_id,
             'propertyable_type' => $propertyableType,
-            'propertyable_id' => $request->propertyable_id,
+            'propertyable_id' => $propertyableId ?? $request->propertyable_id,
             'property_ref_no' => $request->property_ref_no,
             'source_page' => $sourcePage,
             'contacted_through' => $request->contacted_through,
