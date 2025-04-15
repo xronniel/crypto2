@@ -16,4 +16,5 @@ class PropertyLead extends Model
         'source_page',
         'property_ref_no',
     ];
+    
 }
