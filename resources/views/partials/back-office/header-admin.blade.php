@@ -182,6 +182,12 @@
                         </a>
                     </div>
                     <div class="option2 nav-option">
+                        <a href="{{ route('admin.comments.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="comments">
+                            Comments
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
                         <a href="{{ route('admin.facilities.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blogs.png') }}" class="nav-img" alt="articles">
                             Facilities

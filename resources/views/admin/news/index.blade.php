@@ -34,7 +34,10 @@
                     <!-- Action Buttons -->
                     <div class="mt-auto d-flex justify-content-between">
                         <a href="{{ route('admin.news.show', $news->id) }}" class="btn btn-sm btn-primary">Read More</a>
-                        <a href="{{ route('admin.news.edit', $news->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <div>
+                            <a href="{{ url('admin/comments') }}?type=news&content_id={{ urlencode($news->id) }}" class="btn btn-sm btn-info">Comments</a>
+                            <a href="{{ route('admin.news.edit', $news->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        </div>
                     </div>
                 </div>
             </div>
