@@ -539,6 +539,9 @@
                         @endif
                     </div>
                 @endforeach
+
+                         {{-- end card   --}}
+                         {{ $savedProperties->links() }}
             @else
                 <div class="no-saved">
                     <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
@@ -567,36 +570,35 @@
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const navButtons1 = document.querySelectorAll(".button-contacted-properties");
             const navButtons2 = document.querySelectorAll(".button-saved-properties");
             const navButtons3 = document.querySelectorAll(".button-my-account");
-
+    
             const breadcrumb1 = document.querySelectorAll(".saved-properties");
             const breadcrumb2 = document.querySelectorAll(".my-account");
             const breadcrumb3 = document.querySelectorAll(".contacted-properties");
-
+    
             const sidebar = document.querySelectorAll(".sidebar");
             const goBacktoSidebar = document.querySelectorAll(".go-backto-sidebar");
-
-
-            function handleButtonClick(button, breadcrumbToShow, breadcrumbToHide1, breadcrumbToHide2) {
-                button.forEach(btn => {
-                    btn.addEventListener("click", function() {
-
+    
+            function handleButtonClick(buttons, breadcrumbToShow, breadcrumbToHide1, breadcrumbToHide2, key) {
+                buttons.forEach(btn => {
+                    btn.addEventListener("click", function () {
+                        // Save the key to sessionStorage
+                        sessionStorage.setItem("lastClicked", key);
+    
                         breadcrumbToShow.forEach(breadcrumb => {
                             breadcrumb.style.display = "flex";
                         });
-
-
+    
                         breadcrumbToHide1.forEach(breadcrumb => {
                             breadcrumb.style.display = "none";
                         });
                         breadcrumbToHide2.forEach(breadcrumb => {
                             breadcrumb.style.display = "none";
                         });
-
-
+    
                         if (window.innerWidth <= 900) {
                             sidebar.forEach(side => {
                                 side.style.display = "none";
@@ -605,66 +607,55 @@
                     });
                 });
             }
-
-
+    
+            // Initial state for small screens
             if (window.innerWidth <= 900) {
-
-                breadcrumb1.forEach(breadcrumb => {
-                    breadcrumb.style.display = "none";
-                });
-                breadcrumb2.forEach(breadcrumb => {
-                    breadcrumb.style.display = "none";
-                });
-                breadcrumb3.forEach(breadcrumb => {
-                    breadcrumb.style.display = "none";
-                });
-
-                sidebar.forEach(side => {
-                    side.style.display = "flex";
-                });
-
-
+                breadcrumb1.forEach(breadcrumb => breadcrumb.style.display = "none");
+                breadcrumb2.forEach(breadcrumb => breadcrumb.style.display = "none");
+                breadcrumb3.forEach(breadcrumb => breadcrumb.style.display = "none");
+    
+                sidebar.forEach(side => side.style.display = "flex");
+    
                 goBacktoSidebar.forEach(goBackBtn => {
-                    goBackBtn.addEventListener("click", function() {
-                        sidebar.forEach(side => {
-                            side.style.display = "flex";
-                        });
-
-                        breadcrumb1.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none";
-                        });
-                        breadcrumb2.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none";
-                        });
-                        breadcrumb3.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none";
-                        });
+                    goBackBtn.addEventListener("click", function () {
+                        sidebar.forEach(side => side.style.display = "flex");
+                        breadcrumb1.forEach(breadcrumb => breadcrumb.style.display = "none");
+                        breadcrumb2.forEach(breadcrumb => breadcrumb.style.display = "none");
+                        breadcrumb3.forEach(breadcrumb => breadcrumb.style.display = "none");
                     });
                 });
             }
-
-
-            handleButtonClick(navButtons3, breadcrumb2, breadcrumb1, breadcrumb3);
-            handleButtonClick(navButtons2, breadcrumb1, breadcrumb2,
-                breadcrumb3);
-            handleButtonClick(navButtons1, breadcrumb3, breadcrumb1,
-                breadcrumb2);
-
-
-            if (window.innerWidth > 900) {
-                breadcrumb2.forEach(breadcrumb => {
-                    breadcrumb.style.display = "flex";
-                });
-                breadcrumb1.forEach(breadcrumb => {
-                    breadcrumb.style.display = "none";
-                });
-                breadcrumb3.forEach(breadcrumb => {
-                    breadcrumb.style.display =
-                        "none";
-                });
+    
+            // Setup event listeners and store keys
+            handleButtonClick(navButtons3, breadcrumb2, breadcrumb1, breadcrumb3, "my-account");
+            handleButtonClick(navButtons2, breadcrumb1, breadcrumb2, breadcrumb3, "saved-properties");
+            handleButtonClick(navButtons1, breadcrumb3, breadcrumb1, breadcrumb2, "contacted-properties");
+    
+            // Restore state after refresh
+            const lastClicked = sessionStorage.getItem("lastClicked");
+            if (lastClicked) {
+                switch (lastClicked) {
+                    case "my-account":
+                        navButtons3[0]?.click();
+                        break;
+                    case "saved-properties":
+                        navButtons2[0]?.click();
+                        break;
+                    case "contacted-properties":
+                        navButtons1[0]?.click();
+                        break;
+                }
+            } else {
+                // Default display for large screens if no session storage
+                if (window.innerWidth > 900) {
+                    breadcrumb2.forEach(breadcrumb => breadcrumb.style.display = "flex");
+                    breadcrumb1.forEach(breadcrumb => breadcrumb.style.display = "none");
+                    breadcrumb3.forEach(breadcrumb => breadcrumb.style.display = "none");
+                }
             }
         });
     </script>
+    
 
 
 
