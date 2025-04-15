@@ -164,6 +164,12 @@
                         </a>
                     </div>
                     <div class="option2 nav-option">
+                        <a href="{{ route('admin.property-leads.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/cashback.png') }}" class="nav-img" alt="articles">
+                            Property Leads
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
                         <a href="{{ route('admin.communities.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/blog.png') }}" class="nav-img" alt="articles">
                             Communities

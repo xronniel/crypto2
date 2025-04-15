@@ -15,9 +15,11 @@ use App\Http\Controllers\HolidayPropertyController;
 use App\Http\Controllers\HomepageContentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\MortgageLandingPageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\PropertyLeadController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SavePropertyController;
 use App\Http\Controllers\TagController;
@@ -60,6 +62,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('reviews', ReviewController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('holiday-properties', HolidayPropertyController::class);
+
+    Route::get('/property-leads', [PropertyLeadController::class, 'index'])->name('property-leads.index');
+    Route::get('/property-leads/{lead}', [PropertyLeadController::class, 'show'])->name('property-leads.show');
+
+    Route::get('/mortgage', [MortgageLandingPageController::class, 'index'])->name('mortgage-landing-page.index');
+    Route::get('/mortgage/create', [MortgageLandingPageController::class, 'create'])->name('mortgage-landing-page.create');
+    Route::post('/mortgage', [MortgageLandingPageController::class, 'store'])->name('mortgage-landing-page.store');
+    Route::get('/mortgage/{page}/edit', [MortgageLandingPageController::class, 'edit'])->name('mortgage-landing-page.edit');
+    Route::put('/mortgage/{page}', [MortgageLandingPageController::class, 'update'])->name('mortgage-landing-page.update');
 });
 
 

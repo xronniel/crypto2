@@ -68,4 +68,10 @@ class HolidayProperty extends Model
     {
         return $this->morphMany(UserSavedProperty::class, 'propertyable');
     }
+
+    public function contactedByUsers()
+    {
+        return $this->morphMany(UserContactedProperty::class, 'propertyable');
+    }
+
 }
