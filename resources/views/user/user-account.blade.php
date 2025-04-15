@@ -33,24 +33,27 @@
     <div class="container container-user">
         <!-- Sidebar -->
         <div class="sidebar">
-            <h2>My Account</h2>
+            <h2 class="sidebar-h2">My Account</h2>
             <button class="nav-button button-my-account desk-user">
-                <img style="width: 35px;" src="{{ asset('/assets/img/user/use-one.png') }}" alt="">
+                <img class="nav-button-img" style="width: 35px;" src="{{ asset('/assets/img/user/use-one.png') }}"
+                    alt="">
                 Account
             </button>
             <button class="nav-button button-my-account mobile-user">
-                <img style="width: 40px;" src="{{ asset('/assets/img/user/user-man-green.png') }}" alt="">
+                <img class="nav-button-img" style="width: 40px;" src="{{ asset('/assets/img/user/user-man-green.png') }}"
+                    alt="">
                 {{ $user->email }}
-                <img style="width: 20px;" src="{{ asset('/assets/img/user/chevron.png') }}" alt="">
+                <img class="nav-button-img" style="width: 20px;" src="{{ asset('/assets/img/user/chevron.png') }}"
+                    alt="">
 
             </button>
             <button class="nav-button button-saved-properties">
-                <img src="{{ asset('/assets/img/user/user-two.png') }}" alt="">
+                <img class="nav-button-img" src="{{ asset('/assets/img/user/user-two.png') }}" alt="">
                 Saved Properties
             </button>
 
             <button class="nav-button button-contacted-properties">
-                <img src="{{ asset('/assets/img/user/user-three.png') }}" alt="">
+                <img class="nav-button-img" src="{{ asset('/assets/img/user/user-three.png') }}" alt="">
                 Contacted Properties
             </button>
         </div>
@@ -64,11 +67,11 @@
         <div class="main my-account">
             <div class="form-wrapper">
                 <div class="go-backto-sidebar mobile-user-two">
-                    <img src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
-                    <span>Personal Information</span>
+                    <img class="go-backto-sidebar-img" src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
+                    <span class="go-backto-sidebar-span">Personal Information</span>
                     <div></div>
                 </div>
-                <h3 class="desk-user">Personal Information</h3>
+                <h3 class="desk-user main-h3">Personal Information</h3>
                 <form method="POST" action="{{ route('user.account.update') }}">
                     @csrf
 
@@ -119,33 +122,440 @@
 
         <div class="main saved-properties">
             <div class="go-backto-sidebar mobile-user-two">
-                <img src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
-                <span>Saved Properties</span>
+                <img class="go-backto-sidebar-img" src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
+                <span class="go-backto-sidebar-span">Saved Properties</span>
                 <div></div>
             </div>
 
-            @foreach ($savedProperties as $savedProperty)
-            @if ($savedProperty->propertyable instanceof \App\Models\Listing)
-                <p>{{$savedProperty->property_ref_no}}<p>
-            @elseif ($savedProperty->propertyable instanceof \App\Models\HolidayProperty)
-                <p>{{$savedProperty->reference_number}}<p>
+            @if ($savedProperties && $savedProperties->isNotEmpty())
+                @foreach ($savedProperties as $savedProperty)
+                    @php
+                        $property = $savedProperty->propertyable;
+                    @endphp
+
+                    <div class="saved-property-card">
+                        @if ($property instanceof \App\Models\Listing)
+                            <article style="cursor: pointer;"
+                                onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
+                                class="blog__item mt-30 blog__item-property">
+                                <div class="blog__item-property-one swiper">
+                                    {{-- <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite"> --}}
+                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form"
+                                        style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="propertyable_id" value="{{ $property->id }}">
+                                        <input type="hidden" name="propertyable_type" value="commercial">
+                                        <input type="hidden" name="property_ref_no"
+                                            value="{{ $property->property_ref_no }}">
+
+                                        <button class="Favorite-green" type="submit"
+                                            style="background: none; border: none; padding: 0; cursor: pointer;">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/green-Favorite.png') }}"
+                                                alt="Favorite">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                        </button>
+                                    </form>
+
+                                    <img class="location-green"
+                                        src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
+                                    <!-- Image Slider Count -->
+                                    <div class="img-slider-count">
+                                        <img class="" src="{{ asset('assets/img/property/cam.png') }}"
+                                            alt="location">
+                                        <p>{{ $property->images->count() }}</p>
+                                    </div>
+
+
+                                    <div class="budge-three-div">
+                                        <!-- If Verified -->
+                                        @if ($property->verified == 1)
+                                            <p>
+                                                <img class=""
+                                                    src="{{ asset('assets/img/property/Verified-img.png') }}"
+                                                    alt="location">
+                                                Verified
+                                            </p>
+                                        @endif
+
+                                        <!-- If SuperAgent -->
+                                        @if ($property->superagent == 1)
+                                            <p>
+                                                <img class=""
+                                                    src="{{ asset('assets/img/property/SuperAgent-img.png') }}"
+                                                    alt="location">
+                                                SuperAgent
+                                            </p>
+                                        @endif
+
+                                        <!-- If New -->
+                                        @if ($property->new == 1)
+                                            <p>New</p>
+                                        @endif
+                                    </div>
+
+                                    <div class="swiper-wrapper">
+                                        @foreach ($property->images as $image)
+                                            <div class="swiper-slide">
+                                                <img class="blog__item-property-one-img-slide"
+                                                    src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}"
+                                                    alt="Property Image">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                                <div style="background-image: url(assets/img/bg/tm_bg.png);
+                                background-size: cover;
+                            "
+                                    class="blog__item-property-two">
+                                    <div class="blog__item-property-two-big-box">
+                                        <div class="blog__item-property-two-box">
+                                            <h1 class="blog__item-property-two-title">{{ $property->unit_type }}</h1>
+                                            <p>Premium</p>
+                                        </div>
+                                        <div class="blog__item-property-two-box-two">
+                                            <div class="blog__item-property-two-box-one">
+                                                <p class="box-two-p-one">
+                                                    {{ $property->getConvertedPrice()['converted_price'] }}({{ $property->getConvertedPrice()['currency_code'] }})
+                                                </p>
+                                                <p class="box-two-p-two">
+                                                    {{ $property->price }} AED
+                                                </p>
+                                            </div>
+
+                                            <div class="blog__item-property-two-img">
+                                                <img src="assets/img/property/state-logo.jpeg" alt="logo">
+                                            </div>
+
+                                        </div>
+                                        <div class="blog__item-property-two-box-three">
+                                            <p>{{ $property->property_title }}</p>
+                                        </div>
+                                        <div class="location-property-two-box-three">
+                                            <img src="{{ asset('assets/img/property/green-location.png') }}"
+                                                alt="location">
+                                            <p>Hattan, Arabian Ranches, Dubai</p>
+                                        </div>
+                                        <div class="property-two-box-four">
+                                            {{-- Rooms --}}
+                                            @if (isset($property->no_of_rooms) && $property->no_of_rooms > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-bed.png') }}"
+                                                    alt="bed">
+                                                <p>{{ $property->no_of_rooms }}</p>
+                                                <img src="{{ asset('assets/img/property/pipeline.png') }}"
+                                                    alt="pipeline">
+                                            @endif
+
+                                            {{-- Bathrooms --}}
+                                            @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-bath.png') }}"
+                                                    alt="bath">
+                                                <p>{{ $property->no_of_bathroom }}</p>
+                                                <img src="{{ asset('assets/img/property/pipeline.png') }}"
+                                                    alt="pipeline">
+                                            @endif
+
+                                            {{-- Built-Up Area --}}
+                                            @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-size.png') }}"
+                                                    alt="size">
+                                                <p>{{ $property->unit_builtup_area }} {{ $property->unit_measure }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="property-two-box-five">
+
+                                        <div class="property-two-box-five-one">
+
+                                            <div class="property-two-box-five-one-img">
+                                                <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
+                                            </div>
+                                            <div class="property-two-box-five-one-name">
+                                                <p>{{ $property->listing_agent }}</p>
+                                                <h4>Real Estate Agent</h4>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="property-two-box-five-two">
+                                            <!-- Phone Call -->
+                                            <a href="tel:{{ $property->listing_agent_phone }}">
+                                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                    alt="Call">
+                                                <span>
+                                                    Call
+                                                </span>
+                                            </a>
+
+                                            <!-- Email -->
+                                            <a href="mailto:{{ $property->listing_agent_email }}">
+                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                    alt="Email">
+                                                <span>
+                                                    Email
+                                                </span>
+                                            </a>
+
+                                            <!-- WhatsApp -->
+                                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+                                                target="_blank">
+                                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                    alt="WhatsApp">
+                                                <span>
+                                                    WhatsApp
+                                                </span>
+                                            </a>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </article>
+                        @elseif ($property instanceof \App\Models\HolidayProperty)
+                            <article style="cursor: pointer;"
+                                onclick="window.location.href='{{ route('holiday-properties.show', ['holidayProperty' => $property->reference_number]) }}'"
+                                class="blog__item mt-30 blog__item-property">
+                                <div class="blog__item-property-one swiper">
+                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form"
+                                        style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="propertyable_id" value="{{ $property->id }}">
+                                        <input type="hidden" name="propertyable_type" value="holiday">
+                                        <input type="hidden" name="property_ref_no"
+                                            value="{{ $property->reference_number }}">
+
+                                        <button class="Favorite-green" type="submit"
+                                            style="background: none; border: none; padding: 0; cursor: pointer;">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/green-Favorite.png') }}"
+                                                alt="Favorite">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                        </button>
+                                    </form>
+
+
+                                    <img class="location-green"
+                                        src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
+                                    <!-- Image Slider Count -->
+                                    <div class="img-slider-count">
+                                        <img class="" src="{{ asset('assets/img/property/cam.png') }}"
+                                            alt="location">
+                                        @php
+                                            $images = $property->holidayPhotos;
+                                        @endphp
+
+                                        <p>{{ is_array($images) || $images instanceof Countable ? count($images) : 0 }}</p>
+
+                                    </div>
+
+
+                                    <div class="budge-three-div">
+                                        <!-- If Verified -->
+                                        @if ($property->verified == 1)
+                                            <p>
+                                                <img class=""
+                                                    src="{{ asset('assets/img/property/Verified-img.png') }}"
+                                                    alt="location">
+                                                Verified
+                                            </p>
+                                        @endif
+
+                                        <!-- If SuperAgent -->
+                                        @if ($property->superagent == 1)
+                                            <p>
+                                                <img class=""
+                                                    src="{{ asset('assets/img/property/SuperAgent-img.png') }}"
+                                                    alt="location">
+                                                SuperAgent
+                                            </p>
+                                        @endif
+
+                                        <!-- If New -->
+                                        @if ($property->new == 1)
+                                            <p>New</p>
+                                        @endif
+                                    </div>
+
+                                    <div class="swiper-wrapper">
+                                        @foreach ($property->holidayPhotos as $photo)
+                                            <div class="swiper-slide">
+                                                <img class="blog__item-property-one-img-slide" src="{{ $photo->url }}"
+                                                    alt="Property Image">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                                <div style="background-image: url(assets/img/bg/tm_bg.png);
+                                background-size: cover;
+                            "
+                                    class="blog__item-property-two">
+                                    <div class="blog__item-property-two-big-box">
+                                        <div class="blog__item-property-two-box">
+                                            @php
+                                                $offeringTypeMap = [
+                                                    'AP' => ['Apartment', 'apartment.png'],
+                                                    'VH' => ['Villa', 'villa.png'],
+                                                    'OF' => ['Office', 'office.png'],
+                                                    'ST' => ['Studio', 'studio.png'],
+                                                    // Add more types as needed
+                                                ];
+
+                                                $typeCode = $property->property_type;
+                                                $offeringType = $offeringTypeMap[$typeCode] ?? [
+                                                    'Unknown',
+                                                    'default.png',
+                                                ];
+                                            @endphp
+
+                                            <h1 class="blog__item-property-two-title">
+                                                {{ $offeringType[0] }}
+                                            </h1>
+
+                                            <p>Premium</p>
+                                        </div>
+                                        <div class="blog__item-property-two-box-two">
+                                            <div class="blog__item-property-two-box-one">
+                                                {{-- <p class="box-two-p-one">
+                {{ $property->getConvertedPrice()['converted_price'] }}({{ $property->getConvertedPrice()['currency_code'] }})
+            </p> --}}
+                                                <p class="box-two-p-two">
+                                                    {{ $property->price }} AED
+                                                </p>
+                                            </div>
+
+                                            <div class="blog__item-property-two-img">
+                                                <img src="assets/img/property/state-logo.jpeg" alt="logo">
+                                            </div>
+
+                                        </div>
+                                        <div class="blog__item-property-two-box-three">
+                                            <p>{{ $property->title_en }}</p>
+                                        </div>
+                                        <div class="location-property-two-box-three">
+                                            <img src="{{ asset('assets/img/property/green-location.png') }}"
+                                                alt="location">
+                                            <p>Hattan, Arabian Ranches, Dubai</p>
+                                        </div>
+                                        <div class="property-two-box-four">
+                                            {{-- Rooms --}}
+                                            @if (isset($property->bathroom) && $property->bathroom > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-bed.png') }}"
+                                                    alt="bed">
+                                                <p>{{ $property->bathroom }}</p>
+                                                <img src="{{ asset('assets/img/property/pipeline.png') }}"
+                                                    alt="pipeline">
+                                            @endif
+
+                                            {{-- Bathrooms --}}
+                                            @if (isset($property->bedroom) && $property->bedroom > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-bath.png') }}"
+                                                    alt="bath">
+                                                <p>{{ $property->bedroom }}</p>
+                                                <img src="{{ asset('assets/img/property/pipeline.png') }}"
+                                                    alt="pipeline">
+                                            @endif
+
+                                            {{-- Built-Up Area --}}
+                                            @if (isset($property->size) && $property->size > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-size.png') }}"
+                                                    alt="size">
+                                                <p>d{{ $property->size }} Sq.Ft.</p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="property-two-box-five">
+
+                                        <div class="property-two-box-five-one">
+
+                                            <div class="property-two-box-five-one-img">
+                                                <img src="{{ asset($property->agent_photo) }}" alt="person">
+                                            </div>
+                                            <div class="property-two-box-five-one-name">
+                                                <p>{{ $property->agent_name }}</p>
+                                                <h4>Real Estate Agent</h4>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="property-two-box-five-two">
+                                            <!-- Phone Call -->
+                                            <a href="tel:{{ $property->agent_phone }}">
+                                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                    alt="Call">
+                                                <span>
+                                                    Call
+                                                </span>
+                                            </a>
+
+                                            <!-- Email -->
+                                            <a href="mailto:{{ $property->listing_agent_email }}">
+                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                    alt="Email">
+                                                <span>
+                                                    Email
+                                                </span>
+                                            </a>
+
+                                            <!-- WhatsApp -->
+                                            <a href="https://wa.me/{{ $property->agent_phone }}" target="_blank">
+                                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                    alt="WhatsApp">
+                                                <span>
+                                                    WhatsApp
+                                                </span>
+                                            </a>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </article>
+                        @endif
+                    </div>
+                @endforeach
+            @else
+                <div class="no-saved">
+                    <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
+                    <p class="saved-properties-one">No Saved Properties</p>
+                    <p class="saved-properties-two">
+                        ​To save a property to your favorites, click the <span>heart icon</span> on any listing.
+                        All your saved properties will be conveniently accessible here for easy viewing and management.
+                    </p>
+                </div>
             @endif
-        @endforeach
-
-
-
-
-
-            <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
-            <p class="saved-properties-one">No Saved Properties</p>
-            <p class="saved-properties-two">​To save a property to your favorites, click the <span>heart icon</span> on any
-                listing. All your saved properties will be conveniently accessible here for easy viewing and management.</p>
         </div>
+
         <div class="main contacted-properties">
 
             <div class="go-backto-sidebar mobile-user-two">
-                <img src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
-                <span>Contacted Properties</span>
+                <img class="go-backto-sidebar-img" src="{{ asset('/assets/img/user/arrow-left.png') }}" alt="">
+                <span class="go-backto-sidebar-span">Contacted Properties</span>
                 <div></div>
             </div>
             <img src="{{ asset('/assets/img/user/contact-animated.png') }}" alt="">
@@ -169,34 +579,34 @@
             const sidebar = document.querySelectorAll(".sidebar");
             const goBacktoSidebar = document.querySelectorAll(".go-backto-sidebar");
 
-            
+
             function handleButtonClick(button, breadcrumbToShow, breadcrumbToHide1, breadcrumbToHide2) {
                 button.forEach(btn => {
                     btn.addEventListener("click", function() {
-                       
+
                         breadcrumbToShow.forEach(breadcrumb => {
-                            breadcrumb.style.display = "flex"; 
+                            breadcrumb.style.display = "flex";
                         });
 
-                      
+
                         breadcrumbToHide1.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none"; 
+                            breadcrumb.style.display = "none";
                         });
                         breadcrumbToHide2.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none"; 
+                            breadcrumb.style.display = "none";
                         });
 
-                        
+
                         if (window.innerWidth <= 900) {
                             sidebar.forEach(side => {
-                                side.style.display = "none"; 
+                                side.style.display = "none";
                             });
                         }
                     });
                 });
             }
 
-        
+
             if (window.innerWidth <= 900) {
 
                 breadcrumb1.forEach(breadcrumb => {
@@ -210,18 +620,18 @@
                 });
 
                 sidebar.forEach(side => {
-                    side.style.display = "flex"; 
+                    side.style.display = "flex";
                 });
 
 
                 goBacktoSidebar.forEach(goBackBtn => {
                     goBackBtn.addEventListener("click", function() {
                         sidebar.forEach(side => {
-                            side.style.display = "flex"; 
+                            side.style.display = "flex";
                         });
 
                         breadcrumb1.forEach(breadcrumb => {
-                            breadcrumb.style.display = "none"; 
+                            breadcrumb.style.display = "none";
                         });
                         breadcrumb2.forEach(breadcrumb => {
                             breadcrumb.style.display = "none";
@@ -233,20 +643,20 @@
                 });
             }
 
-           
-            handleButtonClick(navButtons3, breadcrumb2, breadcrumb1, breadcrumb3); 
-            handleButtonClick(navButtons2, breadcrumb1, breadcrumb2,
-                breadcrumb3); 
-            handleButtonClick(navButtons1, breadcrumb3, breadcrumb1,
-                breadcrumb2); 
 
-           
+            handleButtonClick(navButtons3, breadcrumb2, breadcrumb1, breadcrumb3);
+            handleButtonClick(navButtons2, breadcrumb1, breadcrumb2,
+                breadcrumb3);
+            handleButtonClick(navButtons1, breadcrumb3, breadcrumb1,
+                breadcrumb2);
+
+
             if (window.innerWidth > 900) {
                 breadcrumb2.forEach(breadcrumb => {
-                    breadcrumb.style.display = "flex"; 
+                    breadcrumb.style.display = "flex";
                 });
                 breadcrumb1.forEach(breadcrumb => {
-                    breadcrumb.style.display = "none"; 
+                    breadcrumb.style.display = "none";
                 });
                 breadcrumb3.forEach(breadcrumb => {
                     breadcrumb.style.display =
@@ -289,7 +699,7 @@
             align-items: center;
         }
 
-        .sidebar h2 {
+        .sidebar .sidebar-h2 {
 
             font-family: "Manrope", sans-serif;
             font-weight: 400;
@@ -330,7 +740,7 @@
 
         }
 
-        .nav-button img {
+        .nav-button .nav-button-img {
             width: 40px;
         }
 
@@ -345,7 +755,7 @@
             align-items: center;
 
             /*
-                gap: 36px; */
+                            gap: 36px; */
             align-content: center;
             align-items: center;
 
@@ -357,7 +767,7 @@
             gap: 36px;
         }
 
-        .main h3 {
+        .main .main-h3 {
 
 
 
@@ -395,6 +805,10 @@
 
         }
 
+        .saved-property-card {
+            width: 100%;
+        }
+
         .go-backto-sidebar {
             display: flex;
             align-content: center;
@@ -403,7 +817,7 @@
             margin: 0 0 60px 0;
         }
 
-        .go-backto-sidebar span {
+        .go-backto-sidebar .go-backto-sidebar-span {
 
             font-family: "Manrope", sans-serif;
             font-weight: 400;
@@ -414,7 +828,7 @@
 
         }
 
-        .go-backto-sidebar img {
+        .go-backto-sidebar .go-backto-sidebar-img {
             width: 50px !important;
         }
 
@@ -497,7 +911,7 @@
 
         }
 
-        .saved-properties img {
+        .saved-properties .saved-properties-img {
             width: 150px;
         }
 
@@ -549,11 +963,62 @@
         }
 
 
+        /* crads  */
+        .box-two-p-one {
+            font-size: 18px;
+        }
 
+        .box-two-p-two {
+            font-size: 17px;
+        }
 
+        .swiper-slide img {
+            border-radius: 5px 0 0 5px;
+        }
 
+        .blog__item-property-two {
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            /* width: 100%; */
+            justify-content: space-between;
+        }
 
+        .blog__item-property-two-big-box {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+        }
 
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1500px;
+
+            }
+        }
+
+        .property-two-box-five {
+            margin: 30px 0 0 0;
+
+        }
+
+        .property-two-box-five-two a {
+            font-size: 12px;
+        }
+
+        .blog__item-property-two-box-one {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 0;
+        }
+
+        .location-property-two-box-three {
+            margin: 10px 0 0 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
         @media (max-width: 900px) {
             .mobile-user {
@@ -580,7 +1045,11 @@
 
             .main {
                 width: 100%;
-                padding: 20px;
+                padding: 20px 0 0 0;
+            }
+
+            .go-backto-sidebar {
+                margin: 0 0 10px 0;
             }
 
             .main form,

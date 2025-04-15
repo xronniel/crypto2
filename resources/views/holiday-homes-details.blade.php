@@ -13,7 +13,20 @@
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
                 <p>/ Property Listing</p>
-                <p class="active-path-line">/ {{ $holidayProperty->property_type }}</p>
+                @php
+                $propertyTypeMap = [
+                    'AP' => 'Apartment',
+                    'VH' => 'Villa',
+                    'OF' => 'Office',
+                    'ST' => 'Studio',
+                    // Add more as needed
+                ];
+            
+                $propertyTypeLabel = $propertyTypeMap[$holidayProperty->property_type] ?? $holidayProperty->property_type;
+            @endphp
+            
+            <p class="active-path-line">/ {{ $propertyTypeLabel }}</p>
+            
             </div>
             <div class="grid-img-container">
                 <div class="grid-container">
@@ -105,7 +118,21 @@
                         <p>{{ $holidayProperty->offering_type }}</p>
                     </div>
                     <h3 class="grid-left-side-one hide-mobile">{{ $holidayProperty->title_en }}</h3>
-                    <h3 class="grid-left-side-two hide-mobile">{{ $holidayProperty->property_type }} | Furnished</h3>
+                    @php
+                    $propertyTypeMap = [
+                        'AP' => 'Apartment',
+                        'VH' => 'Villa',
+                        'OF' => 'Office',
+                        'ST' => 'Studio',
+                        // Add more as needed
+                    ];
+                
+                    $propertyTypeLabel = $propertyTypeMap[$holidayProperty->property_type] ?? $holidayProperty->property_type;
+                @endphp
+                
+                <h3 class="grid-left-side-two hide-mobile">{{ $propertyTypeLabel }} | {{ $holidayProperty->furnished == 1 ? 'Furnished' : 'Unfurnished' }}
+                </h3>
+                
                     <h3 class="grid-left-side-three">
                         {!! nl2br(e($holidayProperty->description_en)) !!}
                     </h3>
@@ -258,7 +285,20 @@
                                             alt="Property">
                                         Property
                                     </p>
-                                    <span>{{ $holidayProperty->property_type == 'AP' ? 'Apartment' : $holidayProperty->property_type }}</span>
+                                    @php
+                                    $propertyTypeMap = [
+                                        'AP' => 'Apartment',
+                                        'VH' => 'Villa',
+                                        'OF' => 'Office',
+                                        'ST' => 'Studio',
+                                        // Add more as needed
+                                    ];
+                                
+                                    $propertyTypeLabel = $propertyTypeMap[$holidayProperty->property_type] ?? $holidayProperty->property_type;
+                                @endphp
+                                
+                                <span>{{ $propertyTypeLabel }}</span>
+                                
                                 </div>
             
                                 <div class="property-details-Description-two">

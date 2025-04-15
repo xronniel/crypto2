@@ -191,7 +191,22 @@
                                 <div style="background-image: url(assets/img/bg/tm_bg.png); background-size: cover;"
                                     class="blog__item-property-two">
                                     <div class="blog__item-property-two-box">
-                                        <h1 class="blog__item-property-two-title">{{ $holiday->property_type }}</h1>
+                                        @php
+                                        $propertyTypeMap = [
+                                            'AP' => ['Apartment', 'apartment.png'],
+                                            'VH' => ['Villa', 'villa.png'],
+                                            'OF' => ['Office', 'office.png'],
+                                            'ST' => ['Studio', 'studio.png'],
+                                            // Add more if needed
+                                        ];
+                                    
+                                        $propertyTypeCode = $holiday->property_type;
+                                        $propertyType = $propertyTypeMap[$propertyTypeCode] ?? ['Unknown', 'default.png'];
+                                    @endphp
+                                    
+                                    <h1 class="blog__item-property-two-title">
+                                        {{ $propertyType[0] }}
+                                    </h1>
                                         <p>Premium</p>
                                     </div>
                                     <div class="blog__item-property-two-box-two">
