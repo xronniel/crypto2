@@ -131,11 +131,7 @@
                 <p>{{$savedProperty->reference_number}}<p>
             @endif
         @endforeach
-
-
-
-
-
+   
             <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
             <p class="saved-properties-one">No Saved Properties</p>
             <p class="saved-properties-two">​To save a property to your favorites, click the <span>heart icon</span> on any
