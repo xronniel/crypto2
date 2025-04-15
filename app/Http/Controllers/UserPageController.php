@@ -32,7 +32,7 @@ class UserPageController extends Controller
                     }
                 );
             }
-        ])->where('user_id', $user->id)->get();
+        ])->where('user_id', $user->id)->paginate(10);
 
         foreach ($savedProperties as $savedProperty) {
             if ($savedProperty->propertyable instanceof \App\Models\Listing) {
@@ -57,8 +57,8 @@ class UserPageController extends Controller
                     }
                 );
             }
-        ])->where('user_id', $user->id)->get();
-
+        ])->where('user_id', $user->id)->paginate(10);
+        
         foreach ($contactedProperties as $contactedProperty) {
             if ($contactedProperty->propertyable instanceof \App\Models\Listing) {
                 $contactedProperty->propertyable->load('images');

@@ -10,15 +10,10 @@ class MortgageLandingPageController extends Controller
 {
     public function index()
     {
-        // Retrieve the first MortgageLandingPage item
         $page = MortgageLandingPage::first();
-
-        // Redirect to the appropriate view
-        if ($page) {
-            return redirect()->route('admin.mortgage-landing-page.edit', $page->id);
-        } else {
-            return redirect()->route('admin.mortgage-landing-page.create');
-        }
+        return $page
+            ? redirect()->route('admin.mortgage-landing-page.edit', $page->id)
+            : redirect()->route('admin.mortgage-landing-page.create');
     }
 
     public function create()
@@ -28,19 +23,38 @@ class MortgageLandingPageController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->only(['hero_title', 'trust_section_title', 'trust_section_image', 'step_section_title']);
-    
+        $request->validate([
+            'hero_title' => 'required|string|max:255',
+            'trust_section_title' => 'nullable|string|max:255',
+            'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'step_section_title' => 'nullable|string|max:255',
+            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // ✅ UPDATED
+        ]);
+
+        $data = $request->only(['hero_title', 'trust_section_title', 'step_section_title']);
+
+        // ✅ UPDATED: Handle trust_section_image upload
+        if ($request->hasFile('trust_section_image')) {
+            $data['trust_section_image'] = $request->file('trust_section_image')->store('trust_images', 'public');
+        }
+
         $page = MortgageLandingPage::create($data);
-    
+
+        // ✅ UPDATED: Handle trust item icon uploads
         if ($request->has('trust_items')) {
             foreach ($request->trust_items as $item) {
+                $iconPath = null;
+                if (isset($item['icon']) && is_file($item['icon'])) {
+                    $iconPath = $item['icon']->store('trust_icons', 'public');
+                }
+
                 $page->trustItems()->create([
-                    'icon' => $item['icon'] ?? null,
+                    'icon' => $iconPath,
                     'description' => $item['description'],
                 ]);
             }
         }
-    
+
         return redirect()->back()->with('success', 'Mortgage landing page created successfully!');
     }
 
@@ -51,37 +65,57 @@ class MortgageLandingPageController extends Controller
 
     public function update(Request $request, MortgageLandingPage $page)
     {
-        $data = $request->only(['hero_title', 'trust_section_title', 'trust_section_image', 'step_section_title']);
+        $request->validate([
+            'hero_title' => 'required|string|max:255',
+            'trust_section_title' => 'nullable|string|max:255',
+            'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'step_section_title' => 'nullable|string|max:255',
+            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // ✅ UPDATED
+        ]);
+
+        $data = $request->only(['hero_title', 'trust_section_title', 'step_section_title']);
+
+        // ✅ UPDATED: Image update for main section
+        if ($request->hasFile('trust_section_image')) {
+            $data['trust_section_image'] = $request->file('trust_section_image')->store('trust_images', 'public');
+        }
+
         $page->update($data);
 
         $existingIds = [];
 
+        // ✅ UPDATED: Loop through trust items and manage file uploads
         if ($request->has('trust_items')) {
             foreach ($request->trust_items as $item) {
-                if (isset($item['id'])) {
-                    // Update existing
-                    $trustItem = TrustItem::find($item['id']);
+                $iconPath = null;
+                if (isset($item['icon']) && is_file($item['icon'])) {
+                    $iconPath = $item['icon']->store('trust_icons', 'public');
+                }
+
+                if (!empty($item['id'])) {
+                    $trustItem = $page->trustItems()->find($item['id']);
                     if ($trustItem) {
                         $trustItem->update([
-                            'icon' => $item['icon'] ?? null,
+                            'icon' => $iconPath ?? $trustItem->icon, // Keep old if not updated
                             'description' => $item['description'],
                         ]);
                         $existingIds[] = $trustItem->id;
                     }
                 } else {
-                    // New item
-                    $page->trustItems()->create([
-                        'icon' => $item['icon'] ?? null,
+                    $newItem = $page->trustItems()->create([
+                        'icon' => $iconPath,
                         'description' => $item['description'],
                     ]);
+                    $existingIds[] = $newItem->id;
                 }
             }
         }
 
-        // Delete removed trust items
         $page->trustItems()->whereNotIn('id', $existingIds)->delete();
 
         return redirect()->back()->with('success', 'Mortgage landing page updated successfully!');
     }
+
+    
     
 }
