@@ -134,9 +134,12 @@
                         <select name="saved_category" id="sort-options-two" onchange="this.form.submit()">
                             <option value="" {{ request('saved_category') == '' ? 'selected' : '' }}>All</option>
                             <option value="buy" {{ request('saved_category') == 'buy' ? 'selected' : '' }}>Buy</option>
-                            <option value="rent" {{ request('saved_category') == 'rent' ? 'selected' : '' }}>Rent</option>
-                            <option value="commercial" {{ request('saved_category') == 'commercial' ? 'selected' : '' }}>Commercial</option>
-                            <option value="new_projects" {{ request('saved_category') == 'new_projects' ? 'selected' : '' }}>New Projects</option>
+                            <option value="rent" {{ request('saved_category') == 'rent' ? 'selected' : '' }}>Rent
+                            </option>
+                            <option value="commercial" {{ request('saved_category') == 'commercial' ? 'selected' : '' }}>
+                                Commercial</option>
+                            <option value="new_projects"
+                                {{ request('saved_category') == 'new_projects' ? 'selected' : '' }}>New Projects</option>
                         </select>
                     </div>
                 </form>
@@ -586,28 +589,37 @@ data-user-id="{{ auth()->user()->id }}"
                 <form class="search-form" action="{{ route('user.account') }}" method="GET">
                     <div class="page-line-filter-links-two">
                         <label for="sort-options">Agent Name :</label>
-                     
+
 
                         <span class="agent-account-search">
-                            <img class="Vector-img-two" src="{{asset('/assets/img/home/search-gray.png')}}" alt="">
-                            <input type="text" placeholder="Type Location or Agent Name" value="" name="agent_search">
+                            <img class="Vector-img-two" src="{{ asset('/assets/img/home/search-gray.png') }}"
+                                alt="">
+                            <input type="text" placeholder="Type Location or Agent Name" value=""
+                                name="agent_search">
                         </span>
                     </div>
                 </form>
                 <form action="{{ route('user.account') }}" method="GET">
                     <div class="page-line-filter-links-two">
-                        <img class="filter-links-two-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                        <img class="filter-links-two-img" src="{{ asset('assets/img/home/arrow.png') }}"
+                            alt="arrow">
                         <label class="lable-agent" for="sort-options">Category :</label>
                         <select name="contacted_category" id="sort-options-two" onchange="this.form.submit()">
-                            <option value="" {{ request('contacted_category') == '' ? 'selected' : '' }}>All</option>
-                            <option value="buy" {{ request('contacted_category') == 'buy' ? 'selected' : '' }}>Buy</option>
-                            <option value="rent" {{ request('contacted_category') == 'rent' ? 'selected' : '' }}>Rent</option>
-                            <option value="commercial" {{ request('contacted_category') == 'commercial' ? 'selected' : '' }}>Commercial</option>
-                            <option value="new_projects" {{ request('contacted_category') == 'new_projects' ? 'selected' : '' }}>New Projects</option>
+                            <option value="" {{ request('contacted_category') == '' ? 'selected' : '' }}>All
+                            </option>
+                            <option value="buy" {{ request('contacted_category') == 'buy' ? 'selected' : '' }}>Buy
+                            </option>
+                            <option value="rent" {{ request('contacted_category') == 'rent' ? 'selected' : '' }}>Rent
+                            </option>
+                            <option value="commercial"
+                                {{ request('contacted_category') == 'commercial' ? 'selected' : '' }}>Commercial</option>
+                            <option value="new_projects"
+                                {{ request('contacted_category') == 'new_projects' ? 'selected' : '' }}>New Projects
+                            </option>
                         </select>
                     </div>
                 </form>
-              
+
             </div>
 
             @if ($contactedProperties && $contactedProperties->isNotEmpty())
@@ -1226,7 +1238,7 @@ data-user-id="{{ auth()->user()->id }}"
             align-items: center;
 
             /*
-                                    gap: 36px; */
+                                        gap: 36px; */
             align-content: center;
             align-items: center;
 
@@ -1419,17 +1431,17 @@ data-user-id="{{ auth()->user()->id }}"
         }
 
 
-.user-account-filter{
-    display: flex;
-width: 100%;
-justify-content: flex-end;
-align-items: center;
-gap: 20px;
-}
+        .user-account-filter {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+        }
 
-.Vector-img-two{
-    width: 21px;
-}
+        .Vector-img-two {
+            width: 21px;
+        }
 
         .mobile-user {
             border: 1px solid #FFFFFF1A;
@@ -1452,19 +1464,19 @@ gap: 20px;
         .box-two-p-two {
             font-size: 17px;
         }
-.agent-account-search {
-    border: 1px solid #41445C;
-    padding: 4px 15px 4px 8px;
-    background: none;
-    border-radius: 3px;
-    border-width: 1px;
-    display: flex
-;
 
-    align-items: center;
-    gap: 13px;
+        .agent-account-search {
+            border: 1px solid #41445C;
+            padding: 4px 15px 4px 8px;
+            background: none;
+            border-radius: 3px;
+            border-width: 1px;
+            display: flex;
 
-}
+            align-items: center;
+            gap: 13px;
+
+        }
 
 
 
@@ -1520,31 +1532,31 @@ gap: 20px;
 
 
 
-        .agent-account-search  input[type="text"]{
-    background:  #080b18;
-    color: white;
-}
+        .agent-account-search input[type="text"] {
+            background: #080b18;
+            color: white;
+        }
 
-        
+
         @media (max-width: 986px) {
-    .lable-agent {
-        display: block !important;
+            .lable-agent {
+                display: block !important;
 
-    }
+            }
 
 
-    .user-account-filter{
+            .user-account-filter {
 
-justify-content: flex-start;
-display: flex
-;
-    width: 100%;
-    justify-content: flex-end;
-    align-items: flex-start;
-    gap: 20px;
-    flex-direction: column;
-}
-}
+                justify-content: flex-start;
+                display: flex;
+                width: 100%;
+                justify-content: flex-end;
+                align-items: flex-start;
+                gap: 20px;
+                flex-direction: column;
+            }
+        }
+
         @media (max-width: 900px) {
             .mobile-user {
                 display: flex;
@@ -1557,9 +1569,9 @@ display: flex
 
             }
 
-            .search-form{
-            width: 100%;
-        }
+            .search-form {
+                width: 100%;
+            }
 
             .container-user {
                 flex-direction: column;
@@ -1611,10 +1623,11 @@ display: flex
             .desk-user {
                 display: none;
             }
-            .agent-account-search {
-width: 100%;
 
-}
+            .agent-account-search {
+                width: 100%;
+
+            }
 
             .nav-button {
                 font-weight: 400;
