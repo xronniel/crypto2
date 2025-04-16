@@ -126,7 +126,21 @@
                 <span class="go-backto-sidebar-span">Saved Properties</span>
                 <div></div>
             </div>
-
+            <div class="user-account-filter">
+                <form action="{{ route('user.account') }}" method="GET">
+                    <div class="page-line-filter-links-two">
+                        <img class="filter-links-two-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                        <label class="lable-agent" for="sort-options">Category :</label>
+                        <select name="saved_category" id="sort-options-two" onchange="this.form.submit()">
+                            <option value="" {{ request('saved_category') == '' ? 'selected' : '' }}>All</option>
+                            <option value="buy" {{ request('saved_category') == 'buy' ? 'selected' : '' }}>Buy</option>
+                            <option value="rent" {{ request('saved_category') == 'rent' ? 'selected' : '' }}>Rent</option>
+                            <option value="commercial" {{ request('saved_category') == 'commercial' ? 'selected' : '' }}>Commercial</option>
+                            <option value="new_projects" {{ request('saved_category') == 'new_projects' ? 'selected' : '' }}>New Projects</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
             @if ($savedProperties && $savedProperties->isNotEmpty())
                 @foreach ($savedProperties as $savedProperty)
                     @php
@@ -286,12 +300,11 @@
 
                                         <div class="property-two-box-five-two"
                                             @auth
-                                                data-user-id="{{ auth()->user()->id }}"
+data-user-id="{{ auth()->user()->id }}"
                                                 data-property-id="{{ $property->id }}"
                                                 data-property-ref="{{ $property->property_ref_no }}"
                                                 data-url="{{ url()->current() }}"
-                                                data-property-type="listing"
-                                            @endauth>
+                                                data-property-type="listing" @endauth>
 
                                             <!-- Phone Call -->
                                             <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
@@ -502,13 +515,11 @@
 
                                         <div class="property-two-box-five-two"
                                             @auth
-                                            data-user-id="{{ auth()->user()->id }}"
+data-user-id="{{ auth()->user()->id }}"
                                             data-property-id="{{ $property->id }}"
                                             data-property-ref="{{ $property->reference_number }}"
                                             data-url="{{ url()->current() }}"  
-                                            data-property-type="holiday"
-                                            
-                                            @endauth>
+                                            data-property-type="holiday" @endauth>
 
                                             <!-- Phone Call -->
                                             <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
@@ -571,447 +582,471 @@
             </div>
 
 
+            <div class="user-account-filter">
+                <form class="search-form" action="{{ route('user.account') }}" method="GET">
+                    <div class="page-line-filter-links-two">
+                        <label for="sort-options">Agent Name :</label>
+                     
 
+                        <span class="agent-account-search">
+                            <img class="Vector-img-two" src="{{asset('/assets/img/home/search-gray.png')}}" alt="">
+                            <input type="text" placeholder="Type Location or Agent Name" value="" name="agent_search">
+                        </span>
+                    </div>
+                </form>
+                <form action="{{ route('user.account') }}" method="GET">
+                    <div class="page-line-filter-links-two">
+                        <img class="filter-links-two-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="arrow">
+                        <label class="lable-agent" for="sort-options">Category :</label>
+                        <select name="contacted_category" id="sort-options-two" onchange="this.form.submit()">
+                            <option value="" {{ request('contacted_category') == '' ? 'selected' : '' }}>All</option>
+                            <option value="buy" {{ request('contacted_category') == 'buy' ? 'selected' : '' }}>Buy</option>
+                            <option value="rent" {{ request('contacted_category') == 'rent' ? 'selected' : '' }}>Rent</option>
+                            <option value="commercial" {{ request('contacted_category') == 'commercial' ? 'selected' : '' }}>Commercial</option>
+                            <option value="new_projects" {{ request('contacted_category') == 'new_projects' ? 'selected' : '' }}>New Projects</option>
+                        </select>
+                    </div>
+                </form>
+              
+            </div>
 
             @if ($contactedProperties && $contactedProperties->isNotEmpty())
-            @foreach ($contactedProperties as $savedProperty)
-                @php
-                    $property = $savedProperty->propertyable;
-                @endphp
+                @foreach ($contactedProperties as $savedProperty)
+                    @php
+                        $property = $savedProperty->propertyable;
+                    @endphp
 
-                <div class="saved-property-card">
-                    @if ($property instanceof \App\Models\Listing)
-                        <article style="cursor: pointer;"
-                            onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
-                            class="blog__item mt-30 blog__item-property">
-                            <div class="blog__item-property-one swiper">
-                                {{-- <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite"> --}}
-                                <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form"
-                                    style="display:inline;">
-                                    @csrf
-                                    <input type="hidden" name="propertyable_id" value="{{ $property->id }}">
-                                    <input type="hidden" name="propertyable_type" value="commercial">
-                                    <input type="hidden" name="property_ref_no"
-                                        value="{{ $property->property_ref_no }}">
+                    <div class="saved-property-card">
+                        @if ($property instanceof \App\Models\Listing)
+                            <article style="cursor: pointer;"
+                                onclick="window.location.href='{{ route('properties.show', ['property' => $property->property_ref_no]) }}'"
+                                class="blog__item mt-30 blog__item-property">
+                                <div class="blog__item-property-one swiper">
+                                    {{-- <img class="Favorite-green" src="assets/img/property/green-Favorite.png" alt="Favorite"> --}}
+                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form"
+                                        style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="propertyable_id" value="{{ $property->id }}">
+                                        <input type="hidden" name="propertyable_type" value="commercial">
+                                        <input type="hidden" name="property_ref_no"
+                                            value="{{ $property->property_ref_no }}">
 
-                                    <button class="Favorite-green" type="submit"
-                                        style="background: none; border: none; padding: 0; cursor: pointer;">
-                                        <img class="Favorite-green"
-                                            src="{{ asset('assets/img/property/green-Favorite.png') }}"
-                                            alt="Favorite">
-                                        <img class="Favorite-green"
-                                            src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
-                                    </button>
-                                </form>
+                                        <button class="Favorite-green" type="submit"
+                                            style="background: none; border: none; padding: 0; cursor: pointer;">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/green-Favorite.png') }}"
+                                                alt="Favorite">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                        </button>
+                                    </form>
 
-                                <img class="location-green"
-                                    src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
-                                <!-- Image Slider Count -->
-                                <div class="img-slider-count">
-                                    <img class="" src="{{ asset('assets/img/property/cam.png') }}"
-                                        alt="location">
-                                    <p>{{ $property->images->count() }}</p>
+                                    <img class="location-green"
+                                        src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
+                                    <!-- Image Slider Count -->
+                                    <div class="img-slider-count">
+                                        <img class="" src="{{ asset('assets/img/property/cam.png') }}"
+                                            alt="location">
+                                        <p>{{ $property->images->count() }}</p>
+                                    </div>
+
+
+                                    <div class="budge-three-div">
+                                        <!-- If Verified -->
+                                        @if ($property->verified == 1)
+                                            <p>
+                                                <img class=""
+                                                    src="{{ asset('assets/img/property/Verified-img.png') }}"
+                                                    alt="location">
+                                                Verified
+                                            </p>
+                                        @endif
+
+                                        <!-- If SuperAgent -->
+                                        @if ($property->superagent == 1)
+                                            <p>
+                                                <img class=""
+                                                    src="{{ asset('assets/img/property/SuperAgent-img.png') }}"
+                                                    alt="location">
+                                                SuperAgent
+                                            </p>
+                                        @endif
+
+                                        <!-- If New -->
+                                        @if ($property->new == 1)
+                                            <p>New</p>
+                                        @endif
+                                    </div>
+
+                                    <div class="swiper-wrapper">
+                                        @foreach ($property->images as $image)
+                                            <div class="swiper-slide">
+                                                <img class="blog__item-property-one-img-slide"
+                                                    src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}"
+                                                    alt="Property Image">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Pagination -->
+                                    <div class="swiper-pagination"></div>
                                 </div>
-
-
-                                <div class="budge-three-div">
-                                    <!-- If Verified -->
-                                    @if ($property->verified == 1)
-                                        <p>
-                                            <img class=""
-                                                src="{{ asset('assets/img/property/Verified-img.png') }}"
-                                                alt="location">
-                                            Verified
-                                        </p>
-                                    @endif
-
-                                    <!-- If SuperAgent -->
-                                    @if ($property->superagent == 1)
-                                        <p>
-                                            <img class=""
-                                                src="{{ asset('assets/img/property/SuperAgent-img.png') }}"
-                                                alt="location">
-                                            SuperAgent
-                                        </p>
-                                    @endif
-
-                                    <!-- If New -->
-                                    @if ($property->new == 1)
-                                        <p>New</p>
-                                    @endif
-                                </div>
-
-                                <div class="swiper-wrapper">
-                                    @foreach ($property->images as $image)
-                                        <div class="swiper-slide">
-                                            <img class="blog__item-property-one-img-slide"
-                                                src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}"
-                                                alt="Property Image">
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <!-- Pagination -->
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div style="background-image: url(assets/img/bg/tm_bg.png);
+                                <div style="background-image: url(assets/img/bg/tm_bg.png);
                             background-size: cover;
                         "
-                                class="blog__item-property-two">
-                                <div class="blog__item-property-two-big-box">
-                                    <div class="blog__item-property-two-box">
-                                        <h1 class="blog__item-property-two-title">{{ $property->unit_type }}</h1>
-                                        <p>Premium</p>
-                                    </div>
-                                    <div class="blog__item-property-two-box-two">
-                                        <div class="blog__item-property-two-box-one">
-                                            <p class="box-two-p-one">
-                                                {{ $property->getConvertedPrice()['converted_price'] }}({{ $property->getConvertedPrice()['currency_code'] }})
-                                            </p>
-                                            <p class="box-two-p-two">
-                                                {{ $property->price }} AED
-                                            </p>
+                                    class="blog__item-property-two">
+                                    <div class="blog__item-property-two-big-box">
+                                        <div class="blog__item-property-two-box">
+                                            <h1 class="blog__item-property-two-title">{{ $property->unit_type }}</h1>
+                                            <p>Premium</p>
                                         </div>
+                                        <div class="blog__item-property-two-box-two">
+                                            <div class="blog__item-property-two-box-one">
+                                                <p class="box-two-p-one">
+                                                    {{ $property->getConvertedPrice()['converted_price'] }}({{ $property->getConvertedPrice()['currency_code'] }})
+                                                </p>
+                                                <p class="box-two-p-two">
+                                                    {{ $property->price }} AED
+                                                </p>
+                                            </div>
 
-                                        <div class="blog__item-property-two-img">
-                                            <img src="assets/img/property/state-logo.jpeg" alt="logo">
+                                            <div class="blog__item-property-two-img">
+                                                <img src="assets/img/property/state-logo.jpeg" alt="logo">
+                                            </div>
+
                                         </div>
-
-                                    </div>
-                                    <div class="blog__item-property-two-box-three">
-                                        <p>{{ $property->property_title }}</p>
-                                    </div>
-                                    <div class="location-property-two-box-three">
-                                        <img src="{{ asset('assets/img/property/green-location.png') }}"
-                                            alt="location">
-                                        <p>Hattan, Arabian Ranches, Dubai</p>
-                                    </div>
-                                    <div class="property-two-box-four">
-                                        {{-- Rooms --}}
-                                        @if (isset($property->no_of_rooms) && $property->no_of_rooms > 0)
-                                            <img class="img-four"
-                                                src="{{ asset('assets/img/property/green-bed.png') }}"
-                                                alt="bed">
-                                            <p>{{ $property->no_of_rooms }}</p>
-                                            <img src="{{ asset('assets/img/property/pipeline.png') }}"
-                                                alt="pipeline">
-                                        @endif
-
-                                        {{-- Bathrooms --}}
-                                        @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
-                                            <img class="img-four"
-                                                src="{{ asset('assets/img/property/green-bath.png') }}"
-                                                alt="bath">
-                                            <p>{{ $property->no_of_bathroom }}</p>
-                                            <img src="{{ asset('assets/img/property/pipeline.png') }}"
-                                                alt="pipeline">
-                                        @endif
-
-                                        {{-- Built-Up Area --}}
-                                        @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
-                                            <img class="img-four"
-                                                src="{{ asset('assets/img/property/green-size.png') }}"
-                                                alt="size">
-                                            <p>{{ $property->unit_builtup_area }} {{ $property->unit_measure }}</p>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="property-two-box-five">
-
-                                    <div class="property-two-box-five-one">
-
-                                        <div class="property-two-box-five-one-img">
-                                            <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
+                                        <div class="blog__item-property-two-box-three">
+                                            <p>{{ $property->property_title }}</p>
                                         </div>
-                                        <div class="property-two-box-five-one-name">
-                                            <p>{{ $property->listing_agent }}</p>
-                                            <h4>Real Estate Agent</h4>
+                                        <div class="location-property-two-box-three">
+                                            <img src="{{ asset('assets/img/property/green-location.png') }}"
+                                                alt="location">
+                                            <p>Hattan, Arabian Ranches, Dubai</p>
+                                        </div>
+                                        <div class="property-two-box-four">
+                                            {{-- Rooms --}}
+                                            @if (isset($property->no_of_rooms) && $property->no_of_rooms > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-bed.png') }}"
+                                                    alt="bed">
+                                                <p>{{ $property->no_of_rooms }}</p>
+                                                <img src="{{ asset('assets/img/property/pipeline.png') }}"
+                                                    alt="pipeline">
+                                            @endif
+
+                                            {{-- Bathrooms --}}
+                                            @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-bath.png') }}"
+                                                    alt="bath">
+                                                <p>{{ $property->no_of_bathroom }}</p>
+                                                <img src="{{ asset('assets/img/property/pipeline.png') }}"
+                                                    alt="pipeline">
+                                            @endif
+
+                                            {{-- Built-Up Area --}}
+                                            @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-size.png') }}"
+                                                    alt="size">
+                                                <p>{{ $property->unit_builtup_area }} {{ $property->unit_measure }}</p>
+                                            @endif
                                         </div>
                                     </div>
 
+                                    <div class="property-two-box-five">
 
-                                    <div class="property-two-box-five-two"
-                                        @auth
-                                            data-user-id="{{ auth()->user()->id }}"
+                                        <div class="property-two-box-five-one">
+
+                                            <div class="property-two-box-five-one-img">
+                                                <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
+                                            </div>
+                                            <div class="property-two-box-five-one-name">
+                                                <p>{{ $property->listing_agent }}</p>
+                                                <h4>Real Estate Agent</h4>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="property-two-box-five-two"
+                                            @auth
+data-user-id="{{ auth()->user()->id }}"
                                             data-property-id="{{ $property->id }}"
                                             data-property-ref="{{ $property->property_ref_no }}"
                                             data-url="{{ url()->current() }}"
-                                            data-property-type="listing"
-                                        @endauth>
+                                            data-property-type="listing" @endauth>
 
-                                        <!-- Phone Call -->
-                                        <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
-                                            data-method="Call">
-                                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
-                                                alt="Call">
-                                            <span>Call</span>
-                                        </a>
+                                            <!-- Phone Call -->
+                                            <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
+                                                data-method="Call">
+                                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                    alt="Call">
+                                                <span>Call</span>
+                                            </a>
 
-                                        <!-- Email -->
-                                        <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
-                                            data-method="Email">
-                                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
-                                                alt="Email">
-                                            <span>Email</span>
-                                        </a>
+                                            <!-- Email -->
+                                            <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+                                                data-method="Email">
+                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                    alt="Email">
+                                                <span>Email</span>
+                                            </a>
 
-                                        <!-- WhatsApp -->
-                                        <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
-                                            class="contact-btn" data-method="WhatsApp" target="_blank">
-                                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
-                                                alt="WhatsApp">
-                                            <span>WhatsApp</span>
-                                        </a>
+                                            <!-- WhatsApp -->
+                                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+                                                class="contact-btn" data-method="WhatsApp" target="_blank">
+                                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                    alt="WhatsApp">
+                                                <span>WhatsApp</span>
+                                            </a>
+                                        </div>
+
+
                                     </div>
 
 
-                                </div>
 
 
-
-
-
-                            </div>
-                        </article>
-                    @elseif ($property instanceof \App\Models\HolidayProperty)
-                        <article style="cursor: pointer;"
-                            onclick="window.location.href='{{ route('holiday-properties.show', ['holidayProperty' => $property->reference_number]) }}'"
-                            class="blog__item mt-30 blog__item-property">
-                            <div class="blog__item-property-one swiper">
-                                <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form"
-                                    style="display:inline;">
-                                    @csrf
-                                    <input type="hidden" name="propertyable_id" value="{{ $property->id }}">
-                                    <input type="hidden" name="propertyable_type" value="holiday">
-                                    <input type="hidden" name="property_ref_no"
-                                        value="{{ $property->reference_number }}">
-
-                                    <button class="Favorite-green" type="submit"
-                                        style="background: none; border: none; padding: 0; cursor: pointer;">
-                                        <img class="Favorite-green"
-                                            src="{{ asset('assets/img/property/green-Favorite.png') }}"
-                                            alt="Favorite">
-                                        <img class="Favorite-green"
-                                            src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
-                                    </button>
-                                </form>
-
-
-                                <img class="location-green"
-                                    src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
-                                <!-- Image Slider Count -->
-                                <div class="img-slider-count">
-                                    <img class="" src="{{ asset('assets/img/property/cam.png') }}"
-                                        alt="location">
-                                    @php
-                                        $images = $property->holidayPhotos;
-                                    @endphp
-
-                                    <p>{{ is_array($images) || $images instanceof Countable ? count($images) : 0 }}</p>
 
                                 </div>
+                            </article>
+                        @elseif ($property instanceof \App\Models\HolidayProperty)
+                            <article style="cursor: pointer;"
+                                onclick="window.location.href='{{ route('holiday-properties.show', ['holidayProperty' => $property->reference_number]) }}'"
+                                class="blog__item mt-30 blog__item-property">
+                                <div class="blog__item-property-one swiper">
+                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form"
+                                        style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="propertyable_id" value="{{ $property->id }}">
+                                        <input type="hidden" name="propertyable_type" value="holiday">
+                                        <input type="hidden" name="property_ref_no"
+                                            value="{{ $property->reference_number }}">
+
+                                        <button class="Favorite-green" type="submit"
+                                            style="background: none; border: none; padding: 0; cursor: pointer;">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/green-Favorite.png') }}"
+                                                alt="Favorite">
+                                            <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                        </button>
+                                    </form>
 
 
-                                <div class="budge-three-div">
-                                    <!-- If Verified -->
-                                    @if ($property->verified == 1)
-                                        <p>
-                                            <img class=""
-                                                src="{{ asset('assets/img/property/Verified-img.png') }}"
-                                                alt="location">
-                                            Verified
-                                        </p>
-                                    @endif
-
-                                    <!-- If SuperAgent -->
-                                    @if ($property->superagent == 1)
-                                        <p>
-                                            <img class=""
-                                                src="{{ asset('assets/img/property/SuperAgent-img.png') }}"
-                                                alt="location">
-                                            SuperAgent
-                                        </p>
-                                    @endif
-
-                                    <!-- If New -->
-                                    @if ($property->new == 1)
-                                        <p>New</p>
-                                    @endif
-                                </div>
-
-                                <div class="swiper-wrapper">
-                                    @foreach ($property->holidayPhotos as $photo)
-                                        <div class="swiper-slide">
-                                            <img class="blog__item-property-one-img-slide" src="{{ $photo->url }}"
-                                                alt="Property Image">
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <!-- Pagination -->
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div style="background-image: url(assets/img/bg/tm_bg.png);
-                            background-size: cover;
-                        "
-                                class="blog__item-property-two">
-                                <div class="blog__item-property-two-big-box">
-                                    <div class="blog__item-property-two-box">
+                                    <img class="location-green"
+                                        src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
+                                    <!-- Image Slider Count -->
+                                    <div class="img-slider-count">
+                                        <img class="" src="{{ asset('assets/img/property/cam.png') }}"
+                                            alt="location">
                                         @php
-                                            $offeringTypeMap = [
-                                                'AP' => ['Apartment', 'apartment.png'],
-                                                'VH' => ['Villa', 'villa.png'],
-                                                'OF' => ['Office', 'office.png'],
-                                                'ST' => ['Studio', 'studio.png'],
-                                                // Add more types as needed
-                                            ];
-
-                                            $typeCode = $property->property_type;
-                                            $offeringType = $offeringTypeMap[$typeCode] ?? [
-                                                'Unknown',
-                                                'default.png',
-                                            ];
+                                            $images = $property->holidayPhotos;
                                         @endphp
 
-                                        <h1 class="blog__item-property-two-title">
-                                            {{ $offeringType[0] }}
-                                        </h1>
+                                        <p>{{ is_array($images) || $images instanceof Countable ? count($images) : 0 }}
+                                        </p>
 
-                                        <p>Premium</p>
                                     </div>
-                                    <div class="blog__item-property-two-box-two">
-                                        <div class="blog__item-property-two-box-one">
-                                            {{-- <p class="box-two-p-one">
+
+
+                                    <div class="budge-three-div">
+                                        <!-- If Verified -->
+                                        @if ($property->verified == 1)
+                                            <p>
+                                                <img class=""
+                                                    src="{{ asset('assets/img/property/Verified-img.png') }}"
+                                                    alt="location">
+                                                Verified
+                                            </p>
+                                        @endif
+
+                                        <!-- If SuperAgent -->
+                                        @if ($property->superagent == 1)
+                                            <p>
+                                                <img class=""
+                                                    src="{{ asset('assets/img/property/SuperAgent-img.png') }}"
+                                                    alt="location">
+                                                SuperAgent
+                                            </p>
+                                        @endif
+
+                                        <!-- If New -->
+                                        @if ($property->new == 1)
+                                            <p>New</p>
+                                        @endif
+                                    </div>
+
+                                    <div class="swiper-wrapper">
+                                        @foreach ($property->holidayPhotos as $photo)
+                                            <div class="swiper-slide">
+                                                <img class="blog__item-property-one-img-slide" src="{{ $photo->url }}"
+                                                    alt="Property Image">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <!-- Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                                <div style="background-image: url(assets/img/bg/tm_bg.png);
+                            background-size: cover;
+                        "
+                                    class="blog__item-property-two">
+                                    <div class="blog__item-property-two-big-box">
+                                        <div class="blog__item-property-two-box">
+                                            @php
+                                                $offeringTypeMap = [
+                                                    'AP' => ['Apartment', 'apartment.png'],
+                                                    'VH' => ['Villa', 'villa.png'],
+                                                    'OF' => ['Office', 'office.png'],
+                                                    'ST' => ['Studio', 'studio.png'],
+                                                    // Add more types as needed
+                                                ];
+
+                                                $typeCode = $property->property_type;
+                                                $offeringType = $offeringTypeMap[$typeCode] ?? [
+                                                    'Unknown',
+                                                    'default.png',
+                                                ];
+                                            @endphp
+
+                                            <h1 class="blog__item-property-two-title">
+                                                {{ $offeringType[0] }}
+                                            </h1>
+
+                                            <p>Premium</p>
+                                        </div>
+                                        <div class="blog__item-property-two-box-two">
+                                            <div class="blog__item-property-two-box-one">
+                                                {{-- <p class="box-two-p-one">
             {{ $property->getConvertedPrice()['converted_price'] }}({{ $property->getConvertedPrice()['currency_code'] }})
         </p> --}}
-                                            <p class="box-two-p-two">
-                                                {{ $property->price }} AED
-                                            </p>
+                                                <p class="box-two-p-two">
+                                                    {{ $property->price }} AED
+                                                </p>
+                                            </div>
+
+                                            <div class="blog__item-property-two-img">
+                                                <img src="assets/img/property/state-logo.jpeg" alt="logo">
+                                            </div>
+
                                         </div>
-
-                                        <div class="blog__item-property-two-img">
-                                            <img src="assets/img/property/state-logo.jpeg" alt="logo">
+                                        <div class="blog__item-property-two-box-three">
+                                            <p>{{ $property->title_en }}</p>
                                         </div>
-
-                                    </div>
-                                    <div class="blog__item-property-two-box-three">
-                                        <p>{{ $property->title_en }}</p>
-                                    </div>
-                                    <div class="location-property-two-box-three">
-                                        <img src="{{ asset('assets/img/property/green-location.png') }}"
-                                            alt="location">
-                                        <p>Hattan, Arabian Ranches, Dubai</p>
-                                    </div>
-                                    <div class="property-two-box-four">
-                                        {{-- Rooms --}}
-                                        @if (isset($property->bathroom) && $property->bathroom > 0)
-                                            <img class="img-four"
-                                                src="{{ asset('assets/img/property/green-bed.png') }}"
-                                                alt="bed">
-                                            <p>{{ $property->bathroom }}</p>
-                                            <img src="{{ asset('assets/img/property/pipeline.png') }}"
-                                                alt="pipeline">
-                                        @endif
-
-                                        {{-- Bathrooms --}}
-                                        @if (isset($property->bedroom) && $property->bedroom > 0)
-                                            <img class="img-four"
-                                                src="{{ asset('assets/img/property/green-bath.png') }}"
-                                                alt="bath">
-                                            <p>{{ $property->bedroom }}</p>
-                                            <img src="{{ asset('assets/img/property/pipeline.png') }}"
-                                                alt="pipeline">
-                                        @endif
-
-                                        {{-- Built-Up Area --}}
-                                        @if (isset($property->size) && $property->size > 0)
-                                            <img class="img-four"
-                                                src="{{ asset('assets/img/property/green-size.png') }}"
-                                                alt="size">
-                                            <p>d{{ $property->size }} Sq.Ft.</p>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="property-two-box-five">
-
-                                    <div class="property-two-box-five-one">
-
-                                        <div class="property-two-box-five-one-img">
-                                            <img src="{{ asset($property->agent_photo) }}" alt="person">
+                                        <div class="location-property-two-box-three">
+                                            <img src="{{ asset('assets/img/property/green-location.png') }}"
+                                                alt="location">
+                                            <p>Hattan, Arabian Ranches, Dubai</p>
                                         </div>
-                                        <div class="property-two-box-five-one-name">
-                                            <p>{{ $property->agent_name }}</p>
-                                            <h4>Real Estate Agent</h4>
+                                        <div class="property-two-box-four">
+                                            {{-- Rooms --}}
+                                            @if (isset($property->bathroom) && $property->bathroom > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-bed.png') }}"
+                                                    alt="bed">
+                                                <p>{{ $property->bathroom }}</p>
+                                                <img src="{{ asset('assets/img/property/pipeline.png') }}"
+                                                    alt="pipeline">
+                                            @endif
+
+                                            {{-- Bathrooms --}}
+                                            @if (isset($property->bedroom) && $property->bedroom > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-bath.png') }}"
+                                                    alt="bath">
+                                                <p>{{ $property->bedroom }}</p>
+                                                <img src="{{ asset('assets/img/property/pipeline.png') }}"
+                                                    alt="pipeline">
+                                            @endif
+
+                                            {{-- Built-Up Area --}}
+                                            @if (isset($property->size) && $property->size > 0)
+                                                <img class="img-four"
+                                                    src="{{ asset('assets/img/property/green-size.png') }}"
+                                                    alt="size">
+                                                <p>d{{ $property->size }} Sq.Ft.</p>
+                                            @endif
                                         </div>
                                     </div>
 
+                                    <div class="property-two-box-five">
 
-                                    <div class="property-two-box-five-two"
-                                        @auth
-                                        data-user-id="{{ auth()->user()->id }}"
+                                        <div class="property-two-box-five-one">
+
+                                            <div class="property-two-box-five-one-img">
+                                                <img src="{{ asset($property->agent_photo) }}" alt="person">
+                                            </div>
+                                            <div class="property-two-box-five-one-name">
+                                                <p>{{ $property->agent_name }}</p>
+                                                <h4>Real Estate Agent</h4>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="property-two-box-five-two"
+                                            @auth
+data-user-id="{{ auth()->user()->id }}"
                                         data-property-id="{{ $property->id }}"
                                         data-property-ref="{{ $property->reference_number }}"
                                         data-url="{{ url()->current() }}"  
-                                        data-property-type="holiday"
-                                        
-                                        @endauth>
+                                        data-property-type="holiday" @endauth>
 
-                                        <!-- Phone Call -->
-                                        <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
-                                            data-method="Call">
-                                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
-                                                alt="Call">
-                                            <span>Call</span>
-                                        </a>
+                                            <!-- Phone Call -->
+                                            <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
+                                                data-method="Call">
+                                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                    alt="Call">
+                                                <span>Call</span>
+                                            </a>
 
-                                        <!-- Email -->
-                                        <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
-                                            data-method="Email">
-                                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
-                                                alt="Email">
-                                            <span>Email</span>
-                                        </a>
+                                            <!-- Email -->
+                                            <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+                                                data-method="Email">
+                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                    alt="Email">
+                                                <span>Email</span>
+                                            </a>
 
-                                        <!-- WhatsApp -->
-                                        <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
-                                            class="contact-btn" data-method="WhatsApp" target="_blank">
-                                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
-                                                alt="WhatsApp">
-                                            <span>WhatsApp</span>
-                                        </a>
+                                            <!-- WhatsApp -->
+                                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+                                                class="contact-btn" data-method="WhatsApp" target="_blank">
+                                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                    alt="WhatsApp">
+                                                <span>WhatsApp</span>
+                                            </a>
+                                        </div>
+
+
                                     </div>
 
 
+
+
+
                                 </div>
+                            </article>
+                        @endif
+                    </div>
+                @endforeach
 
-
-
-
-
-                            </div>
-                        </article>
-                    @endif
-                </div>
-            @endforeach
-
-            {{-- end card   --}}
-            {{ $savedProperties->links() }}
-        @else
-  
+                {{-- end card   --}}
+                {{ $savedProperties->links() }}
+            @else
                 <img src="{{ asset('/assets/img/user/contact-animated.png') }}" alt="">
                 <p class="saved-properties-one">No Contacted Properties</p>
                 <p class="saved-properties-two">You haven't reached out to any properties yet. To inquire about a property,
-                    click the <span>"Send Message"</span> button or any of the contact links like Whatsapp, Email, or Telephone
-                    on any listing. All your contacted properties will be conveniently accessible here for easy reference and
+                    click the <span>"Send Message"</span> button or any of the contact links like Whatsapp, Email, or
+                    Telephone
+                    on any listing. All your contacted properties will be conveniently accessible here for easy reference
+                    and
                     follow-up.</p>
-         
-        @endif
+            @endif
 
 
 
-            
 
-         
+
+
         </div>
     </div>
     <script>
@@ -1191,7 +1226,7 @@
             align-items: center;
 
             /*
-                                gap: 36px; */
+                                    gap: 36px; */
             align-content: center;
             align-items: center;
 
@@ -1384,7 +1419,17 @@
         }
 
 
+.user-account-filter{
+    display: flex;
+width: 100%;
+justify-content: flex-end;
+align-items: center;
+gap: 20px;
+}
 
+.Vector-img-two{
+    width: 21px;
+}
 
         .mobile-user {
             border: 1px solid #FFFFFF1A;
@@ -1407,7 +1452,24 @@
         .box-two-p-two {
             font-size: 17px;
         }
+.agent-account-search {
+    border: 1px solid #41445C;
+    padding: 4px 15px 4px 8px;
+    background: none;
+    border-radius: 3px;
+    border-width: 1px;
+    display: flex
+;
 
+    align-items: center;
+    gap: 13px;
+
+}
+
+
+.agent-account-search  input[type="text"]{
+    background:  #080b18;
+}
         .swiper-slide img {
             border-radius: 5px 0 0 5px;
         }
@@ -1443,6 +1505,11 @@
             font-size: 12px;
         }
 
+
+        .search-form{
+            width: 100%;
+        }
+
         .blog__item-property-two-box-one {
             display: flex;
             align-items: center;
@@ -1457,6 +1524,30 @@
             gap: 5px;
         }
 
+
+
+
+
+        
+        @media (max-width: 986px) {
+    .lable-agent {
+        display: block !important;
+
+    }
+
+
+    .user-account-filter{
+
+justify-content: flex-start;
+display: flex
+;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 20px;
+    flex-direction: column;
+}
+}
         @media (max-width: 900px) {
             .mobile-user {
                 display: flex;
@@ -1519,6 +1610,10 @@
             .desk-user {
                 display: none;
             }
+            .agent-account-search {
+width: 100%;
+
+}
 
             .nav-button {
                 font-weight: 400;
