@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
 use App\Models\MortgageLandingPage;
 use App\Models\Partner;
 use App\Models\TrustItem;
@@ -13,8 +14,8 @@ class MortgageLandingPageController extends Controller
     {
         $page = MortgageLandingPage::with('trustItems', 'stepItems')->first();
         $partners = Partner::all();
-
-        return view('mortgage', compact('page', 'partners'));
+        $faqs = Faq::all();
+        return view('mortgage', compact('page', 'partners', 'faqs'));
     }
 
     public function index()
