@@ -55,7 +55,7 @@
                                 </ul>
                             </li> --}}
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>Mortgages</span></a>
+                                <a class="scrollspy-btn" href="{{route('mortgage-calculator')}}"><span>Mortgages</span></a>
                             </li>
                         </ul>
                     </nav>
