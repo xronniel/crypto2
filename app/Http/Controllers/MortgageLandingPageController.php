@@ -15,6 +15,7 @@ class MortgageLandingPageController extends Controller
         $page = MortgageLandingPage::with('trustItems', 'stepItems')->first();
         $partners = Partner::all();
         $faqs = Faq::all();
+ 
         return view('mortgage', compact('page', 'partners', 'faqs'));
     }
 

@@ -12,7 +12,7 @@
             <p><strong>Phone:</strong> {{ $lead->phone ?? 'N/A' }}</p>
             <p><strong>Message:</strong> {{ $lead->message }}</p>
             <p><strong>Source Page:</strong> {{ $lead->source_page }}</p>
-            <p><strong>Property Name:</strong> {{ $type === 'holiday' ? $property->title_en : $property->property_name }}</p>
+            <p><strong>Property Name:</strong> {{ $type === 'holiday' ? $property->property_name : $property->property_name }}</p>
             <p><strong>Property Ref No:</strong> {{ $lead->property_ref_no ?? 'N/A' }}</p>
             <p><strong>Created At:</strong> {{ $lead->created_at->format('F j, Y g:i A') }}</p>
 
