@@ -5,60 +5,126 @@
     @endif
 
     <!-- Hero Title -->
-    <input type="text" name="hero_title" value="{{ old('hero_title', $page->hero_title ?? '') }}" placeholder="Hero Title" class="form-control mb-2">
+    <label for="hero_title" class="form-label">Hero Title</label>
+    <input type="text" id="hero_title" name="hero_title" value="{{ old('hero_title', $page->hero_title ?? '') }}" placeholder="Hero Title" class="form-control mb-2">
 
     <!-- Trust Section Title -->
-    <input type="text" name="trust_section_title" value="{{ old('trust_section_title', $page->trust_section_title ?? '') }}" placeholder="Trust Section Title" class="form-control mb-2">
+    <label for="trust_section_title" class="form-label">Trust Section Title</label>
+    <input type="text" id="trust_section_title" name="trust_section_title" value="{{ old('trust_section_title', $page->trust_section_title ?? '') }}" placeholder="Trust Section Title" class="form-control mb-2">
 
+    <!-- Trust Section Image -->
+    <label for="trust_section_image" class="form-label">Trust Section Image</label>
     @if(isset($page) && $page->trust_section_image)
         <div class="mb-2">
              <img src="{{ asset('storage/' . $page->trust_section_image) }}" alt="Trust Image" width="150">
-         </div>
+        </div>
     @endif
-    <input type="file" name="trust_section_image" class="form-control mb-2">
+    <input type="file" id="trust_section_image" name="trust_section_image" class="form-control mb-2">
 
-    <!-- Step Section Title -->
-    <input type="text" name="step_section_title" value="{{ old('step_section_title', $page->step_section_title ?? '') }}" placeholder="Step Section Title" class="form-control mb-4">
-
+    <!-- Trust Items -->
     <h5>Trust Items</h5>
     <div id="trust-items-wrapper">
         @if(isset($page))
             @foreach($page->trustItems as $item)
-                <div class="trust-item-row mb-2">
+                <div class="trust-item-row mb-3 border p-2 rounded">
                     <input type="hidden" name="trust_items[{{ $loop->index }}][id]" value="{{ $item->id }}">
 
-                    <!-- UPDATED: Show existing icon image if present -->
+                    <!-- Icon Preview -->
                     @if($item->icon)
-                        <div class="mb-1">
+                        <label class="form-label d-block">Current Icon</label>
+                        <div class="mb-2">
                             <img src="{{ asset('storage/' . $item->icon) }}" width="50" alt="Icon">
                         </div>
                     @endif
 
-                    <!-- UPDATED: File input for icon upload -->
-                    <input type="file" name="trust_items[{{ $loop->index }}][icon]" class="form-control mb-1">
+                    <!-- Icon Upload -->
+                    <label class="form-label">Upload Icon</label>
+                    <input type="file" name="trust_items[{{ $loop->index }}][icon]" class="form-control mb-2">
 
-                    <input type="text" name="trust_items[{{ $loop->index }}][description]" value="{{ $item->description }}" placeholder="Description" class="form-control mb-1">
+                    <!-- Title -->
+                    <label class="form-label">Title</label>
+                    <input type="text" name="trust_items[{{ $loop->index }}][title]" value="{{ $item->title }}" placeholder="Title" class="form-control mb-2">
+
+                    <!-- Description -->
+                    <label class="form-label">Description</label>
+                    <input type="text" name="trust_items[{{ $loop->index }}][description]" value="{{ $item->description }}" placeholder="Description" class="form-control mb-2">
+
                     <button type="button" class="btn btn-danger btn-sm remove-trust-item">X</button>
                 </div>
             @endforeach
         @endif
     </div>
+    <button type="button" id="add-trust-item" class="btn btn-outline-primary btn-sm mt-2">
+        <i class="bi bi-plus-circle me-1"></i> Add Trust Item
+    </button>
 
-    <button type="button" id="add-trust-item" class="btn btn-secondary btn-sm">+ Add Trust Item</button>
+        <!-- Step Section Title -->
+        <label for="step_section_title" class="form-label">Step Section Title</label>
+        <input type="text" id="step_section_title" name="step_section_title" value="{{ old('step_section_title', $page->step_section_title ?? '') }}" placeholder="Step Section Title" class="form-control mb-4">
 
-    <button type="submit" class="btn btn-success mt-4">Save</button>
+    <!-- Step Items -->
+    <h5 class="mt-4">Step Items</h5>
+    <div id="step-items-wrapper">
+        @if(isset($page))
+            @foreach($page->stepItems as $item)
+                <div class="step-item-row mb-3 border p-2 rounded">
+                    <input type="hidden" name="step_items[{{ $loop->index }}][id]" value="{{ $item->id }}">
+
+                    <!-- Icon Preview -->
+                    @if($item->icon)
+                        <label class="form-label d-block">Current Icon</label>
+                        <div class="mb-2">
+                            <img src="{{ asset('storage/' . $item->icon) }}" width="50" alt="Icon">
+                        </div>
+                    @endif
+
+                    <!-- Icon Upload -->
+                    <label class="form-label">Upload Icon</label>
+                    <input type="file" name="step_items[{{ $loop->index }}][icon]" class="form-control mb-2">
+
+                    <!-- Title -->
+                    <label class="form-label">Title</label>
+                    <input type="text" name="step_items[{{ $loop->index }}][title]" value="{{ $item->title }}" placeholder="Title" class="form-control mb-2">
+
+                    <!-- Description -->
+                    <label class="form-label">Description</label>
+                    <input type="text" name="step_items[{{ $loop->index }}][description]" value="{{ $item->description }}" placeholder="Description" class="form-control mb-2">
+
+                    <button type="button" class="btn btn-danger btn-sm remove-step-item">X</button>
+                </div>
+            @endforeach
+        @endif
+    </div>
+    <button type="button" id="add-step-item" class="btn btn-outline-primary btn-sm mt-2">
+        <i class="bi bi-plus-circle me-1"></i> Add Step Item
+    </button>
+
+    <!-- Submit Button -->
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-success btn-lg px-5">
+            <i class="bi bi-save me-2"></i> Save
+        </button>
+    </div>
 </form>
 
 <script>
     let trustItemIndex = {{ isset($page) ? $page->trustItems->count() : 0 }};
+    let stepItemIndex = {{ isset($page) ? $page->stepItems->count() : 0 }};
+
+    // Add Trust Item
     document.getElementById('add-trust-item').addEventListener('click', function () {
         const wrapper = document.getElementById('trust-items-wrapper');
-
-        // UPDATED: Add file input for icon
         const html = `
-            <div class="trust-item-row mb-2">
-                <input type="file" name="trust_items[${trustItemIndex}][icon]" class="form-control mb-1">
-                <input type="text" name="trust_items[${trustItemIndex}][description]" placeholder="Description" class="form-control mb-1">
+            <div class="trust-item-row mb-3 border p-2 rounded">
+                <label class="form-label">Upload Icon</label>
+                <input type="file" name="trust_items[${trustItemIndex}][icon]" class="form-control mb-2">
+                
+                <label class="form-label">Title</label>
+                <input type="text" name="trust_items[${trustItemIndex}][title]" placeholder="Title" class="form-control mb-2">
+                
+                <label class="form-label">Description</label>
+                <input type="text" name="trust_items[${trustItemIndex}][description]" placeholder="Description" class="form-control mb-2">
+                
                 <button type="button" class="btn btn-danger btn-sm remove-trust-item">X</button>
             </div>
         `;
@@ -66,9 +132,38 @@
         trustItemIndex++;
     });
 
+    // Add Step Item
+    document.getElementById('add-step-item').addEventListener('click', function () {
+        const wrapper = document.getElementById('step-items-wrapper');
+        const html = `
+            <div class="step-item-row mb-3 border p-2 rounded">
+                <label class="form-label">Upload Icon</label>
+                <input type="file" name="step_items[${stepItemIndex}][icon]" class="form-control mb-2">
+                
+                <label class="form-label">Title</label>
+                <input type="text" name="step_items[${stepItemIndex}][title]" placeholder="Title" class="form-control mb-2">
+                
+                <label class="form-label">Description</label>
+                <input type="text" name="step_items[${stepItemIndex}][description]" placeholder="Description" class="form-control mb-2">
+                
+                <button type="button" class="btn btn-danger btn-sm remove-step-item">X</button>
+            </div>
+        `;
+        wrapper.insertAdjacentHTML('beforeend', html);
+        stepItemIndex++;
+    });
+
+    // Remove Trust Item
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('remove-trust-item')) {
-            e.target.parentElement.remove();
+            e.target.closest('.trust-item-row').remove();
+        }
+    });
+
+    // Remove Step Item
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-step-item')) {
+            e.target.closest('.step-item-row').remove();
         }
     });
 </script>

@@ -12,6 +12,7 @@ class TrustItem extends Model
     protected $fillable = [
         'mortgage_landing_page_id',
         'icon',
+        'title',
         'description',
     ];
 

@@ -132,9 +132,5 @@ Route::post('/currency/select', [CurrencyController::class, 'selectCurrency'])->
 Route::get('/agents', [AgentController::class, 'userIndex'])->name('agents.index');
 Route::get('/agents/{agent}', [AgentController::class, 'userShow'])->name('agents.show');
 
-
-Route::get('/mortgage', function () {
-    return view('mortgage');
-})->name('mortgage');
-
+Route::get('mortgage-calculator',[MortgageLandingPageController::class, 'userIndex'])->name('mortgage-calculator');
 

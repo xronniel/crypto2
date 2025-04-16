@@ -3,11 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\MortgageLandingPage;
+use App\Models\Partner;
 use App\Models\TrustItem;
 use Illuminate\Http\Request;
 
 class MortgageLandingPageController extends Controller
 {
+    public function userIndex()
+    {
+        $page = MortgageLandingPage::with('trustItems', 'stepItems')->first();
+        $partners = Partner::all();
+
+        return view('mortgage', compact('page', 'partners'));
+    }
+
     public function index()
     {
         $page = MortgageLandingPage::first();
@@ -28,7 +37,12 @@ class MortgageLandingPageController extends Controller
             'trust_section_title' => 'nullable|string|max:255',
             'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'step_section_title' => 'nullable|string|max:255',
-            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // ✅ UPDATED
+            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'trust_items.*.title' => 'nullable|string|max:255',
+            'trust_items.*.description' => 'nullable|string|max:255',
+            'step_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'step_items.*.title' => 'nullable|string|max:255',
+            'step_items.*.description' => 'nullable|string|max:255',
         ]);
 
         $data = $request->only(['hero_title', 'trust_section_title', 'step_section_title']);
@@ -50,7 +64,23 @@ class MortgageLandingPageController extends Controller
 
                 $page->trustItems()->create([
                     'icon' => $iconPath,
+                    'title' => $item['title'] ?? null, // Save title
                     'description' => $item['description'],
+                ]);
+            }
+        }
+
+        if ($request->has('step_items')) {
+            foreach ($request->step_items as $item) {
+                $iconPath = null;
+                if (isset($item['icon']) && is_file($item['icon'])) {
+                    $iconPath = $item['icon']->store('step_icons', 'public');
+                }
+    
+                $page->stepItems()->create([
+                    'icon' => $iconPath,
+                    'title' => $item['title'] ?? null,
+                    'description' => $item['description'] ?? null,
                 ]);
             }
         }
@@ -70,7 +100,12 @@ class MortgageLandingPageController extends Controller
             'trust_section_title' => 'nullable|string|max:255',
             'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'step_section_title' => 'nullable|string|max:255',
-            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048', // ✅ UPDATED
+            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'trust_items.*.title' => 'nullable|string|max:255',
+            'trust_items.*.description' => 'nullable|string|max:255',
+            'step_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'step_items.*.title' => 'nullable|string|max:255',
+            'step_items.*.description' => 'nullable|string|max:255',
         ]);
 
         $data = $request->only(['hero_title', 'trust_section_title', 'step_section_title']);
@@ -83,6 +118,7 @@ class MortgageLandingPageController extends Controller
         $page->update($data);
 
         $existingIds = [];
+        $existingStepIds = [];
 
         // ✅ UPDATED: Loop through trust items and manage file uploads
         if ($request->has('trust_items')) {
@@ -97,6 +133,7 @@ class MortgageLandingPageController extends Controller
                     if ($trustItem) {
                         $trustItem->update([
                             'icon' => $iconPath ?? $trustItem->icon, // Keep old if not updated
+                            'title' => $item['title'] ?? $trustItem->title, // Update title
                             'description' => $item['description'],
                         ]);
                         $existingIds[] = $trustItem->id;
@@ -104,6 +141,7 @@ class MortgageLandingPageController extends Controller
                 } else {
                     $newItem = $page->trustItems()->create([
                         'icon' => $iconPath,
+                        'title' => $item['title'] ?? null,
                         'description' => $item['description'],
                     ]);
                     $existingIds[] = $newItem->id;
@@ -111,7 +149,36 @@ class MortgageLandingPageController extends Controller
             }
         }
 
+        if ($request->has('step_items')) {
+            foreach ($request->step_items as $item) {
+                $iconPath = null;
+                if (isset($item['icon']) && is_file($item['icon'])) {
+                    $iconPath = $item['icon']->store('step_icons', 'public');
+                }
+    
+                if (!empty($item['id'])) {
+                    $stepItem = $page->stepItems()->find($item['id']);
+                    if ($stepItem) {
+                        $stepItem->update([
+                            'icon' => $iconPath ?? $stepItem->icon,
+                            'title' => $item['title'] ?? $stepItem->title,
+                            'description' => $item['description'] ?? $stepItem->description,
+                        ]);
+                        $existingStepIds[] = $stepItem->id;
+                    }
+                } else {
+                    $newItem = $page->stepItems()->create([
+                        'icon' => $iconPath,
+                        'title' => $item['title'] ?? null,
+                        'description' => $item['description'] ?? null,
+                    ]);
+                    $existingStepIds[] = $newItem->id;
+                }
+            }
+        }
+
         $page->trustItems()->whereNotIn('id', $existingIds)->delete();
+        $page->stepItems()->whereNotIn('id', $existingStepIds)->delete();
 
         return redirect()->back()->with('success', 'Mortgage landing page updated successfully!');
     }

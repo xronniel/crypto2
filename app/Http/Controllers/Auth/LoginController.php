@@ -28,8 +28,13 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        if (Auth::check() && Auth::user()->hasRole('Admin')) {
-            return '/admin/homepage';
+        if (Auth::check()) {
+            if (Auth::user()->hasRole('Admin')) {
+                return '/admin/homepage';
+            }
+    
+            // Redirect non-admin authenticated users to /user/account
+            return '/user/account';
         }
 
         return '/';

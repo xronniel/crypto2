@@ -21,7 +21,7 @@ class ListingRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'agent_id' => 'nullable|exists:agents,id',
             'community_id' => 'nullable|exists:communities,id',
             'property_title' => 'required|string|max:255',
@@ -42,20 +42,20 @@ class ListingRequest extends FormRequest
             'plot_area' => 'nullable|numeric|min:0',
             'no_of_bathroom' => 'nullable|integer|min:0',
             'no_of_rooms' => 'nullable|integer|min:0',
-            'bedrooms' => 'nullable|integer|min:0',
+            'bedrooms' => 'required|integer|min:0',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
             'emirate' => 'nullable|string|max:255',
             'company_name' => 'nullable|string|max:255',
             'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'permit_number' => 'nullable|string|max:255',
-            'completion_status' => 'nullable|string|max:255',
+            'completion_status' => 'required|string|max:255',
             'listing_date' => 'nullable|date',
             'web_remarks' => 'nullable|string',
             'description' => 'nullable|string',
             'brochure' => 'nullable|mimes:pdf,jpeg,png,jpg,gif,svg',
             'floor_plan' => 'nullable|mimes:pdf,jpeg,png,jpg,gif,svg',
-            'cheques' => 'nullable|integer|min:1',
+            'cheques' => 'nullable|integer',
             'parking' => 'nullable|integer|min:0',
             'unit_measure' => 'nullable|string|max:255',
             'listing_agent_permit' => 'nullable|string|max:255',
@@ -84,5 +84,12 @@ class ListingRequest extends FormRequest
             'off_plan' => 'boolean',
             'last_updated' => 'nullable|date',
         ];
+    
+        // Add conditional validation for developer_id when off_plan is 1
+        if ($this->input('off_plan') == 1) {
+            $rules['developer_id'] = 'required|exists:developers,id';
+        }
+    
+        return $rules;
     }
 }

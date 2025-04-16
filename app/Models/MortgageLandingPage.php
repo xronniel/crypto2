@@ -20,4 +20,9 @@ class MortgageLandingPage extends Model
     {
         return $this->hasMany(TrustItem::class);
     }
+
+    public function stepItems()
+    {
+        return $this->hasMany(StepItem::class);
+    }
 }
