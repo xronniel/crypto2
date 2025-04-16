@@ -86,51 +86,51 @@ class UserPageController extends Controller
         }
 
         $contactedPropertiesQuery = UserContactedProperty::with([
-            'propertyable' => function ($query) {
-                $query->when($query->getModel() instanceof Listing, function ($q) {
-                    $q->with('images');
-                })->when($query->getModel() instanceof HolidayProperty, function ($q) {
-                    $q->with('holidayPhotos');
-                });
-            }
-        ])->where('user_id', $user->id);
-        
-        if (request()->has('contacted_category') || !empty($matchedAgentIds)) {
-            // Remove hardcoded `propertyable_type` = Listing::class
-            $contactedPropertiesQuery->whereHasMorph(
-                'propertyable',
-                [Listing::class, HolidayProperty::class],
-                function ($q, $type) use ($matchedAgentIds) {
-                    // Common agent_id filter for both models
-                    if (!empty($matchedAgentIds)) {
-                        $q->whereIn('agent_id', $matchedAgentIds);
-                    }
-        
-                    // Additional filters only for Listing model
-                    if ($type === Listing::class) {
-                        if (request('contacted_category') == 'rent') {
-                            $q->where('ad_type', 'Rent');
-                        }
-        
-                        if (request('contacted_category') == 'buy') {
-                            $q->where('ad_type', 'Sale');
-                        }
-        
-                        if (request('contacted_category') == 'new_projects') {
-                            $q->where('off_plan', 1);
-                        }
-        
-                        if (request('contacted_category') == 'commercial') {
-                            $q->where('type', 'Commercial');
-                        }
-        
-                        if (request('new') == 1) {
-                            $q->where('new', 1);
-                        }
-                    }
+                'propertyable' => function ($query) {
+                    $query->when($query->getModel() instanceof Listing, function ($q) {
+                        $q->with('images');
+                    })->when($query->getModel() instanceof HolidayProperty, function ($q) {
+                        $q->with('holidayPhotos');
+                    });
                 }
-            );
-        }
+            ])->where('user_id', $user->id);
+        
+            if (request()->has('contacted_category') || !empty($matchedAgentIds)) {
+                // Remove hardcoded `propertyable_type` = Listing::class
+                $contactedPropertiesQuery->whereHasMorph(
+                    'propertyable',
+                    [Listing::class, HolidayProperty::class],
+                    function ($q, $type) use ($matchedAgentIds) {
+                        // Common agent_id filter for both models
+                        if (!empty($matchedAgentIds)) {
+                            $q->whereIn('agent_id', $matchedAgentIds);
+                        }
+            
+                        // Additional filters only for Listing model
+                        if ($type === Listing::class) {
+                            if (request('contacted_category') == 'rent') {
+                                $q->where('ad_type', 'Rent');
+                            }
+            
+                            if (request('contacted_category') == 'buy') {
+                                $q->where('ad_type', 'Sale');
+                            }
+            
+                            if (request('contacted_category') == 'new_projects') {
+                                $q->where('off_plan', 1);
+                            }
+            
+                            if (request('contacted_category') == 'commercial') {
+                                $q->where('type', 'Commercial');
+                            }
+            
+                            if (request('new') == 1) {
+                                $q->where('new', 1);
+                            }
+                        }
+                    }
+                );
+            }
 
         
         // Get the properties, group by the property ID to ensure no duplicates
@@ -139,14 +139,26 @@ class UserPageController extends Controller
         // Paginate the results manually, since you're using `unique()` on the collection
         $contactedProperties = $contactedProperties->forPage(request()->get('page', 1), 10);
         
-        // Optional fallback eager loading
-        foreach ($contactedProperties as $contactedProperty) {
-            if ($contactedProperty->propertyable instanceof Listing) {
-                $contactedProperty->propertyable->loadMissing('images');
-            } elseif ($contactedProperty->propertyable instanceof HolidayProperty) {
-                $contactedProperty->propertyable->loadMissing('holidayPhotos');
-            }
+        $savedPropertyIds = UserSavedProperty::where('user_id', $user->id)
+        ->where('propertyable_type', Listing::class)
+        ->pluck('propertyable_id')
+        ->toArray();
+    
+    // Optional fallback eager loading + favorite tagging
+    foreach ($contactedProperties as $contactedProperty) {
+        $propertyable = $contactedProperty->propertyable;
+    
+        if ($propertyable instanceof Listing) {
+            $propertyable->loadMissing('images');
+            $contactedProperty->favorite = in_array($propertyable->id, $savedPropertyIds);
+        } elseif ($propertyable instanceof HolidayProperty) {
+            $propertyable->loadMissing('holidayPhotos');
+            $contactedProperty->favorite = false;
+        } else {
+            $contactedProperty->favorite = false;
         }
+    }
+
       
         return view('user.user-account', compact('user', 'phonecodes', 'savedProperties', 'contactedProperties'));
     }
