@@ -202,15 +202,15 @@
 	var slider = new Swiper(".partner-active", {
 		loop: true,
 		spaceBetween: 0,
-		speed: 5000, // Slow, continuous movement (adjust speed as needed)
+		speed: 5000, 
 		slidesPerView: 6,
-		// autoplay: {
-		// 	delay: 0, 
-		// 	disableOnInteraction: false, 
-		// },
-		freeMode: true, // Enables smooth, continuous scrolling
-		freeModeMomentum: false, // Prevents sudden stops after movement
-		allowTouchMove: false, // Prevents manual swiping
+		autoplay: {
+			delay: 0, 
+			disableOnInteraction: false, 
+		},
+		freeMode: true, 
+		freeModeMomentum: false, 
+		allowTouchMove: false, 
 		breakpoints: {
 			1600: { slidesPerView: 6 },
 			1200: { slidesPerView: 4 },
@@ -253,6 +253,34 @@
 			},
 		},
 	});
+
+
+
+
+
+
+
+
+
+	var slider = new Swiper(".partner-slider-three", {
+		loop: true,
+		spaceBetween: 20,
+		speed: 400,
+		slidesPerView: 9,
+		// autoplay: {
+		//     enabled: true,
+		//     delay: 6000
+		// },
+		breakpoints: {
+			1600: { slidesPerView: 4 },
+			1200: { slidesPerView: 4 },
+			992: { slidesPerView: 4 },
+			768: { slidesPerView: 3 },
+			576: { slidesPerView: 2 },
+			0: { slidesPerView: 1.3 }, 
+		},
+	});
+	
 
 	/*------------------------------------------
 	= footer-testimonial-slider

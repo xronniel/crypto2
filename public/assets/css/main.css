@@ -4945,7 +4945,7 @@ body[data-aos-easing="ease"] [data-aos] {
     padding-top: 200px;
     z-index: 1;
 }
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     .second-footer {
         padding-top: 200px;
     }
@@ -4954,7 +4954,7 @@ body[data-aos-easing="ease"] [data-aos] {
     .second-footer {
         padding-top: 180px;
     }
-}
+} */
 
 .footer-bg {
     position: absolute;
@@ -11155,12 +11155,15 @@ blockquote .quote {
 }
 @media (max-width: 991px) {
     .second-footer {
-        padding-top: 200px;
+        padding-top: 50px;
     }
 }
 @media (max-width: 767px) {
     .second-footer {
-        padding-top: 180px;
+        padding-top: 50px;
+    }
+    .pb-145 {
+        padding-bottom: 20px;
     }
 }
 
