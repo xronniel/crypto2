@@ -2,7 +2,7 @@
 @section('content')
 
 
-    {{ $property }}
+    {{-- {{ $property }} --}}
     <section style="background: #080B18;" class="blog pt-50 pb-50">
         <x-property-filter 
             :propertyTypes="$propertyTypes" 
@@ -541,7 +541,7 @@
         <div class="container">
             <div class="card-title">
                 <h1>More available in the same area</h1>
-                {{$propertiesSameArea}}
+                {{-- {{$propertiesSameArea}} --}}
             </div>
             <div class="row mt-none-30 justify-content-center">
                 <div class="col-lg-3 col-md-6 mt-30">
