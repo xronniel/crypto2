@@ -277,7 +277,7 @@ class PropertyController extends Controller
                     ];
              });
          
-        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches', 'request'));
+        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches', 'request', 'emirateCounts'));
     }
 
     public function show($property_ref_no)
