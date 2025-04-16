@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MortgageLandingPage;
+use App\Models\Partner;
 use App\Models\TrustItem;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,9 @@ class MortgageLandingPageController extends Controller
     public function userIndex()
     {
         $page = MortgageLandingPage::with('trustItems', 'stepItems')->first();
- 
-        return view('mortgage', compact('page'));
+        $partners = Partner::all();
+
+        return view('mortgage', compact('page', 'partners'));
     }
 
     public function index()
