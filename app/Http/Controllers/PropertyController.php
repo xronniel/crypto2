@@ -109,12 +109,14 @@ class PropertyController extends Controller
             $q->where('price', '<=', request('max_price'));
         });
 
-        $query->when(request('completion_status'), function ($q) {
-            if (request('completion_status') === 'ready') {
-                $q->whereIn('completion_status', ['completed_property', 'complete']);
-            } else {
-                $q->where('completion_status', request('completion_status'));
-            }
+        $query->when(request()->filled('completion_status'), function ($q) {
+            $status = request('completion_status');
+        
+            match ($status) {
+                'off_plan' => $q->where('off_plan', 1),
+                'ready'    => $q->whereIn('completion_status', ['completed_property', 'complete']),
+                default    => null,
+            };
         });
 
         $query->when($request->has('emirate') && $request->emirate != '', function ($q) use ($request) {
@@ -123,16 +125,6 @@ class PropertyController extends Controller
 
         $query->when($request->has('type') && $request->type != '', function ($q) use ($request) {
             $q->where('type', $request->type);
-        });
-
-        $query->when(request()->has('completion_status') && request('completion_status') !== '', function ($q) {
-            $status = request('completion_status');
-       
-            if ($status === 'off_plan') {
-                $q->where('completion_status', 'off_plan');
-            } elseif ($status === 'ready') {
-                $q->whereIn('completion_status', ['completed_property', 'complete']);
-            }
         });
 
         if ($request->has('furnishing') && !empty($request->furnishing)) {
@@ -273,8 +265,19 @@ class PropertyController extends Controller
                     'ad_type' => $item->ad_type,
                 ])->unique()->values()->all(),
             ];
+
+            $emirateCounts = Listing::select('emirate', DB::raw('COUNT(*) as count'))
+                ->groupBy('emirate')
+                ->orderByDesc('count')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'emirate' => $item->emirate,
+                        'count' => $item->count,
+                    ];
+             });
          
-        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches'));
+        return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches', 'request', 'emirateCounts'));
     }
 
     public function show($property_ref_no)
@@ -353,6 +356,14 @@ class PropertyController extends Controller
             'steps' => $steps,
         ];
 
-        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs', 'priceRange', 'plotAreaRange'));
+        $propertiesSameArea = Listing::with('images')
+            ->where('community', $property->community)
+            ->where('id', '!=', $property->id)
+            ->latest()
+            ->take(5)
+            ->get();
+        
+        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs', 'priceRange', 'plotAreaRange', 'propertiesSameArea'));
     }
+
 }

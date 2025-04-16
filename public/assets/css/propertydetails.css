@@ -396,7 +396,8 @@ position: relative;
     width: 60%;
 }
 .map-div-one {
-    width: 60%;
+    width: 100%;
+    height: 500px;
 }
 .Floor-Plan-div-two {
     width: 40%;

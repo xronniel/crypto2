@@ -733,6 +733,29 @@
 		},
 	});
 
+
+
+
+	const swiper = new Swiper('.Swiper-emirate', {
+		loop: true,
+		spaceBetween: 10,
+		freeMode: true,
+		slidesPerView: 1, // default (small screens)
+	
+		navigation: {
+			nextEl: '.swiper-button-next-emirate',
+			prevEl: '.swiper-button-prev-emirate',
+		},
+	
+		breakpoints: {
+			768: { slidesPerView: 2 },      // tablets
+			1024: { slidesPerView: 3 },     // small laptops
+			1280: { slidesPerView: 4 },     // medium desktops
+			1600: { slidesPerView: 5 },     // large screens
+		}
+	});
+	
+	
 	/*------------------------------------------
 	= ds-brand-slider
 	-------------------------------------------*/

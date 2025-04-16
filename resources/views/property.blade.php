@@ -10,7 +10,11 @@
     <section class="breadcrumb bg_img pos-rel" data-background="assets/img/bg/breadcrumb.jpg">
         <div class="container">
             <div class="breadcrumb__content">
+                @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
+                <h2 class="breadcrumb__title">Off-Plan Properties in Dubai</h2>
+                @else
                 <h2 class="breadcrumb__title">Properties for Sale in UAE</h2>
+                @endif
                 <ul style="    flex-direction: column;" class="bread-crumb clearfix ul_li_center">
                     <li class="breadcrumb-item"><a href="#">Items Found</a></li>
                     <li class="breadcrumb-item">{{ $properties->total() }} properties</li>
@@ -34,16 +38,27 @@
 
     </section>
     <!-- breadcrumb end -->
-
     <!-- blog start -->
     <section class="blog pt-130">
         <div class="container">
 
-            <div class="page-line-path">
-                <img src="assets/img/property/home.png" alt="home">
-                <img src="assets/img/property/right-arrow.png" alt="home">
-                <p>Properties for sale in UAE</p>
+            @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
+            <div onclick="window.location.href='/'" class="page-path-line">
+                <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
+                <p>Home</p>
+                <p class="active-path-line">/ properties for sale in uae</p>
             </div>
+            @else
+                <div class="page-line-path">
+                    <img src="assets/img/property/home.png" alt="home">
+                    <img src="assets/img/property/right-arrow.png" alt="home">
+                    <p>Properties for sale in UAE</p>
+                </div>
+            @endif
+      
+
+
+        
 
             <h2 class="page-line-title">
                 Buy Properties in Dubai
@@ -68,39 +83,38 @@
                     </div>
 
                 </div>
-
-
-                <div class="page-line-filter">
-
-                    <div class="page-line-filter-links-two mobile-view">
-                        <a href="#">
-                            <img style="    width: 22px;" class="page-line-filter-links-two-img"
-                                src="assets/img/property/location.png" alt="home">
-                            Map view</a>
-                        <a href="#">
-                            <img style="    width: 19px;" class="page-line-filter-links-two-img"
-                                src="assets/img/property/alert.png" alt="home">
-                            Create alert</a>
-                    </div>
-
-                    <form action="{{ route('properties.index') }}" method="GET">
-                        <div class="page-line-filter-links-two">
-                            <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
-                            <label for="sort-options">Sort by:</label>
-
-                            <select name="sort" id="sort-options" onchange="this.form.submit()">
-                                <option value="">Select an option</option>
-                                <option value="featured">Featured</option>
-                                <option value="newest">Newest</option>
-                                <option value="from_lowest_price">From Lowest Price</option>
-                                <option value="from_highest_price">From Highest Price</option>
-                            </select>
-                        </div>
-                    </form>
-
-                </div>
             </div>
 
+        
+                
+       
+
+            @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
+                
+                    <div class="emirate-title">Search by Locations</div>
+                    
+                    <div class="emirate-swiper-box">
+                        <div class="swiper Swiper-emirate">
+                            <div class="swiper-wrapper">
+                                @foreach ($emirateCounts as $emirate)
+                                    <div class="swiper-slide swiper-slide-emirate"
+                                        onclick="location.href='{{ url('properties?completion_status=off_plan&emirate=' . urlencode($emirate['emirate'])) }}'">
+                                        {{ $emirate['emirate'] }} ({{ $emirate['count'] }} projects)
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        
+                            <!-- Navigation arrows -->
+                            <div class="swiper-button-prev swiper-button-prev-emirate"></div>
+                            <div class="swiper-button-next swiper-button-next-emirate"></div>
+                    
+                    </div>
+
+            @endif
+
+
+         
 
             <div class="row mt-none-30">
                 <div class="col-lg-9 mt-30">
@@ -299,6 +313,15 @@
                 <div class="col-lg-3 mt-30">
                     <div class="sidebar-area mt-none-30">
 
+                        @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
+                        <div style="padding: 0;" class="widget widget-three mt-30">
+                            <img 
+                            style="height: 100%"
+                            src="{{ asset('assets/img/property/off-plan-map.png') }}" alt="amar">
+                        </div>
+                    @endif
+
+                      
                         <div class="widget  widget-one mt-30">
                             <h3 class="widget__title">Nearby Areas</h3>
                             <ul class="widget__category list-unstyled">
@@ -417,7 +440,105 @@
 
 
 
-        @media (max-width: 700px) {
+
+    .Swiper-emirate {
+        position: relative;
+        width: 92%;
+    justify-self: flex-start;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    }
+
+    .swiper-slide-emirate {
+
+ 
+
+   
+        font-size: 14px;
+        padding: 8px 12px;
+        text-align: center;
+        cursor: pointer;
+        flex-shrink: 0;
+
+        border: 1px solid #FFFFFF33;
+        border-radius: 3px;
+
+        font-family: "Manrope", sans-serif;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+letter-spacing: 0%;
+vertical-align: middle;
+color: #FFFFFF;
+
+    }
+
+    .swiper-button-prev-emirate,
+    .swiper-button-next-emirate {
+
+        position: absolute;
+        color: white;
+        z-index: 10;
+
+        font-size: 16px; /* smaller font size */
+    padding: 4px;     /* smaller clickable area */
+    width: 25px;      /* smaller width */
+    height: 25px;     /* smaller height */
+    }
+
+    .swiper-button-next-emirate:after,
+.swiper-button-prev-emirate:after {
+    font-size: 16px;
+    padding: 4px;
+    width: 25px;
+    height: 25px;
+}
+
+
+    .swiper-button-next-emirate{
+        right: 0;
+        top: 0;
+    bottom: 0;
+    margin: auto;
+    }
+
+    .swiper-button-prev-emirate {
+        left: 95%;
+        top: 0;
+    bottom: 0;
+    margin: auto;
+    }
+.emirate-swiper-box{
+    width: 80%;
+    position: relative;
+    margin: 0 0 20px 0;
+}
+
+
+.emirate-title{
+    font-family: "Manrope", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 24px;
+letter-spacing: 0%;
+vertical-align: middle;
+margin-bottom: 10px;
+color: #FFFFFF80;
+
+}
+
+@media (max-width: 1194px) {
+    .emirate-swiper-box{
+        width: 100%;
+    }
+    .swiper-button-prev-emirate {
+        left: 93%;
+    }
+}
+@media (max-width: 700px) {
+
+ 
             .property-filter {
                 width: 60%;
             }
@@ -464,8 +585,7 @@
 
 
         }
-    </style>
-
+</style>
 
 
 <script>

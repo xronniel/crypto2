@@ -525,85 +525,7 @@
                     </div>
 
 
-                    <div class="Floor-Plan-div-two">
-
-                        <div class="map-div-three">
-                            <div class="Location-div-three-box">
-                                <div class="Location-div-three-box-one">
-                                    <div class="Location-img-one">
-                                        <img src="{{ asset('assets/img/propertydetails/map-section-one.png') }}"
-                                            alt="floor-plan">
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Collective 2.0 Tower B
-                                        </p>
-                                        <p class="Location-img-one-p-two">
-                                            Residential Insights
-                                        </p>
-                                    </div>
-                                    <img class="Location-img-two"
-                                        src="{{ asset('assets/img/propertydetails/arrow-right-green.png') }}"
-                                        alt="floor-plan">
-                                </div>
-                                <div class="Location-div-three-line"></div>
-                                <div class="map-div-three-box-two">
-                                    <div class="map-div-three-box-two-one">
-                                        <img src="{{ asset('assets/img/propertydetails/Component15.png') }}"
-                                            alt="floor-plan">
-                                        <p> Floor Plans :</p>
-                                        <span>256 units</span>
-                                    </div>
-                                    <div class="map-div-three-box-two-one">
-                                        <img src="{{ asset('assets/img/propertydetails/Component16.png') }}"
-                                            alt="floor-plan">
-                                        <p> Price Range :</p>
-                                        <span>80K - 165K AED/year</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="map-div-three">
-                            <div class="Location-div-three-box">
-                                <div class="Location-div-three-box-one">
-                                    <div class="Location-img-one">
-                                        <img src="{{ asset('assets/img/propertydetails/map-section-one.png') }}"
-                                            alt="floor-plan">
-                                    </div>
-                                    <div>
-                                        <p>
-                                            Collective 2.0 Tower B
-                                        </p>
-                                        <p class="Location-img-one-p-two">
-                                            Residential Insights
-                                        </p>
-                                        <div class="Location-one-p-box">
-                                            <p class="Location-img-one-p-three">4.2/5</p>
-                                            <span class="Location-img-one-span">19 building reviews</span>
-                                        </div>
-                                    </div>
-                                    <img class="Location-img-two"
-                                        src="{{ asset('assets/img/propertydetails/arrow-right-green.png') }}"
-                                        alt="floor-plan">
-                                </div>
-                                <div class="Location-div-three-line"></div>
-                                <div class="map-div-three-box-two">
-                                    <div class="map-div-three-box-two-one">
-                                        <span>Apartments and villas | Family-Friendly</span>
-                                    </div>
-                                    <div class="map-div-three-box-two-one">
-                                        <img src="{{ asset('assets/img/propertydetails/Component16.png') }}"
-                                            alt="floor-plan">
-                                        <p> Price Range :</p>
-                                        <span>80K - 165K AED/year</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                
                 </div>
             </div>
 
@@ -619,6 +541,7 @@
         <div class="container">
             <div class="card-title">
                 <h1>More available in the same area</h1>
+                {{-- {{$propertiesSameArea}} --}}
             </div>
             <div class="row mt-none-30 justify-content-center">
                 <div class="col-lg-3 col-md-6 mt-30">
