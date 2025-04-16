@@ -353,6 +353,13 @@ class PropertyController extends Controller
             'steps' => $steps,
         ];
 
-        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs', 'priceRange', 'plotAreaRange'));
+        $propertiesSameArea = Listing::with('images')
+            ->where('community', $property->community)
+            ->where('id', '!=', $property->id)
+            ->latest()
+            ->take(5)
+            ->get();
+        
+        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs', 'priceRange', 'plotAreaRange', 'propertiesSameArea'));
     }
 }
