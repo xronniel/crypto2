@@ -1467,9 +1467,7 @@ gap: 20px;
 }
 
 
-.agent-account-search  input[type="text"]{
-    background:  #080b18;
-}
+
         .swiper-slide img {
             border-radius: 5px 0 0 5px;
         }
@@ -1506,10 +1504,6 @@ gap: 20px;
         }
 
 
-        .search-form{
-            width: 100%;
-        }
-
         .blog__item-property-two-box-one {
             display: flex;
             align-items: center;
@@ -1526,7 +1520,10 @@ gap: 20px;
 
 
 
-
+        .agent-account-search  input[type="text"]{
+    background:  #080b18;
+    color: white;
+}
 
         
         @media (max-width: 986px) {
@@ -1559,6 +1556,10 @@ display: flex
                 width: 100%;
 
             }
+
+            .search-form{
+            width: 100%;
+        }
 
             .container-user {
                 flex-direction: column;
