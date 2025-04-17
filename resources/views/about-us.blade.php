@@ -22,11 +22,11 @@
             <div class="row">
                 @foreach($ourTeam as $teamMember)
                     <div class="col-md-4">
-                        <div class="card">
+                        <div>
                             @if($teamMember->image)
                                 <img src="{{ asset('storage/' . $teamMember->image) }}" class="card-img-top" alt="{{ $teamMember->name }}">
                             @endif
-                            <div class="card-body">
+                            <div>
                                 <h5 class="card-title">{{ $teamMember->name }}</h5>
                                 <p class="card-text">{{ $teamMember->role }}</p>
                             </div>

@@ -167,7 +167,7 @@ class AboutUsController extends Controller
         $ourCommitment = OurCommitment::all();
         $cryptoHomeInFigures = CryptoHomeInFigure::all();
 
-        return view('about-us', compact('aboutUs', 'ourTeam', 'ourCommitment', 'cryptoHomeInFigures'));
+        return view('aboutUs', compact('aboutUs', 'ourTeam', 'ourCommitment', 'cryptoHomeInFigures'));
     }
 
 }

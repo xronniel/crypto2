@@ -1,0 +1,611 @@
+.about-mainContainer {
+    background-color: #4A21EF;
+    position: relative;
+}
+
+.hero-about {
+    min-height: 900px;
+}
+
+.hero-img {
+    width: 100%;
+}
+
+.title-bg {
+    margin-top: 50px;
+}
+
+.hero-section-about-us {
+    margin-top: 0;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    height: auto;
+    color: #ffffff;
+    text-align: center;
+    font-family: sans-serif;
+    position: relative;
+    background-color: transparent;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    width: 100%;
+  }
+
+.aboutUs_title {
+    text-align: center;
+    color: #fff;
+    font-size: 4rem;
+    margin-bottom: 28px;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+  .landing-text {
+    color: #cbd5e1;
+    font-size: 1.1rem;  
+    margin-bottom: 30px;
+    width: 90%;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .about-icon {
+    position: absolute;
+    right: 3%;
+    top: 40%;
+    transform: translateY(-50%);
+    max-width: 200px;
+    height: auto;
+    z-index: 1;
+  }
+
+  .about-icon2 {
+    position: absolute;
+    left: 5%;
+    top: 40%;
+    transform: translateY(-50%);
+    max-width: 200px;
+    height: 200px;
+    z-index: 1;
+  }
+
+
+  /* content first section */
+  .about-glass-section {
+    position: relative;
+    min-height: 300px; /* adjust as needed */
+  }
+
+  /* icons */
+  .icons1 {
+    max-width: 100px;
+    width: auto;
+    position: absolute;
+    left: 7%;
+  }
+  .icons2 {
+    max-width: 100px;
+    width: auto;
+    position: absolute;
+    bottom: 10%;
+    left: 3%;
+  }
+
+  .icons3 {
+    max-width: 100px;
+    width: auto;
+    position: absolute;
+    bottom: 10%;
+    right: 3%;
+  }
+
+  .icons4 {
+    max-width: 70px;
+    width: auto;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+  }
+
+  .icons5 {
+    max-width: 100px;
+    width: auto;
+    position: absolute;
+    top: 10%;
+    left: 3%;
+  }
+
+  .icons6 {
+    max-width: 70px;
+    width: auto;
+    position: absolute;
+    top: 20%;
+    right: 1%;
+  }
+
+  .icons7 {
+    max-width: 70px;
+    width: auto;
+    position: absolute;
+    bottom: 20%;
+    left: 1%;
+  }
+  
+  
+  
+  .glass-img-wrapper {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 10px;
+    width: 900px;
+    backdrop-filter: blur(15px);
+    background: #8A83A82E;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    border: 1px solid #AAA5BF;
+    z-index: 1;
+  }
+  .glass-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+  }
+
+
+  /* commit ment section */
+  .commitment-section {
+    margin-bottom: 80px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+  
+  .commitment-title {
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 72px;
+    margin-bottom: 40px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .card-wrapper-about {
+    padding: 16px;
+    border: 1px solid #FFFFFF47;
+    
+    border-radius: 20px;
+    width: 288.5px;
+  }
+
+  .commitment1 {
+    width: 98px;
+    max-width: 220.5px;
+    height: 97px;
+    object-fit: contain;
+  }
+  
+  .commitment-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .commit-title {
+    font-family: 'Manrope';
+    font-size: 23px;
+    line-height: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .commitment-card {
+    background-color: #0D0B33;
+    border-radius: 12px;
+    padding-top: 23px;
+    padding-bottom: 35px;
+    padding-left: 26px;
+    padding-right: 26px;
+    max-width: 266.5px;
+    min-height: 447px;
+    flex: 1 1 250px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .commitment-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .icon-placeholder {
+    width: 214.5px;
+    height: 100px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  
+  .commitment-card p {
+    font-family: 'Outfit';
+    font-weight: 400;
+    line-height: 24px;
+    font-size: 16px;
+  }
+
+  /* what we offer section */
+  .what-we-offer-section {
+    background-color: #0D0B33;
+    padding-top: 125px;
+    padding-bottom: 120px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+    position: relative;
+    color: white;
+  }
+  
+  .offer-container {
+    /* padding-left: 120px;
+    padding-right: 120px; */
+    background-color: #0D0B33;
+    color: white;
+  }
+  
+  .offer-title {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 72px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .offer-main-flex {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: stretch; 
+  }
+  
+  .offer-left {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    
+    gap: 20px;
+  }
+  
+  .offer-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* If you want content stacked vertically */
+    /* Remove align-items: stretch as it's not needed here */
+    /* The container's align-items: stretch will handle height matching */
+  }
+  
+  .offer-row {
+    display: flex;
+    gap: 20px;
+    background-color: #0D0B33;
+    border: 0.5px solid #256d50;
+    border-radius: 20px;
+    height: 100%;
+    padding: 60px;
+    z-index: 2;
+    position: relative;
+  }
+
+  .offer-row2 {
+    display: flex;
+    gap: 20px;
+    background-color: #0D0B33;
+    border: 0.5px solid #256d50;
+    border-radius: 20px;
+    height: 100%;
+    padding: 40px;
+    z-index: 2;
+    position: relative;
+  }
+/* 
+  .offer-card {
+    background-color: #4A21EF;
+  } */
+
+  .wwo1 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    max-width: 280px;
+    height: auto;
+    pointer-events: none;
+    z-index: -1; /* Optional: avoid hover/focus if decorative */
+  }
+  
+  .offer-card2 {
+    font-family: 'Manrope';
+    text-align: left;
+    flex: 1;
+    background-color: #0D0B33;
+    border: 1px solid #256d50;
+    border-radius: 20px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .full-height {
+    width: 100%;
+  }
+  
+  .offer-card h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    z-index: 2;
+  }
+  
+  .offer-card p {
+    font-size: 16px;
+    line-height: 1.5;
+    z-index: 2;
+  }
+
+
+  /* cryptohomes sections */
+  .figures-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  
+  .figure-card {
+    position: relative;
+    min-width: 200px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 10px;
+  }
+  
+  .card-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  
+  .card-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .card-content h3 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .card-content p {
+    font-size: 1rem;
+    margin-top: 0;
+  }
+  
+  .figure-divider {
+    height: 150px;
+    width: auto ;
+  }
+  
+  @media (max-width: 768px) {
+    .figures-grid {
+      flex-direction: column;
+    }
+    
+    .figure-card {
+      width: 100%;
+      max-width: 250px;
+    }
+    
+    .figure-divider {
+      display: none;
+    }
+  }
+
+
+  /* modal section */
+  .custom-modal-about {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  
+  .modal-content-about {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 50px;
+    color: white;
+    margin: auto;
+    gap: 40px;
+    flex-direction: row;
+  }
+  
+  .modal-left,
+  .modal-right {
+    flex: 1;
+    min-width: 300px; /* Ensures decent width even when stacked */
+  }
+  
+  .modal-person {
+    width: 100%;
+    background-size: cover;
+  }
+  
+  .modal-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Manrope', sans-serif;
+  }
+  
+  .modal-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+  }
+  
+  /* 🔁 Responsive styles */
+  @media (max-width: 768px) {
+    .modal-content-about {
+      flex-direction: column;
+      padding: 30px 20px;
+      gap: 20px;
+    }
+  
+    .modal-left,
+    .modal-right {
+      width: 100%;
+    }
+  
+    .modal-right {
+      padding: 20px;
+    }
+
+    .aboutUs_title {
+        font-size: 2.5rem;
+        padding: 0;
+        width: 100%;
+    }
+
+    .landing-text {
+        font-size: 1rem;  
+        padding: 0;
+        width: 100%;
+    }
+  }
+
+    /* 🔁 Responsive styles */
+    @media (max-width: 1000px) {
+        .glass-img-wrapper {
+            display: none;
+        }
+        .about-glass-section {
+            min-height: auto;
+        }
+        .about-icon, .about-icon2 {
+            display: none;
+        }
+        .aboutUs_title {
+            font-size: 3rem;
+        }
+      }
+
+  
+  .modal-right img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .close-btn {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 10000;
+  }
+
+  
+
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+    }
+
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+    /* Responsive adjustments */
+    @media (max-width: 430px) {
+        .wwo1 {
+            display: none;
+        }
+        .aboutUs_title {
+            font-size: 2.5rem;
+        }
+      }
+
+
+    /* Responsive adjustments */
+    @media (min-width: 1200px) {
+        .offer-container{
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+
+     
+      }
