@@ -17,5 +17,6 @@ class OurTeam extends Model
         'role',
         'email',
         'mobile',
+        'sno'
     ];
 }

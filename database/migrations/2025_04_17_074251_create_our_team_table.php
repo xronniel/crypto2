@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('role');
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
-            $table->string('SNO')->nullable();
+            $table->string('sno')->nullable();
             $table->timestamps();
         });
         
