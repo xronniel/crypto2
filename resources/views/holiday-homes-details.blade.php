@@ -503,17 +503,21 @@
     </div>
 
 
-
-    <div style="background: #0B0F28;
-    padding: 1px 0;
-        background-position: center;
-    " class="bg_img top-center pos-rel pb-145"
-      data-background="{{ asset('assets/img/bg/team-bg.png') }}">
+    <div style="
+            background-image: url(http://127.0.0.1:8000/assets/img/bg/team-bg.png);
+            background-color: rgb(11, 15, 40);
+            background-repeat: no-repeat;
+            background-position: center -77%;
+            background-size: cover;
+        }
+            "
+        class="bg_img top-center pos-rel ">
         <div class="container">
             <div class="card-title">
                 <h1>More available in the same area</h1>
             </div>
             <div class="row mt-none-30 justify-content-center">
+                @foreach($holidayPropertiesSameArea as $property)
                 <div class="col-lg-3 col-md-6 mt-30">
                     <div class="xb-event-card">
                         <div class="cards-property-img">
@@ -521,34 +525,32 @@
                         </div>
                         <div class="xb-item--cards-property">
                             <p class="">APARTMENT</p>
-                            <p class="cards-property-title-two">2623.06 BTC</p>
-                            <p class="cards-property-title-three">2623.06 ETH / month</p>
-                            <p class="cards-property-title-four">87, 000 AED/ month</p>
-                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills
-                                Estate, Dubai</p>
-
+                            <p class="cards-property-title-two">{{ $property->price }} BTC</p>
+                            <p class="cards-property-title-three">{{ $property->price / 10 }} ETH / month</p>
+                            <p class="cards-property-title-four">{{ $property->price }} AED / month</p>
+                            <p class="cards-property-title-five">{{ $property->property_name }}</p>
+                            <p class="cards-property-title-five">{{ $property->community }}, {{ $property->city }}</p>
                             <div class="grid-left-side-price-two">
                                 <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="{{ asset('assets/img/property/green-bed.png') }}"
-                                        alt="bed">
-                                    <p>6</p>
+                                    <img class="img-card" src="{{ asset('assets/img/property/green-bed.png') }}" alt="bed">
+                                    <p>{{ $property->bedroom }}</p>
                                 </div>
                                 <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
                                 <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="{{ asset('assets/img/property/green-bath.png') }}"
-                                        alt="bath">
-                                    <p>6 </p>
+                                    <img class="img-card" src="{{ asset('assets/img/property/green-bath.png') }}" alt="bath">
+                                    <p>{{ $property->bathroom }}</p>
                                 </div>
                                 <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
                                 <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="{{ asset('assets/img/property/green-size.png') }}"
-                                        alt="size">
-                                    <p>6,000 sq. ft.</p>
+                                    <img class="img-card" src="{{ asset('assets/img/property/green-size.png') }}" alt="size">
+                                    <p>{{ $property->size }} sq. ft.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            @endforeach
+            
             </div>
         </div>
 

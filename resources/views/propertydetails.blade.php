@@ -1,15 +1,8 @@
 @extends('layouts.front-office.app')
 @section('content')
-
-
     {{-- {{ $property }} --}}
     <section style="background: #080B18;" class="blog pt-50 pb-50">
-        <x-property-filter 
-            :propertyTypes="$propertyTypes" 
-            :plotAreaRange="$plotAreaRange" 
-            :priceRange="$priceRange" 
-            :amenities="$amenities" 
-        />
+        <x-property-filter :propertyTypes="$propertyTypes" :plotAreaRange="$plotAreaRange" :priceRange="$priceRange" :amenities="$amenities" />
     </section>
     {{-- {{ $property }} --}}
 
@@ -30,16 +23,16 @@
                     <div class="main-image">
                         <div class="budge-three-div">
 
-                                     <!-- If Verified -->
-                            @if($property->verified == 1)
+                            <!-- If Verified -->
+                            @if ($property->verified == 1)
                                 <p>
                                     <img class="" src="assets/img/property/Verified-img.png" alt="location">
                                     Verified
                                 </p>
                             @endif
-                        
+
                             <!-- If SuperAgent -->
-                            @if($property->superagent == 1)
+                            @if ($property->superagent == 1)
                                 <p>
                                     <img class="" src="assets/img/property/SuperAgent-img.png" alt="location">
                                     SuperAgent
@@ -47,17 +40,13 @@
                             @endif
 
 
-                    
+
                         </div>
 
                         {{-- Show One Main Image --}}
                         @if ($property->images->isNotEmpty())
-              
-
-
-                                <img class="main-image-img" alt="Property Image"
-                                 src="{{ $property->xml ? $property->images->first()->url : asset('storage/' . $property->images->first()->url) }}">
-
+                            <img class="main-image-img" alt="Property Image"
+                                src="{{ $property->xml ? $property->images->first()->url : asset('storage/' . $property->images->first()->url) }}">
                         @endif
 
                         <div class="floor-plan-div">
@@ -69,10 +58,8 @@
                     {{-- Small Images --}}
                     <div class="small-images">
                         @foreach ($property->images->take(3) as $image)
-                            <img class="small-images-img" 
-                               src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}"
-                            
-                        alt="home">
+                            <img class="small-images-img"
+                                src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}" alt="home">
                         @endforeach
 
                         {{-- See More Button --}}
@@ -83,13 +70,11 @@
                 </div>
 
                 <div class="properties-swiper-mobile swiper">
-                    <div
-                    
-                    class="swiper-wrapper">
+                    <div class="swiper-wrapper">
                         {{-- Main Image --}}
                         @if ($property->images->isNotEmpty())
                             <div class="swiper-slide">
-                                <img class="main-image-img" alt="Property Image" 
+                                <img class="main-image-img" alt="Property Image"
                                     src="{{ $property->xml ? $property->images->first()->url : asset('storage/' . $property->images->first()->url) }}">
                             </div>
                         @endif
@@ -97,8 +82,8 @@
                         {{-- Small Images --}}
                         @foreach ($property->images->take(3) as $image)
                             <div class="swiper-slide">
-                                <img class="small-images-img"  
-                                    src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}" 
+                                <img class="small-images-img"
+                                    src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}"
                                     alt="home">
                             </div>
                         @endforeach
@@ -120,7 +105,8 @@
                             <div class="swiper-wrapper">
                                 @foreach ($property->images as $image)
                                     <div class="swiper-slide">
-                                        <img   src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}" alt="Property Image">
+                                        <img src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}"
+                                            alt="Property Image">
                                     </div>
                                 @endforeach
                             </div>
@@ -134,7 +120,8 @@
                     </div>
                     <div class="popup-small-img">
                         @foreach ($property->images as $image)
-                            <img   src="{{ $property->xml ? $image->url  : asset('storage/' . $image->url ) }}" alt="Property Image" class="thumbnail-img">
+                            <img src="{{ $property->xml ? $image->url : asset('storage/' . $image->url) }}"
+                                alt="Property Image" class="thumbnail-img">
                         @endforeach
                     </div>
 
@@ -149,37 +136,37 @@
                     <h3 class="grid-left-side-two hide-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
                     <h3 class="grid-left-side-three">
                         @php
-                        $html = $property->web_remarks;
-                    
-                        $dom = new DOMDocument();
-                        libxml_use_internal_errors(true); // Suppress HTML5 warnings
-                        $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
-                    
-                        $pTags = $dom->getElementsByTagName('p');
-                        $output = '';
-                    
-                        foreach ($pTags as $p) {
-                            // Remove <strong> and <br> tags
-                            foreach (iterator_to_array($p->getElementsByTagName('*')) as $node) {
-                                if ($node->nodeName === 'strong' || $node->nodeName === 'br') {
-                                    // Replace node with its text content or nothing
-                                    $text = $node->textContent;
-                                    $textNode = $dom->createTextNode($text);
-                                    $node->parentNode->replaceChild($textNode, $node);
+                            $html = $property->web_remarks;
+
+                            $dom = new DOMDocument();
+                            libxml_use_internal_errors(true); // Suppress HTML5 warnings
+                            $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+
+                            $pTags = $dom->getElementsByTagName('p');
+                            $output = '';
+
+                            foreach ($pTags as $p) {
+                                // Remove <strong> and <br> tags
+                                foreach (iterator_to_array($p->getElementsByTagName('*')) as $node) {
+                                    if ($node->nodeName === 'strong' || $node->nodeName === 'br') {
+                                        // Replace node with its text content or nothing
+                                        $text = $node->textContent;
+                                        $textNode = $dom->createTextNode($text);
+                                        $node->parentNode->replaceChild($textNode, $node);
+                                    }
                                 }
+
+                                // Save final <p> tag with cleaned content
+                                $output .= $dom->saveHTML($p);
                             }
-                    
-                            // Save final <p> tag with cleaned content
-                            $output .= $dom->saveHTML($p);
-                        }
-                    @endphp
-                    
-                    {!! $output !!}
-                    
+                        @endphp
+
+                        {!! $output !!}
+
                     </h3>
                     <h3 class="grid-left-side-one show-mobile">{{ $property->property_title }}</h3>
                     <h3 class="grid-left-side-two show-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
-                    
+
                     <div class="grid-left-side-fisrt-dev show-mobile">
                         <p>{{ $property->ad_type }}</p>
                         {{-- <p>6% OFF</p> --}}
@@ -190,21 +177,23 @@
                             <div class="grid-left-side-price-div">
                                 {{-- <p class="grid-left-side-price-div-one">830.22 XRP</p> --}}
                                 @php
-                                if (!function_exists('formatNumber')) {
-                                    function formatNumber($num) {
-                                        if ($num >= 1000000000) {
-                                            return number_format($num / 1000000000, 2) . 'B';
-                                        } elseif ($num >= 1000000) {
-                                            return number_format($num / 1000000, 2) . 'M';
-                                        } elseif ($num >= 1000) {
-                                            return number_format($num / 1000, 2) . 'K';
+                                    if (!function_exists('formatNumber')) {
+                                        function formatNumber($num)
+                                        {
+                                            if ($num >= 1000000000) {
+                                                return number_format($num / 1000000000, 2) . 'B';
+                                            } elseif ($num >= 1000000) {
+                                                return number_format($num / 1000000, 2) . 'M';
+                                            } elseif ($num >= 1000) {
+                                                return number_format($num / 1000, 2) . 'K';
+                                            }
+                                            return number_format($num, 2);
                                         }
-                                        return number_format($num, 2);
                                     }
-                                }
-                            @endphp
-                            
-                            <p class="grid-left-side-price-div-two">{{ formatNumber($property->price) }}<span>AED</span></p>
+                                @endphp
+
+                                <p class="grid-left-side-price-div-two">
+                                    {{ formatNumber($property->price) }}<span>AED</span></p>
                             </div>
                             <h4 class="grid-left-side-price-div-four">/Month</h4>
                         </div>
@@ -214,37 +203,52 @@
                                 // Build an array of available segments.
                                 $segments = [];
                             @endphp
-                        
+
                             @if (isset($property->bedrooms) && $property->bedrooms > 0)
                                 @php
-                                    $segments[] = '
+                                    $segments[] =
+                                        '
                                         <div class="grid-left-side-price-two-one">
-                                            <img class="img-four" src="' . asset("assets/img/property/green-bed.png") . '" alt="bed">
-                                            <p>' . $property->bedrooms . ' Bedroom</p>
+                                            <img class="img-four" src="' .
+                                        asset('assets/img/property/green-bed.png') .
+                                        '" alt="bed">
+                                            <p>' .
+                                        $property->bedrooms .
+                                        ' Bedroom</p>
                                         </div>';
                                 @endphp
                             @endif
-                        
+
                             @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
                                 @php
-                                    $segments[] = '
+                                    $segments[] =
+                                        '
                                         <div class="grid-left-side-price-two-one">
-                                            <img class="img-four" src="' . asset("assets/img/property/green-bath.png") . '" alt="bath">
-                                            <p>' . $property->no_of_bathroom . ' Bathroom</p>
+                                            <img class="img-four" src="' .
+                                        asset('assets/img/property/green-bath.png') .
+                                        '" alt="bath">
+                                            <p>' .
+                                        $property->no_of_bathroom .
+                                        ' Bathroom</p>
                                         </div>';
                                 @endphp
                             @endif
-                        
+
                             @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
                                 @php
-                                    $segments[] = '
+                                    $segments[] =
+                                        '
                                         <div class="grid-left-side-price-two-one">
-                                            <img class="img-four" src="' . asset("assets/img/property/green-size.png") . '" alt="size">
-                                            <p>' . number_format($property->unit_builtup_area, 2) . ' sq. ft.</p>
+                                            <img class="img-four" src="' .
+                                        asset('assets/img/property/green-size.png') .
+                                        '" alt="size">
+                                            <p>' .
+                                        number_format($property->unit_builtup_area, 2) .
+                                        ' sq. ft.</p>
                                         </div>';
                                 @endphp
                             @endif
-                        
+
                             {{-- Loop through segments and insert pipeline image in-between --}}
                             @foreach ($segments as $index => $segment)
                                 {!! $segment !!}
@@ -266,8 +270,7 @@
                                 </select>
                                 <img class="Converter-img-select" src="{{ asset('assets/img/home/frame-7.svg.png') }}"
                                     alt="">
-                                <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}"
-                                    alt="icon">
+                                <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}" alt="icon">
                             </div>
                         </div>
                         <div class="icon-box-Converter">
@@ -287,41 +290,33 @@
                                 <h4>Real Estate Agent</h4>
                             </div>
                         </div>
-                        <div class="property-two-box-five-two" 
-                                            
-                   @auth
-                   data-user-id="{{ auth()->user()->id }}"
+                        <div class="property-two-box-five-two"
+                            @auth
+data-user-id="{{ auth()->user()->id }}"
                    data-property-id="{{ $property->id }}"
                    data-property-ref="{{ $property->property_ref_no }}"
-                   data-url="{{ url()->current() }}"
-                   @endauth
-                        
-                        >
+                   data-url="{{ url()->current() }}" @endauth>
 
-                        <!-- Phone Call -->
-                        <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
-                            data-method="Call">
-                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
-                                alt="Call">
-                            <span>Call</span>
-                        </a>
+                            <!-- Phone Call -->
+                            <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn" data-method="Call">
+                                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
+                                <span>Call</span>
+                            </a>
 
-                        <!-- Email -->
-                        <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
-                            data-method="Email">
-                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
-                                alt="Email">
-                            <span>Email</span>
-                        </a>
+                            <!-- Email -->
+                            <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+                                data-method="Email">
+                                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
+                                <span>Email</span>
+                            </a>
 
-                        <!-- WhatsApp -->
-                        <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
-                            class="contact-btn" data-method="WhatsApp" target="_blank">
-                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
-                                alt="WhatsApp">
-                            <span>WhatsApp</span>
-                        </a>
-                    </div>
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" class="contact-btn"
+                                data-method="WhatsApp" target="_blank">
+                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -332,7 +327,7 @@
                 </div>
                 <div class="Description-second-box">
                     <div class="Description-second-box-one">
-                        {!! $property->web_remarks !!} 
+                        {!! $property->web_remarks !!}
                         <div class="custom-list-two">
                             <p><span>Office location :</span> {{ $property->company_name }} - {{ $property->community }},
                                 {{ $property->emirate }}</p>
@@ -444,38 +439,35 @@
                 <div class="property-details-Description">
                     <span class="active-filter-link">Floor Plan</span>
 
-                   
+
                 </div>
                 <div class="Floor-Plan-div">
                     <div class="Floor-Plan-div-one">
                         {{-- <img src="{{ asset('assets/img/propertydetails/Floor-Plan-bg.png') }}" alt="floor-plan"> --}}
-                        <img src="{{asset('storage/' . $property->floor_plan ) }}" alt="floor-plan">
+                        <img src="{{ asset('storage/' . $property->floor_plan) }}" alt="floor-plan">
                     </div>
-        
+
                     <div class="Floor-Plan-div-two">
-               
+
                         <div class="video-container">
-                            @if($property->web_tour)
-                            @php
-                                // Extract the video ID from a YouTube Shorts URL
-                                $videoId = Str::afterLast($property->web_tour, '/');
-                            @endphp
-                        
-                                <iframe 
-                                    width="100%" 
-                                    height="100%" 
-                                    src="https://www.youtube.com/embed/{{ $videoId }}" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            @if ($property->web_tour)
+                                @php
+                                    // Extract the video ID from a YouTube Shorts URL
+                                    $videoId = Str::afterLast($property->web_tour, '/');
+                                @endphp
+
+                                <iframe width="100%" height="100%"
+                                    src="https://www.youtube.com/embed/{{ $videoId }}" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
                                 </iframe>
-                     
-                        @else
-                            <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}" controls alt="floor-plan"></video>
-                            <button id="playButton" class="play-button">
-                                <img src="{{ asset('assets/img/propertydetails/play-icon.png') }}" alt="floor-plan">
-                                Watch video tour</button>
-                        @endif
+                            @else
+                                <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}"
+                                    controls alt="floor-plan"></video>
+                                <button id="playButton" class="play-button">
+                                    <img src="{{ asset('assets/img/propertydetails/play-icon.png') }}" alt="floor-plan">
+                                    Watch video tour</button>
+                            @endif
 
 
 
@@ -500,7 +492,7 @@
                                         In partnership with
                                     </p>
                                     <img src="{{ asset($property->company_logo) }}" alt="logo">
-                                    <a class="pre-approved" href="{{$property->preview_link}}">Get pre-approved</a>
+                                    <a class="pre-approved" href="{{ $property->preview_link }}">Get pre-approved</a>
                                 </div>
                             </div>
                         </div>
@@ -525,7 +517,7 @@
                     </div>
 
 
-                
+
                 </div>
             </div>
 
@@ -533,65 +525,75 @@
         </div>
     </div>
 
-    <div style="background: #0B0F28;
-    padding: 1px 0;
-        background-position: center;
-    " class="bg_img top-center pos-rel pb-145"
-      data-background="{{ asset('assets/img/bg/team-bg.png') }}">
+    <div style="
+    background-image: url(http://127.0.0.1:8000/assets/img/bg/team-bg.png);
+    background-color: rgb(11, 15, 40);
+    background-repeat: no-repeat;
+    background-position: center -77%;
+    background-size: cover;
+}
+    "
+        class="bg_img top-center pos-rel ">
         <div class="container">
             <div class="card-title">
                 <h1>More available in the same area</h1>
-                {{-- {{$propertiesSameArea}} --}}
+
             </div>
             <div class="row mt-none-30 justify-content-center">
-                <div class="col-lg-3 col-md-6 mt-30">
-                    <div class="xb-event-card">
-                        <div class="cards-property-img">
-                            <img src="{{ asset('assets/img/event/event-img01.jpg') }}" alt="">
-                        </div>
-                        <div class="xb-item--cards-property">
-                            <p class="">APARTMENT</p>
-                            <p class="cards-property-title-two">2623.06 BTC</p>
-                            <p class="cards-property-title-three">2623.06 ETH / month</p>
-                            <p class="cards-property-title-four">87, 000 AED/ month</p>
-                            <p class="cards-property-title-five">Collective 2.0 Tower B, Collective 2.0, Dubai, Hills
-                                Estate, Dubai</p>
+                @foreach ($propertiesSameArea->take(4) as $property)
+                    <div class="col-lg-3 col-md-6 mt-30">
+                        <div class="xb-event-card">
+                            <div class="cards-property-img">
+                                <img src="{{ $property->images[0]['url'] ?? asset('assets/img/event/event-img01.jpg') }}"
+                                    alt="">
+                            </div>
+                            <div class="xb-item--cards-property">
+                                <p class="">{{ strtoupper($property->unit_type ?? 'N/A') }}</p>
+                                <p class="cards-property-title-two">{{ number_format($property->price / 155000) }} BTC</p>
+                                <p class="cards-property-title-three">{{ number_format($property->price / 9500) }} ETH /
+                                    month</p>
+                                <p class="cards-property-title-four">{{ number_format($property->price, 0) }} AED</p>
+                                <p class="cards-property-title-five">{{ $property->property_name }},
+                                    {{ $property->community }}, {{ $property->emirate }}</p>
 
-                            <div class="grid-left-side-price-two">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="{{ asset('assets/img/property/green-bed.png') }}"
-                                        alt="bed">
-                                    <p>6</p>
-                                </div>
-                                <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="{{ asset('assets/img/property/green-bath.png') }}"
-                                        alt="bath">
-                                    <p>6 </p>
-                                </div>
-                                <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
-                                <div class="grid-left-side-price-two-card">
-                                    <img class="img-card" src="{{ asset('assets/img/property/green-size.png') }}"
-                                        alt="size">
-                                    <p>6,000 sq. ft.</p>
+                                <div class="grid-left-side-price-two">
+                                    <div class="grid-left-side-price-two-card">
+                                        <img class="img-card" src="{{ asset('assets/img/property/green-bed.png') }}"
+                                            alt="bed">
+                                        <p>{{ $property->bedrooms }}</p>
+                                    </div>
+                                    <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                    <div class="grid-left-side-price-two-card">
+                                        <img class="img-card" src="{{ asset('assets/img/property/green-bath.png') }}"
+                                            alt="bath">
+                                        <p>{{ $property->no_of_bathroom }}</p>
+                                    </div>
+                                    <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                    <div class="grid-left-side-price-two-card">
+                                        <img class="img-card" src="{{ asset('assets/img/property/green-size.png') }}"
+                                            alt="size">
+                                        <p>{{ number_format($property->unit_builtup_area, 0) }} sq. ft.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+
+
             </div>
         </div>
 
 
         <!-- faq start -->
-        <section style="    padding-bottom: 126px;" class="faq pt-130">
+        <section style="padding:100px 0  126px 0;" class="faq ">
             <div class="container">
                 <div class="section-title pb-55 wow fadeInUp" data-wow-duration=".7s">
                     <h1 class="title">Have Any Questions?</h1>
                 </div>
                 <div class="faq__blockchain wow fadeInUp" data-wow-duration=".7s" data-wow-delay="200ms">
                     <ul class="accordion_box clearfix">
-                        @foreach($faqs as $faq)
+                        @foreach ($faqs as $faq)
                             <li class="accordion block">
                                 <div class="acc-btn">
                                     {{ $faq['question'] }}
@@ -750,111 +752,110 @@
 
 
         document.addEventListener("DOMContentLoaded", function() {
-                            
-                                let container = document.querySelector(".Description-second-box-one");
-                        
-                                if (container) {
-                               
-                                    container.querySelectorAll("p").forEach(p => p.remove());
-                                }
-                            });
 
-</script>
+            let container = document.querySelector(".Description-second-box-one");
 
-<style>
-    ul {
-    list-style-type: none;  
-    padding: 0;            
-    margin: 0;              
-}
+            if (container) {
 
-ul li {
-    margin: 0;              
-    padding: 0;            
-}
-.beds-baths-options button {
-    flex: 1 1 calc(25% - 10px); 
-    min-width: 120px; 
-    padding: 10px;
-    text-align: center;
-    white-space: nowrap;
-}
-.property-filter .search-button-property {
-    position: absolute;
-    left: 4px;
-    top: 0.7px;
-    bottom: 0;
-    margin: auto;
-    width: fit-content;
-    height: fit-content;
-    background: none;
-    display: flex
-;
-    border-radius: 50% 0 0 50%;
-    justify-content: center;
-    align-items: center;
-    height: 43px;
-    padding: 10px 8px;
-    align-content: center;
-}
+                container.querySelectorAll("p").forEach(p => p.remove());
+            }
+        });
+    </script>
 
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
 
+        ul li {
+            margin: 0;
+            padding: 0;
+        }
 
-@media (max-width: 986px) {
+        .beds-baths-options button {
+            flex: 1 1 calc(25% - 10px);
+            min-width: 120px;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
 
-    .page-path-line{
-    display: none;
-}
-}
+        .property-filter .search-button-property {
+            position: absolute;
+            left: 4px;
+            top: 0.7px;
+            bottom: 0;
+            margin: auto;
+            width: fit-content;
+            height: fit-content;
+            background: none;
+            display: flex;
+            border-radius: 50% 0 0 50%;
+            justify-content: center;
+            align-items: center;
+            height: 43px;
+            padding: 10px 8px;
+            align-content: center;
+        }
 
 
-@media (max-width: 700px) {
-    .property-filter {
-        width: 60%;
-    }
 
-    .filter-button {
-        right: 2%;
-    }
-}
-@media (max-width: 700px) {
-    .property-filter {
-        width: 60%;
-    }
+        @media (max-width: 986px) {
 
-    .filter-button {
-        right: 2%;
-    }
+            .page-path-line {
+                display: none;
+            }
+        }
 
 
-    .property-filter img {
-        filter: brightness(0) invert(1); 
-    }
-    
+        @media (max-width: 700px) {
+            .property-filter {
+                width: 60%;
+            }
 
-    .property-filter .search-button-property {
-        position: absolute;
-        left: 2px;
-        top: 0.7px;
-        bottom: 0;
-        margin: auto;
-        width: fit-content;
-        height: fit-content;
-        background: #2dd98f;
-        display: flex
-    ;
-        border-radius: 50% 0 0 50%;
-        justify-content: center;
-        align-items: center;
-        height: 43px;
-        padding: 10px 8px;
-        align-content: center;
-    }
-    
-    
+            .filter-button {
+                right: 2%;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .property-filter {
+                width: 60%;
+            }
+
+            .filter-button {
+                right: 2%;
+            }
 
 
-}
+            .property-filter img {
+                filter: brightness(0) invert(1);
+            }
 
-</style>
+
+            .property-filter .search-button-property {
+                position: absolute;
+                left: 2px;
+                top: 0.7px;
+                bottom: 0;
+                margin: auto;
+                width: fit-content;
+                height: fit-content;
+                background: #2dd98f;
+                display: flex;
+                border-radius: 50% 0 0 50%;
+                justify-content: center;
+                align-items: center;
+                height: 43px;
+                padding: 10px 8px;
+                align-content: center;
+            }
+
+
+
+
+        }
+    </style>
 @endsection
