@@ -44,7 +44,12 @@ use Illuminate\Support\Facades\Route;
 */
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->group(function () {
 
-    Route::resource('contact-us', ContactUsController::class);
+    Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact-us.index');
+    Route::get('contact-us/create', [ContactUsController::class, 'create'])->name('contact-us.create');
+    Route::post('contact-us', [ContactUsController::class, 'store'])->name('contact-us.store');
+    Route::get('contact-us/{contactUs}/edit', [ContactUsController::class, 'edit'])->name('contact-us.edit');
+    Route::put('contact-us/{contactUs}', [ContactUsController::class, 'update'])->name('contact-us.update');
+    Route::delete('contact-us/{contactUs}', [ContactUsController::class, 'destroy'])->name('contact-us.destroy');
 
     Route::resource('news', NewsController::class);
     Route::delete('news/gallery/{id}', [NewsController::class, 'deleteGalleryImage'])->name('gallery.delete');
@@ -144,4 +149,3 @@ Route::get('/agents', [AgentController::class, 'userIndex'])->name('agents.index
 Route::get('/agents/{agent}', [AgentController::class, 'userShow'])->name('agents.show');
 
 Route::get('mortgage-calculator',[MortgageLandingPageController::class, 'userIndex'])->name('mortgage-calculator');
-
