@@ -14,9 +14,9 @@
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
                 <p>/ Property Listing</p>
-                <p class="active-path-line">/ Bespoke Upgrades | Extended | Vacant {{$property->off_plan}}</p>
+                <p class="active-path-line">/ Bespoke Upgrades | Extended | Vacant</p>
             </div>
-            {{-- {{$property}} --}}
+    
             <div class="grid-img-container">
 
 
@@ -321,6 +321,58 @@ data-user-id="{{ auth()->user()->id }}"
                     </div>
                 </div>
             </div>
+            @if ($property->off_plan)
+            <div class="Description-big-box">
+                <div class="property-details-Description">
+                    <span class="active-filter-link">Payment Plans</span>
+                </div>
+        
+                <div class="Description-second-box">
+                    @foreach ($paymentPlanCards as $index => $card)
+                        <div class="payment-card">
+                            <div class="plan-title">{{ $card['payment_plan_name'] }}</div>
+                            <div class="plan-percent">{{ rtrim($card['percentage'], '.00') }}%</div>
+                            <div class="plan-description">{{ $card['text'] }}</div>
+                        </div>
+        
+                        @if (!$loop->last)
+                            <img class="payment-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="Arrow">
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        @endif
+            @if ($property->off_plan)
+            <div class="Description-big-box">
+                <div class="property-details-Description">
+                    <span class="active-filter-link">Payment Plans</span>
+                </div>
+        
+                <div class="Description-second-box">
+                    <div class="timeline">
+                        @foreach ($timelines as $index => $item)
+                            <div class="timeline-item">
+                                <div class="timeline-icon-wrapper {{ $loop->last ? 'unchecked' : '' }}">
+                                    <img
+                                        src="{{ asset($loop->last ? 'assets/img/home/Unchecked.png' : 'assets/img/home/green-check.png') }}"
+                                        alt="Status Icon"
+                                        class="timeline-icon"
+                                    />
+                                </div>
+                    
+                                <div class="timeline-text">
+                                    <p class="timeline-title">{{ $item['title'] }}</p>
+                                    <p class="timeline-date">{{ \Carbon\Carbon::parse($item['date'])->format('F j, Y') }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    
+                </div>
+            </div>
+        @endif
+        
+
 
             <div class="Description-big-box">
                 <div class="property-details-Description">
@@ -783,6 +835,88 @@ data-user-id="{{ auth()->user()->id }}"
             white-space: nowrap;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+.payment-card {
+    background-color: #1D2458;
+    border: 1px solid #73737380;
+    padding: 30px 20px;
+    width: 220px;
+    border-radius: 3px;
+    text-align: center;
+    flex-shrink: 0;
+    display: flex
+;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.plan-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+
+    font-family: "Manrope", sans-serif;
+font-weight: 400;
+font-size: 20px;
+line-height: 16px;
+letter-spacing: 0%;
+text-align: center;
+vertical-align: middle;
+color: #ffffff80;
+}
+
+.plan-percent {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 5px;
+
+    font-family: "Manrope", sans-serif;
+font-weight: 700;
+font-size: 20px;
+line-height: 16px;
+letter-spacing: 0%;
+text-align: center;
+vertical-align: middle;
+color: #FFFFFF;
+
+}
+
+.plan-description {
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+font-weight: 400;
+font-size: 16px;
+line-height: 16px;
+letter-spacing: 0%;
+text-align: center;
+vertical-align: middle;
+color: #ffffff80;
+}
+
+.header-arrow-img {
+    width: 24px;
+    height: auto;
+}
+       
+.payment-img{
+    rotate: -90deg;
+    filter: brightness(0) invert(1);
+    width: 24px;
+}
+
+
+
+
+
         .property-filter .search-button-property {
             position: absolute;
             left: 4px;
@@ -801,6 +935,71 @@ data-user-id="{{ auth()->user()->id }}"
             align-content: center;
         }
 
+        .timeline {
+    position: relative;
+width: 100%;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 34px;
+}
+
+.timeline-icon-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 13.5px;
+    width: 2px;
+    height: 79%;
+    background-color: #2DD98F;
+    z-index: 0;
+}
+
+.timeline-item:last-child .timeline-icon-wrapper::before {
+    display: none; /* Hide the line after the last item */
+}
+
+.timeline-icon {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.timeline-text {
+    margin-left: 10px;
+    color: white;
+}
+
+.timeline-title {
+    font-family: "Manrope", sans-serif;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+letter-spacing: 0%;
+vertical-align: middle;
+padding-bottom: 10px;
+}
+
+.timeline-date {
+    font-family: "Manrope", sans-serif;
+font-weight: 700;
+font-size: 20px;
+line-height: 24px;
+letter-spacing: 0%;
+vertical-align: middle;
+color: #ffffff80;
+}
 
 
         @media (max-width: 986px) {
