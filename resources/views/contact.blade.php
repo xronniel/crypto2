@@ -8,7 +8,8 @@
         <div class="breadcrumb__content">
             <h2 class="breadcrumb__title">Contact Us</h2>
             <ul class="bread-crumb clearfix ul_li_center">
-                <li class="breadcrumb-item"><a href="/">Home </a></li> -
+                <li class="breadcrumb-item"><a href="/">Home</a> </li> 
+                <li> - </li>
                 <li class="breadcrumb-item">Contact Us</li>
             </ul>
         </div>
