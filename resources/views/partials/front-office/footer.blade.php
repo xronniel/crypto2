@@ -99,7 +99,7 @@
                         <ul class="xb-item--footer_widget-list">
                             <li><a href="#!">About Us</a></li>
                             <li><a href="#!">Careers</a></li>
-                            <li><a href="#!">Contact Us</a></li>
+                            <li><a href="/contact-us">Contact Us</a></li>
                             <li><a href="#!">Explore</a></li>
                             <li><a href="#!">Terms</a> </li>
                         </ul>
