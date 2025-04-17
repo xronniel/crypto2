@@ -14,8 +14,9 @@
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
                 <p>/ Property Listing</p>
-                <p class="active-path-line">/ Bespoke Upgrades | Extended | Vacant</p>
+                <p class="active-path-line">/ Bespoke Upgrades | Extended | Vacant {{$property->off_plan}}</p>
             </div>
+            {{-- {{$property}} --}}
             <div class="grid-img-container">
 
 
