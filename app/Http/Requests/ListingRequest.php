@@ -85,17 +85,9 @@ class ListingRequest extends FormRequest
             'last_updated' => 'nullable|date',
         ];
     
-        // Add conditional validation for developer_id and fact_sheet when off_plan is 1
+        // Add conditional validation for developer_id when off_plan is 1
         if ($this->input('off_plan') == 1) {
             $rules['developer_id'] = 'required|exists:developers,id';
-            $rules['fact_sheet'] = 'nullable|mimes:pdf,jpeg,png,jpg,gif,svg';
-            $rules['off_plan_images.*.type'] = 'required|string';
-            $rules['off_plan_images.*.image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
-            $rules['off_plan_keys'] = 'array|nullable';
-            $rules['off_plan_keys.*.key'] = 'required|string|max:255';
-            $rules['off_plan_keys.*.value'] = 'required|string|max:255';
-            $rules['off_plan_keys.*.status'] = 'required|in:active,inactive';
-            $rules['off_plan_images.*.type'] = 'required|in:interior,exterior,feature';
         }
     
         return $rules;

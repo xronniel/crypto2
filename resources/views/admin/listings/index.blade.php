@@ -29,19 +29,13 @@
                     <td>{{ $listing->community }}</td>
                     <td>{{ $listing->listing_agent }}</td>
                     <td>
-                        <div style="display: flex; gap: 4px; flex-wrap: wrap;">
-                            <a href="{{ route('admin.listings.show', $listing->id) }}" class="btn btn-info btn-sm px-2">View</a>
-                            <a href="{{ route('admin.listings.edit', $listing->id) }}" class="btn btn-warning btn-sm px-2">Edit</a>
-                            @if($listing->off_plan == 1)
-                                <a href="{{ route('admin.listings.payment-plan-cards.index', $listing) }}" class="btn btn-primary btn-sm px-2">Payment Cards</a>
-                                <a href="{{ route('admin.listings.payment-plan-timelines.index', $listing) }}" class="btn btn-primary btn-sm px-2">Timelines</a>
-                            @endif
-                            <form action="{{ route('admin.listings.destroy', $listing->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm px-2">Delete</button>
-                            </form>
-                        </div>
+                        <a href="{{ route('admin.listings.show', $listing->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('admin.listings.edit', $listing->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.listings.destroy', $listing->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @empty
