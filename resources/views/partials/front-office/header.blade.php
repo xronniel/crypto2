@@ -37,12 +37,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="#">
+                                <a class="scrollspy-btn" href="{{route('holiday-properties.index')}}">
                                     <span>Vacations</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
+                                <a class="scrollspy-btn" href="/properties?completion_status=off_plan"><span>New Projects</span></a>
                             </li>
                             <li>
                                 <a class="scrollspy-btn" href="{{route('agents.index')}}"><span>Find Agent</span></a>
@@ -93,12 +93,12 @@
                                             </a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#">
+                                            <a class="scrollspy-btn"href="{{route('holiday-properties.index')}}">
                                                 <span>Vacations</span>
                                             </a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="#"><span>New Projects</span></a>
+                                            <a class="scrollspy-btn" href="/properties?completion_status=off_plan"><span>New Projects</span></a>
                                         </li>
                                         <li class="menu-item">
                                             <a class="scrollspy-btn" href="{{route('agents.index')}}"><span>Find Agent</span></a>
