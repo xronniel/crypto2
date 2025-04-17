@@ -134,3 +134,6 @@ Route::get('/agents/{agent}', [AgentController::class, 'userShow'])->name('agent
 
 Route::get('mortgage-calculator',[MortgageLandingPageController::class, 'userIndex'])->name('mortgage-calculator');
 
+Route::get('/contact-us', function () {
+    return view('contact');
+});
