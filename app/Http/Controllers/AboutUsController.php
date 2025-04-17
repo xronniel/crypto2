@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AboutUs;
+use App\Models\OurTeam;
+use App\Models\OurCommitment;
+use App\Models\CryptoHomeInFigure;
 use Illuminate\Support\Facades\Storage;
 class AboutUsController extends Controller
 {
@@ -48,19 +51,22 @@ class AboutUsController extends Controller
 
             'wwo_section3_title1' => 'nullable|string|max:255',
             'wwo_section3_text1' => 'nullable|string',
-            'wwo_section3_icon' => 'nullable|string|max:255',
+            'wwo_section3_icon' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        // Handle image upload
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('aboutus', 'public');
         }
 
-        // Save to DB
+        if ($request->hasFile('wwo_section3_icon')) {
+            $validated['wwo_section3_icon'] = $request->file('wwo_section3_icon')->store('aboutus/icons', 'public');
+        }
+
         AboutUs::create($validated);
 
         return redirect()->route('admin.aboutus.index')->with('success', 'About Us content created successfully.');
     }
+
 
     /**
      * Display the specified resource.
@@ -93,6 +99,7 @@ class AboutUsController extends Controller
             'hero_text' => 'nullable|string',
 
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'wwo_section3_icon' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
 
             'wwo_section1_title1' => 'nullable|string|max:255',
             'wwo_section1_text1' => 'nullable|string',
@@ -108,24 +115,29 @@ class AboutUsController extends Controller
 
             'wwo_section3_title1' => 'nullable|string|max:255',
             'wwo_section3_text1' => 'nullable|string',
-            'wwo_section3_icon' => 'nullable|string|max:255',
         ]);
 
-        // Handle image upload
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('aboutus', 'public');
-
-            // Optional: delete old image
             if ($about->image && \Storage::disk('public')->exists($about->image)) {
                 \Storage::disk('public')->delete($about->image);
             }
+
+            $validated['image'] = $request->file('image')->store('aboutus', 'public');
         }
 
-        // Update record
+        if ($request->hasFile('wwo_section3_icon')) {
+            if ($about->wwo_section3_icon && \Storage::disk('public')->exists($about->wwo_section3_icon)) {
+                \Storage::disk('public')->delete($about->wwo_section3_icon);
+            }
+
+            $validated['wwo_section3_icon'] = $request->file('wwo_section3_icon')->store('aboutus/icons', 'public');
+        }
+
         $about->update($validated);
 
         return redirect()->route('admin.aboutus.index')->with('success', 'About Us content updated successfully!');
     }
+
 
 
     /**
@@ -135,14 +147,27 @@ class AboutUsController extends Controller
     {
         $about = AboutUs::findOrFail($id);
 
-        // Delete image from storage if it exists
         if ($about->image && \Storage::disk('public')->exists($about->image)) {
             \Storage::disk('public')->delete($about->image);
         }
 
-        // Delete the record
+        if ($about->wwo_section3_icon && \Storage::disk('public')->exists($about->wwo_section3_icon)) {
+            \Storage::disk('public')->delete($about->wwo_section3_icon);
+        }
+
         $about->delete();
 
         return redirect()->route('admin.aboutus.index')->with('success', 'About Us entry deleted successfully!');
     }
+
+    public function aboutUs()
+    {
+        $aboutUs = AboutUs::all(); 
+        $ourTeam = OurTeam::all(); 
+        $ourCommitment = OurCommitment::all();
+        $cryptoHomeInFigures = CryptoHomeInFigure::all();
+
+        return view('about-us', compact('aboutUs', 'ourTeam', 'ourCommitment', 'cryptoHomeInFigures'));
+    }
+
 }

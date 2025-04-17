@@ -86,8 +86,11 @@
             <textarea name="wwo_section3_text1" class="form-control">{{ $aboutus->wwo_section3_text1 }}</textarea>
         </div>
         <div>
-            <label>Icon</label>
-            <input type="text" name="wwo_section3_icon" class="form-control" value="{{ $aboutus->wwo_section3_icon }}">
+            <label>Icon (Image)</label><br>
+            @if($aboutus->wwo_section3_icon)
+                <img src="{{ asset('storage/' . $aboutus->wwo_section3_icon) }}" alt="Current Icon" width="100" class="mb-2">
+            @endif
+            <input type="file" name="wwo_section3_icon" class="form-control" accept="image/*">
         </div>
 
         <br>

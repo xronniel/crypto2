@@ -82,8 +82,8 @@
             <textarea name="wwo_section3_text1" class="form-control"></textarea>
         </div>
         <div>
-            <label>Icon</label>
-            <input type="text" name="wwo_section3_icon" class="form-control">
+            <label>Icon (Image)</label>
+            <input type="file" name="wwo_section3_icon" class="form-control" accept="image/*">
         </div>
 
         <br>

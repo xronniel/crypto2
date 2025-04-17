@@ -157,3 +157,10 @@ Route::get('/agents', [AgentController::class, 'userIndex'])->name('agents.index
 Route::get('/agents/{agent}', [AgentController::class, 'userShow'])->name('agents.show');
 
 Route::get('mortgage-calculator',[MortgageLandingPageController::class, 'userIndex'])->name('mortgage-calculator');
+
+Route::get('/contact-us', function () {
+    return view('contact');
+});
+Route::get('/about-us', [AboutUsController::class, 'aboutUs'])->name('front.home');
+
+

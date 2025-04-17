@@ -34,7 +34,10 @@
             <h4>WWO Section 3</h4>
             <p><strong>Title:</strong> {{ $aboutus->wwo_section3_title1 }}</p>
             <p><strong>Text:</strong> {{ $aboutus->wwo_section3_text1 }}</p>
-            <p><strong>Icon:</strong> {{ $aboutus->wwo_section3_icon }}</p>
+            @if($aboutus->wwo_section3_icon)
+                <p><strong>Icon:</strong></p>
+                <img src="{{ asset('storage/' . $aboutus->wwo_section3_icon) }}" alt="WWO Section 3 Icon" width="100">
+            @endif
 
             <hr>
             <a href="{{ route('admin.aboutus.index') }}" class="btn btn-secondary">Back</a>
