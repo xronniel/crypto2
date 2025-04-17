@@ -71,7 +71,6 @@ class Listing extends Model
         'agent_id',
         'community_id',
         'visit_count',
-        'fact_sheet',
     ];
 
 
@@ -83,26 +82,6 @@ class Listing extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
-    }
-
-    public function offPlanImages()
-    {
-        return $this->hasMany(OffPlanImage::class);
-    }
-
-    public function paymentPlanCards()
-    {
-        return $this->hasMany(PaymentPlanCard::class);
-    }
-
-    public function paymentPlanTimelines()
-    {
-        return $this->hasMany(PaymentPlanTimeline::class);
-    }
-
-    public function offPlanKeys()
-    {
-        return $this->hasMany(OffPlanKey::class);
     }
 
     public function developer()

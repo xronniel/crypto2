@@ -1,12 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\PaymentPlanCardController;
-use App\Http\Controllers\Admin\PaymentPlanTimelineController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Admin\ContactUsController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrencyController;
@@ -44,18 +40,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->group(function () {
 
-    Route::resource('contact-us', ContactUsController::class);
-
     Route::resource('news', NewsController::class);
     Route::delete('news/gallery/{id}', [NewsController::class, 'deleteGalleryImage'])->name('gallery.delete');
     Route::resource('listings', ListingController::class);
-
-    // Payment Plan Cards
-    Route::resource('listings.payment-plan-cards', PaymentPlanCardController::class)->except(['show']);
-
-    // Payment Plan Timelines
-    Route::resource('listings.payment-plan-timelines', PaymentPlanTimelineController::class)->except(['show']);
-
 
     Route::resource('articles', ArticleController::class);
     Route::delete('articles/gallery/{id}', [ArticleController::class, 'deleteGalleryImage'])->name('article.gallery.delete');
@@ -121,7 +108,9 @@ Route::get('/properties/{property}', [PropertyController::class, 'show'])->name(
 Route::get('/holiday-properties', [HolidayPropertyController::class, 'userIndex'])->name('holiday-properties.index');
 Route::get('/holiday-properties/{holidayProperty}', [HolidayPropertyController::class, 'userShow'])->name('holiday-properties.show');
 
-Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
+Route::get('/contact-us', function () {
+    return view('contact');
+});
 Route::get('/blog', function () {
     return view('blog');
 });
