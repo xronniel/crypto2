@@ -8,8 +8,10 @@
         <div class="breadcrumb__content">
             <h2 class="breadcrumb__title">Contact Us</h2>
             <ul class="bread-crumb clearfix ul_li_center">
-                <li class="breadcrumb-item"><a href="/">Home</a> </li> 
-                <li> - </li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li> 
+                <li
+                style="margin: 0 10px"
+                > - </li>
                 <li class="breadcrumb-item">Contact Us</li>
             </ul>
         </div>
@@ -29,9 +31,7 @@
         </div>
     </div>
 </section>
-<!-- breadcrumb end -->
 
-<!-- contact start -->
 <section class="contact-info pt-130 pb-120">
     <div class="container">
         <div class="row justify-content-md-center mt-none-30">
@@ -42,7 +42,7 @@
                     </div>
                     <h3>Location</h3>
                     <p>
-                        Sunshine Business Park <br> Sector-94, Poland
+                        {{ $contactInfo->address ?? 'No address available' }}
                     </p>
                 </div>
             </div>
@@ -53,8 +53,9 @@
                     </div>
                     <h3>Contact</h3>
                     <p>
-                        <a href="tel:+88(0)555-0108">+88(0) 555-0108</a> <br> 
-                        <a href="tel:+88(0)555-01117">+88(0) 555-01117</a>
+                        @foreach($contacts as $contact)
+                            <a href="tel:{{ $contact }}">{{ $contact }}</a> <br> 
+                        @endforeach
                     </p>
                 </div>
             </div>
@@ -65,22 +66,110 @@
                     </div>
                     <h3>Email</h3>
                     <p>
-                        <a href="mailto:info@cryco.com">info@cryco.com</a> <br> 
-                        <a href="mailto:example@cryco.com">example@cryco.com</a>
+                        @foreach($emails as $email)
+                            <a href="mailto:{{ $email }}">{{ $email }}</a> <br>
+                        @endforeach
                     </p>
                 </div>
             </div>
-       </div>
+        </div>
     </div>
 </section>
-<!-- contact end -->
 
-<!-- google map start -->
 <section class="google-map">
+    <input type="checkbox" id="toggleMap" class="map-toggle" />
+    
+    <label for="toggleMap" class="google-map__overlay">
+      <p>Click anywhere to view our Headquarter’s location on the map</p>
+    </label>
+  
     <div class="google-map__inner">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14602.254272231177!2d90.3654215!3d23.7985508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1592852423971!5m2!1sen!2sbd" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      {!! $contactInfo->map !!}
     </div>
-</section>
-<!-- google map end -->
+  </section>
+  
 
+
+
+
+
+
+
+<style>
+    .contact-info__item{
+        min-height: 380px;
+    }
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    .google-map {
+  position: relative;
+
+}
+
+.map-toggle {
+  display: none;
+}
+
+.google-map__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+
+
+
+
+  color: #000000;
+
+
+  font-family: "Manrope", sans-serif;
+font-weight: 400;
+font-size: 30px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+vertical-align: middle;
+
+}
+.google-map__overlay p { 
+    padding: 0 0 200px 0;
+}
+.map-toggle:checked + .google-map__overlay {
+  display: none;
+}
+
+@media (max-width: 950px) {
+ 
+
+    .google-map__overlay {
+
+font-weight: 400;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+vertical-align: middle;
+
+    }
+
+}
+</style>
 @endsection
