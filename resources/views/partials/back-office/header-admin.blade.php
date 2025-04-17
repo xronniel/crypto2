@@ -205,6 +205,12 @@
                             Facilities
                         </a>
                     </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.aboutus.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
+                            About Us
+                        </a>
+                    </div>
                  <div class="option2 nav-option">
                         <a href="{{ route('admin.faqs.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/box.png') }}" class="nav-img" alt="articles">

@@ -29,6 +29,7 @@ use App\Http\Controllers\SavePropertyController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\AboutUsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -82,6 +83,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('categories', CategoryController::class);
     Route::resource('holiday-properties', HolidayPropertyController::class);
     Route::resource('comments', CommentController::class)->except(['create', 'store']);
+    Route::resource('aboutus', AboutUsController::class);
+
 
     Route::get('/property-leads', [PropertyLeadController::class, 'index'])->name('property-leads.index');
     Route::get('/property-leads/{lead}', [PropertyLeadController::class, 'show'])->name('property-leads.show');
