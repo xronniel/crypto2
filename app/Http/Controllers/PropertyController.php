@@ -282,7 +282,7 @@ class PropertyController extends Controller
 
     public function show($property_ref_no)
     {
-        $property = Listing::with(['images', 'facilities'])
+        $property = Listing::with(['images', 'facilities', 'offPlanKeys', 'offPlanImages', 'paymentPlanCards', 'paymentPlanTimelines'])
             ->where('property_ref_no', $property_ref_no)
             ->firstOrFail();
 
@@ -362,8 +362,30 @@ class PropertyController extends Controller
             ->latest()
             ->take(5)
             ->get();
+
+        $offPlanKeys = $property->offPlanKeys;
+        $offPlanImages = $property->offPlanImages;
+        $paymentPlanCards = $property->paymentPlanCards;
+        $timelines = $property->paymentPlanTimelines;
         
-        return view('propertydetails', compact('property', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'completionStatus', 'noOfRooms', 'noOfBathrooms', 'amenities', 'faqs', 'priceRange', 'plotAreaRange', 'propertiesSameArea'));
+        return view('propertydetails', compact(
+            'property', 
+            'unitTypesAndModels', 
+            'adTypes', 
+            'propertyTypes', 
+            'completionStatus', 
+            'noOfRooms', 
+            'noOfBathrooms', 
+            'amenities', 
+            'faqs', 
+            'priceRange', 
+            'plotAreaRange', 
+            'propertiesSameArea',
+            'offPlanKeys',
+            'offPlanImages',
+            'paymentPlanCards',
+            'timelines'
+        ));
     }
 
 }
