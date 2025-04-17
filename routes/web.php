@@ -31,6 +31,8 @@ use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\OurTeamController;
+use App\Http\Controllers\OurCommitmentsController;
+use App\Http\Controllers\CryptoHomeInFigureController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -86,8 +88,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('comments', CommentController::class)->except(['create', 'store']);
     Route::resource('aboutus', AboutUsController::class);
     Route::resource('ourteam', OurTeamController::class);
-
-
+    Route::resource('ourcommitments', OurCommitmentsController::class);
+    Route::resource('crypto-home-in-figures', CryptoHomeInFigureController::class);
 
     Route::get('/property-leads', [PropertyLeadController::class, 'index'])->name('property-leads.index');
     Route::get('/property-leads/{lead}', [PropertyLeadController::class, 'show'])->name('property-leads.show');

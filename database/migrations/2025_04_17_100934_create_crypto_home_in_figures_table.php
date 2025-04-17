@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('our_commitments', function (Blueprint $table) {
+        Schema::create('crypto_home_in_figures', function (Blueprint $table) {
             $table->id();
-            $table->string('icon')->nullable();     
-            $table->string('title'); 
-            $table->text('text'); 
-            $table->boolean('status')->default(1);  // 1 = Active, 0 = Inactive
+            $table->string('title');
+            $table->text('text');
+            $table->boolean('status')->default(1); // 1 = Active, 0 = Inactive
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('our_commitments');
+        Schema::dropIfExists('crypto_home_in_figures');
     }
 };
