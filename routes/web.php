@@ -165,9 +165,12 @@ Route::get('/contact-us', function () {
     return view('contact');
 });
 Route::get('/about-us', [AboutUsController::class, 'aboutUs'])->name('front.home');
-// Route::get('/about-us', function () {
-//     return view('aboutUs');
-// });
+
+
+
+Route::get('/TermsConditions', function () {
+    return view('TermsConditions');
+});
 
 
 

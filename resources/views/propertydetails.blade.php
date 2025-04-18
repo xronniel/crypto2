@@ -427,6 +427,29 @@ data-user-id="{{ auth()->user()->id }}"
                     </div>
                 </div>
             @endif
+            @if ($property->off_plan)
+                <div class="Description-big-box">
+                    <div class="property-details-Description">
+                        <span class="active-filter-link">Features</span>
+                    </div>
+
+                    <div class="Description-second-box">
+                           
+                        <div class="container-Features">
+                            <div class="image">
+                                <img src="{{ asset('assets/img/home/arrow.png') }}" alt="Sample Image">
+                            </div>
+                            <div class="description">
+                                <p>
+                                    This is a detailed description of the image. It provides insights, context, or any relevant information 
+                                    needed. The layout is responsive, adjusting seamlessly between **desktop** and **mobile** views.
+                                </p>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            @endif
 
 
 
@@ -1243,5 +1266,66 @@ data-user-id="{{ auth()->user()->id }}"
 
 
         }
+
+
+
+
+
+
+
+
+.container-Features {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.image {
+    flex: 1;
+    width: 100%;
+    height: 400px;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.description {
+    flex: 1;
+    font-family: "Manrope", sans-serif;
+font-weight: 600;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: -0.5px;
+vertical-align: middle;
+
+}
+
+@media (max-width: 900px) {
+    .container-Features {
+        flex-direction: column;
+        text-align: center;
+    }
+    .image {
+    flex: 1;
+    width: 100%;
+    height: 400px;
+}
+
+.description {
+    font-family: "Manrope", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: -0.5px;
+vertical-align: middle;
+
+
+}
+}
     </style>
 @endsection
