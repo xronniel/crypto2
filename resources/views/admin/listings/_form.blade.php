@@ -242,6 +242,22 @@
 </div>
 
 <div class="form-group">
+    <label for="fact_sheet">fact sheet</label>
+    <input type="file" name="fact_sheet" class="form-control" accept="image/*">
+    @if(!empty($listing->fact_sheet))
+        <img src="{{ asset('storage/' . $listing->fact_sheet) }}" width="100">
+    @endif
+</div>
+
+<div class="form-group">
+    <label for="payment_plan">payment plan</label>
+    <input type="file" name="payment_plan" class="form-control" accept="image/*">
+    @if(!empty($listing->payment_plan))
+        <img src="{{ asset('storage/' . $listing->payment_plan) }}" width="100">
+    @endif
+</div>
+
+<div class="form-group">
     <label for="images">Upload Images (Multiple)</label>
     <input type="file" name="images[]" class="form-control" multiple>
     @if(!empty($listing->images))
