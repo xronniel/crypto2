@@ -503,9 +503,8 @@
   
   .figure-card {
     position: relative;
-    min-width: 200px;
+    min-width: 220px;
     height: 150px;
-    overflow: hidden;
     border-radius: 8px;
     margin: 10px;
   }
@@ -544,6 +543,10 @@
   .figure-divider {
     height: 150px;
     width: auto ;
+    position: absolute;
+    /* margin: 0 10px; */
+    top: 0;
+    right: -20px;
   }
   
   @media (max-width: 768px) {
@@ -564,9 +567,9 @@
       max-width: 250px;
     }
     
-    .figure-divider {
+    /* .figure-divider {
       display: none;
-    }
+    } */
   }
 
 

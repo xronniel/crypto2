@@ -213,8 +213,9 @@
         <h3>{{ $figure->title }}</h3>
         <p>{{ $figure->text }}</p>
       </div>
+      <img src="/assets/img/about/divider.png" alt="divider" class="figure-divider">
     </div>
-    <img src="/assets/img/about/divider.png" alt="divider" class="figure-divider">
+    
   @endforeach
 @endif
           
