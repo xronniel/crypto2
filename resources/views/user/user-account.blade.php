@@ -565,14 +565,14 @@ data-user-id="{{ auth()->user()->id }}"
                 {{-- end card   --}}
                 {{ $savedProperties->links() }}
             @else
-                <div class="no-saved">
+           
                     <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
                     <p class="saved-properties-one">No Saved Properties</p>
                     <p class="saved-properties-two">
                         ​To save a property to your favorites, click the <span>heart icon</span> on any listing.
                         All your saved properties will be conveniently accessible here for easy viewing and management.
                     </p>
-                </div>
+    
             @endif
         </div>
 

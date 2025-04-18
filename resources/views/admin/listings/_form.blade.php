@@ -271,15 +271,35 @@
 <div class="row mt-4">
     <div class="col-md-12">
         <h4>Additional Options</h4>
+
+
+
         @foreach(['exclusive', 'featured', 'price_on_application', 'off_plan', 'new', 'verified', 'superagent'] as $field)
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="{{ $field }}" value="1" 
-                    id="{{ $field }}" {{ old($field, $listing->$field ?? false) ? 'checked' : '' }}>
-                <label class="form-check-label" for="{{ $field }}">{{ ucfirst(str_replace('_', ' ', $field)) }}</label>
-            </div>
-        @endforeach
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="{{ $field }}" value="1" 
+                id="{{ $field }}" {{ old($field, $listing->$field ?? false) ? 'checked' : '' }}
+                onchange="toggleOffPlan()">
+            <label class="form-check-label" for="{{ $field }}">{{ ucfirst(str_replace('_', ' ', $field)) }}</label>
+        </div>
+    @endforeach
+    
+
+
     </div>
 </div>
+
+
+    <!-- Button & Dynamic Inputs Container -->
+    <div class="mt-4 mb-4" id="offPlanContainer" style="display: none;">
+        <button type="button" class="btn btn-primary" onclick="addOffPlanInput()">Add Off-Plan Key</button>
+        <div id="offPlanInputs"></div>
+    </div>
+    
+
+
+
+
+
 
 <div class="form-group" id="developer-field" style="display: {{ old('off_plan', $listing->off_plan ?? false) ? 'block' : 'none' }};">
     <label for="developer_id">Developer</label>
@@ -331,4 +351,23 @@
             offPlanCheckbox.addEventListener('change', toggleDeveloperField);
         }
     });
-</script>
+
+    function toggleOffPlan() {
+        document.getElementById('offPlanContainer').style.display =
+            document.getElementById('off_plan').checked ? 'block' : 'none';
+    }
+    
+    function addOffPlanInput() {
+        const container = document.getElementById('offPlanInputs');
+        const index = container.children.length;
+        container.innerHTML += `
+            <div class="mb-2">
+                <input class="mt-4" type="text" name="off_plan_keys[${index}][key]" placeholder="Key" required>
+                <input class="mt-4" type="text" name="off_plan_keys[${index}][value]" placeholder="Value" required>
+                <select class="mt-4" name="off_plan_keys[${index}][status]">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>`;
+    }
+    </script>

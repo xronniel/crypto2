@@ -959,7 +959,7 @@ width: 100%;
     content: '';
     position: absolute;
     top: 25px;
-    left: 13.5px;
+    left: 14.5px;
     width: 2px;
     height: 79%;
     background-color: #2DD98F;
@@ -967,7 +967,7 @@ width: 100%;
 }
 
 .timeline-item:last-child .timeline-icon-wrapper::before {
-    display: none; /* Hide the line after the last item */
+    display: none; 
 }
 
 .timeline-icon {
@@ -1001,7 +1001,9 @@ vertical-align: middle;
 color: #ffffff80;
 }
 
-
+.timeline-item:last-child::before {
+    display: none;
+}
         @media (max-width: 986px) {
 
             .page-path-line {
