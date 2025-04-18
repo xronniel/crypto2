@@ -285,18 +285,30 @@
     
 
 
+
     </div>
 </div>
 
 
-    <!-- Button & Dynamic Inputs Container -->
-    <div class="mt-4 mb-4" id="offPlanContainer" style="display: none;">
-        <button type="button" class="btn btn-primary" onclick="addOffPlanInput()">Add Off-Plan Key</button>
-        <div id="offPlanInputs"></div>
+
+    <!-- Button & Dynamic Inputs -->
+    <div class="mt-4 mb-4"  id="offPlanContainer" style="display: none;">
+        <button type="button" class="btn btn-primary mb-2" onclick="addOffPlanInput()">Add Off-Plan Key</button>
+        <div id="offPlanInputs">
+            @if(!empty($listing->offPlanKeys))
+                @foreach($listing->offPlanKeys as $index => $keyData)
+                    <div class="mb-2">
+                        <input class="mb-2" type="text" name="off_plan_keys[{{ $index }}][key]" value="{{ $keyData->key }}" required>
+                        <input class="mb-2" type="text" name="off_plan_keys[{{ $index }}][value]" value="{{ $keyData->value }}" required>
+                        <select class="mb-2" name="off_plan_keys[{{ $index }}][status]">
+                            <option value="active" {{ $keyData->status === 'active' ? 'selected' : '' }}>Active</option>
+                            <option value="inactive" {{ $keyData->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                        </select>
+                    </div>
+                @endforeach
+            @endif
+        </div>
     </div>
-    
-
-
 
 
 
@@ -352,6 +364,13 @@
         }
     });
 
+
+    
+ 
+    document.addEventListener("DOMContentLoaded", function() {
+        toggleOffPlan(); 
+    });
+    
     function toggleOffPlan() {
         document.getElementById('offPlanContainer').style.display =
             document.getElementById('off_plan').checked ? 'block' : 'none';
@@ -362,9 +381,9 @@
         const index = container.children.length;
         container.innerHTML += `
             <div class="mb-2">
-                <input class="mt-4" type="text" name="off_plan_keys[${index}][key]" placeholder="Key" required>
-                <input class="mt-4" type="text" name="off_plan_keys[${index}][value]" placeholder="Value" required>
-                <select class="mt-4" name="off_plan_keys[${index}][status]">
+                <input class="mb-2" type="text" name="off_plan_keys[${index}][key]" placeholder="Key" required>
+                <input class="mb-2" type="text" name="off_plan_keys[${index}][value]" placeholder="Value" required>
+                <select class="mb-2" name="off_plan_keys[${index}][status]">
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                 </select>
