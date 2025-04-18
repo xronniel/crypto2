@@ -205,6 +205,30 @@
                             Facilities
                         </a>
                     </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.aboutus.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
+                            About Us
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.ourteam.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
+                            Our Team
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.ourcommitments.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
+                            Our commitment
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.crypto-home-in-figures.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
+                            CryptoHome In Figures
+                        </a>
+                    </div>
                  <div class="option2 nav-option">
                         <a href="{{ route('admin.faqs.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/box.png') }}" class="nav-img" alt="articles">

@@ -20,7 +20,7 @@ class RoleSeeder extends Seeder
       
               // Create admin user and assign Admin role
               $admin = User::create([
-                  'name' => 'Admin User',
+                  'first_name' => 'Admin User',
                   'email' => 'admin@cryptohomeelite.com',
                   'password' => bcrypt('password123')
               ]);
@@ -28,7 +28,7 @@ class RoleSeeder extends Seeder
       
               // Create normal user and assign User role
               $user = User::create([
-                  'name' => 'Normal User',
+                  'first_name' => 'Normal User',
                   'email' => 'user@cryptohomeelite.com',
                   'password' => bcrypt('password123')
               ]);
