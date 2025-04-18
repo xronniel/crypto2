@@ -96,6 +96,11 @@
     justify-content: center;
 }
 
+.page-line-filter-links-two a:hover {
+
+    background: #2dd98f;
+}
+
 .page-line-filter-links-ctive {
     color: #080b18 !important;
     background: #2dd98f;
