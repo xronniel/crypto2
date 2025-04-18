@@ -72,6 +72,8 @@ class Listing extends Model
         'community_id',
         'visit_count',
         'fact_sheet',
+        'payment_plan',
+        'feature_description',
     ];
 
 
