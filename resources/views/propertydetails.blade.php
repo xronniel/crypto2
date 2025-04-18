@@ -432,25 +432,29 @@ data-user-id="{{ auth()->user()->id }}"
                     <div class="property-details-Description">
                         <span class="active-filter-link">Features</span>
                     </div>
+                    <div class="Description-second-box-two">
 
-                    <div class="Description-second-box">
-                           
-                        <div class="container-Features">
-                            <div class="image">
-                                <img src="{{ asset('assets/img/home/arrow.png') }}" alt="Sample Image">
+                        <div class="custom-offplan-swiper-div">
+
+                            <div class="swiper custom-offplan-swiper">
+                                <div class="swiper-wrapper swiper-wrapper-offplan">
+                                    @foreach (json_decode($property->offPlanImages, true) as $image)
+                                        <div class="swiper-slide">
+                                            <img src="{{ asset('storage/' . $image['image']) }}" alt="Property Image">
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
-                            <div class="description">
-                                <p>
-                                    This is a detailed description of the image. It provides insights, context, or any relevant information 
-                                    needed. The layout is responsive, adjusting seamlessly between **desktop** and **mobile** views.
-                                </p>
-                            </div>
+
                         </div>
-                    
+                        <div class="description">
+                            <p>
+                                {{ $property->feature_description }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             @endif
-
 
 
             <div class="Description-big-box">
@@ -1269,63 +1273,83 @@ data-user-id="{{ auth()->user()->id }}"
 
 
 
+        .Description-second-box-two {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            align-items: flex-start;
+            margin: 50px 0 0 0;
+        }
+
+        .container-Features {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 20px;
+        }
 
 
 
+        .custom-offplan-swiper-div {
+            height: 400px;
+            width: 50%;
+            overflow: hidden;
+        }
 
+        .custom-offplan-swiper {
+            /* width: 50% !important; */
+            height: 100%;
+            overflow: hidden;
+        }
 
-.container-Features {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
+        .custom-offplan-swiper .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
 
-.image {
-    flex: 1;
-    width: 100%;
-    height: 400px;
-}
+        .description {
+            width: 50%;
+            font-family: "Manrope", sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 1.4;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
 
-.image img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
+        }
 
-.description {
-    flex: 1;
-    font-family: "Manrope", sans-serif;
-font-weight: 600;
-font-size: 20px;
-line-height: 100%;
-letter-spacing: -0.5px;
-vertical-align: middle;
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container-Features {
+                flex-direction: column;
+                text-align: center;
+                width: 50%;
+            }
 
-}
+            .custom-offplan-swiper,
+            .description {
+                flex: 1 1 100%;
+                width: 100%;
+            }
 
-@media (max-width: 900px) {
-    .container-Features {
-        flex-direction: column;
-        text-align: center;
-    }
-    .image {
-    flex: 1;
-    width: 100%;
-    height: 400px;
-}
+            .Description-second-box-two {
+                flex-direction: column;
+            }
 
-.description {
-    font-family: "Manrope", sans-serif;
-font-weight: 600;
-font-size: 14px;
-line-height: 100%;
-letter-spacing: -0.5px;
-vertical-align: middle;
+            .custom-offplan-swiper-div {
+                height: 400px;
+                width: 100%;
+            }
 
-
-}
-}
+            .description {
+                font-size: 14px;
+                width: 100%;
+                padding: 10px;
+            }
+        }
     </style>
 @endsection
