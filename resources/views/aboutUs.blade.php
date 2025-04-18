@@ -6,7 +6,12 @@
     <div class="hero-img" data-background="assets/img/bg/hero-bg2.png"></div>
     @if($aboutUs->count() > 0)
   @foreach($aboutUs as $about)  
+     
     <div class="container hero-two title-bg">
+        {{-- img for mobile --}}
+        <div class="glass-img-wrapper2">
+            <img src="/assets/img/about/content-about-img1.jpg" alt="About Image" />
+          </div>
     
       <h1 class="aboutUs_title">
         {{ $about->hero_title }}
@@ -58,8 +63,10 @@
       <div class="commitment-cards">
         <!-- Card 1 -->
         @if($ourCommitment->count() > 0)
-        <div class="card-wrapper-about">
-          @foreach($ourCommitment as $commitment)
+
+        {{-- Section 1: Original Grid Layout (Unchanged) --}}
+        @foreach($ourCommitment as $commitment)
+          <div class="card-wrapper-about">
             <div class="commitment-card">
               @if($commitment->icon)
                 <div class="icon-placeholder">
@@ -69,8 +76,27 @@
               <h3 class="commit-title">{{ $commitment->title }}</h3>
               <p>{{ $commitment->text }}</p>
             </div>
-          @endforeach
+          </div>
+        @endforeach
+      
+            {{-- Section 2: Swiper Slider with New Classes --}}
+   {{-- Section 2: Plain CSS Mobile Slider --}}
+<div class="commitment-slider-wrapper-alt">
+    <div class="commitment-slider-scroll">
+      @foreach($ourCommitment as $commitment)
+        <div class="commitment-card-scroll">
+          @if($commitment->icon)
+            <div class="icon-placeholder-scroll">
+              <img src="{{ asset('storage/' . $commitment->icon) }}" alt="about icon" class="commitment1" />
+            </div>
+          @endif    
+          <h3 class="commit-title-scroll">{{ $commitment->title }}</h3>
+          <p class="commit-text-scroll">{{ $commitment->text }}</p>
         </div>
+      @endforeach
+    </div>
+  </div>
+      
       @endif
         <!-- Card 2 -->
         {{-- <div class="card-wrapper-about">
@@ -377,6 +403,38 @@
       document.getElementById('personModal').style.display = 'none';
     });
   </script>
+
+{{-- <script>
+    let commitmentSwiperAlt = null;
+  
+    function initAltSwiper() {
+      const screenWidth = window.innerWidth;
+  
+      if (screenWidth < 630 && !commitmentSwiperAlt) {
+        commitmentSwiperAlt = new Swiper('.commitment-swiper-alt', {
+          spaceBetween: 10,
+          slidesPerView: 1,
+          centeredSlides: true,
+          pagination: {
+            el: '.swiper-pagination-alt',
+            clickable: true,
+          },
+          breakpoints: {
+            480: {
+              slidesPerView: 2,
+              centeredSlides: false,
+            },
+          }
+        });
+      } else if (screenWidth >= 630 && commitmentSwiperAlt) {
+        commitmentSwiperAlt.destroy(true, true);
+        commitmentSwiperAlt = null;
+      }
+    }
+  
+    window.addEventListener('load', () => setTimeout(initAltSwiper, 100));
+    window.addEventListener('resize', initAltSwiper);
+  </script> --}}
 
   <!-- hero section start  -->
   {{-- <section class="hero hero-two pos-rel pt-120 mb-160">

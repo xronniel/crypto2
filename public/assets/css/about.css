@@ -1,8 +1,8 @@
 .about-mainContainer {
     background-color: #4A21EF;
-    position: relative;
+    
+    
 }
-
 .hero-about {
     min-height: 900px;
 }
@@ -91,7 +91,7 @@
   /* content first section */
   .about-glass-section {
     position: relative;
-    min-height: 300px; /* adjust as needed */
+    min-height: 300px; 
   }
 
   /* icons */
@@ -149,8 +149,7 @@
     left: 1%;
   }
   
-  
-  
+
   .glass-img-wrapper {
     position: absolute;
     top: -100%;
@@ -167,6 +166,32 @@
     z-index: 1;
   }
   .glass-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+  }
+
+  .glass-img-wrapper2 {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    height: 300px;
+    max-height: 900px;
+    max-width: 900px;
+    backdrop-filter: blur(15px);
+    background: #8A83A82E;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    border: 1px solid #AAA5BF;
+    z-index: 1;
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .glass-img-wrapper2 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -196,14 +221,12 @@
     font-weight: 700;
     line-height: 72px;
     text-align: center;
-    
     font-family: 'Manrope', sans-serif;
   }
 
   .card-wrapper-about {
     padding: 16px;
     border: 1px solid #FFFFFF47;
-    
     border-radius: 20px;
     width: 288.5px;
   }
@@ -236,7 +259,7 @@
     padding-bottom: 35px;
     padding-left: 26px;
     padding-right: 26px;
-    max-width: 266.5px;
+    width: 100%;
     min-height: 447px;
     flex: 1 1 250px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -258,6 +281,85 @@
     font-size: 12px;
     color: #aaa;
   }
+
+  /* swiper style */
+/* Hide on desktop */
+.commitment-slider-wrapper-alt {
+    display: none;
+  }
+  
+  /* Show on mobile only */
+  @media (max-width: 629px) {
+    .commitment-slider-wrapper-alt {
+      display: block;
+      overflow-x: auto;
+      padding: 20px 0;
+    }
+
+    .card-wrapper-about {
+        display: none;
+    }
+  
+    .commitment-slider-scroll {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 10px;
+    }
+  
+    .commitment-card-scroll {
+      scroll-snap-align: start;
+      flex: 0 0 80%;
+      max-width: 250px;
+      background-color: #0D0B33;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+  
+    .commitment-card-scroll:hover {
+      transform: translateY(-5px);
+    }
+  
+    .icon-placeholder-scroll {
+      width: 214.5px;
+      height: 100px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .commit-title-scroll {
+      font-family: 'Manrope';
+      font-size: 20px;
+      line-height: 32px;
+      margin-bottom: 15px;
+      color: white;
+      text-align: center;
+    }
+  
+    .commit-text-scroll {
+      color: #ddd;
+      font-size: 14px;
+      text-align: center;
+    }
+  
+    /* Hide scrollbar (optional) */
+    .commitment-slider-scroll::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .commitment-slider-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
+  /* end swiper */
   
   
   .commitment-card p {
@@ -313,9 +415,7 @@
   .offer-right {
     flex: 1;
     display: flex;
-    flex-direction: column; /* If you want content stacked vertically */
-    /* Remove align-items: stretch as it's not needed here */
-    /* The container's align-items: stretch will handle height matching */
+    flex-direction: column; 
   }
   
   .offer-row {
@@ -357,7 +457,7 @@
     max-width: 280px;
     height: auto;
     pointer-events: none;
-    z-index: -1; /* Optional: avoid hover/focus if decorative */
+    z-index: -1; 
   }
   
   .offer-card2 {
@@ -585,6 +685,10 @@
         .glass-img-wrapper {
             display: none;
         }
+
+        .glass-img-wrapper2 {
+            display: block;
+        }
         .about-glass-section {
             min-height: auto;
         }
@@ -594,7 +698,21 @@
         .aboutUs_title {
             font-size: 3rem;
         }
+
+        .hero-about {
+            min-height: 1300px;
+        }
+
       }
+
+          /* 🔁 Responsive styles */
+    @media (min-width: 1001px) {
+
+        /* .hero-about {
+            min-height: 1100px;
+        } */
+      }
+
 
   
   .modal-right img {
@@ -617,10 +735,16 @@
 
   
 
+  
+
   /* Responsive adjustments */
   @media (max-width: 600px) {
     .hero-content h1 {
       font-size: 2rem;
+    }
+
+    .title-bg {
+        margin-top: 0px;
     }
 
     .icons1, .icons4 {
