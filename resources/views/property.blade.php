@@ -85,7 +85,37 @@
                 </div>
             </div>
 
-        
+            <div class="page-line-filter">
+
+                <div class="page-line-filter-links-two mobile-view">
+                    <a href="#" onclick="scrollToSection(event)">
+                        <img style="width: 22px;" class="page-line-filter-links-two-img"
+                            src="assets/img/property/location.png" alt="home">
+                        Map view
+                    </a>
+                    
+                    <a href="#">
+                        <img style="    width: 19px;" class="page-line-filter-links-two-img"
+                            src="assets/img/property/alert.png" alt="home">
+                        Create alert</a>
+                </div>
+
+                <form action="{{ route('properties.index') }}" method="GET">
+                    <div class="page-line-filter-links-two">
+                        <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
+                        <label for="sort-options">Sort by:</label>
+
+                        <select name="sort" id="sort-options" onchange="this.form.submit()">
+                            <option value="">Select an option</option>
+                            <option value="featured">Featured</option>
+                            <option value="newest">Newest</option>
+                            <option value="from_lowest_price">From Lowest Price</option>
+                            <option value="from_highest_price">From Highest Price</option>
+                        </select>
+                    </div>
+                </form>
+
+            </div>
                 
        
 
@@ -589,7 +619,10 @@ color: #FFFFFF80;
 
 
 <script>
-
+function scrollToSection(event) {
+    event.preventDefault(); 
+    document.getElementById("question-form-footer").scrollIntoView({ behavior: "smooth" });
+}
 </script>
 
 @endsection

@@ -16,7 +16,7 @@
                 <p>/ Property Listing</p>
                 <p class="active-path-line">/ Bespoke Upgrades | Extended | Vacant</p>
             </div>
-    
+
             <div class="grid-img-container">
 
 
@@ -321,57 +321,136 @@ data-user-id="{{ auth()->user()->id }}"
                     </div>
                 </div>
             </div>
+
+
             @if ($property->off_plan)
-            <div class="Description-big-box">
-                <div class="property-details-Description">
-                    <span class="active-filter-link">Payment Plans</span>
+                <div class="download-grid">
+                    @if ($property->brochure)
+                        <a href="{{ asset('storage/' . $property->brochure) }}" class="download-btn" download
+                            target="_blank">
+                            Download Brochure
+                        </a>
+                    @endif
+
+                    @if ($property->floor_plan)
+                        <a href="{{ asset('storage/' . $property->floor_plan) }}" class="download-btn" download
+                            target="_blank">
+                            Download Floor Plan
+                        </a>
+                    @endif
+
+                    @if ($property->payment_plan)
+                        <a href="{{ asset('storage/' . $property->payment_plan) }}" class="download-btn" download
+                            target="_blank">
+                            Download Payment Plan
+                        </a>
+                    @endif
+
+                    @if ($property->fact_sheet)
+                        <a href="{{ asset('storage/' . $property->fact_sheet) }}" class="download-btn" download
+                            target="_blank">
+                            Download Fact Sheet
+                        </a>
+                    @endif
                 </div>
-        
-                <div class="Description-second-box">
-                    @foreach ($paymentPlanCards as $index => $card)
-                        <div class="payment-card">
-                            <div class="plan-title">{{ $card['payment_plan_name'] }}</div>
-                            <div class="plan-percent">{{ rtrim($card['percentage'], '.00') }}%</div>
-                            <div class="plan-description">{{ $card['text'] }}</div>
+            @endif
+            @if ($property->off_plan)
+                <div class="Description-big-box">
+                    <div class="property-details-Description">
+                        <span class="active-filter-link">Key Information</span>
+                    </div>
+
+                    <div class="Description-second-box">
+                        <div class="description-grid">
+                            @foreach ($offPlanKeys as $item)
+                                <div class="description-item">
+                                    <p class="label">{{ $item['key'] }}</p>
+                                    <p class="value">
+                                        @if ($item['key'] === 'Starting Price')
+                                            <span class="highlight">{{ explode('|', $item['value'])[0] }}</span> |
+                                            {{ explode('|', $item['value'])[1] }}
+                                        @else
+                                            {{ $item['value'] }}
+                                        @endif
+                                    </p>
+                                </div>
+                            @endforeach
                         </div>
-        
-                        @if (!$loop->last)
-                            <img class="payment-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="Arrow">
-                        @endif
-                    @endforeach
+                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
             @if ($property->off_plan)
-            <div class="Description-big-box">
-                <div class="property-details-Description">
-                    <span class="active-filter-link">Payment Plans</span>
-                </div>
-        
-                <div class="Description-second-box">
-                    <div class="timeline">
-                        @foreach ($timelines as $index => $item)
-                            <div class="timeline-item">
-                                <div class="timeline-icon-wrapper {{ $loop->last ? 'unchecked' : '' }}">
-                                    <img
-                                        src="{{ asset($loop->last ? 'assets/img/home/Unchecked.png' : 'assets/img/home/green-check.png') }}"
-                                        alt="Status Icon"
-                                        class="timeline-icon"
-                                    />
-                                </div>
-                    
-                                <div class="timeline-text">
-                                    <p class="timeline-title">{{ $item['title'] }}</p>
-                                    <p class="timeline-date">{{ \Carbon\Carbon::parse($item['date'])->format('F j, Y') }}</p>
-                                </div>
+                <div class="Description-big-box">
+                    <div class="property-details-Description">
+                        <span class="active-filter-link">Payment Plans</span>
+                    </div>
+
+                    <div class="Description-second-box">
+                        @foreach ($paymentPlanCards as $index => $card)
+                            <div class="payment-card">
+                                <div class="plan-title">{{ $card['payment_plan_name'] }}</div>
+                                <div class="plan-percent">{{ rtrim($card['percentage'], '.00') }}%</div>
+                                <div class="plan-description">{{ $card['text'] }}</div>
                             </div>
+
+                            @if (!$loop->last)
+                                <img class="payment-img" src="{{ asset('assets/img/home/arrow.png') }}" alt="Arrow">
+                            @endif
                         @endforeach
                     </div>
-                    
                 </div>
-            </div>
-        @endif
-        
+            @endif
+            @if ($property->off_plan)
+                <div class="Description-big-box">
+                    <div class="property-details-Description">
+                        <span class="active-filter-link">Payment Plans</span>
+                    </div>
+
+                    <div class="Description-second-box">
+                        <div class="timeline">
+                            @foreach ($timelines as $index => $item)
+                                <div class="timeline-item">
+                                    <div class="timeline-icon-wrapper {{ $loop->last ? 'unchecked' : '' }}">
+                                        <img src="{{ asset($loop->last ? 'assets/img/home/Unchecked.png' : 'assets/img/home/green-check.png') }}"
+                                            alt="Status Icon" class="timeline-icon" />
+                                    </div>
+
+                                    <div class="timeline-text">
+                                        <p class="timeline-title">{{ $item['title'] }}</p>
+                                        <p class="timeline-date">
+                                            {{ \Carbon\Carbon::parse($item['date'])->format('F j, Y') }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                    </div>
+                </div>
+            @endif
+            @if ($property->off_plan)
+                <div class="Description-big-box">
+                    <div class="property-details-Description">
+                        <span class="active-filter-link">Features</span>
+                    </div>
+
+                    <div class="Description-second-box">
+                           
+                        <div class="container-Features">
+                            <div class="image">
+                                <img src="{{ asset('assets/img/home/arrow.png') }}" alt="Sample Image">
+                            </div>
+                            <div class="description">
+                                <p>
+                                    This is a detailed description of the image. It provides insights, context, or any relevant information 
+                                    needed. The layout is responsive, adjusting seamlessly between **desktop** and **mobile** views.
+                                </p>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            @endif
+
 
 
             <div class="Description-big-box">
@@ -487,72 +566,73 @@ data-user-id="{{ auth()->user()->id }}"
                     </div>
                 </div>
             </div>
+            @if (!$property->off_plan)
+                <div class="Description-big-box">
+                    <div class="property-details-Description">
+                        <span class="active-filter-link">Floor Plan</span>
 
-            <div class="Description-big-box">
-                <div class="property-details-Description">
-                    <span class="active-filter-link">Floor Plan</span>
 
-
-                </div>
-                <div class="Floor-Plan-div">
-                    <div class="Floor-Plan-div-one">
-                        {{-- <img src="{{ asset('assets/img/propertydetails/Floor-Plan-bg.png') }}" alt="floor-plan"> --}}
-                        <img src="{{ asset('storage/' . $property->floor_plan) }}" alt="floor-plan">
                     </div>
-
-                    <div class="Floor-Plan-div-two">
-
-                        <div class="video-container">
-                            @if ($property->web_tour)
-                                @php
-                                    // Extract the video ID from a YouTube Shorts URL
-                                    $videoId = Str::afterLast($property->web_tour, '/');
-                                @endphp
-
-                                <iframe width="100%" height="100%"
-                                    src="https://www.youtube.com/embed/{{ $videoId }}" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen>
-                                </iframe>
-                            @else
-                                <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}"
-                                    controls alt="floor-plan"></video>
-                                <button id="playButton" class="play-button">
-                                    <img src="{{ asset('assets/img/propertydetails/play-icon.png') }}" alt="floor-plan">
-                                    Watch video tour</button>
-                            @endif
-
-
-
+                    <div class="Floor-Plan-div">
+                        <div class="Floor-Plan-div-one">
+                            {{-- <img src="{{ asset('assets/img/propertydetails/Floor-Plan-bg.png') }}" alt="floor-plan"> --}}
+                            <img src="{{ asset('storage/' . $property->floor_plan) }}" alt="floor-plan">
                         </div>
-                        <div class="Floor-Plan-div-three">
-                            <div class="Floor-Plan-div-three-box">
-                                <div class="Floor-Plan-div-three-box-one">
-                                    <p>
-                                        Rent this property from just
-                                    </p>
-                                    {{-- <h3>83338.37
+
+                        <div class="Floor-Plan-div-two">
+
+                            <div class="video-container">
+                                @if ($property->web_tour)
+                                    @php
+                                        // Extract the video ID from a YouTube Shorts URL
+                                        $videoId = Str::afterLast($property->web_tour, '/');
+                                    @endphp
+
+                                    <iframe width="100%" height="100%"
+                                        src="https://www.youtube.com/embed/{{ $videoId }}" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen>
+                                    </iframe>
+                                @else
+                                    <video id="propertyVideo" src="{{ asset('assets/img/propertydetails/example.mp4') }}"
+                                        controls alt="floor-plan"></video>
+                                    <button id="playButton" class="play-button">
+                                        <img src="{{ asset('assets/img/propertydetails/play-icon.png') }}"
+                                            alt="floor-plan">
+                                        Watch video tour</button>
+                                @endif
+
+
+
+                            </div>
+                            <div class="Floor-Plan-div-three">
+                                <div class="Floor-Plan-div-three-box">
+                                    <div class="Floor-Plan-div-three-box-one">
+                                        <p>
+                                            Rent this property from just
+                                        </p>
+                                        {{-- <h3>83338.37
                                         <span>USDT /month</span>
                                     </h3>
                                     <h4>
                                         59, 383 AED
                                     </h4>
                                     <h4>Fixed rates from: <span>3.75%</span></h4> --}}
-                                </div>
-                                <div class="Floor-Plan-div-three-line"></div>
-                                <div class="Floor-Plan-div-three-box-two">
-                                    <p>
-                                        In partnership with
-                                    </p>
-                                    <img src="{{ asset($property->company_logo) }}" alt="logo">
-                                    <a class="pre-approved" href="{{ $property->preview_link }}">Get pre-approved</a>
+                                    </div>
+                                    <div class="Floor-Plan-div-three-line"></div>
+                                    <div class="Floor-Plan-div-three-box-two">
+                                        <p>
+                                            In partnership with
+                                        </p>
+                                        <img src="{{ asset($property->company_logo) }}" alt="logo">
+                                        <a class="pre-approved" href="{{ $property->preview_link }}">Get pre-approved</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+            @endif
 
 
 
@@ -846,72 +926,71 @@ data-user-id="{{ auth()->user()->id }}"
 
 
 
-.payment-card {
-    background-color: #1D2458;
-    border: 1px solid #73737380;
-    padding: 30px 20px;
-    width: 220px;
-    border-radius: 3px;
-    text-align: center;
-    flex-shrink: 0;
-    display: flex
-;
-    flex-direction: column;
-    gap: 10px;
-}
+        .payment-card {
+            background-color: #1D2458;
+            border: 1px solid #73737380;
+            padding: 30px 20px;
+            width: 220px;
+            border-radius: 3px;
+            text-align: center;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-.plan-title {
-    font-size: 18px;
-    margin-bottom: 8px;
+        .plan-title {
+            font-size: 18px;
+            margin-bottom: 8px;
 
-    font-family: "Manrope", sans-serif;
-font-weight: 400;
-font-size: 20px;
-line-height: 16px;
-letter-spacing: 0%;
-text-align: center;
-vertical-align: middle;
-color: #ffffff80;
-}
+            font-family: "Manrope", sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 16px;
+            letter-spacing: 0%;
+            text-align: center;
+            vertical-align: middle;
+            color: #ffffff80;
+        }
 
-.plan-percent {
-    font-weight: bold;
-    font-size: 24px;
-    margin-bottom: 5px;
+        .plan-percent {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 5px;
 
-    font-family: "Manrope", sans-serif;
-font-weight: 700;
-font-size: 20px;
-line-height: 16px;
-letter-spacing: 0%;
-text-align: center;
-vertical-align: middle;
-color: #FFFFFF;
+            font-family: "Manrope", sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 16px;
+            letter-spacing: 0%;
+            text-align: center;
+            vertical-align: middle;
+            color: #FFFFFF;
 
-}
+        }
 
-.plan-description {
-    font-size: 14px;
-    font-family: "Manrope", sans-serif;
-font-weight: 400;
-font-size: 16px;
-line-height: 16px;
-letter-spacing: 0%;
-text-align: center;
-vertical-align: middle;
-color: #ffffff80;
-}
+        .plan-description {
+            font-size: 14px;
+            font-family: "Manrope", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 16px;
+            letter-spacing: 0%;
+            text-align: center;
+            vertical-align: middle;
+            color: #ffffff80;
+        }
 
-.header-arrow-img {
-    width: 24px;
-    height: auto;
-}
-       
-.payment-img{
-    rotate: -90deg;
-    filter: brightness(0) invert(1);
-    width: 24px;
-}
+        .header-arrow-img {
+            width: 24px;
+            height: auto;
+        }
+
+        .payment-img {
+            rotate: -90deg;
+            filter: brightness(0) invert(1);
+            width: 24px;
+        }
 
 
 
@@ -936,71 +1015,74 @@ color: #ffffff80;
         }
 
         .timeline {
-    position: relative;
-width: 100%;
-}
+            position: relative;
+            width: 100%;
+        }
 
-.timeline-item {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    padding-bottom: 34px;
-}
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            padding-bottom: 34px;
+        }
 
-.timeline-icon-wrapper {
-    position: relative;
-    z-index: 1;
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-}
+        .timeline-icon-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+        }
 
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    top: 25px;
-    left: 13.5px;
-    width: 2px;
-    height: 79%;
-    background-color: #2DD98F;
-    z-index: 0;
-}
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 14.5px;
+            width: 2px;
+            height: 79%;
+            background-color: #2DD98F;
+            z-index: 0;
+        }
 
-.timeline-item:last-child .timeline-icon-wrapper::before {
-    display: none; /* Hide the line after the last item */
-}
+        .timeline-item:last-child .timeline-icon-wrapper::before {
+            display: none;
+        }
 
-.timeline-icon {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
+        .timeline-icon {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
 
-.timeline-text {
-    margin-left: 10px;
-    color: white;
-}
+        .timeline-text {
+            margin-left: 10px;
+            color: white;
+        }
 
-.timeline-title {
-    font-family: "Manrope", sans-serif;
-font-weight: 400;
-font-size: 20px;
-line-height: 24px;
-letter-spacing: 0%;
-vertical-align: middle;
-padding-bottom: 10px;
-}
+        .timeline-title {
+            font-family: "Manrope", sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0%;
+            vertical-align: middle;
+            padding-bottom: 10px;
+        }
 
-.timeline-date {
-    font-family: "Manrope", sans-serif;
-font-weight: 700;
-font-size: 20px;
-line-height: 24px;
-letter-spacing: 0%;
-vertical-align: middle;
-color: #ffffff80;
-}
+        .timeline-date {
+            font-family: "Manrope", sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0%;
+            vertical-align: middle;
+            color: #ffffff80;
+        }
 
+        .timeline-item:last-child::before {
+            display: none;
+        }
 
         @media (max-width: 986px) {
 
@@ -1057,5 +1139,193 @@ color: #ffffff80;
 
 
         }
+
+
+        .description-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 30px;
+        }
+
+        .description-item .lable {
+            font-family: "Manrope", sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: -0.5px;
+            vertical-align: middle;
+            color: #FFFFFF80;
+
+        }
+
+        .description-item .value {
+            font-family: "Manrope", sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: -0.5px;
+            vertical-align: middle;
+            color: #FFFFFF;
+
+
+        }
+
+        .highlight {
+            color: #2ed89b;
+        }
+
+        @media (min-width: 640px) {
+            .description-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .description-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            width: fit-content;
+            margin: 20px 0 0 0;
+        }
+
+        .download-btn {
+            display: inline-block;
+            border: 1px solid #FFFFFF33;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            font-family: "Manrope", sans-serif;
+            width: fit-content;
+            min-width: 221px;
+            letter-spacing: 0;
+            text-align: center;
+            vertical-align: middle;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (min-width: 640px) {
+            .download-grid {
+                grid-template-columns: repeat(4, 1fr);
+                margin: 45px 0 0 0;
+            }
+        }
+
+
+
+        @media (max-width: 900px) {
+            .description-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .download-grid {
+                margin: 45px auto 0;
+            }
+
+            .payment-img {
+                rotate: 0deg;
+            }
+
+            .description-item .value {
+
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 24px;
+                letter-spacing: -0.5px;
+                vertical-align: middle;
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+.container-Features {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.image {
+    flex: 1;
+    width: 100%;
+    height: 400px;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.description {
+    flex: 1;
+    font-family: "Manrope", sans-serif;
+font-weight: 600;
+font-size: 20px;
+line-height: 100%;
+letter-spacing: -0.5px;
+vertical-align: middle;
+
+}
+
+@media (max-width: 900px) {
+    .container-Features {
+        flex-direction: column;
+        text-align: center;
+    }
+    .image {
+    flex: 1;
+    width: 100%;
+    height: 400px;
+}
+
+.description {
+    font-family: "Manrope", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: -0.5px;
+vertical-align: middle;
+
+
+}
+}
     </style>
 @endsection

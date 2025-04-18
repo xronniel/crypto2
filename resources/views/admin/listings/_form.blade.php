@@ -242,6 +242,22 @@
 </div>
 
 <div class="form-group">
+    <label for="fact_sheet">fact sheet</label>
+    <input type="file" name="fact_sheet" class="form-control" accept="image/*">
+    @if(!empty($listing->fact_sheet))
+        <img src="{{ asset('storage/' . $listing->fact_sheet) }}" width="100">
+    @endif
+</div>
+
+<div class="form-group">
+    <label for="payment_plan">payment plan</label>
+    <input type="file" name="payment_plan" class="form-control" accept="image/*">
+    @if(!empty($listing->payment_plan))
+        <img src="{{ asset('storage/' . $listing->payment_plan) }}" width="100">
+    @endif
+</div>
+
+<div class="form-group">
     <label for="images">Upload Images (Multiple)</label>
     <input type="file" name="images[]" class="form-control" multiple>
     @if(!empty($listing->images))
@@ -271,15 +287,88 @@
 <div class="row mt-4">
     <div class="col-md-12">
         <h4>Additional Options</h4>
+
+
+
         @foreach(['exclusive', 'featured', 'price_on_application', 'off_plan', 'new', 'verified', 'superagent'] as $field)
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="{{ $field }}" value="1" 
-                    id="{{ $field }}" {{ old($field, $listing->$field ?? false) ? 'checked' : '' }}>
-                <label class="form-check-label" for="{{ $field }}">{{ ucfirst(str_replace('_', ' ', $field)) }}</label>
-            </div>
-        @endforeach
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="{{ $field }}" value="1" 
+                id="{{ $field }}" {{ old($field, $listing->$field ?? false) ? 'checked' : '' }}
+                onchange="toggleOffPlan()">
+            <label class="form-check-label" for="{{ $field }}">{{ ucfirst(str_replace('_', ' ', $field)) }}</label>
+        </div>
+    @endforeach
+    
+
+
+
     </div>
 </div>
+
+<div class="mt-4 mb-4" id="offPlanImageContainer" style="display: none;">
+    <button type="button" class="btn btn-primary mb-2" onclick="addOffPlanImage()">Add Off-Plan Image</button>
+    <div id="offPlanImages">
+        @if(!empty($listing->offPlanImages))
+            @foreach($listing->offPlanImages as $index => $imageData)
+                <div class="mb-2">
+                    <input type="file" name="off_plan_images[{{ $index }}][image]" accept="image/*" required>
+                    <select name="off_plan_images[{{ $index }}][type]" required>
+                        <option value="interior" {{ $imageData->type === 'interior' ? 'selected' : '' }}>Interior</option>
+                        <option value="exterior" {{ $imageData->type === 'exterior' ? 'selected' : '' }}>Exterior</option>
+                        <option value="feature" {{ $imageData->type === 'feature' ? 'selected' : '' }}>Feature</option>
+                    </select>
+                </div>
+            @endforeach
+        @endif
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    toggleOffPlanImages();
+});
+
+function toggleOffPlanImages() {
+    document.getElementById('offPlanImageContainer').style.display =
+        document.getElementById('off_plan').checked ? 'block' : 'none';
+}
+
+function addOffPlanImage() {
+    const container = document.getElementById('offPlanImages');
+    const index = container.children.length;
+    container.innerHTML += `
+        <div class="mb-2">
+            <input type="file" name="off_plan_images[${index}][image]" accept="image/*" required>
+            <select name="off_plan_images[${index}][type]" required>
+                <option value="interior">Interior</option>
+                <option value="exterior">Exterior</option>
+                <option value="feature">Feature</option>
+            </select>
+        </div>`;
+}
+</script>
+
+    <!-- Button & Dynamic Inputs -->
+    <div class="mt-4 mb-4"  id="offPlanContainer" style="display: none;">
+        <button type="button" class="btn btn-primary mb-2" onclick="addOffPlanInput()">Add Off-Plan Key</button>
+        <div id="offPlanInputs">
+            @if(!empty($listing->offPlanKeys))
+                @foreach($listing->offPlanKeys as $index => $keyData)
+                    <div class="mb-2">
+                        <input class="mb-2" type="text" name="off_plan_keys[{{ $index }}][key]" value="{{ $keyData->key }}" required>
+                        <input class="mb-2" type="text" name="off_plan_keys[{{ $index }}][value]" value="{{ $keyData->value }}" required>
+                        <select class="mb-2" name="off_plan_keys[{{ $index }}][status]">
+                            <option value="active" {{ $keyData->status === 'active' ? 'selected' : '' }}>Active</option>
+                            <option value="inactive" {{ $keyData->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                        </select>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+
+
+
 
 <div class="form-group" id="developer-field" style="display: {{ old('off_plan', $listing->off_plan ?? false) ? 'block' : 'none' }};">
     <label for="developer_id">Developer</label>
@@ -331,4 +420,30 @@
             offPlanCheckbox.addEventListener('change', toggleDeveloperField);
         }
     });
-</script>
+
+
+    
+ 
+    document.addEventListener("DOMContentLoaded", function() {
+        toggleOffPlan(); 
+    });
+    
+    function toggleOffPlan() {
+        document.getElementById('offPlanContainer').style.display =
+            document.getElementById('off_plan').checked ? 'block' : 'none';
+    }
+    
+    function addOffPlanInput() {
+        const container = document.getElementById('offPlanInputs');
+        const index = container.children.length;
+        container.innerHTML += `
+            <div class="mb-2">
+                <input class="mb-2" type="text" name="off_plan_keys[${index}][key]" placeholder="Key" required>
+                <input class="mb-2" type="text" name="off_plan_keys[${index}][value]" placeholder="Value" required>
+                <select class="mb-2" name="off_plan_keys[${index}][status]">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>`;
+    }
+    </script>
