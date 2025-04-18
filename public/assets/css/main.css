@@ -5203,7 +5203,7 @@ body[data-aos-easing="ease"] [data-aos] {
     margin-right: 5px;
 }
 .about .about-img img {
-    position: absolute;
+    /* position: absolute; */
     right: 220px;
     top: 138px;
     z-index: -1;
@@ -8442,7 +8442,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 }
 .hero .hero-shape .shape--1 {
     position: absolute;
-    top: 11%;
+    top: -3px;
     left: 7%;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
@@ -8466,8 +8466,8 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 }
 .hero .hero-shape .shape--2 {
     position: absolute;
-    left: 13%;
-    top: 40%;
+    left: 20%;
+    top: 241px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
     .hero .hero-shape .shape--2 {
@@ -8491,7 +8491,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 .hero .hero-shape .shape--3 {
     position: absolute;
     right: 14%;
-    top: 35%;
+    top: 258px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {
     .hero .hero-shape .shape--3 {
@@ -8514,7 +8514,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
 }
 .hero .hero-shape .shape--4 {
     position: absolute;
-    top: 7%;
+    top: 20px;
     right: 4%;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1500px) {

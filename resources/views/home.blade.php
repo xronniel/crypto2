@@ -30,12 +30,12 @@
             <div class="shape--4">
                 <img class="topToBottom" src="{{ asset('assets/img/shape/hero-sp_03.svg') }}" alt="">
             </div>
-            <div class="shape--5">
+            {{-- <div class="shape--5">
                 <img class="topToBottom" src="{{ asset('assets/img/shape/hero-sp_05.svg') }}" alt="">
             </div>
             <div class="shape--6">
                 <img class="leftToRight" src="{{ asset('assets/img/shape/hero-sp_06.svg') }}" alt="">
-            </div>
+            </div> --}}
         </div>
 
         <div class="container">
@@ -402,7 +402,7 @@
     <!-- about section start-->
     <section class="about pos-rel">
         <div class="container">
-            <div class="row">
+            <div class="home-page-third-section">
                 <div class="col-lg-6">
                     <div class="about-wrap wow fadeInLeft" data-wow-duration=".7s">
                         <h2 class="xb-item--title">{!! $homepageContent->buying_process_title !!}</h2>
@@ -456,11 +456,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="about-img bg_img">
+                    <img class="wow fadeInRight" data-wow-duration=".7s" data-wow-delay="200ms" src="assets/img/home/Link.png"
+                        alt="">
+                </div>
             </div>
-        </div>
-        <div class="about-img bg_img">
-            <img class="wow fadeInRight" data-wow-duration=".7s" data-wow-delay="200ms" src="assets/img/home/Link.png"
-                alt="">
         </div>
     </section>
     <!-- about section end-->
@@ -833,7 +833,7 @@
                                     </div>
 
                                     <!-- Content -->
-                                    <p>{{ $news->content }}</p>
+                                    {{-- <p>{{ $news->content }}</p> --}}
 
                                     <!-- Button -->
                                     <div class="xb-item--event-btn">
@@ -1268,5 +1268,48 @@
             bottom: 0;
             margin: auto;
         }
+
+
+
+        .home-page-third-section {
+            display: flex
+;
+    align-items: center;
+    padding-top: 135px; 
+        }
+
+
+
+
+
+
+
+
+
+
+        .xb-item--list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    width: fit-content;
+}
+
+.xb-item--list span {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+@media (max-width: 900px) {
+    .home-page-third-section {
+    display: flex
+;
+    align-items: center;
+    padding-top: 10px;
+    flex-direction: column-reverse;
+    gap: 30px;
+}
+
+}
     </style>
 @endsection
