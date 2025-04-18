@@ -80,12 +80,12 @@ class PropertyLeadController extends Controller
 
         // Send email to all admins
         foreach ($adminUsers as $admin) {
-            Mail::to($admin->email)->send(new AdminNewLeadNotification($lead));
+            // Mail::to($admin->email)->send(new AdminNewLeadNotification($lead));
         }
 
 
         // Send confirmation email to the user
-        Mail::to($request->input('email'))->send(new UserNewLeadConfirmation($lead));
+        // Mail::to($request->input('email'))->send(new UserNewLeadConfirmation($lead));
     
         return response()->json([
             'message' => 'Thank you! Your inquiry has been received.',

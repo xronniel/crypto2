@@ -138,8 +138,24 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-4">
-                        {{ $comments->appends(request()->query())->links() }}
+                        {{ $comments->appends(request()->query())->links('vendor.pagination.bootstrap-5') }}
                     </div>
+
+                    <style>
+                        .page-item.active .page-link {
+                            background-color: #2c3e50;
+                            border-color: #2c3e50;
+                        }
+                        .page-link {
+                            color: #2c3e50;
+                        }
+                        .page-link:hover {
+                            color: #1a252f;
+                        }
+                        .page-item.disabled .page-link {
+                            color: #6c757d;
+                        }
+                    </style>
                 </div>
             </div>
         </div>

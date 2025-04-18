@@ -35,7 +35,7 @@
                     <div class="mt-auto d-flex justify-content-between">
                         <a href="{{ route('admin.articles.show', $article->id) }}" class="btn btn-sm btn-primary">Read More</a>
                         <div>
-                            <a href="{{ url('admin/comments') }}?type=articles&content_id={{ urlencode($article->id) }}" class="btn btn-sm btn-info">Comments</a>
+                            <a href="{{ url('admin/comments') }}?type=article&content_id={{ urlencode($article->id) }}" class="btn btn-sm btn-info">Comments</a>
                             <a href="{{ route('admin.articles.edit', $article->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         </div>
                     </div>
