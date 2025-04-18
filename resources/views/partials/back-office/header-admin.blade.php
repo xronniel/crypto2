@@ -104,6 +104,12 @@
                         </a>
                     </div>
                     <div class="option2 nav-option">
+                        <a href="{{ route('admin.contact-us.index') }}">
+                            <img loading="lazy" src="{{ asset('assets/img/back-office-img/terms-and-conditions.png') }}" class="nav-img" alt="contact">
+                            Contact Us
+                        </a>
+                    </div>
+                    <div class="option2 nav-option">
                         <a href="{{ route('admin.agents.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
                             Agents

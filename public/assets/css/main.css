@@ -9225,7 +9225,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::after {
     font-weight: 600;
 }
 .breadcrumb .bread-crumb .breadcrumb-item:not(:first-child) {
-    padding-left: 5px;
+    /* padding-left: 5px; */
 }
 .breadcrumb .bread-crumb .breadcrumb-item:not(:first-child)::before {
     content: "";
@@ -10062,7 +10062,7 @@ blockquote .quote {
 
 .google-map__inner {
     height: 950px;
-    margin-bottom: -350px;
+    margin-bottom: -433px;
 }
 @media (max-width: 1199px) {
     .google-map__inner {
@@ -10079,8 +10079,8 @@ blockquote .quote {
 .google-map__inner iframe {
     height: 100%;
     width: 100%;
-    -webkit-filter: invert(1);
-    filter: invert(1);
+    /* -webkit-filter: invert(1); */
+    /* filter: invert(1); */
 }
 
 /*----------------------------------------*/
