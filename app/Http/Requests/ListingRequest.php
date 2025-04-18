@@ -89,12 +89,15 @@ class ListingRequest extends FormRequest
         if ($this->input('off_plan') == 1) {
             $rules['developer_id'] = 'required|exists:developers,id';
             $rules['fact_sheet'] = 'nullable|mimes:pdf,jpeg,png,jpg,gif,svg';
-            $rules['off_plan_images.*.type'] = 'required|string';
-            $rules['off_plan_images.*.image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
+            $rules['payment_plan'] = 'nullable|mimes:pdf,jpeg,png,jpg,gif,svg';
+            $rules['feature_description'] = 'nullable|string';
             $rules['off_plan_keys'] = 'array|nullable';
             $rules['off_plan_keys.*.key'] = 'required|string|max:255';
             $rules['off_plan_keys.*.value'] = 'required|string|max:255';
             $rules['off_plan_keys.*.status'] = 'required|in:active,inactive';
+            $rules['off_plan_images'] = 'array|nullable';
+            $rules['off_plan_images.*.id'] = 'nullable|exists:off_plan_images,id';
+            $rules['off_plan_images.*.image'] = 'nullable|image|mimes:jpeg,png,jpg,gif';
             $rules['off_plan_images.*.type'] = 'required|in:interior,exterior,feature';
         }
     

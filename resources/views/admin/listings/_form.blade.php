@@ -311,7 +311,11 @@
         @if(!empty($listing->offPlanImages))
             @foreach($listing->offPlanImages as $index => $imageData)
                 <div class="mb-2">
-                    <input type="file" name="off_plan_images[{{ $index }}][image]" accept="image/*" required>
+                    <input type="hidden" name="off_plan_images[{{ $index }}][id]" value="{{ $imageData->id }}">
+                    <input type="file" name="off_plan_images[{{ $index }}][image]" accept="image/*">
+                    @if(!empty($imageData->image))
+                        <img src="{{ asset('storage/' . $imageData->image) }}" width="100">
+                    @endif
                     <select name="off_plan_images[{{ $index }}][type]" required>
                         <option value="interior" {{ $imageData->type === 'interior' ? 'selected' : '' }}>Interior</option>
                         <option value="exterior" {{ $imageData->type === 'exterior' ? 'selected' : '' }}>Exterior</option>

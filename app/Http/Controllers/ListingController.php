@@ -91,6 +91,10 @@ class ListingController extends Controller
             $validatedData['fact_sheet'] = $request->file('fact_sheet')->store('uploads/fact_sheets', 'public');
         }
 
+        if ($request->hasFile('payment_plan') && isset($validatedData['off_plan']) && $validatedData['off_plan'] == 1) {
+            $validatedData['payment_plan'] = $request->file('payment_plan')->store('uploads/payment_plans', 'public');
+        }
+
         $listing = Listing::create($validatedData);
 
         // Handle off-plan keys if off_plan is 1
@@ -105,12 +109,12 @@ class ListingController extends Controller
         }
 
         // Handle off-plan images if off_plan is 1
-        if (isset($validatedData['off_plan']) && $validatedData['off_plan'] == 1 && $request->hasFile('off_plan_images')) {
-            foreach ($request->file('off_plan_images') as $key => $image) {
-                $path = $image['image']->store('uploads/off_plan_images', 'public');
+        if (isset($validatedData['off_plan']) && $validatedData['off_plan'] == 1 && $request->has('off_plan_images') && is_array($request->off_plan_images)) {
+            foreach ($request->off_plan_images as $key => $imageData) {
+                $path = $imageData['image']->store('uploads/off_plan_images', 'public');
                 $offPlanImage = [
                     'image' => $path,
-                    'type' => $request->input('off_plan_images')[$key]['type']
+                    'type' => $imageData['type']
                 ];
                 $listing->offPlanImages()->create($offPlanImage);
             }
@@ -186,6 +190,7 @@ class ListingController extends Controller
     public function update(ListingRequest $request, Listing $listing)
     {
         $validatedData = $request->validated();
+        //dd($validatedData);
     
         // Preserve xml value to avoid overwriting
         $validatedData['xml'] = $listing->xml;
@@ -240,6 +245,13 @@ class ListingController extends Controller
             $validatedData['fact_sheet'] = $request->file('fact_sheet')->store('uploads/fact_sheets', 'public');
         }
 
+        if ($request->hasFile('payment_plan') && isset($validatedData['off_plan']) && $validatedData['off_plan'] == 1) {
+            if ($listing->payment_plan) {
+                Storage::disk('public')->delete($listing->payment_plan);
+            }
+            $validatedData['payment_plan'] = $request->file('payment_plan')->store('uploads/payment_plans', 'public');
+        }
+
         // Handle off-plan keys if off_plan is 1
         if (isset($validatedData['off_plan']) && $validatedData['off_plan'] == 1 && $request->has('off_plan_keys')) {
             // Delete existing off-plan keys
@@ -256,21 +268,32 @@ class ListingController extends Controller
         }
 
         // Handle off-plan images if off_plan is 1
-        if (isset($validatedData['off_plan']) && $validatedData['off_plan'] == 1 && $request->hasFile('off_plan_images')) {
-            // Delete existing off-plan images
-            foreach ($listing->offPlanImages as $image) {
-                Storage::disk('public')->delete($image->image);
-            }
-            $listing->offPlanImages()->delete();
+        if (isset($validatedData['off_plan']) && $validatedData['off_plan'] == 1 && $request->has('off_plan_images') && is_array($request->off_plan_images)) {
+            foreach ($request->off_plan_images as $key => $imageData) {
+                if (isset($imageData['id'])) {
+                    $existingImage = $listing->offPlanImages()->find($imageData['id']);
+                    if ($existingImage) {
+                        if (isset($imageData['type'])) {
+                            $existingImage->update(['type' => $imageData['type']]);
+                        }
 
-            // Add new off-plan images
-            foreach ($request->file('off_plan_images') as $key => $image) {
-                $path = $image['image']->store('uploads/off_plan_images', 'public');
-                $offPlanImage = [
-                    'image' => $path,
-                    'type' => $request->input('off_plan_images')[$key]['type']
-                ];
-                $listing->offPlanImages()->create($offPlanImage);
+                        if (isset($imageData['image']) && $imageData['image'] instanceof \Illuminate\Http\UploadedFile) {
+                            Storage::disk('public')->delete($existingImage->image);
+                            $path = $imageData['image']->store('uploads/off_plan_images', 'public');
+                            $existingImage->update(['image' => $path]);
+                        }
+                        continue;
+                    }
+                }
+                
+                if (isset($imageData['image']) && $imageData['image'] instanceof \Illuminate\Http\UploadedFile) {
+                    $path = $imageData['image']->store('uploads/off_plan_images', 'public');
+                    $offPlanImage = [
+                        'image' => $path,
+                        'type' => $imageData['type']
+                    ];
+                    $listing->offPlanImages()->create($offPlanImage);
+                }
             }
         }
     
