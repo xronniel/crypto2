@@ -235,7 +235,7 @@
   <section class="team pt-140 pb-140">
     <div class="container">
         <div class="section-title pb-35">
-            <h1 class="title">Our Team</h1>
+            <h1 class="team-title">Our Team</h1>
         </div>
         <div class="row">
             <div class="col-lg-4">
@@ -341,8 +341,8 @@
       <div class="modal-content-about">
         <!-- Left Side: Person Data -->
         <div class="modal-left">
-          <h2 id="modalName">John Doe</h2>
-          <p id="modalRole">Position: Senior Developer</p>
+          <h2 class="modalName2" id="modalName">John Doe</h2>
+          <p class="modalrole2" id="modalRole">Position: Senior Developer</p><br>
           <p id="modalEmail">Email: john@example.com</p>
           <p id="modalMobile">Mobile: john@example.com</p>
         </div>
@@ -363,13 +363,13 @@
   <script>
     function showModal(name, role, email, imageUrl, mobile) {
       document.getElementById('modalName').textContent = name;
-      document.getElementById('modalRole').textContent = 'Role: ' + role;
+      document.getElementById('modalRole').textContent = role;
       document.getElementById('modalEmail').textContent = 'Email: ' + email;
       document.getElementById('modalImage').src = imageUrl;
       document.getElementById('modalMobile').textContent = 'Mobile: ' + mobile;
       
       // Show modal
-      document.getElementById('personModal').style.display = 'block';
+      document.getElementById('personModal').style.display = 'flex';
     }
   
     // Optional: Hide modal on initial load

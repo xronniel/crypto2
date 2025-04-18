@@ -184,10 +184,19 @@
   }
   
   .commitment-title {
-    font-size: 60px;
+    font-size: 3rem;
     font-weight: 700;
     line-height: 72px;
     margin-bottom: 40px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .team-title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 72px;
+    text-align: center;
+    
     font-family: 'Manrope', sans-serif;
   }
 
@@ -280,7 +289,7 @@
   .offer-title {
     font-family: 'Manrope', sans-serif;
     font-weight: 700;
-    font-size: 60px;
+    font-size: 3rem;
     line-height: 72px;
     text-align: center;
     margin-bottom: 40px;
@@ -312,6 +321,8 @@
   .offer-row {
     display: flex;
     gap: 20px;
+    
+    width: auto;
     background-color: #0D0B33;
     border: 0.5px solid #256d50;
     border-radius: 20px;
@@ -328,6 +339,7 @@
     border: 0.5px solid #256d50;
     border-radius: 20px;
     height: 100%;
+    /* flex-wrap: wrap; */
     padding: 40px;
     z-index: 2;
     position: relative;
@@ -438,6 +450,14 @@
     .figures-grid {
       flex-direction: column;
     }
+
+    .offer-row {
+        flex-wrap: wrap;
+    }
+
+    .offer-row2 {
+        flex-wrap: wrap;
+    }
     
     .figure-card {
       width: 100%;
@@ -463,12 +483,14 @@
     align-items: center;
     justify-content: center;
     padding: 40px;
+    overflow-y: scroll;
   }
   
   .modal-content-about {
     display: flex;
     width: 100%;
     max-width: 1200px;
+    
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -479,15 +501,30 @@
     flex-direction: row;
   }
   
-  .modal-left,
-  .modal-right {
+  .modal-left {
     flex: 1;
     min-width: 300px; /* Ensures decent width even when stacked */
+  }
+
+  .modal-right {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .modalName2 {
+    font-family: 'Outfit';
+    font-size: 3rem;
+  }
+
+  .modalrole2 {
+    font-family: 'Outfit';
+    font-size: 1.5rem;
   }
   
   .modal-person {
     width: 100%;
     background-size: cover;
+    
   }
   
   .modal-left {
@@ -510,13 +547,20 @@
   @media (max-width: 768px) {
     .modal-content-about {
       flex-direction: column;
-      padding: 30px 20px;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 0px;
       gap: 20px;
+      
     }
+
+    .modal-person {
+        width: auto;
+    } 
   
     .modal-left,
     .modal-right {
-      width: 100%;
+      width: auto;
     }
   
     .modal-right {
@@ -579,6 +623,10 @@
       font-size: 2rem;
     }
 
+    .icons1, .icons4 {
+        display: none;
+    }
+
     .hero-content p {
       font-size: 1rem;
     }
@@ -591,6 +639,11 @@
 
     /* Responsive adjustments */
     @media (max-width: 430px) {
+        .offer-title {
+            font-size: 2.5rem;
+        }
+
+       
         .wwo1 {
             display: none;
         }
