@@ -432,7 +432,7 @@ data-user-id="{{ auth()->user()->id }}"
                     <div class="property-details-Description">
                         <span class="active-filter-link">Features</span>
                     </div>
-                    <div class="Description-second-box-two">
+                    <div class="Description-second-box-three">
 
                         <div class="custom-offplan-swiper-div">
 
@@ -1273,7 +1273,7 @@ data-user-id="{{ auth()->user()->id }}"
 
 
 
-        .Description-second-box-two {
+        .Description-second-box-three {
             display: flex;
             gap: 20px;
             width: 100%;
@@ -1336,7 +1336,7 @@ data-user-id="{{ auth()->user()->id }}"
                 width: 100%;
             }
 
-            .Description-second-box-two {
+            .Description-second-box-three {
                 flex-direction: column;
             }
 
