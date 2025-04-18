@@ -733,6 +733,13 @@
 		},
 	});
 
+	const swiperTwo = new Swiper('.custom-offplan-swiper', {
+		loop: false,
+		spaceBetween: 10,
+		freeMode: true,
+		slidesPerView: 1,
+	});
+	
 
 
 

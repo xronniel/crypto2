@@ -305,13 +305,23 @@
     </div>
 </div>
 
+
 <div class="mt-4 mb-4" id="offPlanImageContainer" style="display: none;">
     <button type="button" class="btn btn-primary mb-2" onclick="addOffPlanImage()">Add Off-Plan Image</button>
+
+<!-- Feature Description Input -->
+<input type="text" name="feature_description" id="featureDescription" class="form-control mb-2"
+    placeholder="Enter feature description" value="{{ old('feature_description', $listing->feature_description ?? '') }}">
+
     <div id="offPlanImages">
         @if(!empty($listing->offPlanImages))
             @foreach($listing->offPlanImages as $index => $imageData)
                 <div class="mb-2">
-                    <input type="file" name="off_plan_images[{{ $index }}][image]" accept="image/*" required>
+                    <input type="hidden" name="off_plan_images[{{ $index }}][id]" value="{{ $imageData->id }}">
+                    <input type="file" name="off_plan_images[{{ $index }}][image]" accept="image/*">
+                    @if(!empty($imageData->image))
+                        <img src="{{ asset('storage/' . $imageData->image) }}" width="100">
+                    @endif
                     <select name="off_plan_images[{{ $index }}][type]" required>
                         <option value="interior" {{ $imageData->type === 'interior' ? 'selected' : '' }}>Interior</option>
                         <option value="exterior" {{ $imageData->type === 'exterior' ? 'selected' : '' }}>Exterior</option>
@@ -323,30 +333,9 @@
     </div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    toggleOffPlanImages();
-});
 
-function toggleOffPlanImages() {
-    document.getElementById('offPlanImageContainer').style.display =
-        document.getElementById('off_plan').checked ? 'block' : 'none';
-}
 
-function addOffPlanImage() {
-    const container = document.getElementById('offPlanImages');
-    const index = container.children.length;
-    container.innerHTML += `
-        <div class="mb-2">
-            <input type="file" name="off_plan_images[${index}][image]" accept="image/*" required>
-            <select name="off_plan_images[${index}][type]" required>
-                <option value="interior">Interior</option>
-                <option value="exterior">Exterior</option>
-                <option value="feature">Feature</option>
-            </select>
-        </div>`;
-}
-</script>
+
 
     <!-- Button & Dynamic Inputs -->
     <div class="mt-4 mb-4"  id="offPlanContainer" style="display: none;">
@@ -443,6 +432,30 @@ function addOffPlanImage() {
                 <select class="mb-2" name="off_plan_keys[${index}][status]">
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
+                </select>
+            </div>`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        toggleOffPlanImages();
+    });
+    
+    function toggleOffPlanImages() {
+        const isChecked = document.getElementById('off_plan').checked;
+        document.getElementById('offPlanImageContainer').style.display = isChecked ? 'block' : 'none';
+        document.getElementById('featureDescription').style.display = isChecked ? 'block' : 'none';
+    }
+    
+    function addOffPlanImage() {
+        const container = document.getElementById('offPlanImages');
+        const index = container.children.length;
+        container.innerHTML += `
+            <div class="mb-2">
+                <input type="file" name="off_plan_images[${index}][image]" accept="image/*" required>
+                <select name="off_plan_images[${index}][type]" required>
+                    <option value="interior">Interior</option>
+                    <option value="exterior">Exterior</option>
+                    <option value="feature">Feature</option>
                 </select>
             </div>`;
     }
