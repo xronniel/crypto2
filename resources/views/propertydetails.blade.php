@@ -1198,7 +1198,8 @@ data-user-id="{{ auth()->user()->id }}"
 
         @media (min-width: 640px) {
             .download-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(4, 1fr);
+                margin: 45px 0 0 0;
             }
         }
 
