@@ -29,6 +29,10 @@ use App\Http\Controllers\SavePropertyController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\OurTeamController;
+use App\Http\Controllers\OurCommitmentsController;
+use App\Http\Controllers\CryptoHomeInFigureController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -82,6 +86,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('categories', CategoryController::class);
     Route::resource('holiday-properties', HolidayPropertyController::class);
     Route::resource('comments', CommentController::class)->except(['create', 'store']);
+    Route::resource('aboutus', AboutUsController::class);
+    Route::resource('ourteam', OurTeamController::class);
+    Route::resource('ourcommitments', OurCommitmentsController::class);
+    Route::resource('crypto-home-in-figures', CryptoHomeInFigureController::class);
 
     Route::get('/property-leads', [PropertyLeadController::class, 'index'])->name('property-leads.index');
     Route::get('/property-leads/{lead}', [PropertyLeadController::class, 'show'])->name('property-leads.show');
@@ -96,6 +104,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
 
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
+Route::get('/about-us', function () {
+    return view('aboutUs');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/account', [UserPageController::class, 'account'])->name('user.account');
@@ -149,3 +160,14 @@ Route::get('/agents', [AgentController::class, 'userIndex'])->name('agents.index
 Route::get('/agents/{agent}', [AgentController::class, 'userShow'])->name('agents.show');
 
 Route::get('mortgage-calculator',[MortgageLandingPageController::class, 'userIndex'])->name('mortgage-calculator');
+
+Route::get('/contact-us', function () {
+    return view('contact');
+});
+Route::get('/about-us', [AboutUsController::class, 'aboutUs'])->name('front.home');
+// Route::get('/about-us', function () {
+//     return view('aboutUs');
+// });
+
+
+
