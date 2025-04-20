@@ -104,9 +104,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
 
 
 Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
-Route::get('/about-us', function () {
-    return view('aboutUs');
-});
+// Route::get('/about-us', function () {
+//     return view('aboutUs');
+// });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/account', [UserPageController::class, 'account'])->name('user.account');
@@ -170,6 +170,9 @@ Route::get('/about-us', [AboutUsController::class, 'aboutUs'])->name('front.home
 
 Route::get('/TermsConditions', function () {
     return view('TermsConditions');
+});
+Route::get('/about-us2', function () {
+    return view('about-us');
 });
 
 

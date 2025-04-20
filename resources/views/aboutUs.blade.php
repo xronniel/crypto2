@@ -203,7 +203,7 @@
 
 
     {{-- our team section --}}
-    <section class="team hero-section-about-team hero-about pt-140 pb-100">
+    <section class="team hero-section-about-team hero-about pt-140 pb-100 z-2">
         <div class="hero-img3" data-background="assets/img/about/footer-bg.png"></div>
         <div class="container custom-team">
             <div class="section-title pb-35">
@@ -254,6 +254,8 @@
                     </div>
                 </div>
             </div>
+            <img src="/assets/img/about/icons/icon3.png" class="icons-custom1" alt="About Image" />
+            <img src="/assets/img/about/icons/icon3.png" class="icons3" alt="About Image" />
         </div>
     </section>
 
@@ -261,27 +263,39 @@
     <section class="hero-section-about-us2 hero-about">
         {{-- <img src="assets/img/about/footer-bg.png" alt="Footer Background" class="hero-img2"> --}}
         <div class="hero-img2" data-background="assets/img/about/footer-bg.png"></div>
-        <!-- Your footer content goes here -->
+        <!-- footer content goes here -->
         <img src="/assets/img/about/footer/footer-1.png" alt="Footer Icon" class="footer-icon1" />
 
         {{-- first section --}}
         <div class="glass-img-wrapper3 container">
             <!-- Left: Form Section -->
-            <div class="glass-form">
+            <div class="glass-form xb-inner">
                 <img src="/assets/img/about/footer/footer-2.png" alt="Footer Icon" class="footer-icon2" />
               <h3 class=" mt-3">Start Your Crypto Property Journey Today.</h3>
               <form class="row g-3"> <!-- g-3 for spacing -->
                 <div class="col-md-6">
-                  <input type="text" class="form-control input-text-about" placeholder="Your Name" />
+                    <div class="xb-item--field-about">
+                        <span><img src="{{ asset('assets/img/footer/contact-user.svg') }}" alt="User Icon"></span>
+                        <input type="text" name="message" placeholder="Full Name" required>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                  <input type="email" class="form-control" placeholder="Email Address" />
+                    <div class="xb-item--field-about">
+                        <span><img src="{{ asset('assets/img/footer/contact-email.svg') }}" alt="Email Icon"></span>
+                        <input type="text" name="message" placeholder="Email" required>
+                    </div>
                 </div>
                 <div class="col-12">
-                  <input type="tel" class="form-control" placeholder="Phone Number" />
+                    <div class="xb-item--field-about">
+                        <span><img src="{{ asset('assets/img/footer/contact-call.svg') }}" alt="Email Icon"></span>
+                        <input type="text" name="message" placeholder="Phone" required>
+                    </div>
                 </div>
                 <div class="col-12">
-                  <textarea class="form-control" placeholder="Your Message" rows="4"></textarea>
+                    <div class="xb-item--field-about-tx">
+                        <span><img src="{{ asset('assets/img/footer/contact-massage.svg') }}" alt="Message Icon"></span>
+                        <textarea class="form-control" placeholder="Your Message" rows="4"></textarea>
+                    </div>
                 </div>
                 <div class="col-12 aboutUs-footer-button1 mt-4">
                     <a class="them3-btn">
