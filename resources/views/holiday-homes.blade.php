@@ -21,7 +21,7 @@
         data-background="{{ asset('assets/img/holiday-property/holidayProperty.png') }}">
         <div class="container">
             <div class="breadcrumb__content">
-                <h2 class="breadcrumb__title">Properties for Sale in UAE</h2>
+                <h2 class="breadcrumb__title">Holiday Homes in Dubai</h2>
                 <ul style="    flex-direction: column;" class="bread-crumb clearfix ul_li_center">
                     <li class="breadcrumb-item"><a href="#">Items Found</a></li>
                     <li class="breadcrumb-item">{{ $holidayProperties->total() }} properties</li>

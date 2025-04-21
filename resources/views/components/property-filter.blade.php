@@ -1,9 +1,8 @@
-
 <div class="container">
     <form action="{{ route('properties.index') }}" method="GET">
         @csrf
         <div class="property-filter-box">
-            
+
             <div class="property-filter property-filter-header">
                 <button type="submit" class="search-button-property">
                     <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
@@ -13,8 +12,7 @@
 
             <div class="property-filter-two">
                 <div class="back-filter-box" onclick="window.location.href='/'">
-                    <img class="back-filter-img" src="{{ asset('assets/img/home/return-icon.svg') }}"
-                        alt="arrow">
+                    <img class="back-filter-img" src="{{ asset('assets/img/home/return-icon.svg') }}" alt="arrow">
 
                 </div>
                 <div class="property-filter-select">
@@ -71,7 +69,7 @@
                 {{-- !-- Area Dropdown --> --}}
                 <div class="dropdown-dialog" id="areaDropdown">
                     <p>Area Size</p>
-          
+
                     <div class="dropdown-dialog-content">
                         <div class="black-dropdown black-dropdown-one ">
                             <img class="property-filter-img" src="{{ asset('assets/img/home/arrow.png') }}"
@@ -94,8 +92,7 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button" class="done-btn"
-                        onclick="closeDropdownArea('areaDropdown')">Done</button>
+                    <button type="button" class="done-btn" onclick="closeDropdownArea('areaDropdown')">Done</button>
                 </div>
 
 
@@ -132,14 +129,13 @@
                         </div>
                     </div>
 
-                    <button type="button" class="done-btn"
-                        onclick="closeDropdowntwo('priceDropdown')">Done</button>
+                    <button type="button" class="done-btn" onclick="closeDropdowntwo('priceDropdown')">Done</button>
                 </div>
 
 
 
                 <!-- More Filters Dropdown -->
-                
+
                 <div class="dropdown-dialog  More-FIlters-div" id="FiltersDropdown">
 
                     <div>
@@ -153,8 +149,17 @@
                             Search
                         </p>
 
-                        <div class="property-filter">
-                            <img src="{{ asset('assets/img/property/search.png') }}" alt="search">
+                        <div class="property-filter property-filter-model">
+                            <img style="
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 2%;
+
+                            
+                            "
+                                src="{{ asset('assets/img/property/search.png') }}" alt="search">
                             <input type="text" placeholder="Search : e.g. Villa, Office, etc." value=""
                                 name="search-filters">
                         </div>
@@ -173,8 +178,7 @@
                             <button type="button" class="furnished" data-value="">All
                                 Furnishing</button>
                             <button type="button" class="furnished" data-value="furnished">Furnished</button>
-                            <button type="button" class="furnished"
-                                data-value="unfurnished">Unfurnished</button>
+                            <button type="button" class="furnished" data-value="unfurnished">Unfurnished</button>
                             <button type="button" class="furnished" data-value="partly furnished">Partly
                                 Furnished</button>
 
@@ -232,83 +236,34 @@
 
 <style>
     ul {
-    list-style-type: none;  
-    padding: 0;            
-    margin: 0;              
-}
-
-ul li {
-    margin: 0;              
-    padding: 0;            
-}
-.beds-baths-options button {
-    flex: 1 1 calc(25% - 10px); 
-    min-width: 120px; 
-    padding: 10px;
-    text-align: center;
-    white-space: nowrap;
-}
-.property-filter .search-button-property {
-    position: absolute;
-    left: 4px;
-    top: 0.7px;
-    bottom: 0;
-    margin: auto;
-    width: fit-content;
-    height: fit-content;
-    background: none;
-    display: flex
-;
-    border-radius: 50% 0 0 50%;
-    justify-content: center;
-    align-items: center;
-    height: 43px;
-    padding: 10px 8px;
-    align-content: center;
-}
-
-
-.widget__title {
-text-align: start;
-}
-
-
-
-@media (max-width: 700px) {
-    .property-filter {
-        width: 60%;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
     }
 
-    .filter-button {
-        right: 2%;
-    }
-}
-@media (max-width: 700px) {
-    .property-filter {
-        width: 60%;
+    ul li {
+        margin: 0;
+        padding: 0;
     }
 
-    .filter-button {
-        right: 2%;
+    .beds-baths-options button {
+        flex: 1 1 calc(25% - 10px);
+        min-width: 120px;
+        padding: 10px;
+        text-align: center;
+        white-space: nowrap;
     }
-
-
-    .property-filter img {
-        filter: brightness(0) invert(1); 
-    }
-    
 
     .property-filter .search-button-property {
         position: absolute;
-        left: 2px;
+        left: 4px;
         top: 0.7px;
         bottom: 0;
         margin: auto;
         width: fit-content;
         height: fit-content;
-        background: #2dd98f;
-        display: flex
-    ;
+        background: none;
+        display: flex;
         border-radius: 50% 0 0 50%;
         justify-content: center;
         align-items: center;
@@ -316,11 +271,60 @@ text-align: start;
         padding: 10px 8px;
         align-content: center;
     }
-    
-    
 
 
-}
 
+    .widget__title {
+        text-align: start;
+    }
+
+
+
+    @media (max-width: 700px) {
+        .property-filter {
+            width: 60%;
+        }
+
+        .filter-button {
+            right: 2%;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .property-filter {
+            width: 60%;
+        }
+
+        .filter-button {
+            right: 2%;
+        }
+
+
+        .property-filter img {
+            filter: brightness(0) invert(1);
+        }
+
+
+        .property-filter .search-button-property {
+            position: absolute;
+            left: 2px;
+            top: 0.7px;
+            bottom: 0;
+            margin: auto;
+            width: fit-content;
+            height: fit-content;
+            background: #2dd98f;
+            display: flex;
+            border-radius: 50% 0 0 50%;
+            justify-content: center;
+            align-items: center;
+            height: 43px;
+            padding: 10px 8px;
+            align-content: center;
+        }
+
+
+
+
+    }
 </style>
-

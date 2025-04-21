@@ -10,7 +10,7 @@
             padding: 1px 0;
             ">
         <div class="container">
-            <div onclick="window.location.href='/properties'" class="page-path-line">
+            <div onclick="window.location.href='/properties'" class="page-path-line pt-50">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
                 <p>/ Property Listing</p>

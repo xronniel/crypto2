@@ -98,21 +98,27 @@
 
                 <div class="agent-left-big-box">
                     <div class="agent-left-box">
-                        <img src="{{ asset('assets/img/agent/fea-1.gif') }}" alt="propertydetails">
+                        <div class="agent-blue">
+                            <img src="{{ asset('assets/img/agent/fea-1.gif') }}" alt="propertydetails">
+                        </div>
                         <h2>Crypto Gurus</h2>
                         <p>Our agents speak fluent Bitcoin, Ethereum, and more. They know the ins and outs of digital
                             currencies
                             and can guide you through seamless transactions.</p>
                     </div>
                     <div class="agent-left-box">
-                        <img src="{{ asset('assets/img/agent/fea-2.gif') }}" alt="propertydetails">
+                        <div class="agent-blue">
+                            <img src="{{ asset('assets/img/agent/fea-2.gif') }}" alt="propertydetails">
+                        </div>
                         <h2>Crypto Gurus</h2>
                         <p>Our agents speak fluent Bitcoin, Ethereum, and more. They know the ins and outs of digital
                             currencies
                             and can guide you through seamless transactions.</p>
                     </div>
                     <div class="agent-left-box">
-                        <img src="{{ asset('assets/img/agent/fea-3.gif') }}" alt="propertydetails">
+                        <div class="agent-blue">
+                            <img src="{{ asset('assets/img/agent/fea-3.gif') }}" alt="propertydetails">
+                        </div>
                         <h2>Crypto Gurus</h2>
                         <p>Our agents speak fluent Bitcoin, Ethereum, and more. They know the ins and outs of digital
                             currencies
@@ -190,6 +196,19 @@
         .agent-right-box-card {
             transition: all 0.3s ease-in-out;
             cursor: pointer;
+        }
+
+        .agent-blue {
+            width: 120px;
+            height: 120px;
+            background-image: url(assets/img/agent/blue-bubble-svg.svg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .section-bg-agent {
@@ -426,7 +445,9 @@
             text-align: center;
             vertical-align: middle;
             text-transform: uppercase;
-            color: white;
+            color: #000000;
+            font-family: "Manrope", sans-serif;
+
         }
 
 
@@ -576,10 +597,10 @@
 
 
         .agent-card-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
 
 
@@ -595,14 +616,15 @@
 
         @media (max-width: 1124px) {
 
-.row {
-    flex-direction: column;
-}
+            .row {
+                flex-direction: column;
+            }
 
 
-.col-lg-9, .col-lg-3 {
-    width: 100%;
-}
+            .col-lg-9,
+            .col-lg-3 {
+                width: 100%;
+            }
 
 
 
@@ -613,7 +635,7 @@
 
 
             .agent-card-wrapper {
-            
+
                 width: 100%;
             }
 
@@ -712,7 +734,7 @@
             }
 
             .agent-right-box-card-left {
-    
+
                 gap: 10px;
 
                 justify-content: center;
@@ -721,18 +743,18 @@
 
             .agent-right-box-card-left-one-p p {
 
-font-weight: 700;
-font-size: 10px;
-line-height: 18px;
-letter-spacing: 0%;
+                font-weight: 700;
+                font-size: 10px;
+                line-height: 18px;
+                letter-spacing: 0%;
 
 
 
             }
 
             .agent-right-box-card-right {
-    height: 149px;
-}
+                height: 149px;
+            }
 
 
 
@@ -751,23 +773,22 @@ letter-spacing: 0%;
         @media (max-width: 900px) {
 
             .agent-card-wrapper {
-    flex-direction: column;
-}
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 1429px) {
-    .blog__item-property {
-        flex-direction: row !important;
-    }
-}
+            .blog__item-property {
+                flex-direction: row !important;
+            }
+        }
 
-@media (max-width: 986px) {
+        @media (max-width: 986px) {
 
-.page-path-line{
-display: none;
-}
-}
-
+            .page-path-line {
+                display: none;
+            }
+        }
     </style>
 
 

@@ -720,7 +720,16 @@
     object-position: center 20%;
 }
 
+.Description-second-box-two p {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #FFFFFF;
 
+}
 
 
 

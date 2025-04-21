@@ -12,8 +12,10 @@
             <div class="breadcrumb__content">
                 @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
                 <h2 class="breadcrumb__title">Off-Plan Properties in Dubai</h2>
+                @elseif (request()->is('properties') && request()->query('type') === 'commercial')
+                    <h2 class="breadcrumb__title">Commercial Buildings</h2>
                 @else
-                <h2 class="breadcrumb__title">Properties for Sale in UAE</h2>
+                    <h2 class="breadcrumb__title">Properties for Sale in UAE</h2>
                 @endif
                 <ul style="    flex-direction: column;" class="bread-crumb clearfix ul_li_center">
                     <li class="breadcrumb-item"><a href="#">Items Found</a></li>
@@ -42,23 +44,28 @@
     <section class="blog pt-130">
         <div class="container">
 
-            @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
+            {{-- @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
+                <div onclick="window.location.href='/'" class="page-path-line">
+                    <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
+                    <p>Home</p>
+                    <p class="active-path-line">/ properties for sale in uae</p>
+                </div>
+            @elseif (request()->is('properties') && request()->query('type') === 'commercial')
+                   <div onclick="window.location.href='/'" class="page-path-line">
+                    <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
+                    <p>Home</p>
+                    <p class="active-path-line">/ properties for sale in uae</p>
+                </div>
+            @else
+
+            @endif --}}
+            
+            
             <div onclick="window.location.href='/'" class="page-path-line">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
                 <p class="active-path-line">/ properties for sale in uae</p>
             </div>
-            @else
-                <div class="page-line-path">
-                    <img src="assets/img/property/home.png" alt="home">
-                    <img src="assets/img/property/right-arrow.png" alt="home">
-                    <p>Properties for sale in UAE</p>
-                </div>
-            @endif
-      
-
-
-        
 
             <h2 class="page-line-title">
                 Buy Properties in Dubai
