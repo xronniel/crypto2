@@ -244,7 +244,7 @@ class AgentController extends Controller
 
         $agentListingsQuery = $agent->listings()->with(['images', 'facilities'])->latest();
 
-        if (request()->has('ad_type')) {
+        if (request()->has('ad_type') && request('ad_type') != '') {
             $agentListingsQuery->where('ad_type', request('ad_type'));
         }
 

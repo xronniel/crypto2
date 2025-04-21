@@ -22,7 +22,7 @@
             @endif
             {{-- header buttons --}}
             <div class="hero__btn btns pt-50 wow fadeInUp" data-wow-duration=".7s" data-wow-delay="350ms">
-                <a class="them2-btn">
+                <a class="them2-btn" href="{{ route('properties.index') }}">
                     <span class="btn_label" data-text="Explore Properties">Explore Properties</span>
                     <span class="btn_icon">
                         <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
@@ -33,7 +33,7 @@
                         </svg>
                     </span>
                 </a>
-                <a href="contact.html" class="them2-btn btn-transparent">
+                <a href="properties?completion_status=off_plan" class="them2-btn btn-transparent">
                     <span class="btn_label" data-text="Discover New Projects">Discover New Projects</span>
                     <span class="btn_icon">
                         <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
