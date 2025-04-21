@@ -255,7 +255,7 @@
                 </div>
             </div>
             <img src="/assets/img/about/icons/icon3.png" class="icons-custom1" alt="About Image" />
-            <img src="/assets/img/about/icons/icon3.png" class="icons3" alt="About Image" />
+            <img src="/assets/img/about/icons/icon3.png" class="icons-custom2" alt="About Image" />
         </div>
     </section>
 

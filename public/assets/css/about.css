@@ -7,6 +7,23 @@
   min-height: 900px;
 }
 
+@media (min-width: 1001px) and (max-width: 1196px) {
+
+  .hero-about {
+    min-height: 1000px;
+  }
+  
+}
+
+@media (min-width: 1250px) and (max-width: 1330px) {
+
+  .hero-about {
+    min-height: 1000px;
+  }
+  
+}
+
+
 .hero-img {
     width: 100%;
 }
@@ -200,6 +217,7 @@
     animation: floatUpDown 3s ease-in-out infinite;
   }
   .icons-custom1 {
+    z-index: -1;
     max-width: 100px;
     width: auto;
     position: absolute;
@@ -207,6 +225,16 @@
     left: 3%;
     /* animation: floatUpDown 3s ease-in-out infinite; */
   }
+
+  .icons-custom2 {
+    max-width: 100px;
+    width: auto;
+    position: absolute;
+    bottom: 10%;
+    right: 2%;
+    z-index: -1;
+  }
+
   .icons2 {
     max-width: 100px;
     width: auto;
@@ -756,7 +784,7 @@
   }
 
   .custom-team {
-    z-index: 2;
+    z-index: 3;
   }
 
 
