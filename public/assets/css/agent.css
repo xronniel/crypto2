@@ -239,7 +239,7 @@ text-decoration: none;
     margin: 0 0 10px 0;
 }
 
-.Description-second-box-two p {
+/* .Description-second-box-two p {
     font-family: "Manrope", sans-serif;
     font-weight: 400;
     font-size: 20px;
@@ -248,7 +248,7 @@ text-decoration: none;
     vertical-align: middle;
     color: #FFFFFF;
 
-}
+} */
 
 .page-line-filter-links-two select {
     font-family: "Open Sans";

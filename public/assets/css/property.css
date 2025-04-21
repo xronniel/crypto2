@@ -992,3 +992,8 @@ vertical-align: middle;
 
 }
 
+@media (max-width: 900px) {
+    .property-filter-model{
+        width: 100% !important;
+    }
+}

@@ -1,16 +1,15 @@
 <footer class="footer z-1 second-footer pos-rel">
 
 
-    <div class="bg_img top-center pos-rel pb-5" data-background="{{ asset('assets/img/bg/team-bg.png') }}">
+    <div class="bg_img top-center pos-rel pt-5 pb-5" data-background="{{ asset('assets/img/bg/team-bg.png') }}">
 
         <div class="container pt-110">
             <div id="question-form-footer" class="xb-contact">
-                <div class="row g-0 mt-none-30">
-                    <div class="col-lg-7 mt-30">
-                        <div 
-                        
-                        @auth
-                            @php
+                <div
+                    class="row g-0 mt-none-30 {{ request()->is('/') || request()->is('news*') || request()->is('articles*') ? '' : 'column-reverse-one' }}">
+                    <div class="col-lg-7">
+                        <div @auth
+@php
                                 $path = request()->path(); // e.g. "holiday-properties/elt-5586719"
                                 $segments = explode('/', $path);
                                 $propertyRef = '';
@@ -25,49 +24,83 @@
                                 data-user-id="{{ auth()->user()->id }}"
                                 data-property-ref="{{ $propertyRef }}"
                                 data-url="{{ url()->current() }}"
-                            @endif
-                        @endauth
-
-
-                        class="xb-inner bg_img" data-background="{{ asset('assets/img/bg/form_bg.png') }}">
-                            <h2 class="xb-item--title">if you have question, feel free to contact us</h2>
+                            @endif @endauth
+                            class="xb-inner bg_img
+                                    {{ request()->is('/') || request()->is('news*') || request()->is('articles*') ? '' : 'border-one' }}
+                            "
+                            style="
+                            background-position: 85% 0; 
+                            background-repeat: no-repeat; 
+                            background-size: cover; 
+                    
+                        "
+                            data-background="{{ asset('assets/img/bg/form_bg.png') }}">
+                            <h2 class="xb-item--title">
+                                <h2 class="xb-item--title">
+                                    @if (request()->is('/') || request()->is('news*') || request()->is('articles*'))
+                                        Register for Callback
+                                    @elseif (request()->is('properties') || request()->is('holiday-properties'))
+                                        Looking to advertise a property?
+                                        <span class="span-img-one">We
+                                            can help.</span>
+                                    @elseif (request()->is('properties*') || request()->is('holiday-properties*') || request()->is('user*'))
+                                        Contact Us to See Your Next
+                                        <span class="span-img-one">Home!</span>
+                                    @elseif (request()->is('agents') || request()->is('agents') || request()->is('mortgage-calculator'))
+                                        Still have questions? We can help.
+                                    @elseif (request()->is('agents*'))
+                                        Let's get in touch!
+                                    @else
+                                        If you have a question, feel free to contact us.
+                                    @endif
+                                </h2>
+                            </h2>
                             <form class="xb-item--form" id="propertyLeadForm">
                                 @csrf
-                                <input type="hidden" name="url" value="{{ url()->current() }}"> <!-- Hidden input to pass current page URL -->
-                            
+                                <input type="hidden" name="url" value="{{ url()->current() }}">
+                                <!-- Hidden input to pass current page URL -->
+
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="xb-item--field">
-                                            <span><img src="{{ asset('assets/img/footer/contact-user.svg') }}" alt="User Icon"></span>
+                                            <span><img src="{{ asset('assets/img/footer/contact-user.svg') }}"
+                                                    alt="User Icon"></span>
                                             <input type="text" name="full_name" placeholder="Full Name" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="xb-item--field">
-                                            <span><img src="{{ asset('assets/img/footer/contact-email.svg') }}" alt="Email Icon"></span>
+                                            <span><img src="{{ asset('assets/img/footer/contact-email.svg') }}"
+                                                    alt="Email Icon"></span>
                                             <input type="email" name="email" placeholder="Email" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="xb-item--field">
-                                            <span><img src="{{ asset('assets/img/footer/contact-massage.svg') }}" alt="Message Icon"></span>
-                                            <input type="text" name="message" placeholder="Type Your Message" required>
+                                            <span><img src="{{ asset('assets/img/footer/contact-massage.svg') }}"
+                                                    alt="Message Icon"></span>
+                                            <input type="text" name="message" placeholder="Type Your Message"
+                                                required>
                                         </div>
                                     </div>
-                            
+
                                     <div class="col-lg-12 form-check xb-item--checkbox">
                                         <input class="form-check-input" type="checkbox" id="flexCheckDefault" required>
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            By sending this form I confirm that I have read and accept the <br><a href="#!">privacy policy</a>
+                                            By sending this form I confirm that I have read and accept the <br><a
+                                                href="#!">privacy policy</a>
                                         </label>
                                     </div>
-                            
+
                                     <div class="col-lg-12 xb-item--contact-btn">
                                         <button class="them-btn" type="submit">
                                             <span class="btn_label" data-text="Send Message">Send Message</span>
                                             <span class="btn_icon">
-                                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
+                                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z"
+                                                        fill="white"></path>
                                                 </svg>
                                             </span>
                                         </button>
@@ -76,17 +109,62 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-lg-5 mt-30">
-                        <div class="testimonial-wrap bg_img" data-background="{{ asset('assets/img/bg/tm_bg.png') }}">
-                            <div class="testimonial-slider swiper-container">
-                                <div class="swiper-wrapper">
+                    <div
+                        class="col-lg-5 {{ request()->is('/') || request()->is('news*') || request()->is('articles*') ? 'margin-top-mobile' : '' }}">
 
 
-
+                        @if (request()->is('/') || request()->is('news*') || request()->is('articles*'))
+                            <div class="testimonial-wrap bg_img"
+                                data-background="{{ asset('assets/img/bg/tm_bg.png') }}">
+                                <div class="testimonial-slider swiper-container">
+                                    <div class="swiper-wrapper">
+                                    </div>
+                                    <div class="swiper-pagination"></div>
                                 </div>
-                                <div class="swiper-pagination"></div>
                             </div>
-                        </div>
+                        @elseif (request()->is('properties') || request()->is('holiday-properties'))
+                            <div class="testimonial-wrap bg_img bg-one"
+                                style="
+                                background-position: 85% 0; 
+                                background-repeat: no-repeat; 
+                                background-size: cover; 
+                            "
+                                data-background="{{ asset('assets/img/footer/footer-img-one.jpeg') }}">
+                            </div>
+                        @elseif (request()->is('properties*') ||
+                                request()->is('holiday-properties*') ||
+                                request()->is('user*') ||
+                                request()->is('agents*'))
+                            <div class="testimonial-wrap bg_img bg-one"
+                                style="
+                                background-position: 30% 0; 
+                                background-repeat: no-repeat; 
+                                background-size: cover; 
+                            "
+                                data-background="{{ asset('assets/img/footer/footer-img-two.jpeg') }}">
+                            </div>
+                        @elseif (request()->is('agents') || request()->is('agents*') || request()->is('mortgage-calculator'))
+                            <div class="testimonial-wrap bg_img bg-one"
+                                style="
+                                    background-position: 50% 0; 
+                                    background-repeat: no-repeat; 
+                                    background-size: cover; 
+                                "
+                                data-background="{{ asset('assets/img/footer/footer-img-three.jpeg') }}">
+                            </div>
+                        @else
+                            <div class="testimonial-wrap bg_img bg-one"
+                                data-background="{{ asset('assets/img/bg/tm_bg.png') }}">
+                                <div class="testimonial-slider swiper-container">
+                                    <div class="swiper-wrapper">
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                            </div>
+                        @endif
+
+
+
                     </div>
                 </div>
             </div>
@@ -149,62 +227,63 @@
     </div>
 </footer>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("propertyLeadForm");
 
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("propertyLeadForm");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent traditional form submission
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent traditional form submission
+            let formData = new FormData(form);
 
-        let formData = new FormData(form);
-
-        // 1️⃣ Send the main form data
-        fetch("{{ route('property.leads.store') }}", {
-            method: "POST",
-            headers: {
-                "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
-            },
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                alert("Thank you! Your message has been sent.");
-                form.reset(); // Clear form fields
-
-                // 2️⃣ After success, send the second AJAX call
-                const container = form.closest('.bg_img');
-
-                const user_id = container.dataset.userId;
-                const property_ref_no = container.dataset.propertyRef;
-                const url = container.dataset.url;
-
-
-                $.ajax({
-                    url: '/api/user-contacted-properties',
-                    type: 'POST',
-                    data: {
-                        user_id: user_id,
-                        property_ref_no: property_ref_no,
-                        contacted_through: 'Lead Email',
-                        url: url,
-                        _token: '{{ csrf_token() }}'
+            // 1️⃣ Send the main form data
+            fetch("{{ route('property.leads.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
                     },
-                    success: function (response) {
-                        console.log('Form contact recorded successfully:', response);
-                    },
-                    error: function (xhr) {
-                        console.error('Error logging form contact:', xhr.responseText);
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert("Thank you! Your message has been sent.");
+                        form.reset(); // Clear form fields
+
+                        // 2️⃣ After success, send the second AJAX call
+                        const container = form.closest('.bg_img');
+
+                        const user_id = container.dataset.userId;
+                        const property_ref_no = container.dataset.propertyRef;
+                        const url = container.dataset.url;
+
+
+                        $.ajax({
+                            url: '/api/user-contacted-properties',
+                            type: 'POST',
+                            data: {
+                                user_id: user_id,
+                                property_ref_no: property_ref_no,
+                                contacted_through: 'Lead Email',
+                                url: url,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                console.log('Form contact recorded successfully:',
+                                    response);
+                            },
+                            error: function(xhr) {
+                                console.error('Error logging form contact:', xhr
+                                    .responseText);
+                            }
+                        });
+
+                    } else {
+                        alert("There was an error. Please try again.");
                     }
-                });
-
-            } else {
-                alert("There was an error. Please try again.");
-            }
-        })
-        .catch(error => console.error("Error:", error));
+                })
+                .catch(error => console.error("Error:", error));
+        });
     });
-});
 
 
 
@@ -265,25 +344,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     .review-img-two {
-        width: 80px !important;
+        width: 32px !important;
+        border-radius: 1px !important;
     }
 
     .xb-item--nationality {
-        display: flex
-;
-    flex-direction: row;
+        display: flex;
+        flex-direction: row;
     }
+
     .review-img-div {
-        width: 200px !important;
+        width: 100px !important;
 
     }
-    .review-img-div img{
+
+    .review-img-div img {
         width: 100%;
-    height: 100%;
-    object-fit: cover;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .span-img-one {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    @media (max-width: 900px) {
+        .bg-one {
+            height: 300px;
+            border-radius: 30px 30px 0 0;
+        }
+
+        .margin-top-mobile {
+            margin: 50px 0 0 0
+        }
+
+        .span-img-one {
+            justify-content: start;
+        }
+
+        .border-one {
+            border-radius: 0 0 30px 30px;
+        }
+
+        .column-reverse-one {
+            flex-direction: column-reverse;
+        }
+
+        .sidebar-area {
+            display: none;
+        }
+
+
+
+
     }
 </style>
-<script>
-   
-    </script>
-    
+<script></script>
