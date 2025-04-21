@@ -768,7 +768,7 @@
 
   .hero-section-about-team {
     margin-top: 0;
-    margin-bottom: 1px;
+    margin-bottom: -150px;
     display: flex;
     align-items: start;
     justify-content: center;
