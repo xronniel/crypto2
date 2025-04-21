@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/propertydetails.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/blog.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/agent.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/about.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/about.css') }}"> --}}
 </head>
 <body>
     @include('partials.front-office.header')
