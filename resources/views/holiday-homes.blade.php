@@ -325,7 +325,8 @@ data-user-id="{{ auth()->user()->id }}"
                     @endforeach
 
                     {{-- end card   --}}
-                    {{ $holidayProperties->links() }}
+                    {{ $holidayProperties->appends(request()->except('page'))->links() }}
+
 
 
 
@@ -357,7 +358,7 @@ data-user-id="{{ auth()->user()->id }}"
                                 @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->all(), [
+                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
                                                'filter_type' => $recent['ad_type'],
                                                'search' => $recent['name']
                                            ])) }}'">
@@ -369,7 +370,7 @@ data-user-id="{{ auth()->user()->id }}"
                                 @foreach ($recentSearches['community'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->all(), [
+                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
                                                'filter_type' => $recent['ad_type'],
                                                'search' => $recent['name']
                                            ])) }}'">
@@ -381,7 +382,7 @@ data-user-id="{{ auth()->user()->id }}"
                                 @foreach ($recentSearches['property_title'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->all(), [
+                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
                                                'filter_type' => $recent['ad_type'],
                                                'search' => $recent['title']
                                            ])) }}'">
@@ -390,6 +391,7 @@ data-user-id="{{ auth()->user()->id }}"
                                     </li>
                                 @endforeach
                             </ul>
+                            
                             
 
 
