@@ -22,13 +22,22 @@ class PropertyController extends Controller
 
         $query = Listing::query();
 
+        $emirates = Listing::where('emirate', '!=', '')
+        ->distinct()
+        ->pluck('emirate');
+
+        if (!$request->filled('emirate')) {
+            return redirect()->route('properties.index', ['emirate' => $emirates->first()]);
+        }
+
+        $selectedEmirate = $request->filled('emirate') ? $request->emirate : $emirates->first();
+
         if ($search) {
             $query->where(function ($q) use ($search) {
-                $q->where('emirate', 'LIKE', "%{$search}%")
+                $q->where('unit_type', 'LIKE', "%{$search}%")
                   ->orWhere('community', 'LIKE', "%{$search}%")
                   ->orWhere('property_name', 'LIKE', "%{$search}%")
-                  ->orWhere('property_title', 'LIKE', "%{$search}%")
-                  ->orWhere('unit_type', 'LIKE', "%{$search}%");
+                  ->orWhere('property_title', 'LIKE', "%{$search}%");
             });
         }
 
@@ -119,8 +128,8 @@ class PropertyController extends Controller
             };
         });
 
-        $query->when($request->has('emirate') && $request->emirate != '', function ($q) use ($request) {
-            $q->where('emirate', $request->emirate);
+        $query->when($selectedEmirate, function ($q) use ($selectedEmirate) {
+            $q->where('emirate', $selectedEmirate);
         });
 
         $query->when($request->has('type') && $request->type != '', function ($q) use ($request) {
@@ -204,9 +213,7 @@ class PropertyController extends Controller
             ->distinct()
             ->pluck('name');
 
-        $emirates = Listing::where('emirate', '!=', '')
-            ->distinct()
-            ->pluck('emirate');
+
 
             $min = Listing::whereNotNull('plot_area')->min('plot_area');
             $max = Listing::whereNotNull('plot_area')->max('plot_area');

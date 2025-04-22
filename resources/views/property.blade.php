@@ -15,7 +15,7 @@
                 @elseif (request()->is('properties') && request()->query('type') === 'commercial')
                     <h2 class="breadcrumb__title">Commercial Buildings</h2>
                 @else
-                    <h2 class="breadcrumb__title">Properties for Sale in UAE</h2>
+                    <h2 class="breadcrumb__title">Properties for Sale in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</h2>
                 @endif
                 <ul style="    flex-direction: column;" class="bread-crumb clearfix ul_li_center">
                     <li class="breadcrumb-item"><a href="#">Items Found</a></li>
@@ -64,17 +64,17 @@
             <div onclick="window.location.href='/'" class="page-path-line">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
-                <p class="active-path-line">/ properties for sale in uae</p>
+                <p class="active-path-line">/ properties for sale in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</p>
             </div>
 
             <h2 class="page-line-title">
-                Buy Properties in Dubai
+                Buy Properties in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}
             </h2>
 
             <div class="page-line-filter-box">
                 <div class="page-line-filter">
                     <div class="page-line-filter-h3">
-                        <p>{{ $properties->count() }}</p>
+                        <p>{{ $properties->total() }}</p>
                         <span>properties available</span>
                     </div>
 
@@ -378,7 +378,7 @@
                                 @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['name']]) }}'">
+                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['name'], 'emirate' => request('emirate')]) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
