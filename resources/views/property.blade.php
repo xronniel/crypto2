@@ -383,23 +383,34 @@
                                 @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['name'], 'emirate' => request('emirate')]) }}'">
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->all(), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['name']
+                                           ])) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
                                 @endforeach
+                            
                                 @foreach ($recentSearches['community'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['name']]) }}'">
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->all(), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['name']
+                                           ])) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
                                 @endforeach
+                            
                                 @foreach ($recentSearches['property_title'] as $recent)
                                     <li>
-                                        <a onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['title']]) }}'"
-                                            href="javascript:void(0);">
+                                        <a href="javascript:void(0);"
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->all(), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['title']
+                                           ])) }}'">
                                             {{ $recent['title'] }}
                                         </a>
                                     </li>
