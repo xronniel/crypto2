@@ -206,7 +206,7 @@
                     </div>
                     <div class="xb-item--footer_widget-community mb-30">
                         <h3>Looking To Buy A New House Or Sell One For Crypto?</h3>
-                        <a href="#!">
+                        <a href="#!" onclick="scrollToSection(event)">
                             Inquire now
                         </a>
                     </div>
@@ -338,6 +338,12 @@
             .catch(error => console.error("Error fetching reviews:", error));
     });
 </script>
+<script>
+    function scrollToSection(event) {
+        event.preventDefault(); 
+        document.getElementById("question-form-footer").scrollIntoView({ behavior: "smooth" });
+    }
+    </script>
 <style>
     .xb-item--avater {
         display: flex;
