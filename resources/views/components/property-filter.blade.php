@@ -151,13 +151,12 @@
 
                         <div class="property-filter property-filter-model">
                             <img style="
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    left: 2%;
-
-                            
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            margin: auto;
+                            left: 2%;
+                            filter: brightness(0) invert(0);
                             "
                                 src="{{ asset('assets/img/property/search.png') }}" alt="search">
                             <input type="text" placeholder="Search : e.g. Villa, Office, etc." value=""

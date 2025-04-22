@@ -1,13 +1,8 @@
 @extends('layouts.front-office.app')
 @section('content')
-<section class="blog pt-50 pb-50">
-    <x-property-filter-two
-        :propertyTypes="$propertyTypes" 
-        :priceRange="$priceRange" 
-        :noOfRooms="$noOfRooms"
-        :noOfBathrooms="$noOfBathrooms"
-    />
-</section>
+    <section class="blog blog-padding">
+        <x-property-filter-two :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
+    </section>
 
 
 
@@ -27,10 +22,7 @@
                     <li class="breadcrumb-item">{{ $holidayProperties->total() }} properties</li>
                 </ul>
             </div>
-            <div 
-                class="section-bg-agent-bottom-img"
-                data-background="{{ asset('assets/img/bg/breadcrumb.jpg') }}"
-            >
+            <div class="section-bg-agent-bottom-img" data-background="{{ asset('assets/img/bg/breadcrumb.jpg') }}">
                 <p>Find us on Booking.com and AirBnB</p>
             </div>
         </div>
@@ -81,11 +73,13 @@
                 <div class="page-line-filter">
 
                     <div class="page-line-filter-links-two mobile-view">
-                        <a href="#">
-                            <img style="    width: 22px;" class="page-line-filter-links-two-img"
-                                src="assets/img/property/location.png" alt="home">
-                            Map view</a>
-                        <a href="#">
+                            <a href="#" >
+                                <img style="width: 22px;" class="page-line-filter-links-two-img"
+                                    src="assets/img/property/location.png" alt="home">
+                                Map view
+                            </a>
+
+                        <a href="#" onclick="scrollToSection(event)">
                             <img style="    width: 19px;" class="page-line-filter-links-two-img"
                                 src="assets/img/property/alert.png" alt="home">
                             Create alert</a>
@@ -123,16 +117,28 @@
                             style="margin-bottom: 50px; cursor: pointer;" class="blog-post-wrap mt-none-30">
                             <article class="blog__item mt-30 blog__item-property">
                                 <div class="blog__item-property-one swiper">
-                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form" style="display:inline;">
+                                    <form action="{{ url('saved-properties') }}" method="POST" class="favorite-form"
+                                        style="display:inline;">
                                         @csrf
                                         <input type="hidden" name="propertyable_id" value="{{ $holiday->id }}">
                                         <input type="hidden" name="propertyable_type" value="holiday">
-                                        <input type="hidden" name="property_ref_no" value="{{ $holiday->reference_number }}">
-                                        
-                                        <button  class="Favorite-green" type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-                                            <img class="Favorite-green" src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
-                                            {{-- <img class="Favorite-green" src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite"> --}}
+                                        <input type="hidden" name="property_ref_no"
+                                            value="{{ $holiday->reference_number }}">
+
+
+
+                                        <button class="Favorite-green" type="submit"
+                                            style="background: none; border: none; padding: 0; cursor: pointer;">
+                                            @if ($holiday->favorite)
+                                                <img class="Favorite-green"
+                                                    src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                            @else
+                                                <img class="Favorite-green"
+                                                    src="{{ asset('assets/img/property/green-Favorite.png') }}"
+                                                    alt="Favorite">
+                                            @endif
                                         </button>
+
                                     </form>
                                     <img class="location-green" src="assets/img/property/location-green.png" alt="location">
 
@@ -192,21 +198,24 @@
                                     class="blog__item-property-two">
                                     <div class="blog__item-property-two-box">
                                         @php
-                                        $propertyTypeMap = [
-                                            'AP' => ['Apartment', 'apartment.png'],
-                                            'VH' => ['Villa', 'villa.png'],
-                                            'OF' => ['Office', 'office.png'],
-                                            'ST' => ['Studio', 'studio.png'],
-                                            // Add more if needed
-                                        ];
-                                    
-                                        $propertyTypeCode = $holiday->property_type;
-                                        $propertyType = $propertyTypeMap[$propertyTypeCode] ?? ['Unknown', 'default.png'];
-                                    @endphp
-                                    
-                                    <h1 class="blog__item-property-two-title">
-                                        {{ $propertyType[0] }}
-                                    </h1>
+                                            $propertyTypeMap = [
+                                                'AP' => ['Apartment', 'apartment.png'],
+                                                'VH' => ['Villa', 'villa.png'],
+                                                'OF' => ['Office', 'office.png'],
+                                                'ST' => ['Studio', 'studio.png'],
+                                                // Add more if needed
+                                            ];
+
+                                            $propertyTypeCode = $holiday->property_type;
+                                            $propertyType = $propertyTypeMap[$propertyTypeCode] ?? [
+                                                'Unknown',
+                                                'default.png',
+                                            ];
+                                        @endphp
+
+                                        <h1 class="blog__item-property-two-title">
+                                            {{ $propertyType[0] }}
+                                        </h1>
                                         <p>Premium</p>
                                     </div>
                                     <div class="blog__item-property-two-box-two">
@@ -268,44 +277,41 @@
                                             </div>
                                         </div>
 
-                                        <div class="property-two-box-five-two" 
-                                            
-                                     @auth
-                                     data-user-id="{{ auth()->user()->id }}"
+                                        <div class="property-two-box-five-two"
+                                            @auth
+data-user-id="{{ auth()->user()->id }}"
                                      data-property-id="{{ $holiday->id }}"
                                      data-property-ref="{{ $holiday->reference_number }}"
                                      data-url="{{ url()->current() }}"  
-                                     data-property-type="holiday"
-                                     @endauth
-                                        >
+                                     data-property-type="holiday" @endauth>
 
-                                        <!-- Phone Call -->
-                                        <a href="tel:{{ $holiday->listing_agent_phone }}" class="contact-btn"
-                                            data-method="Call">
-                                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
-                                                alt="Call">
-                                            <span>Call</span>
-                                        </a>
+                                            <!-- Phone Call -->
+                                            <a href="tel:{{ $holiday->listing_agent_phone }}" class="contact-btn"
+                                                data-method="Call">
+                                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                                    alt="Call">
+                                                <span>Call</span>
+                                            </a>
 
-                                        <!-- Email -->
-                                        <a href="mailto:{{ $holiday->listing_agent_email }}" class="contact-btn"
-                                            data-method="Email">
-                                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
-                                                alt="Email">
-                                            <span>Email</span>
-                                        </a>
+                                            <!-- Email -->
+                                            <a href="mailto:{{ $holiday->listing_agent_email }}" class="contact-btn"
+                                                data-method="Email">
+                                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                                    alt="Email">
+                                                <span>Email</span>
+                                            </a>
 
-                                        <!-- WhatsApp -->
-                                        <a href="https://wa.me/{{ $holiday->listing_agent_whatsapp }}"
-                                            class="contact-btn" data-method="WhatsApp" target="_blank">
-                                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
-                                                alt="WhatsApp">
-                                            <span>WhatsApp</span>
-                                        </a>
-                                    </div>
+                                            <!-- WhatsApp -->
+                                            <a href="https://wa.me/{{ $holiday->listing_agent_whatsapp }}"
+                                                class="contact-btn" data-method="WhatsApp" target="_blank">
+                                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                                    alt="WhatsApp">
+                                                <span>WhatsApp</span>
+                                            </a>
+                                        </div>
 
 
-                                    
+
                                     </div>
 
                                 </div>
@@ -417,7 +423,7 @@
             padding: 0;
         }
 
- 
+
 
         .property-filter .search-button-property {
             position: absolute;
@@ -447,31 +453,31 @@
             background-size: cover;
             position: relative;
         }
+
         .section-bg-agent-bottom-img {
             background-position: center 73%;
             background-size: cover;
             position: absolute;
-    width: 100%;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    text-align: center;
-height: 44px;
-box-shadow: 0px 7px 16px 0px #00000040;
-display: flex
-;
-    align-items: center;
-    justify-content: center;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            text-align: center;
+            height: 44px;
+            box-shadow: 0px 7px 16px 0px #00000040;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .section-bg-agent-bottom-img p{
+        .section-bg-agent-bottom-img p {
             font-family: "Manrope", sans-serif;
-font-weight: 700;
-font-size: 16px;
-line-height: 24px;
-letter-spacing: 0%;
-vertical-align: middle;
-color: #2DD98F;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0%;
+            vertical-align: middle;
+            color: #2DD98F;
 
 
         }
@@ -530,4 +536,10 @@ color: #2DD98F;
 
         }
     </style>
+    <script>
+    function scrollToSection(event) {
+        event.preventDefault(); 
+        document.getElementById("question-form-footer").scrollIntoView({ behavior: "smooth" });
+    }
+    </script>
 @endsection

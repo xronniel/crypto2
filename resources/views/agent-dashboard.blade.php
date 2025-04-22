@@ -1,8 +1,8 @@
 @extends('layouts.front-office.app')
 @section('content')
     {{-- {{ $property }} --}}
-    <section style="background: #080B18;" class="blog pt-50 pb-50">
-        <x-property-filter :propertyTypes="$propertyTypes" :plotAreaRange="$plotAreaRange" :priceRange="$priceRange" :amenities="$amenities" />
+    <section class="blog blog-padding">
+        <x-property-filter-two :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
     </section>
     {{-- {{ $property }} --}}
 
@@ -628,6 +628,11 @@
 
 
 
+            .agent-left-big-box {
+          
+            flex-direction: row;
+
+        }
 
 
 
@@ -696,6 +701,7 @@
                 border-radius: 20px;
                 gap: 15px;
                 background: none;
+                
             }
 
             .section-bg-blue-shadow {
@@ -788,6 +794,19 @@
             .page-path-line {
                 display: none;
             }
+
+
+            .agent-right-box {
+        padding: 0px;
+    }
+
+
+    .agent-left-big-box {
+          
+          flex-direction: column;
+
+      }
+
         }
     </style>
 

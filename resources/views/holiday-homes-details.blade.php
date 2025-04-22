@@ -1,7 +1,7 @@
 @extends('layouts.front-office.app')
 @section('content')
     {{-- {{ $property }} --}}
-    <section class="blog pt-50 pb-50">
+    <section class="blog blog-padding">
         <x-property-filter-two :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
     </section>
     {{-- {{ $property }} --}}
@@ -114,170 +114,181 @@
                     </div>
                 </div>
                 <div class="grid-left-side">
-                    <div class="grid-left-side-fisrt-dev hide-mobile">
-                        <p>{{ $holidayProperty->offering_type }}</p>
+
+
+                    <div class="grid-left-side-one">
+                        <div class="grid-left-side-fisrt-dev hide-mobile">
+                            <p>{{ $holidayProperty->offering_type }}</p>
+                        </div>
+                        <h3 class="grid-left-side-one hide-mobile">{{ $holidayProperty->title_en }}</h3>
+                        @php
+                        $propertyTypeMap = [
+                            'AP' => 'Apartment',
+                            'VH' => 'Villa',
+                            'OF' => 'Office',
+                            'ST' => 'Studio',
+                            // Add more as needed
+                        ];
+                    
+                        $propertyTypeLabel = $propertyTypeMap[$holidayProperty->property_type] ?? $holidayProperty->property_type;
+                        @endphp
+                    
+                        <h3 class="grid-left-side-two hide-mobile">{{ $propertyTypeLabel }} | {{ $holidayProperty->furnished == 1 ? 'Furnished' : 'Unfurnished' }}
+                        </h3>
+                        
+                        <h3 class="grid-left-side-three">
+                            {!! nl2br(e($holidayProperty->description_en)) !!}
+                        </h3>
                     </div>
-                    <h3 class="grid-left-side-one hide-mobile">{{ $holidayProperty->title_en }}</h3>
-                    @php
-                    $propertyTypeMap = [
-                        'AP' => 'Apartment',
-                        'VH' => 'Villa',
-                        'OF' => 'Office',
-                        'ST' => 'Studio',
-                        // Add more as needed
-                    ];
-                
-                    $propertyTypeLabel = $propertyTypeMap[$holidayProperty->property_type] ?? $holidayProperty->property_type;
-                @endphp
-                
-                <h3 class="grid-left-side-two hide-mobile">{{ $propertyTypeLabel }} | {{ $holidayProperty->furnished == 1 ? 'Furnished' : 'Unfurnished' }}
-                </h3>
-                
-                    <h3 class="grid-left-side-three">
-                        {!! nl2br(e($holidayProperty->description_en)) !!}
-                    </h3>
-                    <h3 class="grid-left-side-one show-mobile">{{ $holidayProperty->title_en }}</h3>
-                    <h3 class="grid-left-side-two show-mobile">{{ $holidayProperty->property_type }} | Furnished</h3>
-                
-                    <div class="grid-left-side-fisrt-dev show-mobile">
-                        <p>{{ $holidayProperty->offering_type }}</p>
-                    </div>
-                    <div class="grid-left-side-price-box">
-                        <div class=" grid-left-side-price">
-                            <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
-                            <div class="grid-left-side-price-div">
-                                @php
-                                if (!function_exists('formatNumber')) {
-                                    function formatNumber($num) {
-                                        if ($num >= 1000000000) {
-                                            return number_format($num / 1000000000, 2) . 'B';
-                                        } elseif ($num >= 1000000) {
-                                            return number_format($num / 1000000, 2) . 'M';
-                                        } elseif ($num >= 1000) {
-                                            return number_format($num / 1000, 2) . 'K';
+
+
+
+                    <div class="grid-left-side-one">
+
+                        <h3 class="grid-left-side-one show-mobile">{{ $holidayProperty->title_en }}</h3>
+                        <h3 class="grid-left-side-two show-mobile">{{ $holidayProperty->property_type }} | Furnished</h3>
+                    
+                        <div class="grid-left-side-fisrt-dev show-mobile">
+                            <p>{{ $holidayProperty->offering_type }}</p>
+                        </div>
+                        <div class="grid-left-side-price-box">
+                            <div class=" grid-left-side-price">
+                                <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
+                                <div class="grid-left-side-price-div">
+                                    @php
+                                    if (!function_exists('formatNumber')) {
+                                        function formatNumber($num) {
+                                            if ($num >= 1000000000) {
+                                                return number_format($num / 1000000000, 2) . 'B';
+                                            } elseif ($num >= 1000000) {
+                                                return number_format($num / 1000000, 2) . 'M';
+                                            } elseif ($num >= 1000) {
+                                                return number_format($num / 1000, 2) . 'K';
+                                            }
+                                            return number_format($num, 2);
                                         }
-                                        return number_format($num, 2);
                                     }
-                                }
-                                @endphp
-                
-                                <p class="grid-left-side-price-div-two">
-                                    {{ $holidayProperty->price_on_application ? 'Price on Application' : formatNumber($holidayProperty->price) }}<span>AED</span>
-                                </p>
+                                    @endphp
+                    
+                                    <p class="grid-left-side-price-div-two">
+                                        {{ $holidayProperty->price_on_application ? 'Price on Application' : formatNumber($holidayProperty->price) }}<span>AED</span>
+                                    </p>
+                                </div>
+                                <h4 class="grid-left-side-price-div-four">
+                                    {{ $holidayProperty->rental_period === 'M' ? '/Month' : '' }}
+                                </h4>
                             </div>
-                            <h4 class="grid-left-side-price-div-four">
-                                {{ $holidayProperty->rental_period === 'M' ? '/Month' : '' }}
-                            </h4>
-                        </div>
-                
-                        <div class="grid-left-side-price-two">
-                            @php $segments = []; @endphp
-                
-                            @if ($holidayProperty->bedroom)
-                                @php $segments[] = '
-                                    <div class="grid-left-side-price-two-one">
-                                        <img class="img-four" src="' . asset("assets/img/property/green-bed.png") . '" alt="bed">
-                                        <p>' . $holidayProperty->bedroom . ' Bedroom</p>
-                                    </div>'; @endphp
-                            @endif
-                
-                            @if ($holidayProperty->bathroom)
-                                @php $segments[] = '
-                                    <div class="grid-left-side-price-two-one">
-                                        <img class="img-four" src="' . asset("assets/img/property/green-bath.png") . '" alt="bath">
-                                        <p>' . $holidayProperty->bathroom . ' Bathroom</p>
-                                    </div>'; @endphp
-                            @endif
-                
-                            @if ($holidayProperty->size)
-                                @php $segments[] = '
-                                    <div class="grid-left-side-price-two-one">
-                                        <img class="img-four" src="' . asset("assets/img/property/green-size.png") . '" alt="size">
-                                        <p>' . number_format($holidayProperty->size, 2) . ' sq. ft.</p>
-                                    </div>'; @endphp
-                            @endif
-                
-                            @foreach ($segments as $index => $segment)
-                                {!! $segment !!}
-                                @if ($index < count($segments) - 1)
-                                    <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                    
+                            <div class="grid-left-side-price-two">
+                                @php $segments = []; @endphp
+                    
+                                @if ($holidayProperty->bedroom)
+                                    @php $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-bed.png") . '" alt="bed">
+                                            <p>' . $holidayProperty->bedroom . ' Bedroom</p>
+                                        </div>'; @endphp
                                 @endif
-                            @endforeach
-                        </div>
-                    </div>
-                
-                    <div class="Converter-div-box hide-mobile">
-                        <div style="width: 35%;" class="Converter-div-input">
-                            <div style="width: 100%;" class="Converter-select-input">
-                                <select style="width: 100%;" name="crypto" id="crypto">
-                                    <option value="Bitcoin">Bitcoin <span class="Converter-select-span">BTC</span></option>
-                                </select>
-                                <img class="Converter-img-select" src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="">
-                                <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}" alt="icon">
+                    
+                                @if ($holidayProperty->bathroom)
+                                    @php $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-bath.png") . '" alt="bath">
+                                            <p>' . $holidayProperty->bathroom . ' Bathroom</p>
+                                        </div>'; @endphp
+                                @endif
+                    
+                                @if ($holidayProperty->size)
+                                    @php $segments[] = '
+                                        <div class="grid-left-side-price-two-one">
+                                            <img class="img-four" src="' . asset("assets/img/property/green-size.png") . '" alt="size">
+                                            <p>' . number_format($holidayProperty->size, 2) . ' sq. ft.</p>
+                                        </div>'; @endphp
+                                @endif
+                    
+                                @foreach ($segments as $index => $segment)
+                                    {!! $segment !!}
+                                    @if ($index < count($segments) - 1)
+                                        <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
-                        <div class="icon-box-Converter">
-                            <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="icon">
-                            <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="icon">
-                            <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="icon">
-                            <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="icon">
-                        </div>
-                    </div>
-                
-                    <div class="property-two-box-five-box">
-                        <div class="property-two-box-five-one">
-                            <div class="property-two-box-five-one-img">
-                                <img src="{{ $holidayProperty->agent_photo }}" alt="person">
+                    
+                        <div class="Converter-div-box hide-mobile">
+                            <div style="width: 35%;" class="Converter-div-input">
+                                <div style="width: 100%;" class="Converter-select-input">
+                                    <select style="width: 100%;" name="crypto" id="crypto">
+                                        <option value="Bitcoin">Bitcoin <span class="Converter-select-span">BTC</span></option>
+                                    </select>
+                                    <img class="Converter-img-select" src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="">
+                                    <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}" alt="icon">
+                                </div>
                             </div>
-                            <div class="property-two-box-five-one-name">
-                                <p>{{ $holidayProperty->agent_name }}</p>
-                                <h4>Real Estate Agent</h4>
+                            <div class="icon-box-Converter">
+                                <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="icon">
+                                <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="icon">
+                                <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="icon">
+                                <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="icon">
                             </div>
                         </div>
+                    
+                        <div class="property-two-box-five-box">
+                            <div class="property-two-box-five-one">
+                                <div class="property-two-box-five-one-img">
+                                    <img src="{{ $holidayProperty->agent_photo }}" alt="person">
+                                </div>
+                                <div class="property-two-box-five-one-name">
+                                    <p>{{ $holidayProperty->agent_name }}</p>
+                                    <h4>Real Estate Agent</h4>
+                                </div>
+                            </div>
+    
+    
+                            <div class="property-two-box-five-two" 
+                                                
+                      @auth
+                      data-user-id="{{ auth()->user()->id }}"
+                      data-property-id="{{ $holidayProperty->id }}"
+                      data-property-ref="{{ $holidayProperty->reference_number }}"
+                      data-url="{{ url()->current() }}"  
+                      data-property-type="holiday"
+                      @endauth
+                            >
+    
+                            <!-- Phone Call -->
+                            <a href="tel:{{ $holidayProperty->listing_agent_phone }}" class="contact-btn"
+                                data-method="Call">
+                                <img src="{{ asset('assets/img/property/dark-call.png') }}"
+                                    alt="Call">
+                                <span>Call</span>
+                            </a>
+    
+                            <!-- Email -->
+                            <a href="mailto:{{ $holidayProperty->listing_agent_email }}" class="contact-btn"
+                                data-method="Email">
+                                <img src="{{ asset('assets/img/property/dark-mail.png') }}"
+                                    alt="Email">
+                                <span>Email</span>
+                            </a>
+    
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/{{ $holidayProperty->listing_agent_whatsapp }}"
+                                class="contact-btn" data-method="WhatsApp" target="_blank">
+                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
+                                    alt="WhatsApp">
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                        </div>
+    
+    
 
-
-                        <div class="property-two-box-five-two" 
-                                            
-                  @auth
-                  data-user-id="{{ auth()->user()->id }}"
-                  data-property-id="{{ $holidayProperty->id }}"
-                  data-property-ref="{{ $holidayProperty->reference_number }}"
-                  data-url="{{ url()->current() }}"  
-                  data-property-type="holiday"
-                  @endauth
-                        >
-
-                        <!-- Phone Call -->
-                        <a href="tel:{{ $holidayProperty->listing_agent_phone }}" class="contact-btn"
-                            data-method="Call">
-                            <img src="{{ asset('assets/img/property/dark-call.png') }}"
-                                alt="Call">
-                            <span>Call</span>
-                        </a>
-
-                        <!-- Email -->
-                        <a href="mailto:{{ $holidayProperty->listing_agent_email }}" class="contact-btn"
-                            data-method="Email">
-                            <img src="{{ asset('assets/img/property/dark-mail.png') }}"
-                                alt="Email">
-                            <span>Email</span>
-                        </a>
-
-                        <!-- WhatsApp -->
-                        <a href="https://wa.me/{{ $holidayProperty->listing_agent_whatsapp }}"
-                            class="contact-btn" data-method="WhatsApp" target="_blank">
-                            <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
-                                alt="WhatsApp">
-                            <span>WhatsApp</span>
-                        </a>
                     </div>
 
 
 
 
-
-
-                    </div>
                 </div>
     
             </div>

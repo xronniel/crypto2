@@ -415,10 +415,16 @@
                                         <input type="hidden" name="propertyable_type" value="commercial">
                                         <input type="hidden" name="property_ref_no" value="{{ $property->property_ref_no }}">
                                         
-                                        <button  class="Favorite-green" type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-                                            <img class="Favorite-green" src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
-                                            {{-- <img class="Favorite-green" src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite"> --}}
-                                        </button>
+                                        <button class="Favorite-green" type="submit"
+                                        style="background: none; border: none; padding: 0; cursor: pointer;">
+                                        @if ($property->favorite)
+                                            <img class="Favorite-green"
+                                            src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                        @else
+                                            <img class="Favorite-green"
+                                            src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
+                                        @endif
+                                    </button>
                                     </form>
                                     <img class="location-green"
                                         src="{{ asset('assets/img/property/location-green.png') }}" alt="location">
@@ -712,6 +718,12 @@
     overflow: hidden;
 }
 
+.grid-left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
 
 .main-image img {
     width: 100%;

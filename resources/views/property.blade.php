@@ -1,7 +1,7 @@
 @extends('layouts.front-office.app')
 @section('content')
     {{-- {{ $property }} --}}
-    <section class="blog pt-50 pb-50">
+    <section class="blog blog-padding">
         <x-property-filter :propertyTypes="$propertyTypes" :plotAreaRange="$plotAreaRange" :priceRange="$priceRange" :amenities="$amenities" />
     </section>
     {{-- {{ $property }} --}}
@@ -95,13 +95,13 @@
             <div class="page-line-filter">
 
                 <div class="page-line-filter-links-two mobile-view">
-                    <a href="#" onclick="scrollToSection(event)">
+                    <a href="#" >
                         <img style="width: 22px;" class="page-line-filter-links-two-img"
                             src="assets/img/property/location.png" alt="home">
                         Map view
                     </a>
                     
-                    <a href="#">
+                    <a href="#" onclick="scrollToSection(event)">
                         <img style="    width: 19px;" class="page-line-filter-links-two-img"
                             src="assets/img/property/alert.png" alt="home">
                         Create alert</a>
@@ -171,13 +171,15 @@
                                         <input type="hidden" name="propertyable_type" value="commercial">
                                         <input type="hidden" name="property_ref_no"
                                             value="{{ $property->property_ref_no }}">
-
-                                        <button class="Favorite-green" type="submit"
+                                            <button class="Favorite-green" type="submit"
                                             style="background: none; border: none; padding: 0; cursor: pointer;">
-                                            <img class="Favorite-green"
-                                                src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
-                                            <img class="Favorite-green"
+                                            @if ($property->favorite)
+                                                <img class="Favorite-green"
                                                 src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                            @else
+                                                <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
+                                            @endif
                                         </button>
                                     </form>
 
