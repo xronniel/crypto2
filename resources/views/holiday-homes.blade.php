@@ -56,7 +56,7 @@
 
 
             <h2 class="page-line-title">
-                Exclusive Holiday Homes in Dubai Available for Cryptocurrency Purchase
+                Exclusive Holiday Homes in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }} Available for Cryptocurrency Purchase
             </h2>
 
             <div class="page-line-filter-box">
