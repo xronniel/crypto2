@@ -102,7 +102,7 @@
 
 .login-modal {
     position: absolute;
-    top: -800px;
+    top: -1000px;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;

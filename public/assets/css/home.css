@@ -717,6 +717,8 @@ input[type="text"] {
     cursor: pointer;
 }
 
+
+
 @media (max-width: 768px) { 
     .partners {
         padding-top: 40px;
@@ -924,4 +926,29 @@ text-transform: capitalize;
         width: 100%;
     }
     
+}
+
+
+
+
+
+
+
+
+
+
+.button__f5N5i {
+    border-radius: 65px !important;
+    box-shadow: 0 19px 38px 0 rgba(34, 36, 43, .3);
+    display: block;
+    height: 65px;
+    margin-bottom: 20px !important;
+    position: relative;
+    text-align: center;
+    transform: scale(1);
+    width: 65px;
+    position: absolute;
+    z-index: 9999;
+    bottom: 94px;
+    right: 0;
 }

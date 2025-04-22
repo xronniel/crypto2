@@ -258,7 +258,7 @@
                                                 <img src="{{ $property->listing_agent_photo }}" alt="person">
                                             </div>
                                             <div class="property-two-box-five-one-name">
-                                                <p>{{ $property->listing_agent }}</p>
+                                                <p>{{ $agent->name ?? 'Agent' }}</p>
                                                 <h4>Real Estate Agent</h4>
                                             </div>
                                         </div>
@@ -657,10 +657,10 @@
     <div class="property-two-box-five-box mobile-hide-agent">
         <div class="property-two-box-five-one">
             <div class="property-two-box-five-one-img">
-                <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
+                <img src="{{ Str::startsWith($agent->photo, 'http') ? $agent->photo : asset('storage/' . $agent->photo) }}" alt="person">
             </div>
             <div class="property-two-box-five-one-name">
-                <p>{{ $property->listing_agent }}</p>
+                <p>{{ $agent->name}}</p>
                 <h4>Real Estate Agent</h4>
             </div>
         </div>
@@ -678,7 +678,7 @@
         >
 
         <!-- Phone Call -->
-        <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn"
+        <a href="tel:{{ $agent->phone }}" class="contact-btn"
             data-method="Call">
             <img src="{{ asset('assets/img/property/dark-call.png') }}"
                 alt="Call">
@@ -686,7 +686,7 @@
         </a>
 
         <!-- Email -->
-        <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+        <a href="mailto:{{ $agent->email }}" class="contact-btn"
             data-method="Email">
             <img src="{{ asset('assets/img/property/dark-mail.png') }}"
                 alt="Email">
@@ -694,7 +694,7 @@
         </a>
 
         <!-- WhatsApp -->
-        <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}"
+        <a href="https://wa.me/{{ $agent->whatsapp }}"
             class="contact-btn" data-method="WhatsApp" target="_blank">
             <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}"
                 alt="WhatsApp">
