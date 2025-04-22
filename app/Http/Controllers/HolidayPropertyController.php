@@ -79,6 +79,10 @@ class HolidayPropertyController extends Controller
             $q->where('new', 1);
         });
 
+        $query->when(request()->has('emirate'), function ($q) {
+            $q->where('city', '=', request('emirate'));
+        });
+
         // Filter by `min_price` and `max_price` if present
         $query->when(request()->has('min_price') && request('min_price') != '', function ($q) {
             $q->where('price', '>=', request('min_price'));
@@ -176,8 +180,15 @@ class HolidayPropertyController extends Controller
         $faqs = Faq::all();
         $amenities = HolidayPropertyAmenity::all();
         $plotAreaRange = [];
+
+        $emirates = HolidayProperty::whereNotNull('city')
+            ->where('city', '!=', '')
+            ->distinct()
+            ->orderBy('city', 'asc')
+            ->pluck('city');
+
         //$holidayProperties = HolidayProperty::with('photos')->latest()->paginate(10);
-        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings', 'plotAreaRange'));
+        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings', 'plotAreaRange', 'emirates'));
     }
     
     /**

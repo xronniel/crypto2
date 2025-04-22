@@ -38,16 +38,20 @@ class SavePropertyController extends Controller
     
         $validated['propertyable_type'] = $propertyableType;
     
-        $savedProperty = UserSavedProperty::create([
-            'user_id' =>$user->id,
-            'propertyable_id' => $validated['propertyable_id'],
-            'propertyable_type' => $validated['propertyable_type'],
-            'property_ref_no' => $validated['property_ref_no'],
-        ]);
+        [$savedProperty, $created] = UserSavedProperty::firstOrCreate(
+            [
+                'user_id' => $user->id,
+                'propertyable_id' => $validated['propertyable_id'],
+                'propertyable_type' => $validated['propertyable_type'],
+                'property_ref_no' => $validated['property_ref_no'],
+            ]
+        );
     
-        return redirect()
-            ->back()
-            ->with('success', 'Property saved successfully.');
+        if (!$created) {
+            return redirect()->back()->with('info', 'Property already saved.');
+        }
+    
+        return redirect()->back()->with('success', 'Property saved successfully.');
     }
 
     public function destroy(Request $request)

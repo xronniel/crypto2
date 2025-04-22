@@ -85,18 +85,18 @@
                             <img style="    width: 22px;" class="page-line-filter-links-two-img"
                                 src="assets/img/property/location.png" alt="home">
                             Map view</a>
-                        <a href="#">
+                        <a href="contact-us">
                             <img style="    width: 19px;" class="page-line-filter-links-two-img"
                                 src="assets/img/property/alert.png" alt="home">
                             Create alert</a>
                     </div>
 
-                    <form action="{{ route('properties.index') }}" method="GET">
+                    <form action="{{ route('holiday-properties.index') }}" method="GET">
                         <div class="page-line-filter-links-two">
                             <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
                             <label for="sort-options">Sort by:</label>
 
-                            <select name="sort" id="sort-options" onchange="this.form.submit()">
+                            <select name="sort_by" id="sort-options" onchange="this.form.submit()">
                                 <option value="">Select an option</option>
                                 <option value="featured">Featured</option>
                                 <option value="newest">Newest</option>
@@ -212,7 +212,7 @@
                                     <div class="blog__item-property-two-box-two">
                                         <div class="blog__item-property-two-box-one">
                                             <p class="box-two-p-one">
-                                                {{ $holiday->price }} AED
+                                                {{ $holiday->getConvertedPrice()['converted_price'] }}({{ $holiday->getConvertedPrice()['currency_code'] }})
                                             </p>
                                             <p class="box-two-p-two">
                                                 {{ $holiday->rental_period }}
@@ -333,20 +333,20 @@
                         <div class="widget  widget-one mt-30">
                             <h3 class="widget__title">Nearby Areas</h3>
                             <ul class="widget__category list-unstyled">
-                                {{-- @foreach ($emirates as $emirate)
+                                @foreach ($emirates as $emirate)
                                     <li>
-                                        <a href="javascript:void(0);" onclick="window.location.href='{{ route('properties.index', ['filter_type' => 'sale', 'emirate' => $emirate]) }}'">
+                                        <a href="javascript:void(0);" onclick="window.location.href='{{ route('holiday-properties.index', ['emirate' => $emirate]) }}'">
                                             Properties for sale in {{ $emirate }}
                                         </a>
                                     </li>
-                                @endforeach --}}
+                                @endforeach
                             </ul>
                             <h3 class="widget__title">Popular Searches</h3>
                             <ul class="widget__category list-unstyled">
-                                {{-- @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
+                                @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                         onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
+                                         onclick="window.location.href='{{ route('holiday-properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
                                         >
                                             {{ $recent['name'] }}
                                         </a>
@@ -355,7 +355,7 @@
                                 @foreach ($recentSearches['community'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                        onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
+                                        onclick="window.location.href='{{ route('holiday-properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
                                         >
                                             {{ $recent['name'] }}
                                         </a>
@@ -364,12 +364,12 @@
                                 @foreach ($recentSearches['property_title'] as $recent)
                                     <li>
                                         <a 
-                                          onclick="window.location.href='{{ route('properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['title']]) }}'"
+                                          onclick="window.location.href='{{ route('holiday-properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['title']]) }}'"
                                         href="javascript:void(0);">
                                             {{ $recent['title'] }}
                                         </a>
                                     </li>
-                                @endforeach --}}
+                                @endforeach
                             </ul>
 
 

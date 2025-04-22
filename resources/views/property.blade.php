@@ -101,7 +101,7 @@
                         Map view
                     </a>
                     
-                    <a href="#">
+                    <a href="contact-us">
                         <img style="    width: 19px;" class="page-line-filter-links-two-img"
                             src="assets/img/property/alert.png" alt="home">
                         Create alert</a>
@@ -114,10 +114,10 @@
 
                         <select name="sort" id="sort-options" onchange="this.form.submit()">
                             <option value="">Select an option</option>
-                            <option value="featured">Featured</option>
-                            <option value="newest">Newest</option>
-                            <option value="from_lowest_price">From Lowest Price</option>
-                            <option value="from_highest_price">From Highest Price</option>
+                            <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured</option>
+                            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest</option>
+                            <option value="from_lowest_price" {{ request('sort') == 'from_lowest_price' ? 'selected' : '' }}>From Lowest Price</option>
+                            <option value="from_highest_price" {{ request('sort') == 'from_highest_price' ? 'selected' : '' }}>From Highest Price</option>
                         </select>
                     </div>
                 </form>
