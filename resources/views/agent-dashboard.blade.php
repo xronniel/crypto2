@@ -777,7 +777,10 @@
 
 
         @media (max-width: 900px) {
+.row{
+    margin: -74px 0 0 0;
 
+}
             .agent-card-wrapper {
                 flex-direction: column;
             }
