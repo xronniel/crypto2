@@ -133,6 +133,7 @@ position: relative;
     line-height: 48px;
     color: #ffffff;
     text-align: start;
+    margin:  0;
 }
 
 .show-mobile {
@@ -148,7 +149,7 @@ position: relative;
     font-size: 16px;
     line-height: 24px;
     color: #ffffff80;
-    margin: 25px 0;
+    margin: 10px 0;
     text-align: start;
 }
 

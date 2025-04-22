@@ -839,8 +839,6 @@
         }
     });
 
-
-
             document.addEventListener("DOMContentLoaded", function () {
                 const aboutText = document.querySelector('.about-text');
                 const readMoreLink = document.querySelector('.about-us-bottom');

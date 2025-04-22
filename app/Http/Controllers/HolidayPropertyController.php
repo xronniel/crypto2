@@ -31,6 +31,18 @@ class HolidayPropertyController extends Controller
         $unitType = $request->input('unit_type');
         $sortBy = $request->input('sort_by');
 
+        $emirates = HolidayProperty::whereNotNull('city')
+            ->where('city', '!=', '')
+            ->distinct()
+            ->orderBy('city', 'asc')
+            ->pluck('city');
+
+        if (!$request->filled('emirate')) {
+            return redirect()->route('holiday-properties.index', ['emirate' => $emirates->first()]);
+        }
+
+        $selectedEmirate = $request->filled('emirate') ? $request->emirate : $emirates->first();
+
         $query = HolidayProperty::query();
 
         if ($search) {
@@ -79,8 +91,12 @@ class HolidayPropertyController extends Controller
             $q->where('new', 1);
         });
 
-        $query->when(request()->has('emirate'), function ($q) {
-            $q->where('city', '=', request('emirate'));
+        // $query->when(request()->has('emirate'), function ($q) {
+        //     $q->where('city', '=', request('emirate'));
+        // });
+
+        $query->when($selectedEmirate, function ($q) use ($selectedEmirate) {
+            $q->where('city', $selectedEmirate);
         });
 
         // Filter by `min_price` and `max_price` if present
@@ -181,11 +197,6 @@ class HolidayPropertyController extends Controller
         $amenities = HolidayPropertyAmenity::all();
         $plotAreaRange = [];
 
-        $emirates = HolidayProperty::whereNotNull('city')
-            ->where('city', '!=', '')
-            ->distinct()
-            ->orderBy('city', 'asc')
-            ->pluck('city');
 
         //$holidayProperties = HolidayProperty::with('photos')->latest()->paginate(10);
         return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings', 'plotAreaRange', 'emirates'));

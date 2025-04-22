@@ -11,11 +11,11 @@
         <div class="container">
             <div class="breadcrumb__content">
                 @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
-                <h2 class="breadcrumb__title">Off-Plan Properties in Dubai</h2>
+                <h2 class="breadcrumb__title">Off-Plan Properties in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</h2>
                 @elseif (request()->is('properties') && request()->query('type') === 'commercial')
                     <h2 class="breadcrumb__title">Commercial Buildings</h2>
                 @else
-                    <h2 class="breadcrumb__title">Properties for Sale in UAE</h2>
+                    <h2 class="breadcrumb__title">Properties for Sale in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</h2>
                 @endif
                 <ul style="    flex-direction: column;" class="bread-crumb clearfix ul_li_center">
                     <li class="breadcrumb-item"><a href="#">Items Found</a></li>
@@ -64,28 +64,27 @@
             <div onclick="window.location.href='/'" class="page-path-line">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
-                <p class="active-path-line">/ properties for sale in uae</p>
+                <p class="active-path-line">/ properties for sale in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</p>
             </div>
 
             <h2 class="page-line-title">
-                Buy Properties in Dubai
+                Buy Properties in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}
             </h2>
 
             <div class="page-line-filter-box">
                 <div class="page-line-filter">
                     <div class="page-line-filter-h3">
-                        <p>{{ $properties->count() }}</p>
+                        <p>{{ $properties->total() }}</p>
                         <span>properties available</span>
                     </div>
-
                     <div class="page-line-filter-links">
-                        <a href="{{ route('properties.index', ['completion_status' => '']) }}"
+                        <a href="{{ route('properties.index', array_merge(request()->all(), ['completion_status' => ''])) }}"
                             class="{{ request('completion_status') == '' ? 'page-line-filter-links-ctive' : '' }}">Any</a>
-
-                        <a href="{{ route('properties.index', ['completion_status' => 'off_plan']) }}"
+                    
+                        <a href="{{ route('properties.index', array_merge(request()->all(), ['completion_status' => 'off_plan'])) }}"
                             class="{{ request('completion_status') == 'off_plan' ? 'page-line-filter-links-ctive' : '' }}">Off-plan</a>
-
-                        <a href="{{ route('properties.index', ['completion_status' => 'ready']) }}"
+                    
+                        <a href="{{ route('properties.index', array_merge(request()->all(), ['completion_status' => 'ready'])) }}"
                             class="{{ request('completion_status') == 'ready' ? 'page-line-filter-links-ctive' : '' }}">Ready</a>
                     </div>
 
@@ -111,13 +110,19 @@
                     <div class="page-line-filter-links-two">
                         <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
                         <label for="sort-options">Sort by:</label>
-
-                        <select name="sort" id="sort-options" onchange="this.form.submit()">
+                
+                        <!-- Preserve emirate and other filters -->
+                        <input type="hidden" name="emirate" value="{{ request('emirate') }}">
+                        <input type="hidden" name="search" value="{{ request('search') }}">
+                        <input type="hidden" name="filter_type" value="{{ request('filter_type') }}">
+                        <input type="hidden" name="completion_status" value="{{ request('completion_status') }}">
+                
+                        <select name="sort_by" id="sort-options" onchange="this.form.submit()">
                             <option value="">Select an option</option>
-                            <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured</option>
-                            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest</option>
-                            <option value="from_lowest_price" {{ request('sort') == 'from_lowest_price' ? 'selected' : '' }}>From Lowest Price</option>
-                            <option value="from_highest_price" {{ request('sort') == 'from_highest_price' ? 'selected' : '' }}>From Highest Price</option>
+                            <option value="featured" {{ request('sort_by') == 'featured' ? 'selected' : '' }}>Featured</option>
+                            <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>Newest</option>
+                            <option value="from_lowest_price" {{ request('sort_by') == 'from_lowest_price' ? 'selected' : '' }}>From Lowest Price</option>
+                            <option value="from_highest_price" {{ request('sort_by') == 'from_highest_price' ? 'selected' : '' }}>From Highest Price</option>
                         </select>
                     </div>
                 </form>
@@ -347,7 +352,7 @@
                         </div>
                     @endforeach
                     {{-- end card   --}}
-                    {{ $properties->links() }}
+                    {{ $properties->appends(request()->except('page'))->links() }}
                 </div>
                 <div class="col-lg-3 mt-30">
                     <div class="sidebar-area mt-none-30">
@@ -378,28 +383,40 @@
                                 @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['name']]) }}'">
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['name']
+                                           ])) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
                                 @endforeach
+                            
                                 @foreach ($recentSearches['community'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['name']]) }}'">
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['name']
+                                           ])) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
                                 @endforeach
+                            
                                 @foreach ($recentSearches['property_title'] as $recent)
                                     <li>
-                                        <a onclick="window.location.href='{{ route('properties.index', ['filter_type' => $recent['ad_type'], 'search' => $recent['title']]) }}'"
-                                            href="javascript:void(0);">
+                                        <a href="javascript:void(0);"
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['title']
+                                           ])) }}'">
                                             {{ $recent['title'] }}
                                         </a>
                                     </li>
                                 @endforeach
                             </ul>
+                            
 
 
                         </div>

@@ -16,7 +16,7 @@
         data-background="{{ asset('assets/img/holiday-property/holidayProperty.png') }}">
         <div class="container">
             <div class="breadcrumb__content">
-                <h2 class="breadcrumb__title">Holiday Homes in Dubai</h2>
+                <h2 class="breadcrumb__title">Holiday Homes in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</h2>
                 <ul style="    flex-direction: column;" class="bread-crumb clearfix ul_li_center">
                     <li class="breadcrumb-item"><a href="#">Items Found</a></li>
                     <li class="breadcrumb-item">{{ $holidayProperties->total() }} properties</li>
@@ -51,18 +51,18 @@
             <div onclick="window.location.href='/properties'" class="page-path-line">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
-                <p class="active-path-line">/ Holiday homes in dubai</p>
+                <p class="active-path-line">/ Holiday homes in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</p>
             </div>
 
 
             <h2 class="page-line-title">
-                Exclusive Holiday Homes in Dubai Available for Cryptocurrency Purchase
+                Exclusive Holiday Homes in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }} Available for Cryptocurrency Purchase
             </h2>
 
             <div class="page-line-filter-box">
                 <div class="page-line-filter">
                     <div class="page-line-filter-h3">
-                        <p>{{ $holidayProperties->count() }}</p>
+                        <p>{{ $holidayProperties->total() }}</p>
                         <span>properties available</span>
                     </div>
 
@@ -89,16 +89,21 @@
                         <div class="page-line-filter-links-two">
                             <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
                             <label for="sort-options">Sort by:</label>
-
+                    
+                            @foreach(request()->except('sort_by') as $key => $value)
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endforeach
+                    
                             <select name="sort_by" id="sort-options" onchange="this.form.submit()">
                                 <option value="">Select an option</option>
-                                <option value="featured">Featured</option>
-                                <option value="newest">Newest</option>
-                                <option value="from_lowest_price">From Lowest Price</option>
-                                <option value="from_highest_price">From Highest Price</option>
+                                <option value="featured" {{ request('sort_by') == 'featured' ? 'selected' : '' }}>Featured</option>
+                                <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>Newest</option>
+                                <option value="from_lowest_price" {{ request('sort_by') == 'from_lowest_price' ? 'selected' : '' }}>From Lowest Price</option>
+                                <option value="from_highest_price" {{ request('sort_by') == 'from_highest_price' ? 'selected' : '' }}>From Highest Price</option>
                             </select>
                         </div>
                     </form>
+                    
 
                 </div>
             </div>
@@ -320,7 +325,8 @@ data-user-id="{{ auth()->user()->id }}"
                     @endforeach
 
                     {{-- end card   --}}
-                    {{ $holidayProperties->links() }}
+                    {{ $holidayProperties->appends(request()->except('page'))->links() }}
+
 
 
 
@@ -352,31 +358,41 @@ data-user-id="{{ auth()->user()->id }}"
                                 @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                         onclick="window.location.href='{{ route('holiday-properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
-                                        >
+                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['name']
+                                           ])) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
                                 @endforeach
+                            
                                 @foreach ($recentSearches['community'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                        onclick="window.location.href='{{ route('holiday-properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['name']]) }}'"
-                                        >
+                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['name']
+                                           ])) }}'">
                                             {{ $recent['name'] }}
                                         </a>
                                     </li>
                                 @endforeach
+                            
                                 @foreach ($recentSearches['property_title'] as $recent)
                                     <li>
-                                        <a 
-                                          onclick="window.location.href='{{ route('holiday-properties.index', ['filter_type' =>  $recent['ad_type'] , 'search' => $recent['title']]) }}'"
-                                        href="javascript:void(0);">
+                                        <a href="javascript:void(0);"
+                                           onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
+                                               'filter_type' => $recent['ad_type'],
+                                               'search' => $recent['title']
+                                           ])) }}'">
                                             {{ $recent['title'] }}
                                         </a>
                                     </li>
                                 @endforeach
                             </ul>
+                            
+                            
 
 
                         </div>
