@@ -176,17 +176,18 @@
                         <span>Crypto Home</span>
                         <ul class="xb-item--footer_widget-list">
                             <li><a href="#!">About Us</a></li>
-                            <li><a href="#!">Careers</a></li>
+                            <li><a href="{{ route('agents.index') }}">Find Agent</a></li>
                             <li><a href="/contact-us">Contact Us</a></li>
-                            <li><a href="#!">Explore</a></li>
-                            <li><a href="#!">Terms</a> </li>
+                            <li><a href="/TermsConditions">Terms</a> </li>
                         </ul>
                     </div>
                     <div class="xb-item--footer_widget mb-30">
-                        <span>Real Estate Professionals</span>
+                        <span>Our Services</span>
                         <ul class="xb-item--footer_widget-list">
-                            <li><a href="#!">Partner Hub</a></li>
-                            <li><a href="#!">PF Expert</a></li>
+                            <li><a      href="{{ route('properties.index', ['filter_type' => 'buy']) }}"></a>Buy</li>
+                            <li><a    href="{{ route('properties.index', ['filter_type' => 'rent']) }}"></a>Rent</li>
+                            <li><a  href="{{ route('properties.index', ['type' => 'commercial']) }}">Commercial</a></li>
+                            <li><a href="{{ route('holiday-properties.index') }}">Vacations</a></li>
                         </ul>
                     </div>
                     <div class="xb-item--footer_widget mb-30">
@@ -370,8 +371,17 @@
         justify-content: center;
     }
 
+    .xb-footer-wrap .xb-item--footer_widget span{
+        font-family: 'Outfit';
+font-weight: 500;
+font-size: 16px;
+line-height: 30px;
+letter-spacing: 0%;
+vertical-align: middle;
+color: #707070;
 
-    @media (max-width: 900px) {
+    }
+    @media (max-width: 1000px) {
         .bg-one {
             height: 300px;
             border-radius: 30px 30px 0 0;

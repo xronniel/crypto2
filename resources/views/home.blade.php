@@ -318,11 +318,40 @@
                         </p>
                         <div class="xb-item--accept">
                             <h5 class="xb-item--acc-title">We accept :</h5>
-                            <ul class="xb-item--list ul_li">
-                                <li><img src="assets/img/icon/hero-icon01.svg" alt="">Bitcoin</li>
-                                <li><img src="assets/img/icon/hero-icon02.svg" alt="">Ethereum</li>
-                                <li><img src="assets/img/icon/hero-icon03.svg" alt="">Litecoin</li>
-                                <li><img src="assets/img/icon/hero-icon04.svg" alt="">Ripple</li>
+                            <ul class="xb-item--list-two">
+                                <li class="ul-li-two">
+                                    <span>
+                                        <img class="ul-img" src="assets/img/icon/hero-icon01.svg" alt="">Bitcoin
+                                    </span>
+                                    <span class="ul-span-green">
+                                        $ 83,215.40
+                                    </span>
+                                </li>
+                                <li class="ul-li-two">
+                                    <span>
+                                        <img class="ul-img" src="assets/img/icon/hero-icon02.svg" alt="">Ethereum
+                                    </span>
+                                    <span class="ul-span-green">
+                                        $ 83,215.40
+                                    </span>
+                                </li>
+                                <li class="ul-li-two">
+                                    <span>
+                                        <img class="ul-img" src="assets/img/icon/hero-icon03.svg" alt="">Litecoin
+                                    </span>
+                                    <span class="ul-span-green">
+                                        $ 83,215.40
+                                    </span>
+                                </li>
+                                <li class="ul-li-two">
+                                    <span>
+                                        <img class="ul-img" style="width: 15px;" src="assets/img/icon/hero-icon04.svg"
+                                            alt="">Ripple
+                                    </span>
+                                    <span class="ul-span-green">
+                                        $ 83,215.40
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -457,8 +486,8 @@
                     </div>
                 </div>
                 <div class="about-img bg_img">
-                    <img class="wow fadeInRight" data-wow-duration=".7s" data-wow-delay="200ms" src="assets/img/home/Link.png"
-                        alt="">
+                    <img class="wow fadeInRight" data-wow-duration=".7s" data-wow-delay="200ms"
+                        src="assets/img/home/Link.png" alt="">
                 </div>
             </div>
         </div>
@@ -922,7 +951,7 @@
 
                     // Debugging: Check if inputs update correctly
                     console.log("Selected filter type:", hiddenInputOne.value, hiddenInputTwo
-                    .value);
+                        .value);
                 });
             });
         });
@@ -1272,44 +1301,94 @@
 
 
         .home-page-third-section {
-            display: flex
-;
-    align-items: center;
-    padding-top: 135px; 
+            display: flex;
+            align-items: center;
+            padding-top: 135px;
+        }
+
+
+        .xb-item--list-two {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .xb-item--list-two .ul-li-two {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 28px;
+            letter-spacing: 0;
+            vertical-align: middle;
+            color: #C1C7DE;
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .xb-item--list-two .ul-img {
+            width: 13px;
+            margin: 0 7px 0 0;
+        }
+
+
+        .ul-span-green {
+            color: #2DD98F;
+            font-family: 'Outfit';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+            letter-spacing: 0;
+            text-align: center;
+            vertical-align: middle;
+
         }
 
 
 
 
 
-
-
-
-
-
         .xb-item--list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 20px; 
-    width: fit-content;
-}
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: fit-content;
+        }
 
-.xb-item--list span {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-}
+        .xb-item--list span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-@media (max-width: 900px) {
-    .home-page-third-section {
-    display: flex
-;
-    align-items: center;
-    padding-top: 10px;
-    flex-direction: column-reverse;
-    gap: 30px;
-}
+        @media (max-width: 900px) {
+            .home-page-third-section {
+                display: flex;
+                align-items: center;
+                padding-top: 10px;
+                flex-direction: column-reverse;
+                gap: 30px;
+            }
 
-}
+            .xb-item--list-two .ul-img {
+            width: 12px;
+            margin: 0 3px 0 0;
+        }
+
+            .xb-item--list-two .ul-li-two,
+            .ul-span-green {
+
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 28px;
+                letter-spacing: 0%;
+                vertical-align: middle;
+
+            }
+            .hero .token-structure .hero-token {
+                padding: 7px 35px 40px;
+            }
+        }
     </style>
 @endsection

@@ -98,23 +98,24 @@
     </div>
     <div class="partner-slider-three-box">
         <div class="swiper partner-slider-three">
-            <div class="swiper-wrapper swiper-wrapper-three">
-                @if (!empty($page->stepItems))
-                    @foreach ($page->stepItems as $step)
-                        <div class="swiper-slide swiper-slide-partner-slider-three">
-                            <div class="card">
-                                <div class="icon">
-                                    <img src="{{ asset('storage/' . $step['icon']) }}" alt="{{ $step['title'] }}" />
-                                </div>
-                                <h3>{{ $step['title'] }}</h3>
-                                <p>{{ $step['description'] }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
+          <div class="swiper-wrapper swiper-wrapper-three">
+            @foreach ($page->stepItems as $step)
+              <div class="swiper-slide">
+                <div class="card">
+                  <div class="icon">
+                    <img src="{{ asset('storage/' . $step['icon']) }}" alt="{{ $step['title'] }}" />
+                  </div>
+                  <h3>{{ $step['title'] }}</h3>
+                  <p>{{ $step['description'] }}</p>
+                </div>
+              </div>
+            @endforeach
+          </div>
+      
+ 
         </div>
-    </div>
+      </div>
+      
 
 
 

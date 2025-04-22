@@ -263,7 +263,7 @@
 
 
 	var slider = new Swiper(".partner-slider-three", {
-		loop: true,
+		loop: false,
 		spaceBetween: 20,
 		speed: 400,
 		slidesPerView: 9,
@@ -747,7 +747,7 @@
 		loop: true,
 		spaceBetween: 10,
 		freeMode: true,
-		slidesPerView: 1, // default (small screens)
+		slidesPerView: 1, 
 	
 		navigation: {
 			nextEl: '.swiper-button-next-emirate',
@@ -755,10 +755,9 @@
 		},
 	
 		breakpoints: {
-			768: { slidesPerView: 2 },      // tablets
-			1024: { slidesPerView: 3 },     // small laptops
-			1280: { slidesPerView: 4 },     // medium desktops
-			1600: { slidesPerView: 5 },     // large screens
+			768: { slidesPerView: 2 },     
+			1024: { slidesPerView: 3 },     
+			1280: { slidesPerView: 4 },     
 		}
 	});
 	

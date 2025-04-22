@@ -168,10 +168,8 @@
                                         <button class="Favorite-green" type="submit"
                                             style="background: none; border: none; padding: 0; cursor: pointer;">
                                             <img class="Favorite-green"
-                                                src="{{ asset('assets/img/property/green-Favorite.png') }}"
-                                                alt="Favorite">
-                                            <img class="Favorite-green"
                                                 src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+
                                         </button>
                                     </form>
 
@@ -565,14 +563,12 @@ data-user-id="{{ auth()->user()->id }}"
                 {{-- end card   --}}
                 {{ $savedProperties->links() }}
             @else
-           
-                    <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
-                    <p class="saved-properties-one">No Saved Properties</p>
-                    <p class="saved-properties-two">
-                        ​To save a property to your favorites, click the <span>heart icon</span> on any listing.
-                        All your saved properties will be conveniently accessible here for easy viewing and management.
-                    </p>
-    
+                <img src="{{ asset('/assets/img/user/no-saved-property.png') }}" alt="">
+                <p class="saved-properties-one">No Saved Properties</p>
+                <p class="saved-properties-two">
+                    ​To save a property to your favorites, click the <span>heart icon</span> on any listing.
+                    All your saved properties will be conveniently accessible here for easy viewing and management.
+                </p>
             @endif
         </div>
 
@@ -643,13 +639,15 @@ data-user-id="{{ auth()->user()->id }}"
                                         <input type="hidden" name="property_ref_no"
                                             value="{{ $property->property_ref_no }}">
 
-                                        <button class="Favorite-green" type="submit"
+                                            <button class="Favorite-green" type="submit"
                                             style="background: none; border: none; padding: 0; cursor: pointer;">
-                                            <img class="Favorite-green"
-                                                src="{{ asset('assets/img/property/green-Favorite.png') }}"
-                                                alt="Favorite">
-                                            <img class="Favorite-green"
+                                            @if ($savedProperty->favorite)
+                                                <img class="Favorite-green"
                                                 src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                            @else
+                                                <img class="Favorite-green"
+                                                src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
+                                            @endif
                                         </button>
                                     </form>
 
@@ -834,14 +832,16 @@ data-user-id="{{ auth()->user()->id }}"
                                         <input type="hidden" name="property_ref_no"
                                             value="{{ $property->reference_number }}">
 
-                                        <button class="Favorite-green" type="submit"
-                                            style="background: none; border: none; padding: 0; cursor: pointer;">
-                                            <img class="Favorite-green"
-                                                src="{{ asset('assets/img/property/green-Favorite.png') }}"
-                                                alt="Favorite">
-                                            <img class="Favorite-green"
-                                                src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
-                                        </button>
+                                            <button class="Favorite-green" type="submit"
+                                                style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                @if ($savedProperty->favorite)
+                                                    <img class="Favorite-green"
+                                                    src="{{ asset('assets/img/property/fiv-icon.png') }}" alt="Favorite">
+                                                @else
+                                                    <img class="Favorite-green"
+                                                    src="{{ asset('assets/img/property/green-Favorite.png') }}" alt="Favorite">
+                                                @endif
+                                            </button>
                                     </form>
 
 
@@ -1238,7 +1238,7 @@ data-user-id="{{ auth()->user()->id }}"
             align-items: center;
 
             /*
-                                        gap: 36px; */
+                                            gap: 36px; */
             align-content: center;
             align-items: center;
 

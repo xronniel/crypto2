@@ -1,7 +1,7 @@
 @extends('layouts.front-office.app')
 @section('content')
     {{-- {{ $property }} --}}
-    <section style="background: #080B18;" class="blog pt-50 pb-50">
+    <section style="background: #080B18;" class="blog blog-padding">
         <x-property-filter :propertyTypes="$propertyTypes" :plotAreaRange="$plotAreaRange" :priceRange="$priceRange" :amenities="$amenities" />
     </section>
     {{-- {{ $property }} --}}
@@ -129,194 +129,200 @@
                 </div>
 
                 <div class="grid-left-side">
-                    <div class="grid-left-side-fisrt-dev hide-mobile">
-                        <p>{{ $property->ad_type }}</p>
-                        {{-- <p>6% OFF</p> --}}
-                    </div>
-                    <h3 class="grid-left-side-one hide-mobile">{{ $property->property_title }}</h3>
-                    <h3 class="grid-left-side-two hide-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
-                    <h3 class="grid-left-side-three">
-                        @php
-                            $html = $property->web_remarks;
 
-                            $dom = new DOMDocument();
-                            libxml_use_internal_errors(true); // Suppress HTML5 warnings
-                            $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
-
-                            $pTags = $dom->getElementsByTagName('p');
-                            $output = '';
-
-                            foreach ($pTags as $p) {
-                                // Remove <strong> and <br> tags
-                                foreach (iterator_to_array($p->getElementsByTagName('*')) as $node) {
-                                    if ($node->nodeName === 'strong' || $node->nodeName === 'br') {
-                                        // Replace node with its text content or nothing
-                                        $text = $node->textContent;
-                                        $textNode = $dom->createTextNode($text);
-                                        $node->parentNode->replaceChild($textNode, $node);
-                                    }
-                                }
-
-                                // Save final <p> tag with cleaned content
-                                $output .= $dom->saveHTML($p);
-                            }
-                        @endphp
-
-                        {!! $output !!}
-
-                    </h3>
-                    <h3 class="grid-left-side-one show-mobile">{{ $property->property_title }}</h3>
-                    <h3 class="grid-left-side-two show-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
-
-                    <div class="grid-left-side-fisrt-dev show-mobile">
-                        <p>{{ $property->ad_type }}</p>
-                        {{-- <p>6% OFF</p> --}}
-                    </div>
-                    <div class="grid-left-side-price-box">
-                        <div class=" grid-left-side-price">
-                            <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
-                            <div class="grid-left-side-price-div">
-                                {{-- <p class="grid-left-side-price-div-one">830.22 XRP</p> --}}
-                                @php
-                                    if (!function_exists('formatNumber')) {
-                                        function formatNumber($num)
-                                        {
-                                            if ($num >= 1000000000) {
-                                                return number_format($num / 1000000000, 2) . 'B';
-                                            } elseif ($num >= 1000000) {
-                                                return number_format($num / 1000000, 2) . 'M';
-                                            } elseif ($num >= 1000) {
-                                                return number_format($num / 1000, 2) . 'K';
-                                            }
-                                            return number_format($num, 2);
+                    <div class="grid-left-side-one">
+                        <div class="grid-left-side-fisrt-dev hide-mobile">
+                            <p>{{ $property->ad_type }}</p>
+                            {{-- <p>6% OFF</p> --}}
+                        </div>
+                        <h3 class="grid-left-side-one hide-mobile">{{ $property->property_title }}</h3>
+                        <h3 class="grid-left-side-two hide-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
+                        <h3 class="grid-left-side-three">
+                            @php
+                                $html = $property->web_remarks;
+    
+                                $dom = new DOMDocument();
+                                libxml_use_internal_errors(true); // Suppress HTML5 warnings
+                                $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+    
+                                $pTags = $dom->getElementsByTagName('p');
+                                $output = '';
+    
+                                foreach ($pTags as $p) {
+                                    // Remove <strong> and <br> tags
+                                    foreach (iterator_to_array($p->getElementsByTagName('*')) as $node) {
+                                        if ($node->nodeName === 'strong' || $node->nodeName === 'br') {
+                                            // Replace node with its text content or nothing
+                                            $text = $node->textContent;
+                                            $textNode = $dom->createTextNode($text);
+                                            $node->parentNode->replaceChild($textNode, $node);
                                         }
                                     }
-                                @endphp
-
-                                <p class="grid-left-side-price-div-two">
-                                    {{ formatNumber($property->price) }}<span>AED</span></p>
-                            </div>
-                            <h4 class="grid-left-side-price-div-four">/Month</h4>
-                        </div>
-
-                        <div class="grid-left-side-price-two">
-                            @php
-                                // Build an array of available segments.
-                                $segments = [];
+    
+                                    // Save final <p> tag with cleaned content
+                                    $output .= $dom->saveHTML($p);
+                                }
                             @endphp
+    
+                            {!! $output !!}
+    
+                        </h3>
+                    </div>
 
-                            @if (isset($property->bedrooms) && $property->bedrooms > 0)
+                    <div class="grid-left-side-one">
+                        <h3 class="grid-left-side-one show-mobile">{{ $property->property_title }}</h3>
+                        <h3 class="grid-left-side-two show-mobile">{{ $property->unit_type }} | {{ $property->fitted }}</h3>
+    
+                        <div class="grid-left-side-fisrt-dev show-mobile">
+                            <p>{{ $property->ad_type }}</p>
+                            {{-- <p>6% OFF</p> --}}
+                        </div>
+                        <div class="grid-left-side-price-box">
+                            <div class=" grid-left-side-price">
+                                <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="USDT">
+                                <div class="grid-left-side-price-div">
+                                    {{-- <p class="grid-left-side-price-div-one">830.22 XRP</p> --}}
+                                    @php
+                                        if (!function_exists('formatNumber')) {
+                                            function formatNumber($num)
+                                            {
+                                                if ($num >= 1000000000) {
+                                                    return number_format($num / 1000000000, 2) . 'B';
+                                                } elseif ($num >= 1000000) {
+                                                    return number_format($num / 1000000, 2) . 'M';
+                                                } elseif ($num >= 1000) {
+                                                    return number_format($num / 1000, 2) . 'K';
+                                                }
+                                                return number_format($num, 2);
+                                            }
+                                        }
+                                    @endphp
+    
+                                    <p class="grid-left-side-price-div-two">
+                                        {{ formatNumber($property->price) }}<span>AED</span></p>
+                                </div>
+                                <h4 class="grid-left-side-price-div-four">/Month</h4>
+                            </div>
+    
+                            <div class="grid-left-side-price-two">
                                 @php
-                                    $segments[] =
-                                        '
-                                        <div class="grid-left-side-price-two-one">
-                                            <img class="img-four" src="' .
-                                        asset('assets/img/property/green-bed.png') .
-                                        '" alt="bed">
-                                            <p>' .
-                                        $property->bedrooms .
-                                        ' Bedroom</p>
-                                        </div>';
+                                    // Build an array of available segments.
+                                    $segments = [];
                                 @endphp
-                            @endif
-
-                            @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
-                                @php
-                                    $segments[] =
-                                        '
-                                        <div class="grid-left-side-price-two-one">
-                                            <img class="img-four" src="' .
-                                        asset('assets/img/property/green-bath.png') .
-                                        '" alt="bath">
-                                            <p>' .
-                                        $property->no_of_bathroom .
-                                        ' Bathroom</p>
-                                        </div>';
-                                @endphp
-                            @endif
-
-                            @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
-                                @php
-                                    $segments[] =
-                                        '
-                                        <div class="grid-left-side-price-two-one">
-                                            <img class="img-four" src="' .
-                                        asset('assets/img/property/green-size.png') .
-                                        '" alt="size">
-                                            <p>' .
-                                        number_format($property->unit_builtup_area, 2) .
-                                        ' sq. ft.</p>
-                                        </div>';
-                                @endphp
-                            @endif
-
-                            {{-- Loop through segments and insert pipeline image in-between --}}
-                            @foreach ($segments as $index => $segment)
-                                {!! $segment !!}
-                                @if ($index < count($segments) - 1)
-                                    <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+    
+                                @if (isset($property->bedrooms) && $property->bedrooms > 0)
+                                    @php
+                                        $segments[] =
+                                            '
+                                            <div class="grid-left-side-price-two-one">
+                                                <img class="img-four" src="' .
+                                            asset('assets/img/property/green-bed.png') .
+                                            '" alt="bed">
+                                                <p>' .
+                                            $property->bedrooms .
+                                            ' Bedroom</p>
+                                            </div>';
+                                    @endphp
                                 @endif
-                            @endforeach
+    
+                                @if (isset($property->no_of_bathroom) && $property->no_of_bathroom > 0)
+                                    @php
+                                        $segments[] =
+                                            '
+                                            <div class="grid-left-side-price-two-one">
+                                                <img class="img-four" src="' .
+                                            asset('assets/img/property/green-bath.png') .
+                                            '" alt="bath">
+                                                <p>' .
+                                            $property->no_of_bathroom .
+                                            ' Bathroom</p>
+                                            </div>';
+                                    @endphp
+                                @endif
+    
+                                @if (isset($property->unit_builtup_area) && $property->unit_builtup_area > 0)
+                                    @php
+                                        $segments[] =
+                                            '
+                                            <div class="grid-left-side-price-two-one">
+                                                <img class="img-four" src="' .
+                                            asset('assets/img/property/green-size.png') .
+                                            '" alt="size">
+                                                <p>' .
+                                            number_format($property->unit_builtup_area, 2) .
+                                            ' sq. ft.</p>
+                                            </div>';
+                                    @endphp
+                                @endif
+    
+                                {{-- Loop through segments and insert pipeline image in-between --}}
+                                @foreach ($segments as $index => $segment)
+                                    {!! $segment !!}
+                                    @if ($index < count($segments) - 1)
+                                        <img src="{{ asset('assets/img/property/pipeline.png') }}" alt="pipeline">
+                                    @endif
+                                @endforeach
+                            </div>
+    
                         </div>
-
-                    </div>
-                    <div class="Converter-div-box hide-mobile">
-                        <div style="width: 35%;" class="Converter-div-input">
-                            <div style="width: 100%;" class="Converter-select-input">
-                                <select style="width: 100%;" name="cars" id="cars">
-                                    <option value="Bitcoin">
-                                        Bitcoin
-                                        <span class="Converter-select-span">BTC</span>
-                                    </option>
-                                </select>
-                                <img class="Converter-img-select" src="{{ asset('assets/img/home/frame-7.svg.png') }}"
-                                    alt="">
-                                <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}" alt="icon">
+                        <div class="Converter-div-box hide-mobile">
+                            <div style="width: 35%;" class="Converter-div-input">
+                                <div style="width: 100%;" class="Converter-select-input">
+                                    <select style="width: 100%;" name="cars" id="cars">
+                                        <option value="Bitcoin">
+                                            Bitcoin
+                                            <span class="Converter-select-span">BTC</span>
+                                        </option>
+                                    </select>
+                                    <img class="Converter-img-select" src="{{ asset('assets/img/home/frame-7.svg.png') }}"
+                                        alt="">
+                                    <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}" alt="icon">
+                                </div>
+                            </div>
+                            <div class="icon-box-Converter">
+                                <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="icon">
+                                <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="icon">
+                                <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="icon">
+                                <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="icon">
                             </div>
                         </div>
-                        <div class="icon-box-Converter">
-                            <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="icon">
-                            <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="icon">
-                            <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="icon">
-                            <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="icon">
-                        </div>
-                    </div>
-                    <div class="property-two-box-five-box">
-                        <div class="property-two-box-five-one">
-                            <div class="property-two-box-five-one-img">
-                                <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
+                        <div class="property-two-box-five-box">
+                            <div class="property-two-box-five-one">
+                                <div class="property-two-box-five-one-img">
+                                    <img src="{{ asset($property->listing_agent_photo) }}" alt="person">
+                                </div>
+                                <div class="property-two-box-five-one-name">
+                                    <p>{{ $property->listing_agent }}</p>
+                                    <h4>Real Estate Agent</h4>
+                                </div>
                             </div>
-                            <div class="property-two-box-five-one-name">
-                                <p>{{ $property->listing_agent }}</p>
-                                <h4>Real Estate Agent</h4>
+                            <div class="property-two-box-five-two"
+                                @auth
+    data-user-id="{{ auth()->user()->id }}"
+                       data-property-id="{{ $property->id }}"
+                       data-property-ref="{{ $property->property_ref_no }}"
+                       data-url="{{ url()->current() }}" @endauth>
+    
+                                <!-- Phone Call -->
+                                <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn" data-method="Call">
+                                    <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
+                                    <span>Call</span>
+                                </a>
+    
+                                <!-- Email -->
+                                <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
+                                    data-method="Email">
+                                    <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
+                                    <span>Email</span>
+                                </a>
+    
+                                <!-- WhatsApp -->
+                                <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" class="contact-btn"
+                                    data-method="WhatsApp" target="_blank">
+                                    <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
+                                    <span>WhatsApp</span>
+                                </a>
                             </div>
-                        </div>
-                        <div class="property-two-box-five-two"
-                            @auth
-data-user-id="{{ auth()->user()->id }}"
-                   data-property-id="{{ $property->id }}"
-                   data-property-ref="{{ $property->property_ref_no }}"
-                   data-url="{{ url()->current() }}" @endauth>
-
-                            <!-- Phone Call -->
-                            <a href="tel:{{ $property->listing_agent_phone }}" class="contact-btn" data-method="Call">
-                                <img src="{{ asset('assets/img/property/dark-call.png') }}" alt="Call">
-                                <span>Call</span>
-                            </a>
-
-                            <!-- Email -->
-                            <a href="mailto:{{ $property->listing_agent_email }}" class="contact-btn"
-                                data-method="Email">
-                                <img src="{{ asset('assets/img/property/dark-mail.png') }}" alt="Email">
-                                <span>Email</span>
-                            </a>
-
-                            <!-- WhatsApp -->
-                            <a href="https://wa.me/{{ $property->listing_agent_whatsapp }}" class="contact-btn"
-                                data-method="WhatsApp" target="_blank">
-                                <img src="{{ asset('assets/img/property/dark-WhatsApp.png') }}" alt="WhatsApp">
-                                <span>WhatsApp</span>
-                            </a>
                         </div>
                     </div>
                 </div>
