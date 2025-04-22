@@ -383,7 +383,7 @@
                                 @foreach (collect($recentSearches['unit_type'])->unique('name') as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->all(), [
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
                                                'filter_type' => $recent['ad_type'],
                                                'search' => $recent['name']
                                            ])) }}'">
@@ -395,7 +395,7 @@
                                 @foreach ($recentSearches['community'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->all(), [
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
                                                'filter_type' => $recent['ad_type'],
                                                'search' => $recent['name']
                                            ])) }}'">
@@ -407,7 +407,7 @@
                                 @foreach ($recentSearches['property_title'] as $recent)
                                     <li>
                                         <a href="javascript:void(0);"
-                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->all(), [
+                                           onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
                                                'filter_type' => $recent['ad_type'],
                                                'search' => $recent['title']
                                            ])) }}'">
@@ -416,6 +416,7 @@
                                     </li>
                                 @endforeach
                             </ul>
+                            
 
 
                         </div>
