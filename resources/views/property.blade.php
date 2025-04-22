@@ -77,15 +77,14 @@
                         <p>{{ $properties->total() }}</p>
                         <span>properties available</span>
                     </div>
-
                     <div class="page-line-filter-links">
-                        <a href="{{ route('properties.index', ['completion_status' => '']) }}"
+                        <a href="{{ route('properties.index', array_merge(request()->all(), ['completion_status' => ''])) }}"
                             class="{{ request('completion_status') == '' ? 'page-line-filter-links-ctive' : '' }}">Any</a>
-
-                        <a href="{{ route('properties.index', ['completion_status' => 'off_plan']) }}"
+                    
+                        <a href="{{ route('properties.index', array_merge(request()->all(), ['completion_status' => 'off_plan'])) }}"
                             class="{{ request('completion_status') == 'off_plan' ? 'page-line-filter-links-ctive' : '' }}">Off-plan</a>
-
-                        <a href="{{ route('properties.index', ['completion_status' => 'ready']) }}"
+                    
+                        <a href="{{ route('properties.index', array_merge(request()->all(), ['completion_status' => 'ready'])) }}"
                             class="{{ request('completion_status') == 'ready' ? 'page-line-filter-links-ctive' : '' }}">Ready</a>
                     </div>
 
@@ -111,13 +110,19 @@
                     <div class="page-line-filter-links-two">
                         <img class="filter-links-two-img" src="assets/img/home/arrow.png" alt="">
                         <label for="sort-options">Sort by:</label>
-
-                        <select name="sort" id="sort-options" onchange="this.form.submit()">
+                
+                        <!-- Preserve emirate and other filters -->
+                        <input type="hidden" name="emirate" value="{{ request('emirate') }}">
+                        <input type="hidden" name="search" value="{{ request('search') }}">
+                        <input type="hidden" name="filter_type" value="{{ request('filter_type') }}">
+                        <input type="hidden" name="completion_status" value="{{ request('completion_status') }}">
+                
+                        <select name="sort_by" id="sort-options" onchange="this.form.submit()">
                             <option value="">Select an option</option>
-                            <option value="featured" {{ request('sort') == 'featured' ? 'selected' : '' }}>Featured</option>
-                            <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest</option>
-                            <option value="from_lowest_price" {{ request('sort') == 'from_lowest_price' ? 'selected' : '' }}>From Lowest Price</option>
-                            <option value="from_highest_price" {{ request('sort') == 'from_highest_price' ? 'selected' : '' }}>From Highest Price</option>
+                            <option value="featured" {{ request('sort_by') == 'featured' ? 'selected' : '' }}>Featured</option>
+                            <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>Newest</option>
+                            <option value="from_lowest_price" {{ request('sort_by') == 'from_lowest_price' ? 'selected' : '' }}>From Lowest Price</option>
+                            <option value="from_highest_price" {{ request('sort_by') == 'from_highest_price' ? 'selected' : '' }}>From Highest Price</option>
                         </select>
                     </div>
                 </form>
