@@ -11,7 +11,7 @@
         <div class="container">
             <div class="breadcrumb__content">
                 @if (request()->is('properties') && request()->query('completion_status') === 'off_plan')
-                <h2 class="breadcrumb__title">Off-Plan Properties in Dubai</h2>
+                <h2 class="breadcrumb__title">Off-Plan Properties in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</h2>
                 @elseif (request()->is('properties') && request()->query('type') === 'commercial')
                     <h2 class="breadcrumb__title">Commercial Buildings</h2>
                 @else
@@ -352,7 +352,7 @@
                         </div>
                     @endforeach
                     {{-- end card   --}}
-                    {{ $properties->links() }}
+                    {{ $properties->appends(request()->except('page'))->links() }}
                 </div>
                 <div class="col-lg-3 mt-30">
                     <div class="sidebar-area mt-none-30">

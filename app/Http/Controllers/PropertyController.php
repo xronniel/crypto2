@@ -274,15 +274,16 @@ class PropertyController extends Controller
             ];
 
             $emirateCounts = Listing::select('emirate', DB::raw('COUNT(*) as count'))
-                ->groupBy('emirate')
-                ->orderByDesc('count')
-                ->get()
-                ->map(function ($item) {
-                    return [
-                        'emirate' => $item->emirate,
-                        'count' => $item->count,
-                    ];
-             });
+            ->where('off_plan', 1)
+            ->groupBy('emirate')
+            ->orderByDesc('count')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'emirate' => $item->emirate,
+                    'count' => $item->count,
+                ];
+            });
          
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches', 'request', 'emirateCounts'));
     }
