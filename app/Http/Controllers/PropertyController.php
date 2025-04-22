@@ -152,7 +152,7 @@ class PropertyController extends Controller
             });
         }
         // Get paginated properties with filters applied
-        $properties = $query->with(['images', 'facilities'])->latest()->paginate(10);
+        $properties = $query->with(['images', 'facilities'])->latest()->paginate(10)->appends(request()->query());
 
             // Add `favorite` boolean to each property
         $user = Auth::user();

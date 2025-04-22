@@ -132,18 +132,52 @@
                 <div class="header-last-btn">
                     <div class="header-btn-one ul_li hide-item-header">
                         <a class="btc-btn" href="#">
-                            <img src="{{ asset('assets/img/icon/hero-icon01.svg') }}" alt="BTC Icon">
+                            @php
+                                $currentCurrency = Cookie::get('currency_code') ?? (Auth::check() ? Auth::user()->currency_code ?? 'BTC' : 'BTC');
+                                $currencyIcons = [
+                                    'BTC' => 'hero-icon01.svg',
+                                    'ETH' => 'hero-icon02.svg',
+                                    'XRP' => 'hero-icon03.svg',
+                                    'USDT' => 'hero-icon04.svg',
+                                ];
+                                $icon = $currencyIcons[$currentCurrency] ?? 'hero-icon01.svg';
+                            @endphp
+                            <img src="{{ asset('assets/img/icon/' . $icon) }}" alt="{{ $currentCurrency }} Icon">
                             <span>
-                                (BTC)
+                                ({{ $currentCurrency }})
                             </span>
                             <img class="header-arrow-img" src="{{ asset('assets/img/home/arrow.png') }}"
                                 alt="Arrow">
                         </a>
                         <ul class="">
-                            <li><img src="{{ asset('assets/img/icon/hero-icon01.svg') }}" alt="BTC Icon">(BTC)</li>
-                            <li><img src="{{ asset('assets/img/icon/hero-icon02.svg') }}" alt="ETH Icon">(ETH)</li>
-                            <li><img src="{{ asset('assets/img/icon/hero-icon03.svg') }}" alt="XRP Icon">(XRP)</li>
-                            <li><img src="{{ asset('assets/img/icon/hero-icon04.svg') }}" alt="USDT Icon">(USDT)</li>
+                            <li onclick="document.getElementById('btc-form').submit();" style="cursor: pointer;">
+                                <form id="btc-form" action="{{ route('currency.select') }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="currency_code" value="BTC">
+                                </form>
+                                <img src="{{ asset('assets/img/icon/hero-icon01.svg') }}" alt="BTC Icon">(BTC)
+                            </li>
+                            <li onclick="document.getElementById('eth-form').submit();" style="cursor: pointer;">
+                                <form id="eth-form" action="{{ route('currency.select') }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="currency_code" value="ETH">
+                                </form>
+                                <img src="{{ asset('assets/img/icon/hero-icon02.svg') }}" alt="ETH Icon">(ETH)
+                            </li>
+                            <li onclick="document.getElementById('xrp-form').submit();" style="cursor: pointer;">
+                                <form id="xrp-form" action="{{ route('currency.select') }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="currency_code" value="XRP">
+                                </form>
+                                <img src="{{ asset('assets/img/icon/hero-icon03.svg') }}" alt="XRP Icon">(XRP)
+                            </li>
+                            <li onclick="document.getElementById('usdt-form').submit();" style="cursor: pointer;">
+                                <form id="usdt-form" action="{{ route('currency.select') }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" name="currency_code" value="USDT">
+                                </form>
+                                <img src="{{ asset('assets/img/icon/hero-icon04.svg') }}" alt="USDT Icon">(USDT)
+                            </li>
                         </ul>
                     </div>
 
