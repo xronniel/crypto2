@@ -131,7 +131,7 @@
         .container-Terms-Conditions h2 {
 
             margin-top: 2rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
 
 
             font-family: "Manrope", sans-serif;
