@@ -3,6 +3,7 @@
     align-items: center;
     gap: 6px;
     cursor: pointer;
+    padding: 40px 0 0 0;
 }
 
 .page-path-line p {

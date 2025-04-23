@@ -175,7 +175,7 @@
                     <div class="xb-item--footer_widget mb-30">
                         <span>Crypto Home</span>
                         <ul class="xb-item--footer_widget-list">
-                            <li><a href="#!">About Us</a></li>
+                            <li><a href="/about-us">About Us</a></li>
                             <li><a href="{{ route('agents.index') }}">Find Agent</a></li>
                             <li><a href="/contact-us">Contact Us</a></li>
                             <li><a href="/TermsConditions">Terms</a> </li>
