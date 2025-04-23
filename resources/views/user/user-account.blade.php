@@ -1044,14 +1044,14 @@ data-user-id="{{ auth()->user()->id }}"
                 {{-- end card   --}}
                 {{ $savedProperties->links() }}
             @else
-                <img src="{{ asset('/assets/img/user/contact-animated.png') }}" alt="">
-                <p class="saved-properties-one">No Contacted Properties</p>
-                <p class="saved-properties-two">You haven't reached out to any properties yet. To inquire about a property,
-                    click the <span>"Send Message"</span> button or any of the contact links like Whatsapp, Email, or
-                    Telephone
-                    on any listing. All your contacted properties will be conveniently accessible here for easy reference
-                    and
-                    follow-up.</p>
+            <img src="{{ asset('/assets/img/user/contact-animated.png') }}" alt="">
+            <p class="saved-properties-one">No Contacted Properties</p>
+            <p class="saved-properties-two">You haven't reached out to any properties yet. To inquire about a property,
+                click the <span>"Send Message"</span> button or any of the contact links like Whatsapp, Email, or
+                Telephone
+                on any listing. All your contacted properties will be conveniently accessible here for easy reference
+                and
+                follow-up.</p>
             @endif
 
 
@@ -1637,6 +1637,15 @@ data-user-id="{{ auth()->user()->id }}"
                 vertical-align: middle;
 
             }
+
+            .contacted-properties, .saved-properties {
+    gap: 17px;
+}
+            .saved-properties-one {
+            line-height: 35px;
+ 
+
+        }
         }
     </style>
 @endsection

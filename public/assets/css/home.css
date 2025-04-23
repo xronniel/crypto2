@@ -948,7 +948,7 @@ text-transform: capitalize;
     transform: scale(1);
     width: 65px;
     position: absolute;
-    z-index: 9999;
+    z-index: 2;
     bottom: 94px;
     right: 0;
 }
