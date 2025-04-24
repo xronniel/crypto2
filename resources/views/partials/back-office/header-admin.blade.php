@@ -90,11 +90,17 @@
         <div class="navcontainer">
             <nav class="nav" style="z-index: 1;">
                 <div class="nav-upper-options">
-                    <div class="nav-option-home option1">
+                    {{-- <div class="nav-option-home option1">
                         <a href="{{ route('admin.homepage.index') }}">
                             <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/dashboard.png') }}" class="nav-img"
                                 alt="dashboard">
                             <h3 style="margin: 0; font-size: 18px;"> Homepage CMS</h3>
+                        </a>
+                    </div> --}}
+                    <div class="option2 nav-option">
+                        <a href="{{ route('admin.homepage.index') }}">
+                            <img  loading="lazy"  src="{{ asset('assets/img/back-office-img/user.png') }}" class="nav-img" alt="articles">
+                            Homepage CMS
                         </a>
                     </div>
                     <div class="option2 nav-option">
