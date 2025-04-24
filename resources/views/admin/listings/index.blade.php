@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="report-container pt-2">
-    <h1 class="mb-4">Listings f</h1>
+    <h1 class="mb-4">Property Listing</h1>
     <a href="{{ route('admin.listings.create') }}" class="btn btn-primary mb-3">Add New Listing</a>
 
     @if(session('success'))
