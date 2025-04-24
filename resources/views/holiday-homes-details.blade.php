@@ -171,7 +171,7 @@
                                     @endphp
                     
                                     <p class="grid-left-side-price-div-two">
-                                        {{ $holidayProperty->price_on_application ? 'Price on Application' : formatNumber($holidayProperty->price) }}<span>AED</span>
+                                        {{ $holidayProperty->price_on_application ? 'Price on Application' : formatNumber($holidayProperty->getConvertedPrice()['converted_price']) }}<span>{{ $holidayProperty->getConvertedPrice()['currency_code'] }}</span>
                                     </p>
                                 </div>
                                 <h4 class="grid-left-side-price-div-four">
@@ -536,8 +536,8 @@
                         </div>
                         <div class="xb-item--cards-property">
                             <p class="">APARTMENT</p>
-                            <p class="cards-property-title-two">{{ $property->price }} BTC</p>
-                            <p class="cards-property-title-three">{{ $property->price / 10 }} ETH / month</p>
+                            {{-- <p class="cards-property-title-two">{{ $property->price }} BTC</p> --}}
+                            <p class="cards-property-title-three">{{ $property->getConvertedPrice()['converted_price'] }} {{ $property->getConvertedPrice()['currency_code'] }} / month</p>
                             <p class="cards-property-title-four">{{ $property->price }} AED / month</p>
                             <p class="cards-property-title-five">{{ $property->property_name }}</p>
                             <p class="cards-property-title-five">{{ $property->community }}, {{ $property->city }}</p>

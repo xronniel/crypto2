@@ -199,7 +199,7 @@
                                     @endphp
     
                                     <p class="grid-left-side-price-div-two">
-                                        {{ formatNumber($property->price) }}<span>AED</span></p>
+                                        {{ $property->getConvertedPrice()['converted_price'] }}<span>{{ $property->getConvertedPrice()['currency_code'] }}</span></p>
                                 </div>
                                 <h4 class="grid-left-side-price-div-four">/Month</h4>
                             </div>
@@ -692,8 +692,8 @@
                             </div>
                             <div class="xb-item--cards-property">
                                 <p class="">{{ strtoupper($property->unit_type ?? 'N/A') }}</p>
-                                <p class="cards-property-title-two">{{ number_format($property->price / 155000) }} BTC</p>
-                                <p class="cards-property-title-three">{{ number_format($property->price / 9500) }} ETH /
+                                {{-- <p class="cards-property-title-two">{{ number_format($property->price / 155000) }} BTC</p> --}}
+                                <p class="cards-property-title-three">{{ number_format($property->getConvertedPrice()['converted_price']) }} {{ $property->getConvertedPrice()['currency_code'] }} /
                                     month</p>
                                 <p class="cards-property-title-four">{{ number_format($property->price, 0) }} AED</p>
                                 <p class="cards-property-title-five">{{ $property->property_name }},
