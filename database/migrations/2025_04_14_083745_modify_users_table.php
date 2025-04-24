@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -12,9 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         // Step 1: Rename the column
-        Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('name', 'first_name');
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->renameColumn('name', 'first_name');
+        // });
+
+        DB::statement('ALTER TABLE users CHANGE name first_name VARCHAR(255)');
 
         // Step 2: Add new columns
         Schema::table('users', function (Blueprint $table) {
@@ -37,8 +40,9 @@ return new class extends Migration
         });
 
         // Step 2: Rename 'first_name' back to 'name'
-        Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('first_name', 'name');
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->renameColumn('first_name', 'name');
+        // });
+        DB::statement('ALTER TABLE users CHANGE first_name name VARCHAR(255)');
     }
 };
