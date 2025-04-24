@@ -39,10 +39,10 @@ class MortgageLandingPageController extends Controller
             'trust_section_title' => 'nullable|string|max:255',
             'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'step_section_title' => 'nullable|string|max:255',
-            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp',
             'trust_items.*.title' => 'nullable|string|max:255',
             'trust_items.*.description' => 'nullable|string|max:255',
-            'step_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'step_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp',
             'step_items.*.title' => 'nullable|string|max:255',
             'step_items.*.description' => 'nullable|string|max:255',
         ]);
@@ -87,7 +87,7 @@ class MortgageLandingPageController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Mortgage landing page created successfully!');
+        return redirect()->route('admin.mortgage-landing-page.edit', $page->id)->with('success', 'Mortgage landing page created successfully!');
     }
 
     public function edit(MortgageLandingPage $page)
@@ -100,12 +100,12 @@ class MortgageLandingPageController extends Controller
         $request->validate([
             'hero_title' => 'required|string|max:255',
             'trust_section_title' => 'nullable|string|max:255',
-            'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'trust_section_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'step_section_title' => 'nullable|string|max:255',
-            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'trust_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp',
             'trust_items.*.title' => 'nullable|string|max:255',
             'trust_items.*.description' => 'nullable|string|max:255',
-            'step_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp|max:2048',
+            'step_items.*.icon' => 'nullable|file|image|mimes:jpg,jpeg,png,svg,webp',
             'step_items.*.title' => 'nullable|string|max:255',
             'step_items.*.description' => 'nullable|string|max:255',
         ]);

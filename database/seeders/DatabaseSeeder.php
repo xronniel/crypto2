@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CountriesSeeder::class);
         $this->call(EmiratesSeeder::class);
         $this->call(PhoneCodesSeeder::class);
+        $this->call(HomepageContentSeeder::class);
+        $this->call(MortgageLandingPageSeeder::class);
     }
 }

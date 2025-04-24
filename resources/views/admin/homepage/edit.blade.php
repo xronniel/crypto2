@@ -4,6 +4,17 @@
 <div class="report-container pt-2">
     <h1 class="mb-4">Edit Home Page</h1>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops! Something went wrong.</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     {{-- Form to Update Homepage Content --}}
     <form action="{{ route('admin.homepage.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
