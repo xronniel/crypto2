@@ -10,6 +10,7 @@ class Listing extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'ad_type',
         'unit_type',
@@ -76,6 +77,7 @@ class Listing extends Model
         'feature_description',
     ];
 
+    protected $appends = ['converted_price', 'currency_code'];
 
     public function facilities()
     {
@@ -167,6 +169,16 @@ class Listing extends Model
     public function contactedByUsers()
     {
         return $this->morphMany(UserContactedProperty::class, 'propertyable');
+    }
+
+    public function getConvertedPriceAttribute()
+    {
+        return $this->getConvertedPrice()['converted_price'];
+    }
+
+    public function getCurrencyCodeAttribute()
+    {
+        return $this->getConvertedPrice()['currency_code'];
     }
 
 }

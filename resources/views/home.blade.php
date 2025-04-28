@@ -46,7 +46,7 @@
 
                 <form class="desktop-form-home" action="{{ route('properties.index') }}" method="GET">
                     @csrf
-
+                    <input type="hidden" name="current_currency_code" id="curentCurrencyCode" value="{{ $currencyCode }}">
                     <input type="hidden" name="filter_type" id="filterTypeInput" value="rent"> <!-- Default value -->
                     <input type="hidden" name="no_of_rooms" id="selectedRooms" value=""> <!-- Selected rooms -->
                     <input type="hidden" name="no_of_bathroom" id="selectedBathrooms" value="">
@@ -112,7 +112,6 @@
                         </div>
                     </div>
                 </form>
-
 
 
                 <form class="mobile-form-home" action="{{ route('properties.index') }}" method="GET">
@@ -324,7 +323,7 @@
                                         <img class="ul-img" src="assets/img/icon/hero-icon01.svg" alt="">Bitcoin
                                     </span>
                                     <span class="ul-span-green">
-                                        $ 83,215.40
+                                        AED {{ number_format($cryptoRates['BTC'], 2) }}
                                     </span>
                                 </li>
                                 <li class="ul-li-two">
@@ -332,7 +331,7 @@
                                         <img class="ul-img" src="assets/img/icon/hero-icon02.svg" alt="">Ethereum
                                     </span>
                                     <span class="ul-span-green">
-                                        $ 83,215.40
+                                        AED {{ number_format($cryptoRates['ETH'], 2) }}
                                     </span>
                                 </li>
                                 <li class="ul-li-two">
@@ -340,7 +339,7 @@
                                         <img class="ul-img" src="assets/img/icon/hero-icon03.svg" alt="">Litecoin
                                     </span>
                                     <span class="ul-span-green">
-                                        $ 83,215.40
+                                        AED {{ number_format($cryptoRates['LTC'], 2) }}
                                     </span>
                                 </li>
                                 <li class="ul-li-two">
@@ -349,7 +348,7 @@
                                             alt="">Ripple
                                     </span>
                                     <span class="ul-span-green">
-                                        $ 83,215.40
+                                        AED {{ number_format($cryptoRates['XRP'], 2) }}
                                     </span>
                                 </li>
                             </ul>
@@ -1061,13 +1060,15 @@
             let currentPage = 1;
             let totalPages = 1;
 
+            let currencyCode = document.getElementById("curentCurrencyCode").value;
+
             function loadListings(communityName, page = 1) {
                 if (!communityName) {
                     console.error("Community is undefined or missing.");
                     return;
                 }
 
-                fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}`)
+                fetch(`/api/featured-listings?community=${encodeURIComponent(communityName)}&page=${page}&currency=${currencyCode}`)
                     .then(response => response.json())
                     .then(responseData => {
                         let propertiesContainer = document.getElementById("featured-properties");
@@ -1082,7 +1083,7 @@
                             propertiesContainer.innerHTML = "<p>No properties found.</p>";
                             return;
                         }
-
+                        console.log("Listings:", listings);
                         // Ensure default values in case any listing is missing data
                         let listing1 = listings[0] || {};
                         let listing2 = listings[1] || {};
@@ -1124,7 +1125,9 @@
                 </div>
                 <div class="token-distribut-location-span-two">
                     <span class="token-distribut-location-span-two-one">Launch price:</span>
-                    <span class="token-distribut-location-span-two-two">${listing1.price || "N/A"} AED</span>
+                    <span class="token-distribut-location-span-two-two">
+                        ${listing1.current_converted_price || "N/A"} ${listing1.current_currency_code || "AED"}
+                        </span>
                 </div>
                 <a class="token-location-button" ${whatsappLink1}>
                     <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
@@ -1152,7 +1155,9 @@
                                     </div>
                                     <div class="token-distribut-location-span-two">
                                         <span class="token-distribut-location-span-two-one">Launch price:</span>
-                                        <span class="token-distribut-location-span-two-two">${listing2.price || "N/A"} AED</span>
+                                        <span class="token-distribut-location-span-two-two">
+                                            ${listing2.current_converted_price || "N/A"} ${listing2.current_currency_code || "AED"}
+                                            </span>
                                     </div>
                                     <a class="token-location-button" ${whatsappLink2}>
                                         <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
@@ -1178,7 +1183,9 @@
                                 </div>
                                 <div class="token-distribut-location-span-two">
                                     <span class="token-distribut-location-span-two-one">Launch price:</span>
-                                    <span class="token-distribut-location-span-two-two">${listing3.price || "N/A"} AED</span>
+                                    <span class="token-distribut-location-span-two-two">
+                                        ${listing3.current_converted_price || "N/A"} ${listing3.current_currency_code || "AED"}
+                                        </span>
                                 </div>
                                 <a class="token-location-button" ${whatsappLink3}>
                                     <img class="WhatsApp-img" src="assets/img/home/WhatsApp.png" alt="">
