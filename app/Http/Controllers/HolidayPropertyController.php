@@ -37,9 +37,12 @@ class HolidayPropertyController extends Controller
             ->orderBy('city', 'asc')
             ->pluck('city');
 
-        if (!$request->filled('emirate')) {
-            return redirect()->route('holiday-properties.index', ['emirate' => $emirates->first()]);
-        }
+            if (!$request->filled('emirate')) {
+                return redirect()->route('holiday-properties.index', array_merge(
+                    ['emirate' => $emirates->first()], // Add emirate if not filled
+                    $request->except('page') // Include all other query parameters except 'page'
+                ));
+            }
 
         $selectedEmirate = $request->filled('emirate') ? $request->emirate : $emirates->first();
 
