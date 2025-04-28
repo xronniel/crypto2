@@ -86,7 +86,7 @@ class HolidayPropertyController extends Controller
             $q->where('offering_type', 'RR');
         });
 
-        $query->when(request('filter_type') == 'Sale', function ($q) {
+        $query->when(request('filter_type') == 'buy', function ($q) {
             $q->where('offering_type', 'SR');
         });
 

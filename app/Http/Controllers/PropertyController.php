@@ -287,7 +287,7 @@ class PropertyController extends Controller
                     'count' => $item->count,
                 ];
             });
-         
+
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches', 'request', 'emirateCounts'));
     }
 

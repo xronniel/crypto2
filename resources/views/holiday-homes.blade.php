@@ -56,7 +56,13 @@
 
 
             <h2 class="page-line-title">
-                Exclusive Holiday Homes in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }} Available for Cryptocurrency Purchase
+                Exclusive Holiday Homes in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }} Available for Cryptocurrency
+                @if (request()->query('filter_type') === 'rent')
+                    Rent
+                @else (request()->query('filter_type') === 'buy')
+                    Purchase
+                @endif
+                
             </h2>
 
             <div class="page-line-filter-box">
@@ -359,7 +365,7 @@ data-user-id="{{ auth()->user()->id }}"
                                     <li>
                                         <a href="javascript:void(0);"
                                            onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
-                                               'filter_type' => $recent['ad_type'],
+                                               'filter_type' => $recent['ad_type'] === 'sale' ? 'buy' : 'rent',
                                                'search' => $recent['name']
                                            ])) }}'">
                                             {{ $recent['name'] }}
@@ -371,7 +377,7 @@ data-user-id="{{ auth()->user()->id }}"
                                     <li>
                                         <a href="javascript:void(0);"
                                            onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
-                                               'filter_type' => $recent['ad_type'],
+                                               'filter_type' => $recent['ad_type'] === 'sale' ? 'buy' : 'rent',
                                                'search' => $recent['name']
                                            ])) }}'">
                                             {{ $recent['name'] }}
@@ -383,7 +389,7 @@ data-user-id="{{ auth()->user()->id }}"
                                     <li>
                                         <a href="javascript:void(0);"
                                            onclick="window.location.href='{{ route('holiday-properties.index', array_merge(request()->except('page'), [
-                                               'filter_type' => $recent['ad_type'],
+                                               'filter_type' => $recent['ad_type'] === 'sale' ? 'buy' : 'rent',
                                                'search' => $recent['title']
                                            ])) }}'">
                                             {{ $recent['title'] }}

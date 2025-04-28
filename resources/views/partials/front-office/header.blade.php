@@ -33,7 +33,7 @@
                             </li>
                             <li>
                                 <a class="scrollspy-btn"
-                                    href="{{ route('properties.index', ['type' => 'commercial']) }}">
+                                    href="{{ route('properties.index', ['type' => 'commercial', 'filter_type' => 'rent']) }}">
                                     <span>Commercial</span>
                                 </a>
                             </li>

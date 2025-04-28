@@ -15,7 +15,7 @@
                 @elseif (request()->is('properties') && request()->query('type') === 'commercial')
                     <h2 class="breadcrumb__title">Commercial Buildings</h2>
                 @else
-                    <h2 class="breadcrumb__title">Properties for Sale in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</h2>
+                    <h2 class="breadcrumb__title">Properties for {{ request()->query('filter_type') == 'buy' ? 'Sale' : 'Rent' }} in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</h2>
                 @endif
                 <ul style="    flex-direction: column;" class="bread-crumb clearfix ul_li_center">
                     <li class="breadcrumb-item"><a href="#">Items Found</a></li>
@@ -64,11 +64,36 @@
             <div onclick="window.location.href='/'" class="page-path-line">
                 <img src="{{ asset('assets/img/propertydetails/arrow-left.png') }}" alt="home">
                 <p>Home</p>
-                <p class="active-path-line">/ properties for sale in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}</p>
+                <p class="active-path-line">
+                    / properties 
+                    @if (request()->query('filter_type') === 'rent')
+                        for rent
+                    @elseif (request()->query('filter_type') === 'buy')
+                        for sale
+                    @elseif (request()->query('filter_type') === 'new_properties')
+                        New Properties
+                    @elseif (request()->query('filter_type') === 'commercial')
+                        commercial properties
+                    @else
+                        for sale
+                    @endif
+                    in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}
+                </p>
             </div>
 
             <h2 class="page-line-title">
-                Buy Properties in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}
+                @if (request()->query('filter_type') === 'rent')
+                    Rent
+                @elseif (request()->query('filter_type') === 'buy')
+                Buy
+                @elseif (request()->query('filter_type') === 'new_projects')
+                    New 
+                @elseif (request()->query('filter_type') === 'commercial')
+                    Commercial
+                @else
+                    Rent
+                @endif
+                    Properties in {{ request()->query('emirate') ? request()->query('emirate') : 'UAE' }}
             </h2>
 
             <div class="page-line-filter-box">
@@ -372,7 +397,7 @@
                                 @foreach ($emirates as $emirate)
                                     <li>
                                         <a href="javascript:void(0);"
-                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => 'sale', 'emirate' => $emirate]) }}'">
+                                            onclick="window.location.href='{{ route('properties.index', ['filter_type' => 'buy', 'emirate' => $emirate]) }}'">
                                             Properties for sale in {{ $emirate }}
                                         </a>
                                     </li>
@@ -384,7 +409,7 @@
                                     <li>
                                         <a href="javascript:void(0);"
                                            onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
-                                               'filter_type' => $recent['ad_type'],
+                                               'filter_type' => $recent['ad_type'] === 'sale' ? 'buy' : 'rent',
                                                'search' => $recent['name']
                                            ])) }}'">
                                             {{ $recent['name'] }}
@@ -396,7 +421,7 @@
                                     <li>
                                         <a href="javascript:void(0);"
                                            onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
-                                               'filter_type' => $recent['ad_type'],
+                                               'filter_type' => $recent['ad_type']  === 'sale' ? 'buy' : 'rent',
                                                'search' => $recent['name']
                                            ])) }}'">
                                             {{ $recent['name'] }}
@@ -408,7 +433,7 @@
                                     <li>
                                         <a href="javascript:void(0);"
                                            onclick="window.location.href='{{ route('properties.index', array_merge(request()->except('page'), [
-                                               'filter_type' => $recent['ad_type'],
+                                               'filter_type' => $recent['ad_type']  === 'sale' ? 'buy' : 'rent',
                                                'search' => $recent['title']
                                            ])) }}'">
                                             {{ $recent['title'] }}
