@@ -2,7 +2,7 @@
 @section('content')
     {{-- {{ $property }} --}}
     <section class="blog blog-padding">
-        <x-property-filter-two :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
+        <x-property-filter-two :route="route('properties.index')"  :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
     </section>
     {{-- {{ $property }} --}}
 

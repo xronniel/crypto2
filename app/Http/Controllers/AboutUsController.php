@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessage;
 use Illuminate\Http\Request;
 use App\Models\AboutUs;
 use App\Models\OurTeam;
 use App\Models\OurCommitment;
 use App\Models\CryptoHomeInFigure;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 class AboutUsController extends Controller
 {
@@ -168,6 +171,37 @@ class AboutUsController extends Controller
         $cryptoHomeInFigures = CryptoHomeInFigure::all();
 
         return view('aboutUs', compact('aboutUs', 'ourTeam', 'ourCommitment', 'cryptoHomeInFigures'));
+    }
+
+    public function sendMessage(Request $request)
+    {
+        // Validate the incoming data
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:255',
+            'message' => 'nullable|string',
+        ]);
+    
+        // Send the email
+        $data = [
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+        ];
+    
+        // Get all users with the Admin role
+        $admins = User::whereHas('roles', function ($query) {
+            $query->where('name', 'Admin');
+        })->get();
+
+        // Send the email to each admin
+        foreach ($admins as $admin) {
+            Mail::to($admin->email)->send(new ContactMessage($data));
+        }
+        // Redirect or return response
+        return back()->with('success', 'Your message has been sent!');
     }
 
 }
