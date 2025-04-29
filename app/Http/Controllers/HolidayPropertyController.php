@@ -10,6 +10,7 @@ use App\Models\HolidayPropertyAmenity;
 use App\Models\UserSavedProperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 class HolidayPropertyController extends Controller
@@ -86,7 +87,7 @@ class HolidayPropertyController extends Controller
             $q->where('offering_type', 'RR');
         });
 
-        $query->when(request('filter_type') == 'Sale', function ($q) {
+        $query->when(request('filter_type') == 'buy', function ($q) {
             $q->where('offering_type', 'SR');
         });
 
@@ -200,9 +201,9 @@ class HolidayPropertyController extends Controller
         $amenities = HolidayPropertyAmenity::all();
         $plotAreaRange = [];
 
-
+        $route = route('holiday-properties.index');
         //$holidayProperties = HolidayProperty::with('photos')->latest()->paginate(10);
-        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings', 'plotAreaRange', 'emirates'));
+        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings', 'plotAreaRange', 'emirates', 'route'));
     }
     
     /**
@@ -318,7 +319,12 @@ class HolidayPropertyController extends Controller
             ->latest()
             ->take(5)
             ->get();
-        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange', 'holidayPropertiesSameArea'));
+
+        $currencyCode = auth()->check() && auth()->user()->currency_code 
+            ? auth()->user()->currency_code 
+            : Cookie::get('currency_code', 'AED');
+
+        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange', 'holidayPropertiesSameArea', 'currencyCode'));
     }
 
     public function edit(HolidayProperty $holidayProperty)

@@ -2,7 +2,7 @@
 @section('content')
     {{-- {{ $property }} --}}
     <section class="blog blog-padding">
-        <x-property-filter-two :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
+        <x-property-filter-two :route="route('properties.index')"  :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
     </section>
     {{-- {{ $property }} --}}
 
@@ -111,18 +111,14 @@
                             <img src="{{ asset('assets/img/agent/fea-2.gif') }}" alt="propertydetails">
                         </div>
                         <h2>Crypto Gurus</h2>
-                        <p>Our agents speak fluent Bitcoin, Ethereum, and more. They know the ins and outs of digital
-                            currencies
-                            and can guide you through seamless transactions.</p>
+                        <p>It's a new frontier. Our agents stay updated on all the legal twists and turns, ensuring your purchase is smooth and legit.​</p>
                     </div>
                     <div class="agent-left-box">
                         <div class="agent-blue">
                             <img src="{{ asset('assets/img/agent/fea-3.gif') }}" alt="propertydetails">
                         </div>
                         <h2>Crypto Gurus</h2>
-                        <p>Our agents speak fluent Bitcoin, Ethereum, and more. They know the ins and outs of digital
-                            currencies
-                            and can guide you through seamless transactions.</p>
+                        <p>Looking for properties that welcome crypto payments? Our agents have the inside scoop on listings that fit the bill.</p>
                     </div>
                 </div>
 

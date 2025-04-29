@@ -102,8 +102,9 @@ class AgentController extends Controller
             'steps' => $steps,
         ];
         $faqs = Faq::all();
+        $route = route('properties.index');
 
-        return view('agent-dashboard', compact('agents', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'community', 'communities'));
+        return view('agent-dashboard', compact('agents', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'noOfRooms', 'noOfBathrooms', 'completionStatus', 'amenities', 'priceRange', 'plotAreaRange', 'faqs', 'community', 'communities', 'route', 'request'));
     }
 
     /**

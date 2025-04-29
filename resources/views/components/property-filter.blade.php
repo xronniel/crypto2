@@ -1,6 +1,36 @@
 <div class="container">
     <form action="{{ route('properties.index') }}" method="GET">
         @csrf
+
+
+    {{-- Insert hidden fields for current request, excluding 'page' and fields already present manually --}}
+    @php
+    $excluded = [
+        'page', 
+        'search', 
+        'filter_type', 
+        'property_type', 
+        'min_price', 
+        'max_price', 
+        'min_area', 
+        'max_area', 
+        'search-filters', 
+        'furnishing', 
+        'completion', 
+        'amenities'
+    ];
+@endphp
+
+@foreach(request()->except($excluded) as $key => $value)
+    @if(is_array($value))
+        @foreach($value as $item)
+            <input type="hidden" name="{{ $key }}[]" value="{{ $item }}">
+        @endforeach
+    @else
+        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+    @endif
+@endforeach
+
         <div class="property-filter-box">
 
             <div class="property-filter property-filter-header">

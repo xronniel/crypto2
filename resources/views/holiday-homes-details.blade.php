@@ -2,7 +2,7 @@
 @section('content')
     {{-- {{ $property }} --}}
     <section class="blog blog-padding">
-        <x-property-filter-two :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
+        <x-property-filter-two :route="route('holiday-properties.index')" :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
     </section>
     {{-- {{ $property }} --}}
     <div style="background: #0B0F28;
@@ -137,7 +137,7 @@
                         </h3>
                         
                         <h3 class="grid-left-side-three">
-                            {!! nl2br(e($holidayProperty->description_en)) !!}
+                            escription_en  {!! nl2br(e($holidayProperty->description_en)) !!}
                         </h3>
                     </div>
 
@@ -217,19 +217,60 @@
                     
                         <div class="Converter-div-box hide-mobile">
                             <div style="width: 35%;" class="Converter-div-input">
-                                <div style="width: 100%;" class="Converter-select-input">
-                                    <select style="width: 100%;" name="crypto" id="crypto">
-                                        <option value="Bitcoin">Bitcoin <span class="Converter-select-span">BTC</span></option>
-                                    </select>
-                                    <img class="Converter-img-select" src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="">
-                                    <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}" alt="icon">
-                                </div>
+                                <form 
+                                style='width: 100%;'
+                                id="cryptoForm" action="{{ route('currency.select') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="currency_code" id="cryptoSymbol">
+                                    @php
+                                        $currencies = [
+                                            'BTC' => ['name' => 'Bitcoin', 'img' => asset('assets/img/home/frame-7.svg.png')],
+                                            'ETH' => ['name' => 'Ethereum', 'img' => asset('assets/img/propertydetails/USDT2.png')],
+                                            'USDT' => ['name' => 'USDT', 'img' => asset('assets/img/propertydetails/USDT3.png')],
+                                            'XRP' => ['name' => 'Ripple', 'img' => asset('assets/img/propertydetails/USDT.png')],
+                                        ];
+
+                                        $selectedCurrency = $currencies[$currencyCode] ?? $currencies['BTC'];
+                                    @endphp
+
+                                    <div class="custom-select" onclick="toggleDropdown()">
+                                        <div class="selected-option">
+                                            <img src="{{ $selectedCurrency['img'] }}" alt="{{ $selectedCurrency['name'] }}" class="crypto-icon">
+                                            <p class="drop-item-ctypto">{{ $selectedCurrency['name'] }} <span>{{ $currencyCode }}</span></p>
+                                        </div>
+                                        <div class="arrow-down"></div>
+                                    </div>
+                            
+                                    <div id="cryptoDropdown" class="dropdown-options">
+                                        <div class="dropdown-item" onclick="selectCrypto('Bitcoin', 'BTC', '{{ asset('assets/img/home/frame-7.svg.png') }}')">
+                                            <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="Bitcoin" class="crypto-icon">
+                                            <p class="drop-item-ctypto">Bitcoin <span>BTC</span></p>
+                                        </div>
+                                        <div class="dropdown-item" onclick="selectCrypto('Ethereum', 'ETH', '{{ asset('assets/img/propertydetails/USDT2.png') }}')">
+                                            <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="Ethereum" class="crypto-icon">
+                                            <p class="drop-item-ctypto">Ethereum <span>ETH</span></p>
+                                        </div>
+                                        <div class="dropdown-item" onclick="selectCrypto('USDT', 'USDT', '{{ asset('assets/img/propertydetails/USDT3.png') }}')">
+                                            <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="USDT" class="crypto-icon">
+                                            <p class="drop-item-ctypto">USDT <span>USDT</span></p>
+                                        </div>
+                                        <div class="dropdown-item" onclick="selectCrypto('Ripple', 'XRP', '{{ asset('assets/img/propertydetails/USDT.png') }}')">
+                                            <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="Ripple" class="crypto-icon">
+                                            <p class="drop-item-ctypto">Ripple <span>XRP</span></p>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <div class="icon-box-Converter">
-                                <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="icon">
-                                <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="icon">
-                                <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="icon">
-                                <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="icon">
+                                <form id="cryptoForm" action="{{ route('currency.select') }}" method="POST" style="display:none;">
+                                    @csrf
+                                    <input type="hidden" name="currency_code" id="cryptoSymbol">
+                                </form>
+                            
+                                <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="Bitcoin" class="crypto-icon-click" data-symbol="BTC">
+                                <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="Ethereum" class="crypto-icon-click" data-symbol="ETH">
+                                <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="USDT" class="crypto-icon-click" data-symbol="USDT">
+                                <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="Ripple" class="crypto-icon-click" data-symbol="XRP">
                             </div>
                         </div>
                     
@@ -736,6 +777,47 @@ document.addEventListener("DOMContentLoaded", function() {
                 container.querySelectorAll("p").forEach(p => p.remove());
             }
         });
+
+        // Selecting Currency
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('cryptoDropdown');
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        }
+    
+        function selectCrypto(name, symbol, imgSrc) {
+            const selected = document.querySelector('.selected-option');
+            selected.innerHTML = `
+                <img src="{{ asset('') }}${imgSrc}" alt="${name}" class="crypto-icon">
+                <p class="drop-item-ctypto">${name} <span>${symbol}</span></p>
+            `;
+            document.getElementById('cryptoDropdown').style.display = 'none';
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('cryptoDropdown');
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function selectCrypto(name, symbol, imgSrc) {
+            const selected = document.querySelector('.selected-option');
+            selected.innerHTML = `
+                <img src="${imgSrc}" alt="${name}" class="crypto-icon">
+                <p class="drop-item-ctypto">${name} <span>${symbol}</span></p>
+            `;
+            
+            document.getElementById('cryptoSymbol').value = symbol;
+            document.getElementById('cryptoForm').submit(); 
+        }
+
+        document.querySelectorAll('.crypto-icon-click').forEach(img => {
+            img.addEventListener('click', function() {
+                const symbol = this.dataset.symbol;
+
+                document.getElementById('cryptoSymbol').value = symbol;
+                document.getElementById('cryptoForm').submit();
+            });
+        });
     </script>
 
     <style>
@@ -767,8 +849,6 @@ document.addEventListener("DOMContentLoaded", function() {
             padding: 10px 8px;
             align-content: center;
         }
-
-
 
         @media (max-width: 986px) {
 
@@ -820,10 +900,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 padding: 10px 8px;
                 align-content: center;
             }
-
-
-
-
         }
+
+   
     </style>
+
 @endsection

@@ -212,21 +212,23 @@
             <div class="row">
                 <div class="col-lg-4">
                     @php
-                        $firstMember = $ourTeam[0];
+                        $firstMember = $ourTeam[0] ?? null;
                     @endphp
-                    <div onclick="showModal('{{ $firstMember->name }}', '{{ $firstMember->role }}', '{{ $firstMember->email }}', '{{ asset('storage/' . $firstMember->image) }}', {{ $firstMember->mobile }})"
-                        class="xb-team xb-team1 text-center">
-                        <div class="xb-item--img2 pos-rel">
-                            <img src="{{ asset('storage/' . $firstMember['image']) }}" alt="{{ $firstMember['name'] }}">
-                            <div class="overlay">
-                                <span class="overlay-text">Read More</span>
+                    @if ($firstMember)
+                        <div onclick="showModal('{{ $firstMember->name }}', '{{ $firstMember->role }}', '{{ $firstMember->email }}', '{{ asset('storage/' . $firstMember->image) }}', {{ $firstMember->mobile }})"
+                            class="xb-team xb-team1 text-center">
+                            <div class="xb-item--img2 pos-rel">
+                                <img src="{{ asset('storage/' . $firstMember['image']) }}" alt="{{ $firstMember['name'] }}">
+                                <div class="overlay">
+                                    <span class="overlay-text">Read More</span>
+                                </div>
+                            </div>
+                            <div class="xb-item--holder">
+                                <h2 class="xb-item--title">{{ $firstMember['name'] }}</h2>
+                                <span class="xb-item--sub-title">{{ $firstMember['role'] }}</span>
                             </div>
                         </div>
-                        <div class="xb-item--holder">
-                            <h2 class="xb-item--title">{{ $firstMember['name'] }}</h2>
-                            <span class="xb-item--sub-title">{{ $firstMember['role'] }}</span>
-                        </div>
-                    </div>
+                    @endif
                 </div>
                 {{-- childs --}}
                 <div class="col-lg-8 ">
@@ -236,7 +238,8 @@
 
                                 <div class="xb-team text-center">
                                     <div onclick="showModal('{{ $member->name }}', '{{ $member->role }}', '{{ $member->email }}', '{{ asset('storage/' . $member->image) }}', '{{ $member->mobile }}')"
-                                        class="xb-item--img2">
+                                        class="xb-item--img2 xb-item--img xb-item--img-childs pos-rel">
+                                        
                                         <img src="{{ asset('storage/' . $member['image']) }}"
                                             alt="{{ $member['name'] }}">
                                         <div class="overlay">
@@ -259,6 +262,7 @@
         </div>
     </section>
 
+
     {{-- footer --}}
     <section class="hero-section-about-us2 hero-about">
         {{-- <img src="assets/img/about/footer-bg.png" alt="Footer Background" class="hero-img2"> --}}
@@ -272,45 +276,43 @@
             <div class="glass-form xb-inner">
                 <img src="/assets/img/about/footer/footer-2.png" alt="Footer Icon" class="footer-icon2" />
               <h3 class=" mt-3">Start Your Crypto Property Journey Today.</h3>
-              <form class="row g-3"> <!-- g-3 for spacing -->
+              <form class="row g-3" action="{{ route('send.message') }}" method="POST">
+                @csrf
                 <div class="col-md-6">
                     <div class="xb-item--field-about">
                         <span><img src="{{ asset('assets/img/footer/contact-user.svg') }}" alt="User Icon"></span>
-                        <input type="text" name="message" placeholder="Full Name" required>
+                        <input type="text" name="full_name" placeholder="Full Name" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="xb-item--field-about">
                         <span><img src="{{ asset('assets/img/footer/contact-email.svg') }}" alt="Email Icon"></span>
-                        <input type="text" name="message" placeholder="Email" required>
+                        <input type="text" name="email" placeholder="Email" required>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="xb-item--field-about">
                         <span><img src="{{ asset('assets/img/footer/contact-call.svg') }}" alt="Email Icon"></span>
-                        <input type="text" name="message" placeholder="Phone" required>
+                        <input type="text" name="phone" placeholder="Phone" required>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="xb-item--field-about-tx">
                         <span><img src="{{ asset('assets/img/footer/contact-massage.svg') }}" alt="Message Icon"></span>
-                        <textarea class="form-control" placeholder="Your Message" rows="4"></textarea>
+                        <textarea name="message" class="form-control" placeholder="Your Message" rows="4"></textarea>
                     </div>
                 </div>
                 <div class="col-12 aboutUs-footer-button1 mt-4">
-                    <a class="them3-btn">
+                    <button type="submit" class="them3-btn">
                         <span class="btn_label" data-text="Send Message">Send Message</span>
                         <span class="btn_icon">
-                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z"
-                                    fill="white"></path>
+                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.434 0.999999C14.434 0.447714 13.9862 -8.61581e-07 13.434 -1.11446e-06L4.43396 -3.13672e-07C3.88168 -6.50847e-07 3.43396 0.447715 3.43396 0.999999C3.43396 1.55228 3.88168 2 4.43396 2L12.434 2L12.434 10C12.434 10.5523 12.8817 11 13.434 11C13.9862 11 14.434 10.5523 14.434 10L14.434 0.999999ZM2.14107 13.7071L14.1411 1.70711L12.7269 0.292893L0.726853 12.2929L2.14107 13.7071Z" fill="white"></path>
                             </svg>
                         </span>
-                    </a>
+                    </button>
                 </div>
-              </form>
+            </form>
             </div>
           
             <!-- Right: Image Section -->
@@ -430,4 +432,27 @@
         });
     </script>
     </div>
+
+
+
+
+
+    <style>
+        .xb-item--img-childs {
+    width: 100%;
+    height: 252px;
+    overflow: hidden;
+    border-radius: 12px; 
+    position: relative;
+}
+
+.xb-item--img-childs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 3%;
+    display: block;
+}
+
+    </style>
 @endsection

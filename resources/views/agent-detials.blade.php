@@ -765,7 +765,9 @@
     }
 
 
-
+    .grid-left-side {
+    align-items: center;
+}
     .grid-left-side-one {
 
         align-items: center;

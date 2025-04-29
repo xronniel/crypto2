@@ -114,14 +114,22 @@
 
 
                         @if (request()->is('/') || request()->is('news*') || request()->is('articles*'))
-                            <div class="testimonial-wrap bg_img"
+                            {{-- <div class="testimonial-wrap bg_img"
                                 data-background="{{ asset('assets/img/bg/tm_bg.png') }}">
                                 <div class="testimonial-slider swiper-container">
                                     <div class="swiper-wrapper">
                                     </div>
                                     <div class="swiper-pagination"></div>
                                 </div>
-                            </div>
+                            </div> --}}
+                            <div class="testimonial-wrap bg_img bg-one"
+                            style="
+                            background-position: 85% 0; 
+                            background-repeat: no-repeat; 
+                            background-size: cover; 
+                        "
+                            data-background="{{ asset('assets/img/footer/footer-img-one.jpeg') }}">
+                        </div>
                         @elseif (request()->is('properties') || request()->is('holiday-properties'))
                             <div class="testimonial-wrap bg_img bg-one"
                                 style="
@@ -153,14 +161,22 @@
                                 data-background="{{ asset('assets/img/footer/footer-img-three.jpeg') }}">
                             </div>
                         @else
-                            <div class="testimonial-wrap bg_img bg-one"
+                            {{-- <div class="testimonial-wrap bg_img bg-one"
                                 data-background="{{ asset('assets/img/bg/tm_bg.png') }}">
                                 <div class="testimonial-slider swiper-container">
                                     <div class="swiper-wrapper">
                                     </div>
                                     <div class="swiper-pagination"></div>
                                 </div>
-                            </div>
+                            </div> --}}
+                            <div class="testimonial-wrap bg_img bg-one"
+                            style="
+                            background-position: 85% 0; 
+                            background-repeat: no-repeat; 
+                            background-size: cover; 
+                        "
+                            data-background="{{ asset('assets/img/footer/footer-img-one.jpeg') }}">
+                        </div>
                         @endif
 
 

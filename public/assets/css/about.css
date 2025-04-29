@@ -371,6 +371,8 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    color: #C1C7DE;
+
 }
 
 .commit-title {
@@ -1276,7 +1278,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 30px;
+    border-radius: 20px;
     position: relative;
 }
 
@@ -1292,7 +1294,7 @@
     border-radius: 8px;
     border: none;
     background: #151246;
-    height: 50px !important;
+    height: 70px !important;
     width: 100% !important;
 }
 
@@ -1352,7 +1354,7 @@
 .glass-img-side {
     flex: 1;
     position: relative;
-    border-radius: 30px;
+    border-radius: 20px;
     overflow: hidden;
     /* height: 100%; */
 }

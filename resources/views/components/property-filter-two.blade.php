@@ -1,6 +1,8 @@
+@props(['route', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms'])
 
 <div class="container">
-    <form action="{{ route('holiday-properties.index') }}" method="GET">
+   
+    <form action="{{ $route }}" method="GET">
         @csrf
         <input type="hidden" name="no_of_rooms" id="selectedRooms" value=""> 
         <input type="hidden" name="no_of_bathroom" id="selectedBathrooms" value="">

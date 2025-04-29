@@ -5167,6 +5167,7 @@ body[data-aos-easing="ease"] [data-aos] {
     letter-spacing: -0.03px;
     text-transform: capitalize;
     padding-bottom: 32px;
+    text-align: start;
 }
 @media (max-width: 767px) {
     .about .about-wrap .xb-item--title {
@@ -11173,10 +11174,19 @@ blockquote .quote {
 .second-footer {
     padding-top: 200px;
     z-index: 1;
+    transition: padding-top 0.4s ease-in-out;
 }
+
+.second-footer:hover {
+    padding-top: 100px;
+}
+
 @media (max-width: 991px) {
     .second-footer {
         padding-top: 50px;
+    }
+    .second-footer:hover {
+        padding-top: 20px;
     }
 }
 @media (max-width: 767px) {
