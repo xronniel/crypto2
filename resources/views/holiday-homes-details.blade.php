@@ -217,19 +217,58 @@
                     
                         <div class="Converter-div-box hide-mobile">
                             <div style="width: 35%;" class="Converter-div-input">
-                                <div style="width: 100%;" class="Converter-select-input">
-                                    <select style="width: 100%;" name="crypto" id="crypto">
-                                        <option value="Bitcoin">Bitcoin <span class="Converter-select-span">BTC</span></option>
-                                    </select>
-                                    <img class="Converter-img-select" src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="">
-                                    <img class="Converter-img" src="{{ asset('assets/img/home/Border.png') }}" alt="icon">
-                                </div>
+                                <form id="cryptoForm" action="{{ route('currency.select') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="currency_code" id="cryptoSymbol">
+                                    @php
+                                        $currencies = [
+                                            'BTC' => ['name' => 'Bitcoin', 'img' => asset('assets/img/home/frame-7.svg.png')],
+                                            'ETH' => ['name' => 'Ethereum', 'img' => asset('assets/img/propertydetails/USDT2.png')],
+                                            'USDT' => ['name' => 'USDT', 'img' => asset('assets/img/propertydetails/USDT3.png')],
+                                            'XRP' => ['name' => 'Ripple', 'img' => asset('assets/img/propertydetails/USDT.png')],
+                                        ];
+
+                                        $selectedCurrency = $currencies[$currencyCode] ?? $currencies['BTC'];
+                                    @endphp
+
+                                    <div class="custom-select" onclick="toggleDropdown()">
+                                        <div class="selected-option">
+                                            <img src="{{ $selectedCurrency['img'] }}" alt="{{ $selectedCurrency['name'] }}" class="crypto-icon">
+                                            <span>{{ $selectedCurrency['name'] }} <strong>{{ $currencyCode }}</strong></span>
+                                        </div>
+                                        <div class="arrow-down"></div>
+                                    </div>
+                            
+                                    <div id="cryptoDropdown" class="dropdown-options">
+                                        <div class="dropdown-item" onclick="selectCrypto('Bitcoin', 'BTC', '{{ asset('assets/img/home/frame-7.svg.png') }}')">
+                                            <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="Bitcoin" class="crypto-icon">
+                                            <span>Bitcoin <strong>BTC</strong></span>
+                                        </div>
+                                        <div class="dropdown-item" onclick="selectCrypto('Ethereum', 'ETH', '{{ asset('assets/img/propertydetails/USDT2.png') }}')">
+                                            <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="Ethereum" class="crypto-icon">
+                                            <span>Ethereum <strong>ETH</strong></span>
+                                        </div>
+                                        <div class="dropdown-item" onclick="selectCrypto('USDT', 'USDT', '{{ asset('assets/img/propertydetails/USDT3.png') }}')">
+                                            <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="USDT" class="crypto-icon">
+                                            <span>USDT <strong>USDT</strong></span>
+                                        </div>
+                                        <div class="dropdown-item" onclick="selectCrypto('Ripple', 'XRP', '{{ asset('assets/img/propertydetails/USDT.png') }}')">
+                                            <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="Ripple" class="crypto-icon">
+                                            <span>Ripple <strong>XRP</strong></span>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                             <div class="icon-box-Converter">
-                                <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="icon">
-                                <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="icon">
-                                <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="icon">
-                                <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="icon">
+                                <form id="cryptoForm" action="{{ route('currency.select') }}" method="POST" style="display:none;">
+                                    @csrf
+                                    <input type="hidden" name="currency_code" id="cryptoSymbol">
+                                </form>
+                            
+                                <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="Bitcoin" class="crypto-icon-click" data-symbol="BTC">
+                                <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="Ethereum" class="crypto-icon-click" data-symbol="ETH">
+                                <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="USDT" class="crypto-icon-click" data-symbol="USDT">
+                                <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="Ripple" class="crypto-icon-click" data-symbol="XRP">
                             </div>
                         </div>
                     
@@ -736,6 +775,47 @@ document.addEventListener("DOMContentLoaded", function() {
                 container.querySelectorAll("p").forEach(p => p.remove());
             }
         });
+
+        // Selecting Currency
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('cryptoDropdown');
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        }
+    
+        function selectCrypto(name, symbol, imgSrc) {
+            const selected = document.querySelector('.selected-option');
+            selected.innerHTML = `
+                <img src="{{ asset('') }}${imgSrc}" alt="${name}" class="crypto-icon">
+                <span>${name} <strong>${symbol}</strong></span>
+            `;
+            document.getElementById('cryptoDropdown').style.display = 'none';
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('cryptoDropdown');
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function selectCrypto(name, symbol, imgSrc) {
+            const selected = document.querySelector('.selected-option');
+            selected.innerHTML = `
+                <img src="${imgSrc}" alt="${name}" class="crypto-icon">
+                <span>${name} <strong>${symbol}</strong></span>
+            `;
+            
+            document.getElementById('cryptoSymbol').value = symbol;
+            document.getElementById('cryptoForm').submit(); 
+        }
+
+        document.querySelectorAll('.crypto-icon-click').forEach(img => {
+            img.addEventListener('click', function() {
+                const symbol = this.dataset.symbol;
+
+                document.getElementById('cryptoSymbol').value = symbol;
+                document.getElementById('cryptoForm').submit();
+            });
+        });
     </script>
 
     <style>
@@ -767,8 +847,6 @@ document.addEventListener("DOMContentLoaded", function() {
             padding: 10px 8px;
             align-content: center;
         }
-
-
 
         @media (max-width: 986px) {
 
@@ -820,10 +898,58 @@ document.addEventListener("DOMContentLoaded", function() {
                 padding: 10px 8px;
                 align-content: center;
             }
+        }
 
+        /* Selecting Currency */
 
+        .custom-select {
+            background-color: #11142D;
+            border: 1px solid #5A5A89;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            position: relative;
+            border-radius: 6px;
+        }
 
-
+        .selected-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .crypto-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .arrow-down {
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            padding: 4px;
+            transform: rotate(45deg);
+        }
+        .dropdown-options {
+            display: none;
+            flex-direction: column;
+            background-color: #0D0D28;
+            border: 1px solid #5A5A89;
+            position: absolute;
+            width: 30%;
+            z-index: 1000;
+            margin-top: 5px;
+            border-radius: 6px;
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .dropdown-item:hover {
+            background-color: #1E1E3F;
         }
     </style>
+
 @endsection

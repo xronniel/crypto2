@@ -8,6 +8,7 @@ use App\Models\Listing;
 use App\Models\UserSavedProperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
@@ -378,6 +379,10 @@ class PropertyController extends Controller
         $offPlanImages = $property->offPlanImages;
         $paymentPlanCards = $property->paymentPlanCards;
         $timelines = $property->paymentPlanTimelines;
+
+        $currencyCode = auth()->check() && auth()->user()->currency_code 
+        ? auth()->user()->currency_code 
+        : Cookie::get('currency_code', 'AED');
         
         return view('propertydetails', compact(
             'property', 
@@ -395,7 +400,8 @@ class PropertyController extends Controller
             'offPlanKeys',
             'offPlanImages',
             'paymentPlanCards',
-            'timelines'
+            'timelines',
+            'currencyCode',
         ));
     }
 

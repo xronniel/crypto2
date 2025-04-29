@@ -10,6 +10,7 @@ use App\Models\HolidayPropertyAmenity;
 use App\Models\UserSavedProperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 class HolidayPropertyController extends Controller
@@ -318,7 +319,12 @@ class HolidayPropertyController extends Controller
             ->latest()
             ->take(5)
             ->get();
-        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange', 'holidayPropertiesSameArea'));
+
+        $currencyCode = auth()->check() && auth()->user()->currency_code 
+            ? auth()->user()->currency_code 
+            : Cookie::get('currency_code', 'AED');
+
+        return view('holiday-homes-details', compact('holidayProperty', 'propertyTypes', 'priceRange', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'plotAreaRange', 'holidayPropertiesSameArea', 'currencyCode'));
     }
 
     public function edit(HolidayProperty $holidayProperty)

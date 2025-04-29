@@ -12,6 +12,7 @@ class CurrencyController extends Controller
     // Set currency for the user (Authenticated or not)
     public function selectCurrency(Request $request)
     {
+       
         $currencyCode = $request->input('currency_code');  // The selected currency code (e.g., USD, BTC)
        
         $user = Auth::user(); 
