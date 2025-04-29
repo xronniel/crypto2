@@ -236,7 +236,8 @@
 
                                 <div class="xb-team text-center">
                                     <div onclick="showModal('{{ $member->name }}', '{{ $member->role }}', '{{ $member->email }}', '{{ asset('storage/' . $member->image) }}', '{{ $member->mobile }}')"
-                                        class="xb-item--img2">
+                                        class="xb-item--img2 xb-item--img xb-item--img-childs pos-rel">
+                                        
                                         <img src="{{ asset('storage/' . $member['image']) }}"
                                             alt="{{ $member['name'] }}">
                                         <div class="overlay">
@@ -258,6 +259,7 @@
             <img src="/assets/img/about/icons/icon3.png" class="icons-custom2" alt="About Image" />
         </div>
     </section>
+
 
     {{-- footer --}}
     <section class="hero-section-about-us2 hero-about">
@@ -430,4 +432,27 @@
         });
     </script>
     </div>
+
+
+
+
+
+    <style>
+        .xb-item--img-childs {
+    width: 100%;
+    height: 252px;
+    overflow: hidden;
+    border-radius: 12px; 
+    position: relative;
+}
+
+.xb-item--img-childs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 3%;
+    display: block;
+}
+
+    </style>
 @endsection
