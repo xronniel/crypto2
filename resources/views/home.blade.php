@@ -6,6 +6,7 @@
             background-image: url('{{ asset("storage/{$homepageContent->hero_image}") }}');
             background-size: cover;
             background-position: center;
+            background-position: center bottom;
         }
 
         @media (max-width: 768px) {
@@ -361,30 +362,36 @@
                             <h2> {{ $homepageContent->calculator_title }}</h2>
 
                             <div class="Converter-div-two">
-                                <div class="Converter-div-input">
-                                    <input type="text" placeholder="Enter Amount">
-                                    <div class="Converter-select-input">
-                                        <select name="cars" id="cars">
-                                            <option value="Bitcoin">
-                                                Bitcoin
-                                                <span class="Converter-select-span">BTC</span>
-                                            </option>
-                                        </select>
-                                        <img class="Converter-img-select" src="assets/img/home/frame-7.svg.png"
-                                            alt="">
-                                        <img class="Converter-img" src="assets/img/home/Border.png" alt="">
+                                <div class="Converter-div-two-one">
+                                    <span class="Converter-div-two-span">Amount</span>
+                                    <div class="Converter-div-input">
+                                        <input type="text" placeholder="Enter Amount">
+                                        <div class="Converter-select-input">
+                                            <select name="cars" id="cars">
+                                                <option value="Bitcoin">
+                                                    Bitcoin
+                                                    <span class="Converter-select-span">BTC</span>
+                                                </option>
+                                            </select>
+                                            <img class="Converter-img-select" src="assets/img/home/frame-7.svg.png"
+                                                alt="">
+                                            <img class="Converter-img" src="assets/img/home/Border.png" alt="">
+                                        </div>
                                     </div>
                                 </div>
                                 <img class="Swap-img" src="assets/img/home/Swap Icon.png" alt="">
-                                <div class="Converter-div-input">
-                                    <input type="text" placeholder="I will recieve">
-                                    <div class="Converter-select-input">
-                                        <select name="cars" id="cars">
-                                            <option value="Bitcoin">
-                                                AED
-                                            </option>
-                                        </select>
-                                        <img class="Converter-img" src="assets/img/home/Border.png" alt="">
+                                <div class="Converter-div-two-one">
+                                    <span class="Converter-div-two-span">You Get</span>
+                                    <div class="Converter-div-input">
+                                        <input type="text" placeholder="I will recieve">
+                                        <div class="Converter-select-input">
+                                            <select name="cars" id="cars">
+                                                <option value="Bitcoin">
+                                                    AED
+                                                </option>
+                                            </select>
+                                            <img class="Converter-img" src="assets/img/home/Border.png" alt="">
+                                        </div>
                                     </div>
                                 </div>
 
@@ -437,7 +444,7 @@
                         <p class="xb-item--content">
                             {!! $homepageContent->buying_process_text !!}
                         </p>
-                        <h3 class="xb-item--title xb-item--title1">{!! $homepageContent->equirements_title !!}</h3>
+                        <h3 class="xb-item--title xb-item--title1">{!! $homepageContent['requirements_title'] !!}</h3>
                         <p class="xb-item--content xb-item--content1">
                             {!! $homepageContent->requirements_text !!}
                         </p>
@@ -1351,10 +1358,36 @@
             vertical-align: middle;
 
         }
+.feature-wrap{
+    justify-content: space-between;
+}
 
 
+.first-banner-title{
+    width: 80%;
+    margin: auto;
 
+}
 
+.Converter-div-two-one{
+    display: flex;
+
+width: 100%;
+flex-direction: column;
+gap: 10px;
+position: relative;
+}
+.Converter-div-two-span {
+    font-family: 'Outfit';
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: 0%;
+vertical-align: middle;
+color: #FFFFFF;
+position: absolute;
+top: -29px;
+}
 
         .xb-item--list {
             display: grid;

@@ -375,6 +375,7 @@ letter-spacing: -0.03px;
 
     .grid-left-side {
 gap: 20px;
+align-items: center;
 }
 
 

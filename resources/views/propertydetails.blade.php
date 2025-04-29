@@ -267,7 +267,9 @@
                         </div>
                         <div class="Converter-div-box hide-mobile">
                             <div style="width: 35%;" class="Converter-div-input">
-                                <form id="cryptoForm" action="{{ route('currency.select') }}" method="POST">
+                                <form
+                                style='width: 100%;'
+                                id="cryptoForm" action="{{ route('currency.select') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="currency_code" id="cryptoSymbol">
                                     @php
@@ -284,7 +286,7 @@
                                     <div class="custom-select" onclick="toggleDropdown()">
                                         <div class="selected-option">
                                             <img src="{{ $selectedCurrency['img'] }}" alt="{{ $selectedCurrency['name'] }}" class="crypto-icon">
-                                            <span>{{ $selectedCurrency['name'] }} <strong>{{ $currencyCode }}</strong></span>
+                                            <p class="drop-item-ctypto">{{ $selectedCurrency['name'] }} <span>{{ $currencyCode }}</span></p>
                                         </div>
                                         <div class="arrow-down"></div>
                                     </div>
@@ -292,19 +294,19 @@
                                     <div id="cryptoDropdown" class="dropdown-options">
                                         <div class="dropdown-item" onclick="selectCrypto('Bitcoin', 'BTC', '{{ asset('assets/img/home/frame-7.svg.png') }}')">
                                             <img src="{{ asset('assets/img/home/frame-7.svg.png') }}" alt="Bitcoin" class="crypto-icon">
-                                            <span>Bitcoin <strong>BTC</strong></span>
+                                            <p class="drop-item-ctypto">Bitcoin <span>BTC</span></p>
                                         </div>
                                         <div class="dropdown-item" onclick="selectCrypto('Ethereum', 'ETH', '{{ asset('assets/img/propertydetails/USDT2.png') }}')">
                                             <img src="{{ asset('assets/img/propertydetails/USDT2.png') }}" alt="Ethereum" class="crypto-icon">
-                                            <span>Ethereum <strong>ETH</strong></span>
+                                            <p class="drop-item-ctypto">Ethereum <span>ETH</span></p>
                                         </div>
                                         <div class="dropdown-item" onclick="selectCrypto('USDT', 'USDT', '{{ asset('assets/img/propertydetails/USDT3.png') }}')">
                                             <img src="{{ asset('assets/img/propertydetails/USDT3.png') }}" alt="USDT" class="crypto-icon">
-                                            <span>USDT <strong>USDT</strong></span>
+                                            <p class="drop-item-ctypto">USDT <span>USDT</span></p>
                                         </div>
                                         <div class="dropdown-item" onclick="selectCrypto('Ripple', 'XRP', '{{ asset('assets/img/propertydetails/USDT.png') }}')">
                                             <img src="{{ asset('assets/img/propertydetails/USDT.png') }}" alt="Ripple" class="crypto-icon">
-                                            <span>Ripple <strong>XRP</strong></span>
+                                            <p class="drop-item-ctypto">Ripple <span>XRP</span></p>
                                         </div>
                                     </div>
                                 </form>
@@ -950,7 +952,7 @@
             const selected = document.querySelector('.selected-option');
             selected.innerHTML = `
                 <img src="{{ asset('') }}${imgSrc}" alt="${name}" class="crypto-icon">
-                <span>${name} <strong>${symbol}</strong></span>
+                <p class="drop-item-ctypto">${name} <span>${symbol}</span></p>
             `;
             document.getElementById('cryptoDropdown').style.display = 'none';
         }
@@ -964,7 +966,7 @@
             const selected = document.querySelector('.selected-option');
             selected.innerHTML = `
                 <img src="${imgSrc}" alt="${name}" class="crypto-icon">
-                <span>${name} <strong>${symbol}</strong></span>
+                <p class="drop-item-ctypto">${name} <span>${symbol}</span></p>
             `;
             
             document.getElementById('cryptoSymbol').value = symbol;
@@ -1433,55 +1435,6 @@
                 padding: 10px;
             }
         }
-               /* Selecting Currency */
-
-               .custom-select {
-            background-color: #11142D;
-            border: 1px solid #5A5A89;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            position: relative;
-            border-radius: 6px;
-        }
-
-        .selected-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .crypto-icon {
-            width: 24px;
-            height: 24px;
-        }
-        .arrow-down {
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            padding: 4px;
-            transform: rotate(45deg);
-        }
-        .dropdown-options {
-            display: none;
-            flex-direction: column;
-            background-color: #0D0D28;
-            border: 1px solid #5A5A89;
-            position: absolute;
-            width: 30%;
-            z-index: 1000;
-            margin-top: 5px;
-            border-radius: 6px;
-        }
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            cursor: pointer;
-        }
-        .dropdown-item:hover {
-            background-color: #1E1E3F;
-        }
+  
     </style>
 @endsection

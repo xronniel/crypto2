@@ -56,6 +56,7 @@
                     and warrant that you meet this age requirement.</p>
 
                 <h2>3. Account Registration</h2>
+                <p>To access certain features, you may need to create an account. You agree to:</p>
                 <ul>
                     <li>Provide accurate, current, and complete information.</li>
                     <li>Maintain the confidentiality of your account credentials.</li>
@@ -63,6 +64,7 @@
                 </ul>
 
                 <h2>4. Services Offered</h2>
+                <p>CryptoHomes provides a platform for users to:</p>
                 <ul>
                     <li>Buy, rent, and invest in residential and commercial properties in Dubai.</li>
                     <li>Explore new real estate projects.</li>
@@ -76,6 +78,7 @@
                     completeness of any listings and are not responsible for any errors or omissions.</p>
 
                 <h2>6. User Conduct</h2>
+                <p>You agree not to:</p>
                 <ul>
                     <li>Use the site for any unlawful purpose.</li>
                     <li>Post false or misleading information.</li>
@@ -154,6 +157,15 @@
             vertical-align: middle;
         }
 
+        .container-Terms-Conditions p {
+            margin-bottom: 0.5rem;
+            font-family: "Manrope", sans-serif;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            vertical-align: middle;
+        }
         .container-Terms-Conditions li {
             margin-bottom: 0.5rem;
             font-family: "Manrope", sans-serif;
