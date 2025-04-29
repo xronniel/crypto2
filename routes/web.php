@@ -171,5 +171,7 @@ Route::get('/about-us2', function () {
     return view('about-us');
 });
 
+Route::post('/send-message', [AboutUsController::class, 'sendMessage'])->name('send.message');
+
 
 
