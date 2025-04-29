@@ -1,8 +1,8 @@
 @extends('layouts.front-office.app')
 @section('content')
-    <section class="blog blog-padding">
-        <x-property-filter-two :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
-    </section>
+<section class="blog blog-padding">
+    <x-property-filter-two :route="route('holiday-properties.index')" :propertyTypes="$propertyTypes" :priceRange="$priceRange" :noOfRooms="$noOfRooms" :noOfBathrooms="$noOfBathrooms" />
+</section>
 
 
 

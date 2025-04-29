@@ -201,9 +201,9 @@ class HolidayPropertyController extends Controller
         $amenities = HolidayPropertyAmenity::all();
         $plotAreaRange = [];
 
-
+        $route = route('holiday-properties.index');
         //$holidayProperties = HolidayProperty::with('photos')->latest()->paginate(10);
-        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings', 'plotAreaRange', 'emirates'));
+        return view('holiday-homes', compact('holidayProperties', 'propertyTypes', 'priceRange', 'recentSearches', 'noOfRooms', 'noOfBathrooms', 'faqs', 'amenities', 'topListings', 'plotAreaRange', 'emirates', 'route'));
     }
     
     /**

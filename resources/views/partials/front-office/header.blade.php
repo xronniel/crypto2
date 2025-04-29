@@ -43,7 +43,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="/properties?completion_status=off_plan"><span>New
+                                <a class="scrollspy-btn" href="/properties?completion_status=off_plan&filter_type=buy"><span>New
                                         Projects</span></a>
                             </li>
                             <li>
@@ -105,7 +105,7 @@
                                         </li>
                                         <li class="menu-item">
                                             <a class="scrollspy-btn"
-                                                href="/properties?completion_status=off_plan"><span>New
+                                                href="/properties?completion_status=off_plan&filter_type=buy"><span>New
                                                     Projects</span></a>
                                         </li>
                                         <li class="menu-item">
