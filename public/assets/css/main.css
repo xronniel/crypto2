@@ -10344,13 +10344,18 @@ blockquote .quote {
     color: var(--color-primary);
 }
 
-.xb-logo-mobile {
-    margin-bottom: 40px;
+.xb-logo-mobile{
+    width: 100%;
+    display: flex
+;
+    align-items: center;
+    height: fit-content;
+    justify-content: center;
 }
 
-.xb-logo-mobile img {
-    height: 32px;
-}
+
+
+
 
 .xb-header-mobile-search {
     margin-bottom: 20px;

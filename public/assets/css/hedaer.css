@@ -30,6 +30,38 @@
 .header-btn-one ul li:hover {
     background: rgb(75, 75, 75);
 }
+.header-btn-two {
+    position: relative;
+    display: flex;
+}
+
+.header-btn-two ul {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    list-style: none;
+    width: 120px;
+    background: linear-gradient(180deg, #080b18 0%, #202acf 100%);
+    border-radius: 2px;
+    background: #41445c33;
+    backdrop-filter: blur(70px);
+    border: 1px solid #c1c7de;
+}
+
+.header-btn-two ul li {
+    padding: 12px 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.header-btn-two ul li:hover {
+    background: rgb(75, 75, 75);
+}
 
 .btc-btn {
     font-size: 16px;
@@ -62,6 +94,8 @@
     background-color: var(--color-primary);
     border-color: var(--color-primary);
 }
+
+
 
 .header-arrow-img {
     width: 20px;
