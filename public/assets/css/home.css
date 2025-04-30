@@ -928,7 +928,9 @@ text-transform: capitalize;
    
         width: 100%;
     }
-    
+    .Converter-div-input {
+        justify-content: space-between;
+    }
 }
 
 
@@ -939,19 +941,7 @@ text-transform: capitalize;
 
 
 
-
-.button__f5N5i {
-    border-radius: 65px !important;
-    box-shadow: 0 19px 38px 0 rgba(34, 36, 43, .3);
-    display: block;
-    height: 65px;
-    margin-bottom: 20px !important;
-    position: relative;
-    text-align: center;
-    transform: scale(1);
-    width: 65px;
-    position: absolute;
-    z-index: 2;
-    bottom: 94px;
-    right: 0;
+._orientationRight__fugO9.wrap__YHOId {
+    right: -12px !important;
+    bottom: 67px !important;
 }

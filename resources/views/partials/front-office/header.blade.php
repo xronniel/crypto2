@@ -498,61 +498,72 @@
 
 
     document.addEventListener("DOMContentLoaded", function() {
-        const loginBtns = document.querySelectorAll(".login-btn");
-        const logoutModal = document.querySelector(".logout-modal");
-        const loginModal = document.querySelector(".login-modal");
-        const closeModal = document.querySelector(".login-modal-close");
-        const closeModalTwo = document.querySelector(".login-modal-close-two");
-        const modalOverlay = document.createElement("div");
+    const loginBtns = document.querySelectorAll(".login-btn");
+    const logoutModal = document.querySelector(".logout-modal");
+    const loginModal = document.querySelector(".login-modal");
+    const closeModal = document.querySelector(".login-modal-close");
+    const closeModalTwo = document.querySelector(".login-modal-close-two");
+    const modalOverlay = document.createElement("div");
 
-        modalOverlay.classList.add("modal-overlay");
-        document.body.appendChild(modalOverlay);
+    modalOverlay.classList.add("modal-overlay");
+    document.body.appendChild(modalOverlay);
 
-        loginBtns.forEach(btn => {
-            btn.addEventListener("click", function(event) {
-                event.preventDefault();
+    loginBtns.forEach(btn => {
+        btn.addEventListener("click", function(event) {
+            event.preventDefault();
 
-                const isLoggedIn = btn.getAttribute("data-logged-in") === "true";
+            const isLoggedIn = btn.getAttribute("data-logged-in") === "true";
 
-                if (isLoggedIn) {
-                    // Check if mobile (width < 992)
-                    if (window.innerWidth < 992) {
-                        // On mobile: go directly to profile page
-                        window.location.href = "/user/account"; // use correct route if needed
-                    } else {
-                        // On desktop: toggle logout dropdown
-                        logoutModal.style.display = logoutModal.style.display === "block" ?
-                            "none" : "block";
-                    }
+            if (isLoggedIn) {
+                // Check if mobile (width < 992)
+                if (window.innerWidth < 992) {
+                    // On mobile: go directly to profile page
+                    window.location.href = "/user/account"; // use correct route if needed
                 } else {
-                    // Show login modal
-                    loginModal.classList.add("active");
-                    modalOverlay.style.display = "block";
+                    // On desktop: toggle logout dropdown
+                    logoutModal.style.display = logoutModal.style.display === "block" ? "none" : "block";
                 }
-            });
-        });
+            } else {
+                // Show login modal
+                loginModal.classList.add("active");
+                modalOverlay.style.display = "block";
 
-        function closeLoginModal() {
-            loginModal.classList.remove("active");
-            setTimeout(() => {
-                modalOverlay.style.display = "none";
-            }, 500);
-        }
-
-        // Close modal when overlay or close button is clicked
-        modalOverlay.addEventListener("click", closeLoginModal);
-        if (closeModal) closeModal.addEventListener("click", closeLoginModal);
-        if (closeModalTwo) closeModalTwo.addEventListener("click", closeLoginModal);
-
-        // Hide logout dropdown when clicking outside
-        document.addEventListener("click", function(event) {
-            const isClickInsideBtn = event.target.closest('.login-btn');
-            const isClickInsideModal = event.target.closest('.logout-modal');
-            if (!isClickInsideBtn && !isClickInsideModal) {
-                logoutModal.style.display = "none";
+                // Hide property-filter and property-filter-header when login-modal is active
+                if (loginModal.classList.contains("active")) {
+                    document.querySelectorAll('.property-filter, .property-filter-header').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                }
             }
         });
     });
+
+    function closeLoginModal() {
+        loginModal.classList.remove("active");
+        setTimeout(() => {
+            modalOverlay.style.display = "none";
+
+            // Show property-filter and property-filter-header when login-modal is not active
+            document.querySelectorAll('.property-filter, .property-filter-header').forEach(el => {
+                el.style.display = 'block';
+            });
+        }, 500);
+    }
+
+    // Close modal when overlay or close button is clicked
+    modalOverlay.addEventListener("click", closeLoginModal);
+    if (closeModal) closeModal.addEventListener("click", closeLoginModal);
+    if (closeModalTwo) closeModalTwo.addEventListener("click", closeLoginModal);
+
+    // Hide logout dropdown when clicking outside
+    document.addEventListener("click", function(event) {
+        const isClickInsideBtn = event.target.closest('.login-btn');
+        const isClickInsideModal = event.target.closest('.logout-modal');
+        if (!isClickInsideBtn && !isClickInsideModal) {
+            logoutModal.style.display = "none";
+        }
+    });
+});
 
 
 
