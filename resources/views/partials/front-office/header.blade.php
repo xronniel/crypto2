@@ -43,7 +43,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="scrollspy-btn" href="/properties?completion_status=off_plan&filter_type=buy"><span>New
+                                <a class="scrollspy-btn"
+                                    href="/properties?completion_status=off_plan&filter_type=buy"><span>New
                                         Projects</span></a>
                             </li>
                             <li>
@@ -67,19 +68,87 @@
                             <div class="xb-header-menu-scroll">
                                 <div class="xb-menu-close xb-hide-xl xb-close"></div>
                                 <div class="xb-logo-mobile xb-hide-xl">
-                                    <a href="/" rel="home">
+                                    <a class="mobile-logo-header" href="/" rel="home">
                                         <img src="{{ asset('assets/img/logo/Logo-3.png') }}" alt="Logo">
-
                                     </a>
                                 </div>
-                                <div class="xb-header-mobile-search xb-hide-xl">
-                                    <form role="search" action="#">
-                                        <input type="text" placeholder="Search..." name="s"
-                                            class="search-field">
-                                    </form>
+                                <div style="display: flex;" class="header-btn-one ul_li">
+                                    <a class="btc-btn " href="#">
+                                        @php
+                                            $currentCurrency =
+                                                Cookie::get('currency_code') ??
+                                                (Auth::check() ? Auth::user()->currency_code ?? 'BTC' : 'BTC');
+                                            $currencyIcons = [
+                                                'BTC' => 'hero-icon01.svg',
+                                                'ETH' => 'hero-icon02.svg',
+                                                'XRP' => 'hero-icon03.svg',
+                                                'USDT' => 'hero-icon04.svg',
+                                            ];
+                                            $icon = $currencyIcons[$currentCurrency] ?? 'hero-icon01.svg';
+                                        @endphp
+                                        <img src="{{ asset('assets/img/icon/' . $icon) }}"
+                                            alt="{{ $currentCurrency }} Icon">
+                                        <span
+                                            style="display: flex;
+                                        margin: auto;
+    left: 0;
+    right: 0;
+                                        ">
+                                            ({{ $currentCurrency }})
+                                        </span>
+                                        <img class="header-arrow-img" src="{{ asset('assets/img/home/arrow.png') }}"
+                                            alt="Arrow">
+                                    </a>
+                                    <ul style="z-index: 10;">
+                                        <li onclick="document.getElementById('btc-form').submit();"
+                                            style="cursor: pointer;">
+                                            <form id="btc-form" action="{{ route('currency.select') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="currency_code" value="BTC">
+                                            </form>
+                                            <img src="{{ asset('assets/img/icon/hero-icon01.svg') }}"
+                                                alt="BTC Icon">(BTC)
+                                        </li>
+                                        <li onclick="document.getElementById('eth-form').submit();"
+                                            style="cursor: pointer;">
+                                            <form id="eth-form" action="{{ route('currency.select') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="currency_code" value="ETH">
+                                            </form>
+                                            <img src="{{ asset('assets/img/icon/hero-icon02.svg') }}"
+                                                alt="ETH Icon">(ETH)
+                                        </li>
+                                        <li onclick="document.getElementById('xrp-form').submit();"
+                                            style="cursor: pointer;">
+                                            <form id="xrp-form" action="{{ route('currency.select') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="currency_code" value="XRP">
+                                            </form>
+                                            <img src="{{ asset('assets/img/icon/hero-icon03.svg') }}"
+                                                alt="XRP Icon">(XRP)
+                                        </li>
+                                        <li onclick="document.getElementById('usdt-form').submit();"
+                                            style="cursor: pointer;">
+                                            <form id="usdt-form" action="{{ route('currency.select') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                                <input type="hidden" name="currency_code" value="USDT">
+                                            </form>
+                                            <img src="{{ asset('assets/img/icon/hero-icon04.svg') }}"
+                                                alt="USDT Icon">(USDT)
+                                        </li>
+                                    </ul>
                                 </div>
                                 <nav class="xb-header-nav">
                                     <ul class="xb-menu-primary clearfix">
+                                        <li class="menu-item">
+                                            <a class="scrollspy-btn" href="/">
+                                                <span>Home</span>
+                                            </a>
+                                        </li>
                                         <li class="menu-item">
                                             <a class="scrollspy-btn"
                                                 href="{{ route('properties.index', ['filter_type' => 'buy']) }}">
@@ -103,28 +172,41 @@
                                                 <span>Vacations</span>
                                             </a>
                                         </li>
+                                        <div class="line-home-model-list"></div>
+
                                         <li class="menu-item">
                                             <a class="scrollspy-btn"
-                                                href="/properties?completion_status=off_plan&filter_type=buy"><span>New
-                                                    Projects</span></a>
+                                                href="/properties?completion_status=off_plan&filter_type=buy">
+                                                <span>New Projects</span>
+                                            </a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="scrollspy-btn" href="{{ route('agents.index') }}"><span>Find
-                                                    Agent</span></a>
+                                            <a class="scrollspy-btn" href="{{ route('agents.index') }}">
+                                                <span>Find Agent</span>
+                                            </a>
                                         </li>
-                                        {{-- <li class="menu-item menu-item-has-children">
-                                            <a href="/"><span>Explore</span></a>
+
+
+                                        <li class="menu-item menu-item-has-children">
+                                            <a onclick="event.preventDefault();"
+                                                href="#"><span>Explore</span></a>
                                             <ul class="sub-menu">
-                                                <li class="menu-item"><a href="index.html"><span>ICO Explore</span></a>
+                                                <li class="menu-item"><a href="/blog"><span>Blog</span></a>
                                                 </li>
-                                                <li class="menu-item"><a href="home-2.html"><span>Crypto
-                                                            Explore</span></a></li>
+                                                <li class="menu-item"><a href="/news"><span>News</span></a></li>
                                             </ul>
-                                        </li> --}}
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{{ route('mortgage-calculator') }}">
+                                                <span>Mortgages</span>
+                                            </a>
+                                        </li>
                                     </ul>
+
                                 </nav>
                             </div>
                         </div>
+
                         <div class="xb-header-menu-backdrop"></div>
                     </div>
                 </div>
@@ -133,7 +215,9 @@
                     <div class="header-btn-one ul_li hide-item-header">
                         <a class="btc-btn" href="#">
                             @php
-                                $currentCurrency = Cookie::get('currency_code') ?? (Auth::check() ? Auth::user()->currency_code ?? 'BTC' : 'BTC');
+                                $currentCurrency =
+                                    Cookie::get('currency_code') ??
+                                    (Auth::check() ? Auth::user()->currency_code ?? 'BTC' : 'BTC');
                                 $currencyIcons = [
                                     'BTC' => 'hero-icon01.svg',
                                     'ETH' => 'hero-icon02.svg',
@@ -151,28 +235,32 @@
                         </a>
                         <ul class="">
                             <li onclick="document.getElementById('btc-form').submit();" style="cursor: pointer;">
-                                <form id="btc-form" action="{{ route('currency.select') }}" method="POST" style="display: none;">
+                                <form id="btc-form" action="{{ route('currency.select') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                     <input type="hidden" name="currency_code" value="BTC">
                                 </form>
                                 <img src="{{ asset('assets/img/icon/hero-icon01.svg') }}" alt="BTC Icon">(BTC)
                             </li>
                             <li onclick="document.getElementById('eth-form').submit();" style="cursor: pointer;">
-                                <form id="eth-form" action="{{ route('currency.select') }}" method="POST" style="display: none;">
+                                <form id="eth-form" action="{{ route('currency.select') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                     <input type="hidden" name="currency_code" value="ETH">
                                 </form>
                                 <img src="{{ asset('assets/img/icon/hero-icon02.svg') }}" alt="ETH Icon">(ETH)
                             </li>
                             <li onclick="document.getElementById('xrp-form').submit();" style="cursor: pointer;">
-                                <form id="xrp-form" action="{{ route('currency.select') }}" method="POST" style="display: none;">
+                                <form id="xrp-form" action="{{ route('currency.select') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                     <input type="hidden" name="currency_code" value="XRP">
                                 </form>
                                 <img src="{{ asset('assets/img/icon/hero-icon03.svg') }}" alt="XRP Icon">(XRP)
                             </li>
                             <li onclick="document.getElementById('usdt-form').submit();" style="cursor: pointer;">
-                                <form id="usdt-form" action="{{ route('currency.select') }}" method="POST" style="display: none;">
+                                <form id="usdt-form" action="{{ route('currency.select') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                     <input type="hidden" name="currency_code" value="USDT">
                                 </form>
@@ -328,6 +416,46 @@
             width: 100%;
             height: 75px;
             background: black;
+        }
+
+
+        .xb-header-wrap .xb-menu-close {
+            background: #2DD98F;
+            border-radius: 5px;
+            margin: 30px 20px 0 0;
+        }
+
+        .xb-header-wrap .xb-close::before,
+        .xb-header-wrap .xb-close::after {
+            background-color: #000;
+        }
+
+
+        .mobile-logo-header {
+            width: 50px;
+        }
+
+        .xb-menu-primary li a {
+            border-bottom: 0px;
+        }
+
+        .mobile-logo-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .line-home-model-list {
+            display: flex;
+            width: 100%;
+            height: 2px;
+            background: #FFFFFF33;
+            margin: 10px 0;
+        }
+
+        .xb-logo-mobile {
+            margin: 0 0 35px 0;
         }
     </style>
 
