@@ -136,9 +136,25 @@
                         <h3 class="grid-left-side-two hide-mobile">{{ $propertyTypeLabel }} | {{ $holidayProperty->furnished == 1 ? 'Furnished' : 'Unfurnished' }}
                         </h3>
                         
-                        <h3 class="grid-left-side-three">
-                            escription_en  {!! nl2br(e($holidayProperty->description_en)) !!}
-                        </h3>
+                        @php
+                        // Convert <br> to real new lines to split
+                        $text = strip_tags(str_replace(['<br>', '<br/>', '<br />'], "\n", $holidayProperty->description_en));
+                        
+                        // Split into individual paragraphs
+                        $paragraphs = preg_split('/\n{2,}/', $text); // two or more line breaks = new paragraph
+                    
+                        // Trim each paragraph and find the longest one
+                        $longestParagraph = collect($paragraphs)
+                            ->map(fn($p) => trim($p))
+                            ->filter()
+                            ->sortByDesc(fn($p) => strlen($p))
+                            ->first();
+                    @endphp
+                    
+                    <h3 class="grid-left-side-three">
+                        {!! nl2br(e($longestParagraph)) !!}
+                    </h3>
+                    
                     </div>
 
 
@@ -340,7 +356,28 @@
                 </div>
                 <div class="Description-second-box">
                     <div class="Description-second-box-one">
-                        {!! nl2br(e($holidayProperty->description_en)) !!}
+                        @php
+                        // Step 1: Replace <br> tags with real line breaks
+                        $text = str_replace(['<br>', '<br/>', '<br />'], "\n", $holidayProperty->description_en);
+                    
+                        // Step 2: Strip all tags except line breaks
+                        $cleanText = strip_tags($text);
+                    
+                        // Step 3: Split by double newlines to get paragraph blocks
+                        $paragraphBlocks = preg_split('/\n{2,}/', $cleanText);
+                    
+                        // Step 4: Trim, filter, and get the longest block
+                        $longestBlock = collect($paragraphBlocks)
+                            ->map(fn($p) => trim($p))
+                            ->filter()
+                            ->sortByDesc(fn($p) => strlen($p))
+                            ->first();
+                    @endphp
+                    
+                    <h3 class="grid-left-side-three">
+                        {!! nl2br(e($longestBlock)) !!}
+                    </h3>
+                    
                         <div class="custom-list-two">
                             <p><span>Office location :</span> ELITE Vacation Homes LLC - {{ $holidayProperty->sub_community }},
                                 {{ $holidayProperty->city }}</p>

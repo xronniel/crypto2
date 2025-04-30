@@ -40,7 +40,7 @@
                     <div class="icon">
                         <img src="{{ asset('assets/img/icon/location.svg') }}" alt="">
                     </div>
-                    <h3>Location</h3>
+                    <h3>CryptoHomes Headquarters</h3>
                     <p>
                         {{ $contactInfo->address ?? 'No address available' }}
                     </p>
