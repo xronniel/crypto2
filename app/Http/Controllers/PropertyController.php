@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Facility;
 use App\Models\Faq;
 use App\Models\Listing;
+use App\Models\Property;
 use App\Models\UserSavedProperty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -290,6 +291,13 @@ class PropertyController extends Controller
             });
 
         return view('property', compact('properties', 'unitTypesAndModels', 'adTypes', 'propertyTypes', 'search','completionStatus', 'noOfRooms', 'noOfBathrooms', 'request', 'amenities', 'emirates', 'plotAreaRange', 'priceRange', 'recentSearches', 'request', 'emirateCounts'));
+    }
+
+    public function newIndex(Request $request)
+    {
+        $properties = Property::with(['photos', 'agent'])->paginate(10);
+
+        return view('new-properties', compact('properties'));
     }
 
     public function show($property_ref_no)

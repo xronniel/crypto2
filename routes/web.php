@@ -132,6 +132,7 @@ Route::middleware(['auth'])->group(function () {
 // Route::get('/articles/{article}', [ArticleController::class, 'userShow'])->name('articles.show');
 
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
+Route::get('/new-properties', [PropertyController::class, 'newIndex'])->name('new-properties.index');
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
 
 Route::get('/holiday-properties', [HolidayPropertyController::class, 'userIndex'])->name('holiday-properties.index');
