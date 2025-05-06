@@ -15,7 +15,7 @@ class Property extends Model
         'latitude', 'longitude', 'property_name',
         'title_en', 'description_en', 'size', 'bedroom', 'bathroom',
         'price_on_application', 'is_featured', 'is_exclusive', 'last_update', 'agent_id',
-        'emirate_id', 'community_id', 'sub_community_id'
+        'emirate_id', 'community_id', 'sub_community_id', 'off_plan', 'new', 'visit_count'
     ];
 
     public function agent()

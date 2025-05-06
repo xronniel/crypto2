@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Emirates;
 use App\Models\Facility;
 use App\Models\Faq;
 use App\Models\Listing;
@@ -295,9 +296,166 @@ class PropertyController extends Controller
 
     public function newIndex(Request $request)
     {
-        $properties = Property::with(['photos', 'agent'])->paginate(10);
+        // dd($request->all());    
+        $query = Property::with(['photos', 'agent']);
 
-        return view('new-properties', compact('properties'));
+        $offeringType = $request->input('offering_type');
+        $propertyType = $request->input('property_type');
+        $type = $request->input('type');
+        $propertyStatus = $request->input('property_status');
+        $sortBy = $request->input('sort_by');
+
+        if ($offeringType === 'rent' && $type === 'commercial') {
+            $query->where('offering_type', 'CR');
+        } elseif ($offeringType === 'rent' && !$type) {
+            $query->where('offering_type', 'RR');
+        } elseif ($offeringType === 'sale' && $type === 'commercial') {
+            $query->where('offering_type', 'CS');
+        } elseif ($offeringType === 'sale' && !$type) {
+            $query->where('offering_type', 'RS');
+        } elseif ($offeringType) {
+            $query->where('offering_type', $offeringType);
+        }
+
+        if ($propertyType) {
+            $query->where('property_type', $propertyType);
+        }
+
+        if ($propertyStatus === 'off_plan') {
+            $query->where('off_plan', true);
+        } elseif ($propertyStatus === 'ready') {
+            $query->where('is_ready', true);
+        }
+
+        // Apply the sort_by functionality
+        if ($sortBy) {
+            switch ($sortBy) {
+                case 'featured':
+                    // Filter listings where featured is 1
+                    $query->where('featured', 1);
+                    break;
+                case 'from_lowest_price':
+                    // Sort listings by price in ascending order (lowest to highest)
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'from_highest_price':
+                    // Sort listings by price in descending order (highest to lowest)
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'newest':
+                    // Sort listings by listing_date in descending order (newest first)
+                    $query->orderBy('listing_date', 'desc');
+                    break;
+                default:
+                    $query->latest();
+                    break;
+            }
+        }
+
+        if ($request->filled('search')) {
+            $keywords = explode(' ', $request->search);
+            $query->where(function ($q) use ($keywords) {
+                foreach ($keywords as $word) {
+                    $q->orWhere('property_name', 'LIKE', "%{$word}%")
+                      ->orWhere('title_en', 'LIKE', "%{$word}%")
+                      ->orWhere('description_en', 'LIKE', "%{$word}%");
+                }
+            });
+        }
+
+        // Filter by `min_price` and `max_price` if present
+        $query->when(request()->has('min_price') && request('min_price') != '', function ($q) {
+            $q->where('price', '>=', request('min_price'));
+        });
+
+        $query->when(request()->has('max_price') && request('max_price') != '', function ($q) {
+            $q->where('price', '<=', request('max_price'));
+        });
+
+        // Filter by `min_area` and `max_area` if present
+        $query->when(request()->has('min_area') && request('min_area') != '', function ($q) {
+            $q->where('unit_builtup_area', '>=', request('min_area'));
+        });
+
+        $query->when(request()->has('max_area') && request('max_area') != '', function ($q) {
+            $q->where('unit_builtup_area', '<=', request('max_area'));
+        });
+
+        $sortBy = $request->input('sort_by');
+        $query->when(request()->has('no_of_rooms') && request('no_of_rooms') != '', function ($q) {
+            $q->where('beddroom', request('no_of_rooms'));
+        });
+        
+        $query->when(request()->has('no_of_bathroom') && request('no_of_rooms') != '', function ($q) {
+            $q->where('bathroom', request('no_of_bathroom'));
+        });
+
+        $minPrice = Property::whereNotNull('price')->min('price');
+        $maxPrice = Property::whereNotNull('price')->max('price');
+    
+        $minRounded = floor($minPrice / 10000000) * 10000000;
+        $maxRounded = ceil($maxPrice / 10000000) * 10000000;
+    
+        $steps = range($minRounded, $maxRounded, 10000000);
+    
+        $priceRange = [
+            'min'   => $minRounded,
+            'max'   => $maxRounded,
+            'steps' => $steps,
+        ];
+
+        $minArea = Property::whereNotNull('size')->min('size');
+        $maxArea = Property::whereNotNull('size')->max('size');
+    
+        $minRounded = floor($minArea / 10000000) * 10000000;
+        $maxRounded = ceil($maxRounded / 10000000) * 10000000;
+    
+        $steps = range($minRounded, $maxRounded, 10000000);
+    
+        $plotAreaRange = [
+            'min'   => $minRounded,
+            'max'   => $maxRounded,
+            'steps' => $steps,
+        ];
+
+        $topListings = DB::table('properties')
+            ->select('emirate_id', 'title_en', 'offering_type', 'property_type')
+            ->orderByDesc('visit_count')
+            ->limit(10)
+            ->get();
+
+            $recentSearches = [
+                'community' => $topListings->map(fn($item) => [
+                    'name' => Emirates::find($item->emirate_id)->name ?? 'Unknown',
+                    'ad_type' => $item->offering_type,
+                ])->unique()->values()->all(),
+
+                'property_title' => collect($topListings)
+                ->flatMap(function ($item) {
+                    $titles = preg_split('/\s*[|\/]\s*/', $item->title_en);
+                    return collect($titles)->map(fn($title) => [
+                        'title' => trim($title),
+                        'ad_type' => $item->offering_type,
+                    ]);
+                })
+                ->unique(fn($item) => $item['title']) // optional: remove duplicate titles
+                ->values()
+                ->all(),
+
+                'unit_type' => $topListings->map(fn($item) => [
+                    'name' => $item->property_type,
+                    'ad_type' => $item->offering_type,
+                ])->unique()->values()->all(),
+
+            ];
+
+        $emirates = Emirates::pluck('name');
+
+        $properties = $query->paginate(10);
+  
+        // Add `favorite` boolean to each property
+        return view('new-properties', compact('properties', 'offeringType', 'propertyType', 'type', 'propertyStatus', 'sortBy', 'request', 'priceRange', 'plotAreaRange', 'recentSearches', 'emirates'));
+    
     }
 
     public function show($property_ref_no)
@@ -411,6 +569,17 @@ class PropertyController extends Controller
             'timelines',
             'currencyCode',
         ));
+    }
+
+    public function showProperty($property_ref_no)
+    {
+        $property = Property::with(['photos', 'agent'])
+        ->where('reference_number', $property_ref_no)
+        ->firstOrFail();
+
+        $property->increment('visit_count');
+        
+        dd($property);
     }
 
 }

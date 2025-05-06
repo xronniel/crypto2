@@ -134,6 +134,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/new-properties', [PropertyController::class, 'newIndex'])->name('new-properties.index');
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
+Route::get('/new-properties/{property}', [PropertyController::class, 'showProperty'])->name('new-properties.show');
 
 Route::get('/holiday-properties', [HolidayPropertyController::class, 'userIndex'])->name('holiday-properties.index');
 Route::get('/holiday-properties/{holidayProperty}', [HolidayPropertyController::class, 'userShow'])->name('holiday-properties.show');
